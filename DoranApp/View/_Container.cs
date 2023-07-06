@@ -1,0 +1,279 @@
+﻿using DoranApp.Properties;
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace DoranApp.View
+{
+    public partial class _Container : Form
+    {
+        private int dragTabIndex;
+        public _Container()
+        {
+            InitializeComponent();
+
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Tab && tabForms == null)
+            {
+                // Disable Tab key for changing focus between controls
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+
+
+        private void tabForms_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Tab && tabForms == null)
+            {
+                // Disable Tab key for switching TabControl pages
+                e.Handled = true;
+            }
+        }
+
+
+        public void OpenForm<T>() where T : Form, new()
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+
+
+                if (form.GetType() == typeof(T))
+                {
+                    form.WindowState = FormWindowState.Maximized;
+                    tabForms.SelectedTab = tabForms.TabPages[form.Text];
+                    form.Activate();
+                    return;
+                }
+            }
+
+            var openForm = new T();
+            // Set the Parent Form of the Child window.
+            openForm.MdiParent = this;
+            // Display the new form.
+            openForm.Show();
+        }
+
+        private void barangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormMasterBarang newMDIChild = new FormMasterBarang();
+            // Set the Parent Form of the Child window.
+            newMDIChild.MdiParent = this;
+            // Display the new form.
+            newMDIChild.Show();
+        }
+
+        delegate void SetStatusInternetCallback(string text);
+
+        private void SetInternetStatusText(string status)
+        {
+            if (toolStripStatusLabel1.GetCurrentParent() == null)
+            {
+                return;
+            }
+            if (toolStripStatusLabel1.GetCurrentParent().InvokeRequired)
+            {
+                SetStatusInternetCallback d = new SetStatusInternetCallback(SetInternetStatusText);
+                this.Invoke(d, new object[] { status });
+            }
+            else
+            {
+                this.toolStripStatusLabel1.Text = status;
+                toolStripStatusLabel1.Image = status == "Online" ? Resources.Connect : Resources.Disconnect;
+            }
+
+        }
+        private void _Container_Load(object sender, EventArgs e)
+        {
+            var internetAvailability = Utils.InternetAvailabilityService.CheckInternetAvailability();
+            internetAvailability.Subscribe(isAvailable =>
+            {
+                SetInternetStatusText(isAvailable ? "Online" : "Offline");
+            });
+
+            HomeForm homeForm = new HomeForm();
+            homeForm.MdiParent = this;
+            homeForm.ControlBox = false;
+            homeForm.TopLevel = false;
+            homeForm.WindowState = FormWindowState.Maximized;
+            homeForm.Show();
+
+            if (string.IsNullOrEmpty(Properties.Settings.Default.AuthToken))
+            {
+
+                var login = new Login();
+
+                DialogResult loginModal = login.ShowDialog();
+                login.MaximizeBox = true;
+                if (loginModal == DialogResult.None)
+                {
+                    this.Close();
+                }
+            }
+        }
+
+        private void syncToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SyncDatabaseForm newMDIChild = new SyncDatabaseForm();
+            // Set the Parent Form of the Child window.
+            newMDIChild.MdiParent = this;
+            // Display the new form.
+            newMDIChild.Show();
+        }
+
+        private void _Container_MdiChildActivate(object sender, EventArgs e)
+        {
+            if (this.ActiveMdiChild == null)
+                tabForms.Visible = false;
+            // If no any child form, hide tabControl 
+            else
+            {
+                this.ActiveMdiChild.WindowState =
+                FormWindowState.Maximized;
+                // Child form always maximized 
+
+                // If child form is new and no has tabPage, 
+                // create new tabPage 
+                if (this.ActiveMdiChild.Tag == null)
+                {
+                    // Add a tabPage to tabControl with child 
+                    // form caption 
+                    TabPage tp = new TabPage(this.ActiveMdiChild.Text);
+                    tp.Name = this.ActiveMdiChild.Text;
+                    tp.Tag = this.ActiveMdiChild;
+                    tp.Parent = tabForms;
+                    tabForms.SelectedTab = tp;
+
+                    this.ActiveMdiChild.Tag = tp;
+                    this.ActiveMdiChild.FormClosed +=
+                        new FormClosedEventHandler(
+                                        _Container_FormClosed);
+                }
+
+                if (!tabForms.Visible) tabForms.Visible = true;
+
+            }
+        }
+
+        private void _Container_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            var tabPage = ((sender as Form).Tag as TabPage);
+            if (tabPage != null)
+            {
+                tabPage.Dispose();
+            }
+        }
+
+        private void tabForms_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if ((tabForms.SelectedTab != null) &&
+        (tabForms.SelectedTab.Tag != null))
+                (tabForms.SelectedTab.Tag as Form).Select();
+        }
+
+        private void _Container_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void tabForms_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                TabControl tabControl = (TabControl)sender;
+                dragTabIndex = tabControl.SelectedIndex;
+                tabControl.DoDragDrop(dragTabIndex, DragDropEffects.Move);
+            }
+        }
+
+        private void tabForms_DragOver(object sender, DragEventArgs e)
+        {
+            TabControl tabControl = (TabControl)sender;
+            Point clientPoint = tabControl.PointToClient(new Point(e.X, e.Y));
+            int hoverTabIndex = GetHoverTabIndex(tabControl, clientPoint);
+            if (hoverTabIndex != dragTabIndex)
+            {
+                e.Effect = DragDropEffects.Move;
+            }
+        }
+
+
+        private void tabForms_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void tabForms_DragDrop(object sender, DragEventArgs e)
+        {
+            TabControl tabControl = (TabControl)sender;
+            tabControl.SelectedIndex = dragTabIndex;
+            Point clientPoint = tabControl.PointToClient(new Point(e.X, e.Y));
+            int hoverTabIndex = GetHoverTabIndex(tabControl, clientPoint);
+            if (hoverTabIndex != dragTabIndex)
+            {
+
+                TabPage tabPage = tabControl.TabPages[dragTabIndex];
+                tabControl.TabPages.RemoveAt(dragTabIndex);
+                tabControl.TabPages.Insert(hoverTabIndex, tabPage);
+                tabControl.SelectedIndex = hoverTabIndex;
+            }
+        }
+
+        private int GetHoverTabIndex(TabControl tabControl, Point clientPoint)
+        {
+            for (int i = 0; i < tabControl.TabCount; i++)
+            {
+                if (tabControl.GetTabRect(i).Contains(clientPoint))
+                {
+                    return i;
+                }
+            }
+            return dragTabIndex;
+        }
+
+        private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<RolesForm>();
+        }
+
+        private void userToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<UserForm>();
+        }
+
+        private void syncDBManualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<SyncDatabaseForm>();
+        }
+
+        private void channelSalesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<SalesChannelForm>();
+        }
+
+        private void timSalesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<SalesTeamForm>();
+        }
+
+        private void tesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<UserForm>();
+        }
+
+        private void roleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<RolesForm>();
+        }
+
+        private void salesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenForm<SalesForm>();
+        }
+    }
+}

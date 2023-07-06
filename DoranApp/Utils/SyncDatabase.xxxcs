@@ -1,0 +1,73 @@
+﻿using Dotmim.Sync;
+using Dotmim.Sync.MariaDB;
+using Dotmim.Sync.Sqlite;
+using Microsoft.Data.Sqlite;
+using MySql.Data.MySqlClient;
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace DoranApp.Utils
+{
+    class SyncDatabase
+    {
+        public MariaDBSyncProvider serverProvider {  get; private set; }
+
+        public SqliteSyncProvider clientProvider { get; private set; }
+
+        public  MySqlConnectionStringBuilder connectionString { get; private set; }
+           
+        public string[] tables { get; private set; }
+
+        public SyncDatabase(string[] _tables)
+        {
+            
+            tables = _tables;
+            Console.WriteLine("sqlite location: " + Application.UserAppDataPath);
+
+            var sqlite = Path.Combine(
+                Application.UserAppDataPath,
+                "local.db"
+            );
+   
+            connectionString = new MySqlConnectionStringBuilder();
+
+            connectionString.Server = Properties.Settings.Default.DB_SERVER;
+            connectionString.Database = Properties.Settings.Default.DB_DATABASE;
+            connectionString.UserID = Properties.Settings.Default.DB_USERNAME;
+            connectionString.Password = Properties.Settings.Default.DB_PASSWORD;
+            connectionString.ConvertZeroDateTime = true;
+            var s = connectionString.ToString();
+            serverProvider = new MariaDBSyncProvider(s);
+
+            SqliteConnectionStringBuilder sqlLiteConnection = new SqliteConnectionStringBuilder();
+            sqlLiteConnection.DataSource = sqlite;
+            sqlLiteConnection.Mode = SqliteOpenMode.ReadWriteCreate;
+            sqlLiteConnection.Password = "password";
+            clientProvider = new SqliteSyncProvider(sqlLiteConnection);
+          
+        }
+
+      
+
+        public async Task<SyncResult> Reinitialize(Progress<Dotmim.Sync.ProgressArgs> progress)
+        {
+            var clientOptions = new SyncOptions { BatchSize = 500 };
+            var syncSetup = new SyncSetup(tables);
+            foreach(var table in tables)
+            {
+                syncSetup.Tables[$"{table}"].SyncDirection = Dotmim.Sync.Enumerations.SyncDirection.DownloadOnly;
+               
+
+            }
+            SyncAgent agent = new SyncAgent(clientProvider, serverProvider, clientOptions, tables);
+                
+          
+
+            var result = await agent.SynchronizeAsync(Dotmim.Sync.Enumerations.SyncType.Reinitialize, progress);
+            Console.WriteLine(result);
+            return result;
+        }
+    }
+}
