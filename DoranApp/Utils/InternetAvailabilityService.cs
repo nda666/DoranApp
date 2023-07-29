@@ -6,8 +6,11 @@
     public static class InternetAvailabilityService
     {
         public static bool isOnline;
+
+        public static bool? forceStatus = null;
         public static IObservable<bool> CheckInternetAvailability()
         {
+
             return Observable.Interval(TimeSpan.FromSeconds(5))
             .StartWith(-1L)
             .Select(_ => IsInternetAvailable());
@@ -15,6 +18,11 @@
 
         private static bool IsInternetAvailable()
         {
+            if (forceStatus.HasValue)
+            {
+                isOnline = (bool)forceStatus;
+                return isOnline;
+            }
             try
             {
                 Ping ping = new Ping();

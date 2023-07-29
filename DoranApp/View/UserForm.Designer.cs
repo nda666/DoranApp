@@ -33,6 +33,7 @@ namespace DoranApp.View
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboboxFilterActive = new DoranApp.Components.ActiveComboBox(this.components);
             this.searchRoleLabel = new System.Windows.Forms.Label();
             this.comboFilterRole = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -57,7 +58,6 @@ namespace DoranApp.View
             this.textboxUsername = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.comboboxFilterActive = new DoranApp.Components.ActiveComboBox(this.components);
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -78,6 +78,17 @@ namespace DoranApp.View
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Filter";
+            // 
+            // comboboxFilterActive
+            // 
+            this.comboboxFilterActive.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboboxFilterActive.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboboxFilterActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboboxFilterActive.FormattingEnabled = true;
+            this.comboboxFilterActive.Location = new System.Drawing.Point(253, 43);
+            this.comboboxFilterActive.Name = "comboboxFilterActive";
+            this.comboboxFilterActive.Size = new System.Drawing.Size(93, 21);
+            this.comboboxFilterActive.TabIndex = 17;
             // 
             // searchRoleLabel
             // 
@@ -281,10 +292,37 @@ namespace DoranApp.View
             this.comboRoles.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboRoles.FormattingEnabled = true;
             this.comboRoles.ItemHeight = 13;
+            this.comboRoles.Items.AddRange(new object[] {
+            "Bos",
+            "manageroperasional",
+            "auditor",
+            "gudang",
+            "sales",
+            "mastersuperadmin",
+            "masterkagud",
+            "kagud",
+            "adminorder",
+            "supermasteraudit",
+            "pembelian",
+            "akuntan",
+            "masteradmin",
+            "salesonline",
+            "seketaris",
+            "managerbusiness",
+            "dorancare",
+            "masteraudit",
+            "kgdjakarta",
+            "kgdsemarang",
+            "pm",
+            "auditkhusus",
+            "gudangol",
+            "managersalesonline",
+            "Kepalaakuntan"});
             this.comboRoles.Location = new System.Drawing.Point(93, 129);
             this.comboRoles.Name = "comboRoles";
             this.comboRoles.Size = new System.Drawing.Size(169, 21);
             this.comboRoles.TabIndex = 3;
+            this.comboRoles.SelectedIndexChanged += new System.EventHandler(this.comboRoles_SelectedIndexChanged);
             this.comboRoles.Leave += new System.EventHandler(this.comboRoles_Leave);
             // 
             // label5
@@ -349,14 +387,6 @@ namespace DoranApp.View
             // 
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Help";
-            // 
-            // comboboxFilterActive
-            // 
-            this.comboboxFilterActive.FormattingEnabled = true;
-            this.comboboxFilterActive.Location = new System.Drawing.Point(253, 43);
-            this.comboboxFilterActive.Name = "comboboxFilterActive";
-            this.comboboxFilterActive.Size = new System.Drawing.Size(93, 21);
-            this.comboboxFilterActive.TabIndex = 17;
             // 
             // UserForm
             // 

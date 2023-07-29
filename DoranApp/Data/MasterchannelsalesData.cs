@@ -7,36 +7,42 @@ using System.Windows.Forms;
 
 namespace DoranApp.Data
 {
-    internal class SalesChannelData : AbstractData<SalesChannel>
+    internal class MasterchannelsalesData : AbstractData<Masterchannelsales>
     {
-        public SalesChannelData() : base()
+        public MasterchannelsalesData() : base()
         {
         }
 
-        public SalesChannelData(object query) : base(query)
+        public MasterchannelsalesData(object query) : base(query)
         {
         }
 
+
+        protected override string RelativeUrl()
+        {
+            return "masterchannelsales";
+        }
         public override DataColumn[] GetColumn()
         {
 
             DataColumn[] dataColumns = new DataColumn[] {
                 new DataColumn("ID"),
                 new DataColumn("Nama"),
-                new DataColumn("Aktif", Type.GetType("System.Boolean")),
-                new DataColumn("Created At", Type.GetType("System.DateTime")),
-                new DataColumn("Updated At", Type.GetType("System.DateTime")),
+                new DataColumn("Created At", typeof(DateTime)),
+                new DataColumn("Updated At", typeof(DateTime)),
+                new DataColumn("Aktif", typeof(bool)),
                 };
             return dataColumns;
         }
 
         protected override async Task RunRefresh()
         {
-            Rest rest = new Rest("saleschannels");
+            Rest rest = new Rest(RelativeUrl());
+
             var response = await rest.Get(_query);
             if (response.ErrorMessage != null)
             {
-                MessageBox.Show(response.ErrorMessage);
+                MessageBox.Show( response.ErrorMessage);
             }
             else
             {
@@ -45,15 +51,15 @@ namespace DoranApp.Data
                 {
                     _dataTable.BeginInit();
                     _dataTable.Rows.Clear();
-                    foreach (SalesChannel salesChannel in _data)
+                    foreach (Masterchannelsales salesChannel in _data)
                     {
                         DataRow r = _dataTable.NewRow();
                         r.BeginEdit();
-                        r["ID"] = salesChannel.id;
-                        r["Nama"] = salesChannel.name;
-                        r["Aktif"] = salesChannel.active;
-                        r["Created At"] = string.IsNullOrEmpty(salesChannel.createdAt) ? DBNull.Value : (object)DateTime.Parse(salesChannel.createdAt);
-                        r["Updated At"] = string.IsNullOrEmpty(salesChannel.updatedAt) ? DBNull.Value : (object)DateTime.Parse(salesChannel.updatedAt);
+                        r["ID"] = salesChannel.Kode;
+                        r["Nama"] = salesChannel.Nama;
+                        r["Created At"] = salesChannel.CreatedAt ?? Convert.DBNull;
+                        r["Updated At"] = salesChannel.UpdatedAt ?? Convert.DBNull;
+                        r["Aktif"] = salesChannel.Aktif;
                         r.EndEdit();
                         _dataTable.Rows.Add(r);
                     }

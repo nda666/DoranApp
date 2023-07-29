@@ -10,21 +10,25 @@ using System.Windows.Forms;
 
 namespace DoranApp.Data
 {
-    internal class SalesTeamData: AbstractData<SalesTeam>
+    internal class MastertimsalesData: AbstractData<Mastertimsales>
     {
-        public SalesTeamData() : base()
+        public MastertimsalesData() : base()
         {
         }
 
-        public SalesTeamData(object query) : base(query)
+        public MastertimsalesData(object query) : base(query)
         {
+        }
+        protected override string RelativeUrl()
+        {
+            return "mastertimsales";
         }
 
         public override DataColumn[] GetColumn()
         {
 
             DataColumn[] dataColumns = new DataColumn[] {
-                new DataColumn("ID"),
+                new DataColumn("Kode"),
                 new DataColumn("Nama"),
                 new DataColumn("Channel"),
                new DataColumn("Target Jete", System.Type.GetType("System.Double")),
@@ -32,15 +36,15 @@ namespace DoranApp.Data
                 new DataColumn("Syarat Komisi", Type.GetType("System.Boolean")),
                 new DataColumn("Tampil Th Lalu", Type.GetType("System.Boolean")),
                 new DataColumn("Aktif", Type.GetType("System.Boolean")),
-                new DataColumn("Created At", Type.GetType("System.DateTime")),
-                new DataColumn("Updated At", Type.GetType("System.DateTime")),
+                new DataColumn("Created At", typeof(DateTime)),
+                new DataColumn("Updated At", typeof(DateTime)),
                 };
             return dataColumns;
         }
 
         protected override async Task RunRefresh()
         {
-            Rest rest = new Rest("salesteams");
+            Rest rest = new Rest(RelativeUrl());
             var response = await rest.Get(_query);
             if (response.ErrorMessage != null)
             {
@@ -53,20 +57,20 @@ namespace DoranApp.Data
                 {
                     _dataTable.BeginInit();
                     _dataTable.Rows.Clear();
-                    foreach (SalesTeam salesTeam in _data)
+                    foreach (Mastertimsales salesTeam in _data)
                     {
                         DataRow r = _dataTable.NewRow();
                         r.BeginEdit();
-                        r["ID"] = salesTeam.id;
-                        r["Nama"] = salesTeam.name;
-                        r["Channel"] = salesTeam.salesChannel?.name;
-                        r["Target Jete"] = salesTeam.jeteTarget;
-                        r["Target Omzet"] = salesTeam.omzetTarget;
-                        r["Syarat Komisi"] = salesTeam.commissionTerms;
-                        r["Tampil Th Lalu"] = salesTeam.showLastYear;
-                        r["Aktif"] = salesTeam.active;
-                        r["Created At"] = string.IsNullOrEmpty(salesTeam.createdAt) ? DBNull.Value : (object)DateTime.Parse(salesTeam.createdAt);
-                        r["Updated At"] = string.IsNullOrEmpty(salesTeam.updatedAt) ? DBNull.Value : (object)DateTime.Parse(salesTeam.updatedAt);
+                        r["Kode"] = salesTeam.Kode;
+                        r["Nama"] = salesTeam.Nama;
+                        r["Channel"] = salesTeam.Masterchannelsales?.Nama;
+                        r["Target Jete"] = salesTeam.Targetjete;
+                        r["Target Omzet"] = salesTeam.Targetomzet;
+                        r["Syarat Komisi"] = salesTeam.SyaratKomisi;
+                        r["Tampil Th Lalu"] = salesTeam.Tampiltahunlalu;
+                        r["Aktif"] = salesTeam.Aktif;
+                        r["Created At"] = salesTeam.CreatedAt ?? Convert.DBNull;
+                        r["Updated At"] = salesTeam.UpdatedAt ?? Convert.DBNull;
                         r.EndEdit();
                         _dataTable.Rows.Add(r);
                     }
@@ -78,6 +82,7 @@ namespace DoranApp.Data
                 }
             }
         }
+
 
         static void FormatColumnToCurrency(DataTable dataTable, string columnName)
         {

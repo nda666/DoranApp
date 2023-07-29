@@ -19,7 +19,7 @@ namespace DoranApp.Models
         public string updatedAt { get; set; } = null;
         public string deletedAt { get; set; } = null;
         public virtual Sales manager { get; set; } = null;
-        public virtual User user { get; set; } = null;
+        public virtual Masteruser user { get; set; } = null;
         public virtual SalesTeam salesTeam { get; set; } = null;
     }
 }

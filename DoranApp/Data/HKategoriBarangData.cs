@@ -38,7 +38,7 @@ namespace DoranApp.Data
 
         public async Task<BindingSource> GetBindingSource(bool forComboBox = false)
         {
-            Rest rest = new Rest("dkategoribarang");
+            Rest rest = new Rest("hkategoribarang");
             BindingSource = new BindingSource();
             if (forComboBox)
             {

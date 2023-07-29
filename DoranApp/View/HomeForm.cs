@@ -30,5 +30,12 @@ namespace DoranApp.View
         {
             ((_Container)MdiParent).OpenForm<RolesForm>();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ((_Container)MdiParent)._stopSync = false;
+            ((_Container)MdiParent)._runSync = false;
+            ((_Container)MdiParent).syncDb();
+        }
     }
 }

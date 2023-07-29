@@ -77,7 +77,7 @@ namespace DoranApp.View
             comboboxFilterActive.DataSource = new BindingSource(activeOption, null);
             comboboxFilterActive.DisplayMember = "Value";
             comboboxFilterActive.ValueMember = "Key";
-            await fetchRoleData();
+            //await fetchRoleData();
 
             await fetchData();
             comboFilterRole.Text = "";
@@ -129,21 +129,21 @@ namespace DoranApp.View
                     {
                         await rest.Put(new
                         {
-                            id = textboxId.Text,
-                            username = textboxUsername.Text,
-                            password = textboxPassword.Text,
-                            roleId = comboRoles.SelectedValue.ToString(),
-                            active = checkboxActive.Checked
+                            kodeKu = textboxId.Text,
+                            usernameKu = textboxUsername.Text,
+                            passwordKu = textboxPassword.Text,
+                            akses = comboRoles.SelectedText.ToString(),
+                            aktif = checkboxActive.Checked
                         });
                     }
                     else
                     {
                         await rest.Post(new
                         {
-                            username = textboxUsername.Text,
-                            password = textboxPassword.Text,
-                            roleId = comboRoles.SelectedValue.ToString(),
-                            active = checkboxActive.Checked
+                            usernameKu = textboxUsername.Text,
+                            passwordKu = textboxPassword.Text,
+                            akses = comboRoles.SelectedValue.ToString(),
+                            aktif = checkboxActive.Checked
                         });
                     }
                     await _userData.Refresh();
@@ -176,12 +176,12 @@ namespace DoranApp.View
                 return;
             }
 
-            var selectedUser = _userData.GetData().Where(role => role.id == Guid.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString())).First();
-            textboxUsername.Text = selectedUser.username;
-            textboxPassword.Text = selectedUser.passwordText;
-            comboRoles.SelectedValue = selectedUser.roleId;
-            checkboxActive.Checked = selectedUser.active;
-            textboxId.Text = selectedUser.id.ToString();
+            var selectedUser = _userData.GetData().Where(user => user.Kodeku.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
+            textboxUsername.Text = selectedUser.Usernameku;
+            textboxPassword.Text = selectedUser.Passwordku;
+            //comboRoles.SelectedValue = selectedUser.roleId;
+            checkboxActive.Checked = selectedUser.Aktif;
+            textboxId.Text = selectedUser.Kodeku.ToString();
             buttonDelete.Enabled = true;
         }
 
@@ -260,6 +260,11 @@ namespace DoranApp.View
         private void activeComboBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             MessageBox.Show("A");
+        }
+
+        private void comboRoles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show(comboRoles.SelectedText);
         }
     }
 }

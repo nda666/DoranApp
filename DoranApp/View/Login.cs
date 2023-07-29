@@ -40,11 +40,17 @@ namespace DoranApp.View
             }
             catch (RestException error)
             {
-                MessageBox.Show($"{error.Message}", $"{ error.ErrorCode } {error.StatusText}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+               if (error.ErrorCode == 401)
+                {
+                    MessageBox.Show($"Username / password tidak cocok", $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } else
+                {
+                    MessageBox.Show($"{error.ErrorCode} {error.StatusText}", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception error)
             {
-                MessageBox.Show($"{error.Message} {error.StackTrace}", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{error.Message}", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {

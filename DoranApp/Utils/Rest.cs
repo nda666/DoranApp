@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -51,61 +52,48 @@ namespace DoranApp.Utils
                     //}
                 }
             ));
-
             Resource = Client.Resource(uri);
         }
 
 
-        private string FindError(dynamic httpResponseMessage, dynamic response)
+        private string FindError(HttpResponseMessage httpResponseMessage, dynamic response)
         {
+            
             var status = (Int32)httpResponseMessage.StatusCode;
+       
+            var xx = (string)response.ToString();
+            var error = httpResponseMessage.ReasonPhrase;
+
             if (!status.ToString().StartsWith("2"))
             {
-                var xx = (string)response.ToString();
-                if (xx.Count() <= 0)
-                {
-                    throw new Exception(status.ToString() + " " + httpResponseMessage?.ReasonPhrase);
-                }
-                var error = "";
-                JObject dynamicErrors = response;
-
-
-                var reparsed = JsonConvert.SerializeObject(dynamicErrors);
-                dynamic d = JsonConvert.DeserializeObject<dynamic>(reparsed);
-
-                TypeInfo type = d.GetType();
-                var errors = d.errors;
-                foreach (dynamic memberError in errors)
-                {
-                    foreach (dynamic errorLabel in memberError)
-                    {
-                        Console.WriteLine(memberError);
-                        foreach (dynamic message in errorLabel)
-                        {
-                            error = $"{error + message}\n";
-                        }
-                    }
-
-                }
-
-                throw new Exception(error);
+                
                 switch (status)
                 {
-                    case 422:
-                        foreach (dynamic memberError in errors)
-                        {
-                            foreach (dynamic errorLabel in memberError)
-                            {
-                                foreach (dynamic message in errorLabel)
-                                {
-                                    error = $"{error + message}\n";
-                                }
-                            }
+                    case 400:
+                        JObject dynamicErrors = response;
+                        var reparsed = JsonConvert.SerializeObject(dynamicErrors);
 
+                        dynamic d = JsonConvert.DeserializeObject<dynamic>(reparsed);
+
+                        TypeInfo type = d.GetType();
+                        var errors = d.errors;
+                        if (errors != null)
+                        {
+                            foreach (dynamic memberError in errors)
+                            {
+                                foreach (dynamic errorLabel in memberError)
+                                {
+                                    foreach (dynamic message in errorLabel)
+                                    {
+                                        error = $"{error + message}\n";
+                                    }
+                                }
+
+                            }
                         }
-                        throw new RestException(error, status, (string)d.error);
+                        throw new RestException(status, error);
                     default:
-                        throw new RestException((string)d.message, status, (string)d.error);
+                        throw new RestException(status, error);
 
                 }
             }
@@ -167,7 +155,7 @@ namespace DoranApp.Utils
         }
     }
 
-    internal class TReturn
+     class TReturn
     {
         public dynamic HttpResponseMessage { get; set; }
         public dynamic Response { get; set; }

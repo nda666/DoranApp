@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using DoranApp.Exceptions;
+using DoranApp.Utils;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
@@ -10,7 +13,7 @@ namespace DoranApp.Data
         protected List<T> _data;
         protected dynamic _query;
         protected DataTable _dataTable;
-
+        protected virtual string RelativeUrl() { return ""; }
         protected AbstractData()
         {
             _dataTable = new DataTable();
@@ -63,6 +66,33 @@ namespace DoranApp.Data
         public virtual DataTable GetDataTable()
         {
             return _dataTable;
+        }
+
+        public virtual async Task<object> CreateOrUpdate(string primaryKeyValue, object data)
+        {
+            return await CreateOrUpdate<TReturn>( primaryKeyValue,  data);
+        }
+
+        public virtual async Task<TReturn> CreateOrUpdate<TReturn>(string primaryKeyValue, object data)
+        {
+
+            var isEdit = string.IsNullOrEmpty(primaryKeyValue) == false;
+            var uri = isEdit ? $"{RelativeUrl()}/{primaryKeyValue}" : $"{RelativeUrl()}";
+
+
+            var rest = new Rest(uri);
+            try
+            {
+                var method = isEdit ? "Put" : "Post";
+                var _rest = typeof(Rest).GetMethod(method);
+                var result = await (Task<TReturn>)_rest.Invoke(rest, new object[] { data });
+                return result;
+            }
+            catch (Exception ex)
+            {
+                ConsoleDump.Extensions.Dump(ex, "ERRRR");
+                throw;
+            }
         }
     }
 }

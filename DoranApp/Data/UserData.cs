@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace DoranApp.Data
 {
-    internal class UserData : AbstractData<User>
+    internal class UserData : AbstractData<Models.Masteruser>
     {
 
         public override DataColumn[] GetColumn()
@@ -40,17 +40,18 @@ namespace DoranApp.Data
                 {
                     _dataTable.BeginInit();
                     _dataTable.Rows.Clear();
-                    foreach (User user in _data)
+                    foreach (Masteruser user in _data)
                     {
+
                         DataRow r = _dataTable.NewRow();
                         r.BeginEdit();
-                        r["ID"] = user.id;
-                        r["Username"] = user.username;
-                        r["Password"] = user.passwordText;
-                        r["Role"] = user.role.name;
-                        r["Aktif"] = user.active;
-                        r["Created At"] = string.IsNullOrEmpty(user.createdAt) ? DBNull.Value : (object)DateTime.Parse(user.createdAt);
-                        r["Updated At"] = string.IsNullOrEmpty(user.updatedAt) ? DBNull.Value : (object)DateTime.Parse(user.updatedAt);
+                        r["ID"] = user.Kodeku;
+                        r["Username"] = user.Usernameku;
+                        r["Password"] = user.Passwordku;
+                        r["Role"] = user.Akses;
+                        r["Aktif"] = user.Aktif;
+                        r["Created At"] = string.IsNullOrEmpty(user.CreatedAt) ? DBNull.Value : (object)DateTime.Parse(user.CreatedAt);
+                        r["Updated At"] = string.IsNullOrEmpty(user.UpdatedAt) ? DBNull.Value : (object)DateTime.Parse(user.UpdatedAt);
                         r.EndEdit();
                         _dataTable.Rows.Add(r);
                     }

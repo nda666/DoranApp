@@ -15,7 +15,7 @@ namespace DoranApp.View
     {
         private DataTable _dataTable { get; set; }
 
-        private SalesChannelData _salesChannelData = new SalesChannelData();
+        private MasterchannelsalesData _salesChannelData = new MasterchannelsalesData();
 
         public SalesChannelForm()
         {
@@ -32,12 +32,12 @@ namespace DoranApp.View
         public async Task FetchData()
         {
 
-            buttonFilter.Enabled = false;
+            ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
             _salesChannelData.SetQuery(new
             {
-                name = textboxFilterUsername.Text.ToString(),
-                active = comboboxFilterActive.SelectedValue.ToString()
-            });
+                nama = textboxFilterUsername.Text.ToString(),
+                aktif = comboboxFilterActive.SelectedValue.ToString()
+            }); 
             try
             {
                 await _salesChannelData.Refresh();
@@ -46,7 +46,7 @@ namespace DoranApp.View
             {
                 MessageBox.Show(ex.Message);
             }
-            buttonFilter.Enabled = true;
+            ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
         }
 
         private async void SalesChannelForm_Load(object sender, EventArgs e)
@@ -66,9 +66,9 @@ namespace DoranApp.View
             dataGridView1.DoubleBuffered(true);
             _dataTable = _salesChannelData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
-            dataGridView1.Sort(dataGridView1.Columns[3], ListSortDirection.Descending);
+            dataGridView1.Sort(dataGridView1.Columns[2], ListSortDirection.Descending);
+            dataGridView1.Columns[2].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
             dataGridView1.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-            dataGridView1.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
             dataGridView1.ClearSelection();
 
             ResetForm();
@@ -84,49 +84,48 @@ namespace DoranApp.View
         {
             if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
+                ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
+                buttonDelete.Enabled = false;
                 var selectedRowIndex = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 0;
                 var isEdit = textboxId.Text.Length > 0;
-
-                var uri = isEdit ? $"saleschannels/{textboxId.Text}" : $"saleschannels";
-                var rest = new Rest(uri);
+                var dataToSend = new
+                {
+                    nama = textboxName.Text,
+                    aktif = checkboxActive.Checked
+                };
                 try
                 {
-                    if (isEdit)
-                    {
-                        await rest.Put(new
-                        {
-                            id = textboxId.Text,
-                            name = textboxName.Text,
-                            active = checkboxActive.Checked
-                        });
-                    }
-                    else
-                    {
-                        await rest.Post(new
-                        {
-                            name = textboxName.Text,
-                            active = checkboxActive.Checked
-                        });
-                    }
-                    await _salesChannelData.Refresh();
-                    if (isEdit)
-                    {
-                        dataGridView1.Rows[selectedRowIndex].Selected = true;
-                    }
-                    textboxName.Focus();
+                    await _salesChannelData.CreateOrUpdate(textboxId.Text, dataToSend);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
+
+                await _salesChannelData.Refresh();
+
+                if (isEdit && dataGridView1.Rows.Count > 0)
+                {
+                    dataGridView1.Rows[selectedRowIndex].Selected = true;
+                }
+                textboxName.Focus();
+
+               
+
+                ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
+                buttonDelete.Enabled = true;
             }
         }
 
         private async Task Delete()
         {
+            if (String.IsNullOrWhiteSpace(textboxId.Text))
+            {
+                return ;
+            }
             if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
-                var rest = new Rest($"saleschannels/{textboxId.Text}");
+                var rest = new Rest($"masterchannelsales/{textboxId.Text}");
                 try
                 {
                     buttonDelete.Enabled = false;
@@ -158,10 +157,10 @@ namespace DoranApp.View
                 return;
             }
 
-            var selectedUser = _salesChannelData.GetData().Where(role => role.id == Guid.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString())).First();
-            textboxName.Text = selectedUser.name;
-            checkboxActive.Checked = selectedUser.active;
-            textboxId.Text = selectedUser.id.ToString();
+            var selectedUser = _salesChannelData.GetData().Where(role => role.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
+            textboxName.Text = selectedUser.Nama;
+            textboxId.Text = selectedUser.Kode.ToString();
+            checkboxActive.Checked = selectedUser.Aktif;
             buttonDelete.Enabled = true;
         }
 

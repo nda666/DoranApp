@@ -1,13 +1,22 @@
 ﻿using DoranApp.Properties;
+using Dotmim.Sync;
+using Dotmim.Sync.Enumerations;
+using Dotmim.Sync.Sqlite;
+using Dotmim.Sync.Web.Client;
 using System;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace DoranApp.View
 {
+  
     public partial class _Container : Form
     {
+        public bool _runSync = false;
+        public bool _stopSync = false;
         private int dragTabIndex;
+
         public _Container()
         {
             InitializeComponent();
@@ -88,12 +97,69 @@ namespace DoranApp.View
             }
 
         }
+
+        public async void syncDb()
+        {
+            if (_runSync || _stopSync)
+            {
+                return;
+            }
+            _runSync = true;
+            var serverOrchestrator = new WebRemoteOrchestrator("https://localhost:44376/api/sync");
+            var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Doran Office";
+            var filePath = appDataPath + "\\data.db";
+            Console.WriteLine($"Path: {filePath}");
+            if (!System.IO.Directory.Exists(appDataPath))
+            {
+                System.IO.Directory.CreateDirectory(appDataPath);
+            }
+
+            if (!System.IO.File.Exists(filePath))
+            {
+                Console.WriteLine("Just entered to create Sync DB");
+                SQLiteConnection.CreateFile(filePath);
+            }
+            // Second provider is using plain old Sql Server provider,
+            // relying on triggers and tracking tables to create the sync environment
+            var clientProvider = new SqliteSyncProvider($"Data Source={filePath};");
+            var localOrchestrator = new LocalOrchestrator(clientProvider);
+            var sScopeInfo = await serverOrchestrator.GetScopeInfoAsync();
+            var sScopeClientInfo = await localOrchestrator.GetScopeInfoClientAsync();
+           
+            await localOrchestrator.ProvisionAsync(sScopeInfo);
+
+            // Creating an agent that will handle all the process
+            var agent = new SyncAgent(clientProvider, serverOrchestrator);
+
+
+
+            var progress = new Progress<ProgressArgs>(update =>
+            {
+                Console.WriteLine("Progress: " + update.ProgressPercentage.ToString());
+            });
+
+
+            try
+            {
+
+                // Launch the sync process
+                var s1 = await agent.SynchronizeAsync(scopeName: "v2", progress: progress);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            _runSync = false;
+            _stopSync = true;
+        }
+
         private void _Container_Load(object sender, EventArgs e)
         {
             var internetAvailability = Utils.InternetAvailabilityService.CheckInternetAvailability();
             internetAvailability.Subscribe(isAvailable =>
             {
                 SetInternetStatusText(isAvailable ? "Online" : "Offline");
+                if(!isAvailable) syncDb();
             });
 
             HomeForm homeForm = new HomeForm();
@@ -274,6 +340,17 @@ namespace DoranApp.View
         private void salesToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             OpenForm<SalesForm>();
+        }
+
+        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
+        {
+            if (Utils.InternetAvailabilityService.forceStatus.HasValue)
+            {
+                Utils.InternetAvailabilityService.forceStatus = null;
+            } else
+            {
+                Utils.InternetAvailabilityService.forceStatus = !Utils.InternetAvailabilityService.isOnline;
+            }
         }
     }
 }

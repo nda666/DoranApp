@@ -100,6 +100,7 @@
             this.buttonFilter.Name = "buttonFilter";
             this.buttonFilter.Size = new System.Drawing.Size(266, 40);
             this.buttonFilter.TabIndex = 8;
+            this.buttonFilter.Tag = "actionButton";
             this.buttonFilter.Text = "Cari";
             this.buttonFilter.UseVisualStyleBackColor = true;
             this.buttonFilter.Click += new System.EventHandler(this.buttonFilter_Click);
@@ -144,6 +145,7 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(203, 44);
             this.buttonSave.TabIndex = 5;
+            this.buttonSave.Tag = "actionButton";
             this.buttonSave.Text = "Simpan";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
@@ -193,6 +195,7 @@
             this.buttonDelete.Size = new System.Drawing.Size(105, 32);
             this.buttonDelete.TabIndex = 20;
             this.buttonDelete.TabStop = false;
+            this.buttonDelete.Tag = "";
             this.buttonDelete.Text = "Hapus";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);

@@ -19,9 +19,9 @@ namespace DoranApp.View
 
         private DataTable _dataTable { get; set; }
 
-        private SalesChannelData _salesChannelData = new SalesChannelData();
+        private MasterchannelsalesData _salesChannelData = new MasterchannelsalesData();
 
-        private SalesTeamData _salesTeamData = new SalesTeamData();
+        private MastertimsalesData _salesTeamData = new MastertimsalesData();
 
 
         public void ResetForm()
@@ -43,8 +43,8 @@ namespace DoranApp.View
             var bsComboSalesChannel = new BindingSource();
             bsComboSalesChannel.DataSource = _salesChannelData.GetData();
             comboSalesChannel.DataSource = bsComboSalesChannel;
-            comboSalesChannel.DisplayMember = "Name";
-            comboSalesChannel.ValueMember = "Id";
+            comboSalesChannel.DisplayMember = "Nama";
+            comboSalesChannel.ValueMember = "Kode";
 
             var bsComboFilterChannel = new BindingSource();
             bsComboFilterChannel.DataSource = _salesChannelData.GetData();
@@ -78,7 +78,7 @@ namespace DoranApp.View
         {
             if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
-                var rest = new Rest($"salesteams/{textboxId.Text}");
+                var rest = new Rest($"mastertimsales/{textboxId.Text}");
                 try
                 {
                     buttonDelete.Enabled = false;
@@ -122,11 +122,12 @@ namespace DoranApp.View
             dataGridView1.DoubleBuffered(true);
             _dataTable = _salesTeamData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
-            dataGridView1.Sort(dataGridView1.Columns[8], ListSortDirection.Descending);
             dataGridView1.Columns[3].DefaultCellStyle.Format = "N0";
             dataGridView1.Columns[4].DefaultCellStyle.Format = "N0";
             dataGridView1.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
             dataGridView1.Columns[9].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+
+            dataGridView1.Sort(dataGridView1.Columns[8], ListSortDirection.Descending);
             dataGridView1.ClearSelection();
 
             ResetForm();
@@ -143,50 +144,36 @@ namespace DoranApp.View
             {
                 var selectedRowIndex = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 0;
                 var isEdit = textboxId.Text.Length > 0;
-
-                var uri = isEdit ? $"salesteams/{textboxId.Text}" : $"salesteams";
-                var rest = new Rest(uri);
                 try
                 {
-                    if (isEdit)
+                    var dataToSend = new
                     {
-                        await rest.Put(new
-                        {
-                            id = textboxId.Text,
-                            name = textboxName.Text,
-                            salesChannelId = comboSalesChannel.SelectedValue,
-                            jeteTarget = textboxJeteTarget.Text,
-                            omzetTarget = textboxOmzetTarget.Text,
-                            showLastYear = checkboxShowLastYear.Checked,
-                            commissionTerms = checkboxShowLastYear.Checked,
-                            active = checkboxActive.Checked,
-                            
-                        });
-                    }
-                    else
-                    {
-                        await rest.Post(new
-                        {
-                            name = textboxName.Text,
-                            salesChannelId = comboSalesChannel.SelectedValue,
-                            jeteTarget = textboxJeteTarget.Text,
-                            omzetTarget = textboxOmzetTarget.Text,
-                            showLastYear = checkboxShowLastYear.Checked,
-                            commissionTerms = checkboxShowLastYear.Checked,
-                            active = checkboxActive.Checked,
-                        });
-                    }
-                    await _salesTeamData.Refresh();
-                    if (isEdit)
-                    {
-                        dataGridView1.Rows[selectedRowIndex].Selected = true;
-                    }
-                    textboxName.Focus();
+                        nama = textboxName.Text,
+                        kodechannel = comboSalesChannel.SelectedValue,
+                        targetjete = textboxJeteTarget.Text,
+                        targetomzet = textboxOmzetTarget.Text,
+                        tampiltahunlalu = checkboxShowLastYear.Checked,
+                        syaratKomisi = checkboxShowLastYear.Checked,
+                        aktif = checkboxActive.Checked,
+
+                    };
+                    var re = await _salesTeamData.CreateOrUpdate(textboxId.Text, dataToSend);
+
+                    ConsoleDump.Extensions.Dump(re);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                    return;
                 }
+
+                await _salesTeamData.Refresh();
+                if (isEdit)
+                {
+                    dataGridView1.Rows[selectedRowIndex].Selected = true;
+                }
+                textboxName.Focus();
+
             }
         }
 
@@ -213,16 +200,16 @@ namespace DoranApp.View
                 return;
             }
 
-            var selectedUser = _salesTeamData.GetData().Where(x => x.id == Guid.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString())).First();
+            var selectedUser = _salesTeamData.GetData().Where(x => x.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
 
-            textboxId.Text = selectedUser.id.ToString();
-            textboxName.Text = selectedUser.name;
-            textboxOmzetTarget.Text = selectedUser.omzetTarget.ToString();
-            textboxJeteTarget.Text = selectedUser.jeteTarget.ToString();
-            checkboxComissionTerms.Checked = selectedUser.commissionTerms;
-            checkboxShowLastYear.Checked = selectedUser.showLastYear;
-            checkboxActive.Checked = selectedUser.active;
-            comboSalesChannel.SelectedValue = selectedUser.salesChannelId;
+            textboxId.Text = selectedUser.Kode.ToString();
+            textboxName.Text = selectedUser.Nama;
+            textboxOmzetTarget.Text = selectedUser.Targetomzet.ToString();
+            textboxJeteTarget.Text = selectedUser.Targetjete.ToString();
+            checkboxComissionTerms.Checked = selectedUser.SyaratKomisi;
+            checkboxShowLastYear.Checked = selectedUser.Tampiltahunlalu;
+            checkboxActive.Checked = selectedUser.Aktif;
+            comboSalesChannel.SelectedValue = selectedUser.Kodechannel;
 
             buttonDelete.Enabled = true;
         }

@@ -15,7 +15,7 @@ namespace DoranApp.View
 
         private SalesData _salesData = new SalesData();
 
-        private SalesTeamData _salesTeamData = new SalesTeamData();
+        private MastertimsalesData _salesTeamData = new MastertimsalesData();
 
         public SalesForm()
         {
