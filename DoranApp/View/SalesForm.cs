@@ -24,37 +24,37 @@ namespace DoranApp.View
 
         public async Task FetchManager()
         {
-            _salesData.SetQuery(new { active = "true", isManager = "true" });
+            _salesData.SetQuery(new { aktif = "true", manager = "true" });
             await _salesData.Refresh();
             var bsComboManager = new BindingSource();
             bsComboManager.DataSource = _salesData.GetData();
             comboManager.DataSource = bsComboManager;
-            comboManager.DisplayMember = "Name";
-            comboManager.ValueMember = "Id";
+            comboManager.DisplayMember = "Nama";
+            comboManager.ValueMember = "Kode";
 
             var bsComboFilterManager = new BindingSource();
             bsComboFilterManager.DataSource = _salesData.GetData();
             comboFilterManager.DataSource = bsComboFilterManager;
-            comboFilterManager.DisplayMember = "Name";
-            comboFilterManager.ValueMember = "Id";
+            comboFilterManager.DisplayMember = "Nama";
+            comboFilterManager.ValueMember = "Kode";
 
         }
 
         public async Task FetchSalesTeam()
         {
-            _salesTeamData.SetQuery(new { active = "true" });
+            _salesTeamData.SetQuery(new { aktif = "true" });
             await _salesTeamData.Refresh();
             var bsComboSalesTeam = new BindingSource();
             bsComboSalesTeam.DataSource = _salesTeamData.GetData();
             comboSalesTeam.DataSource = bsComboSalesTeam;
             comboSalesTeam.DisplayMember = "Name";
-            comboSalesTeam.ValueMember = "Id";
+            comboSalesTeam.ValueMember = "Kode";
 
             var bsFilterSalesTeam = new BindingSource();
             bsFilterSalesTeam.DataSource = _salesTeamData.GetData();
             comboFilterSalesTeam.DataSource = bsFilterSalesTeam;
             comboFilterSalesTeam.DisplayMember = "Name";
-            comboFilterSalesTeam.ValueMember = "Id";
+            comboFilterSalesTeam.ValueMember = "Kode";
 
             
         }
@@ -64,11 +64,11 @@ namespace DoranApp.View
             buttonFilter.Enabled = false;
             _salesData.SetQuery(new
             {
-                name = textboxFilterUsername.Text.ToString() ?? "",
-                active = comboboxFilterActive.SelectedValue?.ToString() ?? "",
-                salesTeamId = comboFilterSalesTeam.SelectedValue?.ToString() ?? "",
-                isManager = comboFilterIsManager.SelectedValue?.ToString() ?? "",
-                managerId = comboFilterManager.SelectedValue?.ToString() ?? ""
+                nama = textboxFilterUsername.Text.ToString() ?? "",
+                aktif = comboboxFilterActive.SelectedValue?.ToString() ?? "",
+                kodetimsales = comboFilterSalesTeam.SelectedValue?.ToString() ?? "",
+                manager = isManagerComboBox1.SelectedValue.ToString(),
+                kodemanager = comboFilterManager.SelectedValue?.ToString() ?? ""
             });
             try
             {
@@ -76,7 +76,7 @@ namespace DoranApp.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("ERROR " + ex.Message);
             }
             buttonFilter.Enabled = true;
         }
@@ -123,12 +123,13 @@ namespace DoranApp.View
                         await rest.Put(new
                         {
                             id = textboxId.Text,
-                            name = textboxName.Text,
-                            salesTeamId = comboSalesTeam.SelectedValue,
-                            isManager = checkboxIsManager.Checked,
-                            managerId = comboManager.SelectedValue,
-                            getOmzetEmail = checkboxGetOmzetEmail.Checked,
-                            active = checkboxActive.Checked,
+                            nama=textboxName.Text,
+                            kodetimsales= comboSalesTeam.SelectedValue,
+                            manager = checkboxIsManager.Checked,
+                            kodemanager = comboManager.SelectedValue,
+                            emailOmzetTerdahsyat = checkboxGetOmzetEmail.Checked,
+                            emailJeteterdahsyat = checkboxEmailJeteterdahsyat.Checked,
+                            aktif = checkboxActive.Checked,
 
                         });
                     }
@@ -172,5 +173,9 @@ namespace DoranApp.View
             buttonRefreshRole.Cursor = Cursors.Default;
         }
 
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }

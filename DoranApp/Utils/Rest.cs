@@ -91,14 +91,16 @@ namespace DoranApp.Utils
 
                             }
                         }
-                        throw new RestException(status, error);
+                        throw new RestException(status, "123123");
+                    //throw new RestException(status, error);
                     default:
-                        throw new RestException(status, error);
+                        throw new RestException(status, "123123");
+                        //throw new RestException(status, error);
 
                 }
             }
 
-            return "";
+            return null;
         }
 
         public async Task<TReturn> Get(dynamic query)
@@ -145,7 +147,7 @@ namespace DoranApp.Utils
         {
             TReturn tReturn = new TReturn();
             var error = FindError(response.HttpResponseMessage, response);
-            if (error.Length > 0)
+            if (error != null)
             {
                 throw new Exception(error);
             }

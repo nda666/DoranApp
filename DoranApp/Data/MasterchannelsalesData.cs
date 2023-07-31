@@ -42,7 +42,7 @@ namespace DoranApp.Data
             var response = await rest.Get(_query);
             if (response.ErrorMessage != null)
             {
-                MessageBox.Show( response.ErrorMessage);
+                MessageBox.Show("123123");
             }
             else
             {

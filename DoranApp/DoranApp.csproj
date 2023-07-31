@@ -316,6 +316,12 @@
     <Compile Include="Components\IsManagerComboBox.Designer.cs">
       <DependentUpon>IsManagerComboBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\NumericTextbox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\NumericTextbox.Designer.cs">
+      <DependentUpon>NumericTextbox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\AbstractData.cs" />
     <Compile Include="Data\DKategoriBarangData.cs" />
     <Compile Include="Data\MasterGudangData.cs" />
@@ -341,7 +347,6 @@
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\SalesChannel.cs" />
     <Compile Include="Models\Masteruser.cs" />
-    <None Include="Utils\SyncDatabase.xxxcs" />
     <Compile Include="Utils\ButtonToggleHelper.cs" />
     <Compile Include="Utils\InternetAvailabilityService.cs" />
     <Compile Include="View\HomeForm.cs">

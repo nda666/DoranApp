@@ -46,12 +46,7 @@ namespace DoranApp.Data
         {
             Rest rest = new Rest(RelativeUrl());
             var response = await rest.Get(_query);
-            if (response.ErrorMessage != null)
-            {
-                MessageBox.Show(response.ErrorMessage);
-            }
-            else
-            {
+         
                 _data = response.Response;
                 if (_data != null)
                 {
@@ -80,7 +75,7 @@ namespace DoranApp.Data
                 {
                     _dataTable.Rows.Clear();
                 }
-            }
+            
         }
 
 

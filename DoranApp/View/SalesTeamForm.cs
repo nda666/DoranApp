@@ -59,9 +59,9 @@ namespace DoranApp.View
             buttonFilter.Enabled = false;
             _salesTeamData.SetQuery(new
             {
-                name = textboxFilterUsername.Text.ToString(),
-                active = comboboxFilterActive.SelectedValue.ToString(),
-                salesChannelId = comboFilterChannel.SelectedValue?.ToString(),
+                nama = textboxFilterUsername.Text.ToString(),
+                aktif = comboboxFilterActive.SelectedValue.ToString(),
+                kodesales = comboFilterChannel.SelectedValue?.ToString(),
             });
             try
             {
@@ -69,7 +69,7 @@ namespace DoranApp.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
             buttonFilter.Enabled = true;
         }
@@ -168,7 +168,7 @@ namespace DoranApp.View
                 }
 
                 await _salesTeamData.Refresh();
-                if (isEdit)
+                if (isEdit && dataGridView1.Rows.Count > 0)
                 {
                     dataGridView1.Rows[selectedRowIndex].Selected = true;
                 }

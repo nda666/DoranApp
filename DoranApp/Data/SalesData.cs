@@ -1,10 +1,7 @@
 ﻿using DoranApp.Models;
 using DoranApp.Utils;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -12,7 +9,6 @@ namespace DoranApp.Data
 {
     internal class SalesData: AbstractData<Sales>
     {
-        protected string _restUri = "sales";
         public SalesData() : base()
         {
         }
@@ -20,17 +16,24 @@ namespace DoranApp.Data
         public SalesData(object query) : base(query)
         {
         }
+        protected override string RelativeUrl()
+        {
+            return "sales";
+        }
 
         public override DataColumn[] GetColumn()
         {
 
             DataColumn[] dataColumns = new DataColumn[] {
-                new DataColumn("ID"),
+                new DataColumn("Kode"),
                 new DataColumn("Nama"),
-                new DataColumn("Team"),
+                new DataColumn("Tim"),
                 new DataColumn("Manager", Type.GetType("System.Boolean")),
                 new DataColumn("Nama Manager"),
-                new DataColumn("Omzet Email", Type.GetType("System.Boolean")),
+                new DataColumn("Sales Ol", Type.GetType("System.Boolean")),
+                new DataColumn("Email"),
+            new DataColumn("Email Jete Terdahsyat", Type.GetType("System.Boolean")),
+                   new DataColumn("Email Omzet Terdahsyat", Type.GetType("System.Boolean")),
                 new DataColumn("Aktif", Type.GetType("System.Boolean")),
                 new DataColumn("Created At", Type.GetType("System.DateTime")),
                 new DataColumn("Updated At", Type.GetType("System.DateTime")),
@@ -40,14 +43,9 @@ namespace DoranApp.Data
 
         protected override async Task RunRefresh()
         {
-            Rest rest = new Rest(_restUri);
+            Rest rest = new Rest(RelativeUrl());
             var response = await rest.Get(_query);
-            if (response.ErrorMessage != null)
-            {
-                MessageBox.Show(response.ErrorMessage);
-            }
-            else
-            {
+          
                 _data = response.Response;
                 if (_data != null)
                 {
@@ -57,15 +55,18 @@ namespace DoranApp.Data
                     {
                         DataRow r = _dataTable.NewRow();
                         r.BeginEdit();
-                        r["ID"] = sales.id;
-                        r["Nama"] = sales.name;
-                        r["Team"] = sales.salesTeam?.name;
-                        r["Manager"] = sales.isManager;
-                        r["Nama Manager"] = sales.manager?.name;
-                        r["Omzet Email"] = sales.getOmzetEmail;
-                        r["Aktif"] = sales.active;
-                        r["Created At"] = string.IsNullOrEmpty(sales.createdAt) ? DBNull.Value : (object)DateTime.Parse(sales.createdAt);
-                        r["Updated At"] = string.IsNullOrEmpty(sales.updatedAt) ? DBNull.Value : (object)DateTime.Parse(sales.updatedAt);
+                        r["Kode"] = sales.Kode;
+                        r["Nama"] = sales.Nama;
+                        r["Tim"] = sales.NamaTim;
+                        r["Manager"] = sales.Manager;
+                        r["Nama Manager"] = sales.NamaManager;
+                        r["Sales Ol"] = sales.Salesol;
+                        r["Email"] = sales.Email;
+                        r["Email Jete Terdahsyat"] = sales.EmailJeteterdahsyat;
+                        r["Email Omzet Terdahsyat"] = sales.EmailOmzetTerdahsyat;
+                        r["Aktif"] = sales.Aktif;
+                        r["Created At"] = sales.CreatedAt ?? Convert.DBNull;
+                        r["Updated At"] = sales.UpdatedAt ?? Convert.DBNull;
                         r.EndEdit();
                         _dataTable.Rows.Add(r);
                     }
@@ -75,15 +76,7 @@ namespace DoranApp.Data
                 {
                     _dataTable.Rows.Clear();
                 }
-            }
-        }
-
-        static void FormatColumnToCurrency(DataTable dataTable, string columnName)
-        {
-            // Create a new computed column for the formatted price
-            DataColumn formattedPriceColumn = new DataColumn("FormattedPrice", typeof(string));
-            formattedPriceColumn.Expression = $"FORMAT({columnName}, 'C')";
-            dataTable.Columns.Add(formattedPriceColumn);
+       
         }
     }
     

@@ -119,35 +119,36 @@ namespace DoranApp.View
                 Console.WriteLine("Just entered to create Sync DB");
                 SQLiteConnection.CreateFile(filePath);
             }
-            // Second provider is using plain old Sql Server provider,
-            // relying on triggers and tracking tables to create the sync environment
-            var clientProvider = new SqliteSyncProvider($"Data Source={filePath};");
-            var localOrchestrator = new LocalOrchestrator(clientProvider);
-            var sScopeInfo = await serverOrchestrator.GetScopeInfoAsync();
-            var sScopeClientInfo = await localOrchestrator.GetScopeInfoClientAsync();
-           
-            await localOrchestrator.ProvisionAsync(sScopeInfo);
-
-            // Creating an agent that will handle all the process
-            var agent = new SyncAgent(clientProvider, serverOrchestrator);
-
-
-
-            var progress = new Progress<ProgressArgs>(update =>
-            {
-                Console.WriteLine("Progress: " + update.ProgressPercentage.ToString());
-            });
+            
 
 
             try
             {
+                // Second provider is using plain old Sql Server provider,
+                // relying on triggers and tracking tables to create the sync environment
+                var clientProvider = new SqliteSyncProvider($"Data Source={filePath};");
+                var localOrchestrator = new LocalOrchestrator(clientProvider);
+                var sScopeInfo = await serverOrchestrator.GetScopeInfoAsync();
+                var sScopeClientInfo = await localOrchestrator.GetScopeInfoClientAsync();
+
+                await localOrchestrator.ProvisionAsync(sScopeInfo);
+
+                // Creating an agent that will handle all the process
+                var agent = new SyncAgent(clientProvider, serverOrchestrator);
+
+
+
+                var progress = new Progress<ProgressArgs>(update =>
+                {
+                    Console.WriteLine("Progress: " + update.ProgressPercentage.ToString());
+                });
 
                 // Launch the sync process
                 var s1 = await agent.SynchronizeAsync(scopeName: "v2", progress: progress);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                //MessageBox.Show(ex.Message);
             }
             _runSync = false;
             _stopSync = true;

@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.comboFilterIsManager = new DoranApp.Components.IsManagerComboBox(this.components);
-            this.comboboxFilterActive = new DoranApp.Components.ActiveComboBox(this.components);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesForm));
+            this.comboFilterIsManager = new System.Windows.Forms.GroupBox();
             this.comboFilterManager = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -59,55 +58,40 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textboxName = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.groupBox2.SuspendLayout();
+            this.checkboxEmailJeteterdahsyat = new System.Windows.Forms.CheckBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.checkBoxEmailTargetTahunan = new System.Windows.Forms.CheckBox();
+            this.checkBoxEmailresikiriman = new System.Windows.Forms.CheckBox();
+            this.checkBoxBisalihatomzettahunantim = new System.Windows.Forms.CheckBox();
+            this.checkBoxSalesOl = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.isManagerComboBox1 = new DoranApp.Components.IsManagerComboBox(this.components);
+            this.comboboxFilterActive = new DoranApp.Components.ActiveComboBox(this.components);
+            this.textBoxUrutan = new DoranApp.Components.NumericTextbox(this.components);
+            this.comboFilterIsManager.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.comboFilterIsManager);
-            this.groupBox2.Controls.Add(this.comboboxFilterActive);
-            this.groupBox2.Controls.Add(this.comboFilterManager);
-            this.groupBox2.Controls.Add(this.label8);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.comboFilterSalesTeam);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.buttonFilter);
-            this.groupBox2.Controls.Add(this.textboxFilterUsername);
-            this.groupBox2.Location = new System.Drawing.Point(332, 12);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(359, 141);
-            this.groupBox2.TabIndex = 31;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Filter";
-            // 
             // comboFilterIsManager
             // 
-            this.comboFilterIsManager.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboFilterIsManager.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboFilterIsManager.DisplayMember = "Text";
-            this.comboFilterIsManager.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboFilterIsManager.FormattingEnabled = true;
-            this.comboFilterIsManager.Location = new System.Drawing.Point(80, 69);
+            this.comboFilterIsManager.Controls.Add(this.isManagerComboBox1);
+            this.comboFilterIsManager.Controls.Add(this.comboboxFilterActive);
+            this.comboFilterIsManager.Controls.Add(this.comboFilterManager);
+            this.comboFilterIsManager.Controls.Add(this.label8);
+            this.comboFilterIsManager.Controls.Add(this.label7);
+            this.comboFilterIsManager.Controls.Add(this.label4);
+            this.comboFilterIsManager.Controls.Add(this.comboFilterSalesTeam);
+            this.comboFilterIsManager.Controls.Add(this.label3);
+            this.comboFilterIsManager.Controls.Add(this.buttonFilter);
+            this.comboFilterIsManager.Controls.Add(this.textboxFilterUsername);
+            this.comboFilterIsManager.Location = new System.Drawing.Point(431, 12);
             this.comboFilterIsManager.Name = "comboFilterIsManager";
-            this.comboFilterIsManager.Size = new System.Drawing.Size(105, 21);
-            this.comboFilterIsManager.TabIndex = 33;
-            this.comboFilterIsManager.ValueMember = "Value";
-            // 
-            // comboboxFilterActive
-            // 
-            this.comboboxFilterActive.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboboxFilterActive.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboboxFilterActive.DisplayMember = "Text";
-            this.comboboxFilterActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboboxFilterActive.FormattingEnabled = true;
-            this.comboboxFilterActive.Location = new System.Drawing.Point(250, 42);
-            this.comboboxFilterActive.Name = "comboboxFilterActive";
-            this.comboboxFilterActive.Size = new System.Drawing.Size(96, 21);
-            this.comboboxFilterActive.TabIndex = 32;
-            this.comboboxFilterActive.ValueMember = "Value";
+            this.comboFilterIsManager.Size = new System.Drawing.Size(359, 141);
+            this.comboFilterIsManager.TabIndex = 31;
+            this.comboFilterIsManager.TabStop = false;
+            this.comboFilterIsManager.Text = "Filter";
+            this.comboFilterIsManager.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // comboFilterManager
             // 
@@ -191,7 +175,7 @@
             // totalDataLabel
             // 
             this.totalDataLabel.AutoSize = true;
-            this.totalDataLabel.Location = new System.Drawing.Point(332, 156);
+            this.totalDataLabel.Location = new System.Drawing.Point(428, 156);
             this.totalDataLabel.Name = "totalDataLabel";
             this.totalDataLabel.Size = new System.Drawing.Size(69, 13);
             this.totalDataLabel.TabIndex = 30;
@@ -199,6 +183,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.textBoxUrutan);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.checkBoxSalesOl);
+            this.groupBox1.Controls.Add(this.checkBoxBisalihatomzettahunantim);
+            this.groupBox1.Controls.Add(this.checkBoxEmailresikiriman);
+            this.groupBox1.Controls.Add(this.checkBoxEmailTargetTahunan);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.checkboxEmailJeteterdahsyat);
             this.groupBox1.Controls.Add(this.comboManager);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.buttonRefreshRole);
@@ -217,7 +209,7 @@
             this.groupBox1.Controls.Add(this.textboxName);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(314, 334);
+            this.groupBox1.Size = new System.Drawing.Size(410, 397);
             this.groupBox1.TabIndex = 29;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tambah/Ubah User";
@@ -294,11 +286,11 @@
             this.checkboxGetOmzetEmail.AutoSize = true;
             this.checkboxGetOmzetEmail.Checked = true;
             this.checkboxGetOmzetEmail.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkboxGetOmzetEmail.Location = new System.Drawing.Point(189, 183);
+            this.checkboxGetOmzetEmail.Location = new System.Drawing.Point(105, 206);
             this.checkboxGetOmzetEmail.Name = "checkboxGetOmzetEmail";
-            this.checkboxGetOmzetEmail.Size = new System.Drawing.Size(119, 17);
+            this.checkboxGetOmzetEmail.Size = new System.Drawing.Size(140, 17);
             this.checkboxGetOmzetEmail.TabIndex = 6;
-            this.checkboxGetOmzetEmail.Text = "Terima Email Omzet";
+            this.checkboxGetOmzetEmail.Text = "Email Omzet Terdahsyat";
             this.checkboxGetOmzetEmail.UseVisualStyleBackColor = true;
             // 
             // checkboxIsManager
@@ -326,7 +318,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(105, 206);
+            this.buttonSave.Location = new System.Drawing.Point(199, 311);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(205, 44);
             this.buttonSave.TabIndex = 8;
@@ -352,7 +344,7 @@
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.Location = new System.Drawing.Point(3, 16);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(308, 32);
+            this.button4.Size = new System.Drawing.Size(404, 32);
             this.button4.TabIndex = 9;
             this.button4.TabStop = false;
             this.button4.Text = "Buat Baru";
@@ -363,7 +355,7 @@
             this.buttonDelete.Enabled = false;
             this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.Color.Red;
-            this.buttonDelete.Location = new System.Drawing.Point(200, 288);
+            this.buttonDelete.Location = new System.Drawing.Point(296, 361);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(108, 32);
             this.buttonDelete.TabIndex = 20;
@@ -386,7 +378,7 @@
             this.textboxId.Location = new System.Drawing.Point(105, 54);
             this.textboxId.Name = "textboxId";
             this.textboxId.ReadOnly = true;
-            this.textboxId.Size = new System.Drawing.Size(205, 20);
+            this.textboxId.Size = new System.Drawing.Size(299, 20);
             this.textboxId.TabIndex = 6;
             this.textboxId.TabStop = false;
             // 
@@ -404,7 +396,7 @@
             // 
             this.textboxName.Location = new System.Drawing.Point(105, 80);
             this.textboxName.Name = "textboxName";
-            this.textboxName.Size = new System.Drawing.Size(205, 20);
+            this.textboxName.Size = new System.Drawing.Size(299, 20);
             this.textboxName.TabIndex = 1;
             // 
             // dataGridView1
@@ -416,30 +408,160 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(332, 172);
+            this.dataGridView1.Location = new System.Drawing.Point(431, 172);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(360, 219);
+            this.dataGridView1.Size = new System.Drawing.Size(359, 237);
             this.dataGridView1.TabIndex = 28;
             this.dataGridView1.TabStop = false;
+            // 
+            // checkboxEmailJeteterdahsyat
+            // 
+            this.checkboxEmailJeteterdahsyat.AutoSize = true;
+            this.checkboxEmailJeteterdahsyat.Checked = true;
+            this.checkboxEmailJeteterdahsyat.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkboxEmailJeteterdahsyat.Location = new System.Drawing.Point(105, 229);
+            this.checkboxEmailJeteterdahsyat.Name = "checkboxEmailJeteterdahsyat";
+            this.checkboxEmailJeteterdahsyat.Size = new System.Drawing.Size(130, 17);
+            this.checkboxEmailJeteterdahsyat.TabIndex = 32;
+            this.checkboxEmailJeteterdahsyat.Text = "Email Jete Terdahsyat";
+            this.checkboxEmailJeteterdahsyat.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(67, 206);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(32, 13);
+            this.label9.TabIndex = 33;
+            this.label9.Text = "Opsi";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // checkBoxEmailTargetTahunan
+            // 
+            this.checkBoxEmailTargetTahunan.AutoSize = true;
+            this.checkBoxEmailTargetTahunan.Checked = true;
+            this.checkBoxEmailTargetTahunan.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxEmailTargetTahunan.Location = new System.Drawing.Point(105, 252);
+            this.checkBoxEmailTargetTahunan.Name = "checkBoxEmailTargetTahunan";
+            this.checkBoxEmailTargetTahunan.Size = new System.Drawing.Size(131, 17);
+            this.checkBoxEmailTargetTahunan.TabIndex = 34;
+            this.checkBoxEmailTargetTahunan.Text = "Email Target Tahunan";
+            this.checkBoxEmailTargetTahunan.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxEmailresikiriman
+            // 
+            this.checkBoxEmailresikiriman.AutoSize = true;
+            this.checkBoxEmailresikiriman.Checked = true;
+            this.checkBoxEmailresikiriman.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxEmailresikiriman.Location = new System.Drawing.Point(251, 206);
+            this.checkBoxEmailresikiriman.Name = "checkBoxEmailresikiriman";
+            this.checkBoxEmailresikiriman.Size = new System.Drawing.Size(112, 17);
+            this.checkBoxEmailresikiriman.TabIndex = 35;
+            this.checkBoxEmailresikiriman.Text = "Email Resi Kiriman";
+            this.checkBoxEmailresikiriman.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxBisalihatomzettahunantim
+            // 
+            this.checkBoxBisalihatomzettahunantim.AutoSize = true;
+            this.checkBoxBisalihatomzettahunantim.Checked = true;
+            this.checkBoxBisalihatomzettahunantim.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxBisalihatomzettahunantim.Location = new System.Drawing.Point(251, 229);
+            this.checkBoxBisalihatomzettahunantim.Name = "checkBoxBisalihatomzettahunantim";
+            this.checkBoxBisalihatomzettahunantim.Size = new System.Drawing.Size(102, 17);
+            this.checkBoxBisalihatomzettahunantim.TabIndex = 36;
+            this.checkBoxBisalihatomzettahunantim.Text = "Lihat Omzet Tim";
+            this.checkBoxBisalihatomzettahunantim.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxSalesOl
+            // 
+            this.checkBoxSalesOl.AutoSize = true;
+            this.checkBoxSalesOl.Checked = true;
+            this.checkBoxSalesOl.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxSalesOl.Location = new System.Drawing.Point(179, 133);
+            this.checkBoxSalesOl.Name = "checkBoxSalesOl";
+            this.checkBoxSalesOl.Size = new System.Drawing.Size(69, 17);
+            this.checkBoxSalesOl.TabIndex = 37;
+            this.checkBoxSalesOl.Text = "Sales OL";
+            this.checkBoxSalesOl.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(54, 275);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(45, 13);
+            this.label10.TabIndex = 39;
+            this.label10.Text = "Urutan";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // isManagerComboBox1
+            // 
+            this.isManagerComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.isManagerComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.isManagerComboBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.isManagerComboBox1.DisplayMember = "Value";
+            this.isManagerComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.isManagerComboBox1.FormattingEnabled = true;
+            this.isManagerComboBox1.Items.AddRange(new object[] {
+            ((object)(resources.GetObject("isManagerComboBox1.Items"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items1"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items2")))});
+            this.isManagerComboBox1.Location = new System.Drawing.Point(80, 69);
+            this.isManagerComboBox1.Name = "isManagerComboBox1";
+            this.isManagerComboBox1.Size = new System.Drawing.Size(105, 21);
+            this.isManagerComboBox1.TabIndex = 33;
+            this.isManagerComboBox1.ValueMember = "Key";
+            // 
+            // comboboxFilterActive
+            // 
+            this.comboboxFilterActive.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboboxFilterActive.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboboxFilterActive.DisplayMember = "Value";
+            this.comboboxFilterActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboboxFilterActive.FormattingEnabled = true;
+            this.comboboxFilterActive.Items.AddRange(new object[] {
+            ((object)(resources.GetObject("comboboxFilterActive.Items"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items1"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items2"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items3"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items4"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items5"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items6"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items7"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items8")))});
+            this.comboboxFilterActive.Location = new System.Drawing.Point(250, 42);
+            this.comboboxFilterActive.Name = "comboboxFilterActive";
+            this.comboboxFilterActive.Size = new System.Drawing.Size(96, 21);
+            this.comboboxFilterActive.TabIndex = 32;
+            this.comboboxFilterActive.ValueMember = "Key";
+            // 
+            // textBoxUrutan
+            // 
+            this.textBoxUrutan.Location = new System.Drawing.Point(105, 275);
+            this.textBoxUrutan.Name = "textBoxUrutan";
+            this.textBoxUrutan.Size = new System.Drawing.Size(100, 20);
+            this.textBoxUrutan.TabIndex = 40;
             // 
             // SalesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 403);
-            this.Controls.Add(this.groupBox2);
+            this.ClientSize = new System.Drawing.Size(802, 421);
+            this.Controls.Add(this.comboFilterIsManager);
             this.Controls.Add(this.totalDataLabel);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "SalesForm";
             this.Text = "SalesForm";
             this.Load += new System.EventHandler(this.SalesForm_Load);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.comboFilterIsManager.ResumeLayout(false);
+            this.comboFilterIsManager.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -450,7 +572,7 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox comboFilterIsManager;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboFilterSalesTeam;
@@ -479,6 +601,14 @@
         private System.Windows.Forms.ComboBox comboFilterManager;
         private System.Windows.Forms.Label label8;
         private Components.ActiveComboBox comboboxFilterActive;
-        private Components.IsManagerComboBox comboFilterIsManager;
+        private Components.IsManagerComboBox isManagerComboBox1;
+        private System.Windows.Forms.CheckBox checkboxEmailJeteterdahsyat;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox checkBoxSalesOl;
+        private System.Windows.Forms.CheckBox checkBoxBisalihatomzettahunantim;
+        private System.Windows.Forms.CheckBox checkBoxEmailresikiriman;
+        private System.Windows.Forms.CheckBox checkBoxEmailTargetTahunan;
+        private System.Windows.Forms.Label label9;
+        private Components.NumericTextbox textBoxUrutan;
     }
 }
