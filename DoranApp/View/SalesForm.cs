@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -47,13 +48,13 @@ namespace DoranApp.View
             var bsComboSalesTeam = new BindingSource();
             bsComboSalesTeam.DataSource = _salesTeamData.GetData();
             comboSalesTeam.DataSource = bsComboSalesTeam;
-            comboSalesTeam.DisplayMember = "Name";
+            comboSalesTeam.DisplayMember = "Nama";
             comboSalesTeam.ValueMember = "Kode";
 
             var bsFilterSalesTeam = new BindingSource();
             bsFilterSalesTeam.DataSource = _salesTeamData.GetData();
             comboFilterSalesTeam.DataSource = bsFilterSalesTeam;
-            comboFilterSalesTeam.DisplayMember = "Name";
+            comboFilterSalesTeam.DisplayMember = "Nama";
             comboFilterSalesTeam.ValueMember = "Kode";
 
             
@@ -111,51 +112,46 @@ namespace DoranApp.View
         {
             if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
+                ButtonToggleHelper.DisableButtonsByTag(this, "action");
                 var selectedRowIndex = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 0;
                 var isEdit = textboxId.Text.Length > 0;
 
                 var uri = isEdit ? $"sales/{textboxId.Text}" : $"sales";
                 var rest = new Rest(uri);
+                
                 try
                 {
-                    if (isEdit)
+                    await _salesData.CreateOrUpdate(textboxId.Text, new
                     {
-                        await rest.Put(new
-                        {
-                            id = textboxId.Text,
-                            nama=textboxName.Text,
-                            kodetimsales= comboSalesTeam.SelectedValue,
-                            manager = checkboxIsManager.Checked,
-                            kodemanager = comboManager.SelectedValue,
-                            emailOmzetTerdahsyat = checkboxGetOmzetEmail.Checked,
-                            emailJeteterdahsyat = checkboxEmailJeteterdahsyat.Checked,
-                            aktif = checkboxActive.Checked,
+                        id = textboxId.Text,
+                        nama = textboxName.Text.Trim(),
+                        kodetimsales = comboSalesTeam.SelectedValue,
+                        manager = checkboxIsManager.Checked,
+                        kodemanager = comboManager.SelectedValue,
+                        emailOmzetTerdahsyat = checkboxGetOmzetEmail.Checked,
+                        emailJeteterdahsyat = checkboxEmailJeteterdahsyat.Checked,
+                        aktif = checkboxActive.Checked,
+                        email = textBoxEmail.Text.Trim(),
+                        emailTargetTahunan = checkBoxEmailTargetTahunan.Checked,
+                        emailresikiriman = checkBoxEmailresikiriman.Checked,
+                        bisalihatomzettahunantim = checkBoxBisalihatomzettahunantim.Checked,
+                        jenis = checkBoxTerimaEmailOmzet.Checked,
+                        urutan = textBoxUrutan.Text,
 
-                        });
-                    }
-                    else
-                    {
-                        await rest.Post(new
-                        {
-                            name = textboxName.Text,
-                            salesTeamId = comboSalesTeam.SelectedValue,
-                            isManager = checkboxIsManager.Checked,
-                            managerId = comboManager.SelectedValue,
-                            getOmzetEmail = checkboxGetOmzetEmail.Checked,
-                            active = checkboxActive.Checked,
-                        });
-                    }
-                    await _salesData.Refresh();
-                    if (isEdit)
-                    {
-                        dataGridView1.Rows[selectedRowIndex].Selected = true;
-                    }
-                    textboxName.Focus();
+                    });
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
+                await FetchData();
+                    if (isEdit && dataGridView1.Rows.Count > 0)
+                    {
+                        dataGridView1.Rows[selectedRowIndex].Selected = true;
+                    }
+                    textboxName.Focus();
+                ButtonToggleHelper.EnableButtonsByTag(this, "action");
+
             }
         }
 
@@ -176,6 +172,30 @@ namespace DoranApp.View
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count <= 0)
+            {
+                buttonDelete.Enabled = false;
+                return;
+            }
+
+            var selected = _salesData.GetData().Where(x => x.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
+
+            textboxId.Text = selected.Kode.ToString();
+            textboxName.Text = selected.Nama;
+            comboSalesTeam.SelectedValue = selected.Kodetimsales;
+            checkboxIsManager.Checked = selected.Manager;
+            comboManager.SelectedValue = selected.Kodemanager;
+            checkBoxSalesOl.Checked = selected.Salesol;
+            checkboxGetOmzetEmail.Checked = selected.EmailOmzetTerdahsyat;
+            checkboxEmailJeteterdahsyat.Checked = selected.EmailJeteterdahsyat;
+            checkBoxEmailTargetTahunan.Checked = selected.EmailTargetTahunan;
+
+
+            buttonDelete.Enabled = true;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace DoranApp.Data
         {
 
             DataColumn[] dataColumns = new DataColumn[] {
-                new DataColumn("Kode"),
+                new DataColumn("Kode", typeof(Int32)),
                 new DataColumn("Nama"),
                 new DataColumn("Tim"),
                 new DataColumn("Manager", Type.GetType("System.Boolean")),

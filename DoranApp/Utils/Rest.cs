@@ -60,13 +60,13 @@ namespace DoranApp.Utils
         {
             
             var status = (Int32)httpResponseMessage.StatusCode;
-       
             var xx = (string)response.ToString();
             var error = httpResponseMessage.ReasonPhrase;
 
             if (!status.ToString().StartsWith("2"))
             {
-                
+
+                ConsoleDump.Extensions.Dump(httpResponseMessage);
                 switch (status)
                 {
                     case 400:
@@ -91,11 +91,9 @@ namespace DoranApp.Utils
 
                             }
                         }
-                        throw new RestException(status, "123123");
-                    //throw new RestException(status, error);
+                        throw new RestException(status, error);
                     default:
-                        throw new RestException(status, "123123");
-                        //throw new RestException(status, error);
+                        throw new RestException(status, error);
 
                 }
             }
