@@ -113,7 +113,10 @@
             ((object)(resources.GetObject("isManagerComboBox1.Items5"))),
             ((object)(resources.GetObject("isManagerComboBox1.Items6"))),
             ((object)(resources.GetObject("isManagerComboBox1.Items7"))),
-            ((object)(resources.GetObject("isManagerComboBox1.Items8")))});
+            ((object)(resources.GetObject("isManagerComboBox1.Items8"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items9"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items10"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items11")))});
             this.isManagerComboBox1.Location = new System.Drawing.Point(80, 69);
             this.isManagerComboBox1.Name = "isManagerComboBox1";
             this.isManagerComboBox1.Size = new System.Drawing.Size(105, 21);
@@ -148,7 +151,10 @@
             ((object)(resources.GetObject("comboboxFilterActive.Items17"))),
             ((object)(resources.GetObject("comboboxFilterActive.Items18"))),
             ((object)(resources.GetObject("comboboxFilterActive.Items19"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items20")))});
+            ((object)(resources.GetObject("comboboxFilterActive.Items20"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items21"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items22"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items23")))});
             this.comboboxFilterActive.Location = new System.Drawing.Point(250, 42);
             this.comboboxFilterActive.Name = "comboboxFilterActive";
             this.comboboxFilterActive.Size = new System.Drawing.Size(96, 21);
@@ -316,6 +322,8 @@
             this.textBoxUrutan.Name = "textBoxUrutan";
             this.textBoxUrutan.Size = new System.Drawing.Size(40, 20);
             this.textBoxUrutan.TabIndex = 40;
+            this.textBoxUrutan.Text = "0";
+            this.textBoxUrutan.Leave += new System.EventHandler(this.textBoxUrutan_Leave);
             // 
             // label10
             // 

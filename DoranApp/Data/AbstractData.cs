@@ -79,7 +79,7 @@ namespace DoranApp.Data
             var isEdit = string.IsNullOrEmpty(primaryKeyValue) == false;
             var uri = isEdit ? $"{RelativeUrl()}/{primaryKeyValue}" : $"{RelativeUrl()}";
 
-
+            ConsoleDump.Extensions.Dump(uri, "ERRRR");
             var rest = new Rest(uri);
             try
             {

@@ -7,9 +7,12 @@ using System.Windows.Forms;
 
 namespace DoranApp.Data
 {
-    internal class UserData : AbstractData<Models.Masteruser>
+    internal class MasteruserData : AbstractData<Models.Masteruser>
     {
-
+        protected override string RelativeUrl()
+        {
+            return "masteruser";
+        }
         public override DataColumn[] GetColumn()
         {
 
@@ -27,7 +30,7 @@ namespace DoranApp.Data
 
         protected override async Task RunRefresh()
         {
-            Rest rest = new Rest("users");
+            Rest rest = new Rest(RelativeUrl());
             var response = await rest.Get(_query);
             if (response.ErrorMessage != null)
             {

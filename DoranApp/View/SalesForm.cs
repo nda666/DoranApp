@@ -197,5 +197,13 @@ namespace DoranApp.View
 
             buttonDelete.Enabled = true;
         }
+
+        private void textBoxUrutan_Leave(object sender, EventArgs e)
+        {
+            if (String.IsNullOrWhiteSpace(textBoxUrutan.Text))
+            {
+                textBoxUrutan.Text = "0";
+            }
+        }
     }
 }

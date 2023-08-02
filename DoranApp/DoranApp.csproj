@@ -337,7 +337,7 @@
     <Compile Include="Models\Sales.cs" />
     <Compile Include="Models\SalesTeam.cs" />
     <Compile Include="Data\MastertimsalesData.cs" />
-    <Compile Include="Data\UserData.cs" />
+    <Compile Include="Data\MasteruserData.cs" />
     <Compile Include="Exceptions\RestException.cs" />
     <Compile Include="Models\DKategoriBarang.cs" />
     <Compile Include="Models\HKategoriBarang.cs" />

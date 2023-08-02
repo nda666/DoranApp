@@ -42,7 +42,6 @@ namespace DoranApp.View
             this.textboxFilterUsername = new System.Windows.Forms.TextBox();
             this.totalDataLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonRefreshRole = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.textboxPassword = new System.Windows.Forms.TextBox();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -83,12 +82,14 @@ namespace DoranApp.View
             // 
             this.comboboxFilterActive.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboboxFilterActive.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboboxFilterActive.DisplayMember = "Value";
             this.comboboxFilterActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboboxFilterActive.FormattingEnabled = true;
             this.comboboxFilterActive.Location = new System.Drawing.Point(253, 43);
             this.comboboxFilterActive.Name = "comboboxFilterActive";
             this.comboboxFilterActive.Size = new System.Drawing.Size(93, 21);
             this.comboboxFilterActive.TabIndex = 17;
+            this.comboboxFilterActive.ValueMember = "Key";
             // 
             // searchRoleLabel
             // 
@@ -138,6 +139,7 @@ namespace DoranApp.View
             this.buttonFilter.Name = "buttonFilter";
             this.buttonFilter.Size = new System.Drawing.Size(266, 40);
             this.buttonFilter.TabIndex = 8;
+            this.buttonFilter.Tag = "action";
             this.buttonFilter.Text = "Cari";
             this.buttonFilter.UseVisualStyleBackColor = true;
             this.buttonFilter.Click += new System.EventHandler(this.buttonFilter_Click);
@@ -160,7 +162,6 @@ namespace DoranApp.View
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.buttonRefreshRole);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.textboxPassword);
             this.groupBox1.Controls.Add(this.buttonSave);
@@ -181,25 +182,6 @@ namespace DoranApp.View
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tambah/Ubah User";
             // 
-            // buttonRefreshRole
-            // 
-            this.buttonRefreshRole.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonRefreshRole.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonRefreshRole.FlatAppearance.BorderColor = System.Drawing.SystemColors.Control;
-            this.buttonRefreshRole.FlatAppearance.BorderSize = 0;
-            this.buttonRefreshRole.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonRefreshRole.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ControlLight;
-            this.buttonRefreshRole.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRefreshRole.Image = global::DoranApp.Properties.Resources.Refresh;
-            this.buttonRefreshRole.Location = new System.Drawing.Point(267, 128);
-            this.buttonRefreshRole.Name = "buttonRefreshRole";
-            this.buttonRefreshRole.Size = new System.Drawing.Size(25, 25);
-            this.buttonRefreshRole.TabIndex = 16;
-            this.buttonRefreshRole.TabStop = false;
-            this.toolTip1.SetToolTip(this.buttonRefreshRole, "Refresh data role");
-            this.buttonRefreshRole.UseVisualStyleBackColor = true;
-            this.buttonRefreshRole.Click += new System.EventHandler(this.button1_Click_1);
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -214,7 +196,7 @@ namespace DoranApp.View
             // 
             this.textboxPassword.Location = new System.Drawing.Point(93, 103);
             this.textboxPassword.Name = "textboxPassword";
-            this.textboxPassword.Size = new System.Drawing.Size(202, 20);
+            this.textboxPassword.Size = new System.Drawing.Size(200, 20);
             this.textboxPassword.TabIndex = 2;
             // 
             // buttonSave
@@ -223,6 +205,7 @@ namespace DoranApp.View
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(203, 44);
             this.buttonSave.TabIndex = 5;
+            this.buttonSave.Tag = "action";
             this.buttonSave.Text = "Simpan";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
@@ -320,9 +303,8 @@ namespace DoranApp.View
             "Kepalaakuntan"});
             this.comboRoles.Location = new System.Drawing.Point(93, 129);
             this.comboRoles.Name = "comboRoles";
-            this.comboRoles.Size = new System.Drawing.Size(169, 21);
+            this.comboRoles.Size = new System.Drawing.Size(200, 21);
             this.comboRoles.TabIndex = 3;
-            this.comboRoles.SelectedIndexChanged += new System.EventHandler(this.comboRoles_SelectedIndexChanged);
             this.comboRoles.Leave += new System.EventHandler(this.comboRoles_Leave);
             // 
             // label5
@@ -340,7 +322,7 @@ namespace DoranApp.View
             this.textboxId.Location = new System.Drawing.Point(93, 51);
             this.textboxId.Name = "textboxId";
             this.textboxId.ReadOnly = true;
-            this.textboxId.Size = new System.Drawing.Size(202, 20);
+            this.textboxId.Size = new System.Drawing.Size(200, 20);
             this.textboxId.TabIndex = 0;
             this.textboxId.TabStop = false;
             // 
@@ -358,7 +340,7 @@ namespace DoranApp.View
             // 
             this.textboxUsername.Location = new System.Drawing.Point(93, 77);
             this.textboxUsername.Name = "textboxUsername";
-            this.textboxUsername.Size = new System.Drawing.Size(202, 20);
+            this.textboxUsername.Size = new System.Drawing.Size(200, 20);
             this.textboxUsername.TabIndex = 1;
             // 
             // dataGridView1
@@ -435,7 +417,6 @@ namespace DoranApp.View
         private System.Windows.Forms.TextBox textboxPassword;
         private System.Windows.Forms.Label searchRoleLabel;
         private System.Windows.Forms.ComboBox comboFilterRole;
-        private System.Windows.Forms.Button buttonRefreshRole;
         private ToolTip toolTip1;
         private Components.ActiveComboBox activeComboBoxComponent1;
         private Components.ActiveComboBox comboboxFilterActive;

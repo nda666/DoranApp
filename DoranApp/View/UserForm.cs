@@ -14,9 +14,7 @@ namespace DoranApp.View
     {
         private DataTable _dataTable { get; set; }
 
-        private UserData _userData = new UserData();
-
-        private RolesData _rolesData = new RolesData();
+        private MasteruserData _userData = new MasteruserData();
 
         public UserForm()
         {
@@ -32,51 +30,12 @@ namespace DoranApp.View
             comboRoles.SelectedIndex = -1;
         }
 
-        public async Task fetchRoleData()
-        {
-
-            buttonRefreshRole.Enabled = false;
-            buttonRefreshRole.Cursor = Cursors.WaitCursor;
-
-            _rolesData.SetQuery(new { active = "true" });
-            await _rolesData.Refresh();
-            var bsRoleData = new BindingSource();
-            bsRoleData.DataSource = _rolesData.GetData();
-            comboRoles.DataSource = bsRoleData;
-            comboRoles.DisplayMember = "Name";
-            comboRoles.ValueMember = "Id";
-
-            var bsSearchData = new BindingSource();
-            bsSearchData.DataSource = _rolesData.GetData();
-            comboFilterRole.DataSource = bsSearchData;
-            comboFilterRole.DisplayMember = "Name";
-            comboFilterRole.ValueMember = "Id";
-
-            comboRoles.Text = "";
-            comboRoles.SelectedIndex = -1;
-
-            comboFilterRole.Text = "";
-            comboFilterRole.SelectedIndex = -1;
-
-            buttonRefreshRole.Enabled = true;
-            buttonRefreshRole.Cursor = Cursors.Default;
-            buttonRefreshRole.Focus();
-
-
-        }
-
         private async void UserForm_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
             buttonSave.Focus();
 
-            Dictionary<string, string> activeOption = new Dictionary<string, string>();
-            activeOption.Add("true", "Aktif");
-            activeOption.Add("false", "Tidak Aktif");
-            activeOption.Add("", "Semua");
-            comboboxFilterActive.DataSource = new BindingSource(activeOption, null);
-            comboboxFilterActive.DisplayMember = "Value";
-            comboboxFilterActive.ValueMember = "Key";
+         
             //await fetchRoleData();
 
             await fetchData();
@@ -95,13 +54,12 @@ namespace DoranApp.View
 
         public async Task fetchData()
         {
-
-            buttonFilter.Enabled = false;
+            ButtonToggleHelper.DisableButtonsByTag(this, "action");
             _userData.SetQuery(new
             {
-                username = textboxFilterUsername.Text.ToString(),
-                roleId = comboFilterRole.SelectedIndex > -1 ? comboFilterRole.SelectedValue.ToString() : "",
-                active = comboboxFilterActive.SelectedValue.ToString()
+                Username = textboxFilterUsername.Text.ToString(),
+                Akses = comboFilterRole.SelectedIndex > -1 ? comboFilterRole.SelectedItem.ToString() : "",
+                aktif = comboboxFilterActive.SelectedValue
             });
             try
             {
@@ -111,43 +69,29 @@ namespace DoranApp.View
             {
                 MessageBox.Show(ex.Message);
             }
-            buttonFilter.Enabled = true;
+            ButtonToggleHelper.EnableButtonsByTag(this, "action");
         }
 
         private async void buttonSave_Click(object sender, EventArgs e)
         {
             if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
+                this.toolTip1.SetToolTip(this.buttonSave, "This is a tooltip for the button.");
+           ButtonToggleHelper.DisableButtonsByTag(this, "action");
                 var selectedRowIndex = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 0;
                 var isEdit = textboxId.Text.Length > 0;
-
-                var uri = isEdit ? $"users/{textboxId.Text}" : $"users";
-                var rest = new Rest(uri);
+              
                 try
                 {
-                    if (isEdit)
+                    await _userData.CreateOrUpdate(textboxId.Text, new
                     {
-                        await rest.Put(new
-                        {
-                            kodeKu = textboxId.Text,
-                            usernameKu = textboxUsername.Text,
-                            passwordKu = textboxPassword.Text,
-                            akses = comboRoles.SelectedText.ToString(),
-                            aktif = checkboxActive.Checked
-                        });
-                    }
-                    else
-                    {
-                        await rest.Post(new
-                        {
-                            usernameKu = textboxUsername.Text,
-                            passwordKu = textboxPassword.Text,
-                            akses = comboRoles.SelectedValue.ToString(),
-                            aktif = checkboxActive.Checked
-                        });
-                    }
+                        usernameKu = textboxUsername.Text,
+                        passwordKu = textboxPassword.Text,
+                        akses = comboRoles.SelectedItem.ToString(),
+                        aktif = checkboxActive.Checked
+                    }); ;
                     await _userData.Refresh();
-                    if (isEdit)
+                    if (isEdit && dataGridView1.Rows.Count > 0)
                     {
                         dataGridView1.Rows[selectedRowIndex].Selected = true;
                     }
@@ -157,6 +101,9 @@ namespace DoranApp.View
                 {
                     MessageBox.Show(ex.Message);
                 }
+                ButtonToggleHelper.EnableButtonsByTag(this, "action");
+
+                this.toolTip1.SetToolTip(this.buttonSave, null);
             }
         }
 
@@ -179,7 +126,7 @@ namespace DoranApp.View
             var selectedUser = _userData.GetData().Where(user => user.Kodeku.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
             textboxUsername.Text = selectedUser.Usernameku;
             textboxPassword.Text = selectedUser.Passwordku;
-            //comboRoles.SelectedValue = selectedUser.roleId;
+            comboRoles.SelectedItem = selectedUser.Akses;
             checkboxActive.Checked = selectedUser.Aktif;
             textboxId.Text = selectedUser.Kodeku.ToString();
             buttonDelete.Enabled = true;
@@ -252,19 +199,5 @@ namespace DoranApp.View
             }
         }
 
-        private async void button1_Click_1(object sender, EventArgs e)
-        {
-            await fetchRoleData();
-        }
-
-        private void activeComboBox1_SelectedValueChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show("A");
-        }
-
-        private void comboRoles_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show(comboRoles.SelectedText);
-        }
     }
 }
