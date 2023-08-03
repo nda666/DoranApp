@@ -53,7 +53,6 @@ namespace DoranApp
             DKategoriBarangData dKategoriBarangData = new DKategoriBarangData(null);
             HKategoriBarangData hKategoriBarangData = new HKategoriBarangData(new { aktif = "1" });
             MasterGudangData masterGudangData = new MasterGudangData(new { aktif = "1" });
-            hKategoriCombo.DataSource = await hKategoriBarangData.GetBindingSource(true);
             dKategoriCombo.DataSource = await dKategoriBarangData.GetBindingSource(true);
             gudangCombo.DataSource = await masterGudangData.GetBindingSource(true);
         }

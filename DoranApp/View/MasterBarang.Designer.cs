@@ -72,9 +72,9 @@ namespace DoranApp
             // groupBox3
             // 
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox3.Location = new System.Drawing.Point(612, 3);
+            this.groupBox3.Location = new System.Drawing.Point(3, 244);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(257, 255);
+            this.groupBox3.Size = new System.Drawing.Size(866, 14);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Set Harga";
@@ -82,9 +82,9 @@ namespace DoranApp
             // groupBox2
             // 
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(351, 3);
+            this.groupBox2.Location = new System.Drawing.Point(3, 224);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(255, 255);
+            this.groupBox2.Size = new System.Drawing.Size(866, 14);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Tambah Barang";
@@ -96,7 +96,7 @@ namespace DoranApp
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(342, 255);
+            this.groupBox1.Size = new System.Drawing.Size(866, 215);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cari Barang";
@@ -118,12 +118,12 @@ namespace DoranApp
             this.tableLayoutPanel1.Controls.Add(this.button3, 4, 0);
             this.tableLayoutPanel1.Controls.Add(this.button4, 4, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 181);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 141);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.88733F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.11267F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(336, 71);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(860, 71);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // button1
@@ -166,7 +166,7 @@ namespace DoranApp
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Location = new System.Drawing.Point(225, 3);
             this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(27, 21);
+            this.comboBox4.Size = new System.Drawing.Size(551, 21);
             this.comboBox4.TabIndex = 20;
             // 
             // label12
@@ -183,7 +183,7 @@ namespace DoranApp
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(258, 3);
+            this.button3.Location = new System.Drawing.Point(782, 3);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 28);
             this.button3.TabIndex = 21;
@@ -192,7 +192,7 @@ namespace DoranApp
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(258, 37);
+            this.button4.Location = new System.Drawing.Point(782, 37);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 29);
             this.button4.TabIndex = 23;
@@ -236,7 +236,7 @@ namespace DoranApp
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(330, 145);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(854, 145);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // hKategoriCombo
@@ -246,9 +246,9 @@ namespace DoranApp
             this.hKategoriCombo.DropDownWidth = 200;
             this.hKategoriCombo.FormattingEnabled = true;
             this.hKategoriCombo.IntegralHeight = false;
-            this.hKategoriCombo.Location = new System.Drawing.Point(106, 90);
+            this.hKategoriCombo.Location = new System.Drawing.Point(281, 90);
             this.hKategoriCombo.Name = "hKategoriCombo";
-            this.hKategoriCombo.Size = new System.Drawing.Size(75, 21);
+            this.hKategoriCombo.Size = new System.Drawing.Size(250, 21);
             this.hKategoriCombo.TabIndex = 14;
             this.hKategoriCombo.SelectedIndexChanged += new System.EventHandler(this.hKategoriCombo_SelectedIndexChanged);
             // 
@@ -256,7 +256,7 @@ namespace DoranApp
             // 
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(84, 58);
+            this.label6.Location = new System.Drawing.Point(259, 58);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(16, 29);
             this.label6.TabIndex = 12;
@@ -267,7 +267,7 @@ namespace DoranApp
             // 
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(84, 29);
+            this.label3.Location = new System.Drawing.Point(259, 29);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(16, 29);
             this.label3.TabIndex = 9;
@@ -278,7 +278,7 @@ namespace DoranApp
             // 
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(84, 0);
+            this.label2.Location = new System.Drawing.Point(259, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(16, 29);
             this.label2.TabIndex = 8;
@@ -291,7 +291,7 @@ namespace DoranApp
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 29);
+            this.label1.Size = new System.Drawing.Size(250, 29);
             this.label1.TabIndex = 7;
             this.label1.Text = "Nama";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -299,9 +299,9 @@ namespace DoranApp
             // stokTxt
             // 
             this.stokTxt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.stokTxt.Location = new System.Drawing.Point(106, 32);
+            this.stokTxt.Location = new System.Drawing.Point(281, 32);
             this.stokTxt.Name = "stokTxt";
-            this.stokTxt.Size = new System.Drawing.Size(75, 20);
+            this.stokTxt.Size = new System.Drawing.Size(250, 20);
             this.stokTxt.TabIndex = 5;
             this.stokTxt.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
@@ -309,9 +309,9 @@ namespace DoranApp
             // 
             this.tableLayoutPanel2.SetColumnSpan(this.brgNamaTxt, 3);
             this.brgNamaTxt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.brgNamaTxt.Location = new System.Drawing.Point(106, 3);
+            this.brgNamaTxt.Location = new System.Drawing.Point(281, 3);
             this.brgNamaTxt.Name = "brgNamaTxt";
-            this.brgNamaTxt.Size = new System.Drawing.Size(221, 20);
+            this.brgNamaTxt.Size = new System.Drawing.Size(570, 20);
             this.brgNamaTxt.TabIndex = 0;
             // 
             // stokMinusCheck
@@ -319,9 +319,9 @@ namespace DoranApp
             this.stokMinusCheck.AutoSize = true;
             this.tableLayoutPanel2.SetColumnSpan(this.stokMinusCheck, 2);
             this.stokMinusCheck.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.stokMinusCheck.Location = new System.Drawing.Point(187, 32);
+            this.stokMinusCheck.Location = new System.Drawing.Point(537, 32);
             this.stokMinusCheck.Name = "stokMinusCheck";
-            this.stokMinusCheck.Size = new System.Drawing.Size(140, 23);
+            this.stokMinusCheck.Size = new System.Drawing.Size(314, 23);
             this.stokMinusCheck.TabIndex = 6;
             this.stokMinusCheck.Text = "Tampilkan Stok Minus";
             this.stokMinusCheck.UseVisualStyleBackColor = true;
@@ -332,7 +332,7 @@ namespace DoranApp
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(3, 29);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 29);
+            this.label4.Size = new System.Drawing.Size(250, 29);
             this.label4.TabIndex = 4;
             this.label4.Text = "Stok >";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -344,7 +344,7 @@ namespace DoranApp
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(3, 58);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(75, 29);
+            this.label5.Size = new System.Drawing.Size(250, 29);
             this.label5.TabIndex = 10;
             this.label5.Text = "Gudang";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -356,9 +356,9 @@ namespace DoranApp
             this.gudangCombo.DropDownHeight = 100;
             this.gudangCombo.FormattingEnabled = true;
             this.gudangCombo.IntegralHeight = false;
-            this.gudangCombo.Location = new System.Drawing.Point(106, 61);
+            this.gudangCombo.Location = new System.Drawing.Point(281, 61);
             this.gudangCombo.Name = "gudangCombo";
-            this.gudangCombo.Size = new System.Drawing.Size(221, 21);
+            this.gudangCombo.Size = new System.Drawing.Size(570, 21);
             this.gudangCombo.TabIndex = 11;
             // 
             // label8
@@ -367,7 +367,7 @@ namespace DoranApp
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(3, 87);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(75, 29);
+            this.label8.Size = new System.Drawing.Size(250, 29);
             this.label8.TabIndex = 13;
             this.label8.Text = "Rak";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -376,7 +376,7 @@ namespace DoranApp
             // 
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(84, 87);
+            this.label7.Location = new System.Drawing.Point(259, 87);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(16, 29);
             this.label7.TabIndex = 15;
@@ -387,7 +387,7 @@ namespace DoranApp
             // 
             this.label9.AutoSize = true;
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Location = new System.Drawing.Point(187, 87);
+            this.label9.Location = new System.Drawing.Point(537, 87);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(58, 29);
             this.label9.TabIndex = 16;
@@ -401,16 +401,16 @@ namespace DoranApp
             this.dKategoriCombo.DropDownWidth = 200;
             this.dKategoriCombo.FormattingEnabled = true;
             this.dKategoriCombo.IntegralHeight = false;
-            this.dKategoriCombo.Location = new System.Drawing.Point(251, 90);
+            this.dKategoriCombo.Location = new System.Drawing.Point(601, 90);
             this.dKategoriCombo.Name = "dKategoriCombo";
-            this.dKategoriCombo.Size = new System.Drawing.Size(76, 21);
+            this.dKategoriCombo.Size = new System.Drawing.Size(250, 21);
             this.dKategoriCombo.TabIndex = 17;
             // 
             // label11
             // 
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(84, 116);
+            this.label11.Location = new System.Drawing.Point(259, 116);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(16, 29);
             this.label11.TabIndex = 19;
@@ -420,9 +420,9 @@ namespace DoranApp
             // tambahHarga
             // 
             this.tambahHarga.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tambahHarga.Location = new System.Drawing.Point(106, 119);
+            this.tambahHarga.Location = new System.Drawing.Point(281, 119);
             this.tambahHarga.Name = "tambahHarga";
-            this.tambahHarga.Size = new System.Drawing.Size(75, 20);
+            this.tambahHarga.Size = new System.Drawing.Size(250, 20);
             this.tambahHarga.TabIndex = 20;
             this.tambahHarga.Leave += new System.EventHandler(this.tambahHarga_Leave);
             // 
@@ -431,9 +431,9 @@ namespace DoranApp
             this.showHargaCheck.AutoSize = true;
             this.tableLayoutPanel2.SetColumnSpan(this.showHargaCheck, 2);
             this.showHargaCheck.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.showHargaCheck.Location = new System.Drawing.Point(187, 119);
+            this.showHargaCheck.Location = new System.Drawing.Point(537, 119);
             this.showHargaCheck.Name = "showHargaCheck";
-            this.showHargaCheck.Size = new System.Drawing.Size(140, 23);
+            this.showHargaCheck.Size = new System.Drawing.Size(314, 23);
             this.showHargaCheck.TabIndex = 21;
             this.showHargaCheck.Text = "Tampil Harga";
             this.showHargaCheck.UseVisualStyleBackColor = true;
@@ -445,7 +445,7 @@ namespace DoranApp
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(3, 116);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(75, 29);
+            this.label10.Size = new System.Drawing.Size(250, 29);
             this.label10.TabIndex = 18;
             this.label10.Text = "Tambah Hrg";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -464,7 +464,7 @@ namespace DoranApp
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
@@ -476,6 +476,8 @@ namespace DoranApp
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(872, 261);
             this.tableLayoutPanel3.TabIndex = 3;
             // 

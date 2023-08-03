@@ -48,6 +48,7 @@ namespace DoranApp.View
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabForms = new System.Windows.Forms.TabControl();
             this.tessssssToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.brandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -79,21 +80,22 @@ namespace DoranApp.View
             // 
             // barangToolStripMenuItem
             // 
+            this.barangToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.brandToolStripMenuItem});
             this.barangToolStripMenuItem.Name = "barangToolStripMenuItem";
-            this.barangToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.barangToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.barangToolStripMenuItem.Text = "Barang";
-            this.barangToolStripMenuItem.Click += new System.EventHandler(this.barangToolStripMenuItem_Click);
             // 
             // kategoriToolStripMenuItem
             // 
             this.kategoriToolStripMenuItem.Name = "kategoriToolStripMenuItem";
-            this.kategoriToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.kategoriToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.kategoriToolStripMenuItem.Text = "Kategori";
             // 
             // syncToolStripMenuItem
             // 
             this.syncToolStripMenuItem.Name = "syncToolStripMenuItem";
-            this.syncToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.syncToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.syncToolStripMenuItem.Text = "Sync";
             this.syncToolStripMenuItem.Click += new System.EventHandler(this.syncToolStripMenuItem_Click);
             // 
@@ -104,7 +106,7 @@ namespace DoranApp.View
             this.timSalesToolStripMenuItem,
             this.salesToolStripMenuItem1});
             this.salesToolStripMenuItem.Name = "salesToolStripMenuItem";
-            this.salesToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.salesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.salesToolStripMenuItem.Text = "Sales";
             // 
             // channelSalesToolStripMenuItem
@@ -134,7 +136,7 @@ namespace DoranApp.View
             this.tesToolStripMenuItem,
             this.roleToolStripMenuItem});
             this.systemToolStripMenuItem.Name = "systemToolStripMenuItem";
-            this.systemToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.systemToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.systemToolStripMenuItem.Text = "System";
             // 
             // tesToolStripMenuItem
@@ -203,6 +205,13 @@ namespace DoranApp.View
             this.tessssssToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.tessssssToolStripMenuItem.Text = "tessssss";
             // 
+            // brandToolStripMenuItem
+            // 
+            this.brandToolStripMenuItem.Name = "brandToolStripMenuItem";
+            this.brandToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.brandToolStripMenuItem.Text = "Brand";
+            this.brandToolStripMenuItem.Click += new System.EventHandler(this.brandToolStripMenuItem_Click);
+            // 
             // _Container
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -250,5 +259,6 @@ namespace DoranApp.View
         private System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem roleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem brandToolStripMenuItem;
     }
 }

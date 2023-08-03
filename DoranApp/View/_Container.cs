@@ -68,15 +68,7 @@ namespace DoranApp.View
             openForm.Show();
         }
 
-        private void barangToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormMasterBarang newMDIChild = new FormMasterBarang();
-            // Set the Parent Form of the Child window.
-            newMDIChild.MdiParent = this;
-            // Display the new form.
-            newMDIChild.Show();
-        }
-
+        
         delegate void SetStatusInternetCallback(string text);
 
         private void SetInternetStatusText(string status)
@@ -352,6 +344,11 @@ namespace DoranApp.View
             {
                 Utils.InternetAvailabilityService.forceStatus = !Utils.InternetAvailabilityService.isOnline;
             }
+        }
+
+        private void brandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<HKategoribarangForm>();
         }
     }
 }

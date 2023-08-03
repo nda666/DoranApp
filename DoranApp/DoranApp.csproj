@@ -325,7 +325,7 @@
     <Compile Include="Data\AbstractData.cs" />
     <Compile Include="Data\DKategoriBarangData.cs" />
     <Compile Include="Data\MasterGudangData.cs" />
-    <Compile Include="Data\HKategoriBarangData.cs" />
+    <Compile Include="Data\HKategoribarangData.cs" />
     <Compile Include="Data\MasterBarangData.cs" />
     <Compile Include="Data\RolesData.cs" />
     <Compile Include="Data\MasterchannelsalesData.cs" />
@@ -340,7 +340,7 @@
     <Compile Include="Data\MasteruserData.cs" />
     <Compile Include="Exceptions\RestException.cs" />
     <Compile Include="Models\DKategoriBarang.cs" />
-    <Compile Include="Models\HKategoriBarang.cs" />
+    <Compile Include="Models\HKategoribarang.cs" />
     <Compile Include="Models\MasterBarang.cs" />
     <Compile Include="Models\MasterGudang.cs" />
     <Compile Include="Models\Pagination.cs" />
@@ -348,7 +348,14 @@
     <Compile Include="Models\SalesChannel.cs" />
     <Compile Include="Models\Masteruser.cs" />
     <Compile Include="Utils\ButtonToggleHelper.cs" />
+    <Compile Include="Utils\DatatableGenerator.cs" />
     <Compile Include="Utils\InternetAvailabilityService.cs" />
+    <Compile Include="View\HKategoribarangForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\HKategoribarangForm.Designer.cs">
+      <DependentUpon>HKategoribarangForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\HomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -415,6 +422,9 @@
     <Compile Include="View\_Container.Designer.cs">
       <DependentUpon>_Container.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\HKategoribarangForm.resx">
+      <DependentUpon>HKategoribarangForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
     </EmbeddedResource>

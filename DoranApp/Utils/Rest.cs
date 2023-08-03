@@ -58,7 +58,7 @@ namespace DoranApp.Utils
 
         private string FindError(HttpResponseMessage httpResponseMessage, dynamic response)
         {
-            
+
             var status = (Int32)httpResponseMessage.StatusCode;
             var xx = (string)response.ToString();
             var error = httpResponseMessage.ReasonPhrase;
@@ -155,7 +155,7 @@ namespace DoranApp.Utils
         }
     }
 
-     class TReturn
+    class TReturn
     {
         public dynamic HttpResponseMessage { get; set; }
         public dynamic Response { get; set; }

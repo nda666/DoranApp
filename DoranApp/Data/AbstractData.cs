@@ -13,28 +13,27 @@ namespace DoranApp.Data
         protected List<T> _data;
         protected dynamic _query;
         protected DataTable _dataTable;
+        protected DataTableGenerator<T> _dataTableGen;
         protected virtual string RelativeUrl() { return ""; }
         protected AbstractData()
         {
-            _dataTable = new DataTable();
-            _dataTable.Columns.AddRange(GetColumn());
-            _isFetchComplete = false;
-        }
-        protected AbstractData(object query)
-        {
-            _query = query;
-            _dataTable = new DataTable();
-            _dataTable.Columns.AddRange(GetColumn());
+            _dataTableGen = new DataTableGenerator<T>();
+            _dataTable = _dataTableGen.CreateDataTable(null);
             _isFetchComplete = false;
         }
 
+        protected AbstractData(object query)
+        {
+            _query = query;
+            _dataTableGen = new DataTableGenerator<T>();
+            _dataTable = _dataTableGen.CreateDataTable(null);
+            _isFetchComplete = false;
+        }
 
         public virtual DataColumn[] GetColumn()
         {
 
-            DataColumn[] dataColumns = new DataColumn[] {
-                new DataColumn("ID"), };
-            return dataColumns;
+            return _dataTableGen.GetDataColumns().ToArray();
         }
 
         public void SetQuery(dynamic query)
@@ -66,6 +65,22 @@ namespace DoranApp.Data
         public virtual DataTable GetDataTable()
         {
             return _dataTable;
+        }
+
+
+        internal virtual async Task<TReturn> Delete(string primaryKeyValue)
+        {
+            var rest = new Rest($"{RelativeUrl()}/{primaryKeyValue}");
+            return await rest.Delete();
+        }
+
+
+
+        internal virtual async Task<DoranApp.Utils.TReturn> Restore(string primaryKeyValue)
+        {
+            var rest = new Rest($"{RelativeUrl()}/{primaryKeyValue}/restore");
+            var result = await rest.Delete();
+            return result;
         }
 
         public virtual async Task<object> CreateOrUpdate(string primaryKeyValue, object data)
