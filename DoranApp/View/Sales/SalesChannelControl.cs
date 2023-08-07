@@ -11,13 +11,13 @@ using System.Windows.Forms;
 namespace DoranApp.View
 {
 
-    public partial class SalesChannelForm : Form
+    public partial class SalesChannelControl : UserControl
     {
         private DataTable _dataTable { get; set; }
 
         private MasterchannelsalesData _salesChannelData = new MasterchannelsalesData();
 
-        public SalesChannelForm()
+        public SalesChannelControl()
         {
             InitializeComponent();
         }
@@ -37,7 +37,7 @@ namespace DoranApp.View
             {
                 nama = textboxFilterUsername.Text.ToString(),
                 aktif = comboboxFilterActive.SelectedValue.ToString()
-            }); 
+            });
             try
             {
                 await _salesChannelData.Refresh();
@@ -47,32 +47,6 @@ namespace DoranApp.View
                 MessageBox.Show(ex.Message);
             }
             ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
-        }
-
-        private async void SalesChannelForm_Load(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Maximized;
-            buttonSave.Focus();
-
-            Dictionary<string, string> activeOption = new Dictionary<string, string>();
-            activeOption.Add("true", "Aktif");
-            activeOption.Add("false", "Tidak Aktif");
-            activeOption.Add("", "Semua");
-            comboboxFilterActive.DataSource = new BindingSource(activeOption, null);
-            comboboxFilterActive.DisplayMember = "Value";
-            comboboxFilterActive.ValueMember = "Key";
-
-            await FetchData();
-            dataGridView1.DoubleBuffered(true);
-            _dataTable = _salesChannelData.GetDataTable();
-            dataGridView1.DataSource = _dataTable;
-            dataGridView1.Sort(dataGridView1.Columns[2], ListSortDirection.Descending);
-            dataGridView1.Columns[2].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-            dataGridView1.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-            dataGridView1.ClearSelection();
-
-            ResetForm();
-
         }
 
         private async void buttonFilter_Click(object sender, EventArgs e)
@@ -110,7 +84,7 @@ namespace DoranApp.View
                 }
                 textboxName.Focus();
 
-               
+
 
                 ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
                 buttonDelete.Enabled = true;
@@ -121,7 +95,7 @@ namespace DoranApp.View
         {
             if (String.IsNullOrWhiteSpace(textboxId.Text))
             {
-                return ;
+                return;
             }
             if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
@@ -181,6 +155,30 @@ namespace DoranApp.View
 
         private void button4_Click(object sender, EventArgs e)
         {
+            ResetForm();
+        }
+
+        private async void SalesChannelControl_Load(object sender, EventArgs e)
+        {
+            buttonSave.Focus();
+
+            Dictionary<string, string> activeOption = new Dictionary<string, string>();
+            activeOption.Add("true", "Aktif");
+            activeOption.Add("false", "Tidak Aktif");
+            activeOption.Add("", "Semua");
+            comboboxFilterActive.DataSource = new BindingSource(activeOption, null);
+            comboboxFilterActive.DisplayMember = "Value";
+            comboboxFilterActive.ValueMember = "Key";
+
+            await FetchData();
+            dataGridView1.DoubleBuffered(true);
+            _dataTable = _salesChannelData.GetDataTable();
+            dataGridView1.DataSource = _dataTable;
+            dataGridView1.Sort(dataGridView1.Columns[2], ListSortDirection.Descending);
+            //dataGridView1.Columns[2].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            //dataGridView1.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            dataGridView1.ClearSelection();
+
             ResetForm();
         }
     }

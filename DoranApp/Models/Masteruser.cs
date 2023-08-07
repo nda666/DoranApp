@@ -6,9 +6,9 @@ namespace DoranApp.Models
     {
         public Guid Id { get; set; }
         public sbyte Kodeku { get; set; }
-        public string Usernameku { get; set; } 
+        public string Usernameku { get; set; }
         public string Passwordku { get; set; }
-        public string Akses { get; set; } 
+        public string Akses { get; set; }
         public string Sidikjari { get; set; }
         public bool Aktif { get; set; }
         public int Kodesales { get; set; }

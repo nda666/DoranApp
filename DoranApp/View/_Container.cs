@@ -1,6 +1,5 @@
 ﻿using DoranApp.Properties;
 using Dotmim.Sync;
-using Dotmim.Sync.Enumerations;
 using Dotmim.Sync.Sqlite;
 using Dotmim.Sync.Web.Client;
 using System;
@@ -10,7 +9,7 @@ using System.Windows.Forms;
 
 namespace DoranApp.View
 {
-  
+
     public partial class _Container : Form
     {
         public bool _runSync = false;
@@ -68,7 +67,7 @@ namespace DoranApp.View
             openForm.Show();
         }
 
-        
+
         delegate void SetStatusInternetCallback(string text);
 
         private void SetInternetStatusText(string status)
@@ -111,7 +110,7 @@ namespace DoranApp.View
                 Console.WriteLine("Just entered to create Sync DB");
                 SQLiteConnection.CreateFile(filePath);
             }
-            
+
 
 
             try
@@ -152,7 +151,7 @@ namespace DoranApp.View
             internetAvailability.Subscribe(isAvailable =>
             {
                 SetInternetStatusText(isAvailable ? "Online" : "Offline");
-                if(!isAvailable) syncDb();
+                if (!isAvailable) syncDb();
             });
 
             HomeForm homeForm = new HomeForm();
@@ -310,15 +309,7 @@ namespace DoranApp.View
             OpenForm<SyncDatabaseForm>();
         }
 
-        private void channelSalesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenForm<SalesChannelForm>();
-        }
 
-        private void timSalesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenForm<SalesTeamForm>();
-        }
 
         private void tesToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -340,7 +331,8 @@ namespace DoranApp.View
             if (Utils.InternetAvailabilityService.forceStatus.HasValue)
             {
                 Utils.InternetAvailabilityService.forceStatus = null;
-            } else
+            }
+            else
             {
                 Utils.InternetAvailabilityService.forceStatus = !Utils.InternetAvailabilityService.isOnline;
             }
@@ -349,6 +341,17 @@ namespace DoranApp.View
         private void brandToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm<HKategoribarangForm>();
+        }
+
+
+        private void pegawaiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<PegawaiForm>();
+        }
+
+        private void salesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<SalesForm>();
         }
     }
 }

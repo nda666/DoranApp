@@ -1,6 +1,6 @@
 ﻿namespace DoranApp.View
 {
-    partial class SalesForm
+    partial class SalesControl
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesControl));
             this.comboFilterIsManager = new System.Windows.Forms.GroupBox();
             this.isManagerComboBox1 = new DoranApp.Components.IsManagerComboBox(this.components);
             this.comboboxFilterActive = new DoranApp.Components.ActiveComboBox(this.components);

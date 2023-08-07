@@ -9,6 +9,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>DoranApp</RootNamespace>
     <AssemblyName>DoranApp</AssemblyName>
+    <LangVersion>preview</LangVersion>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -57,6 +58,9 @@
     <StartupObject>DoranApp.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper">
+      <Version>2.2.1</Version>
+    </PackageReference>
     <PackageReference Include="ConsoleDump">
       <Version>0.7.0</Version>
     </PackageReference>
@@ -327,12 +331,14 @@
     <Compile Include="Data\MasterGudangData.cs" />
     <Compile Include="Data\HKategoribarangData.cs" />
     <Compile Include="Data\MasterBarangData.cs" />
+    <Compile Include="Data\MasterdivisiData.cs" />
     <Compile Include="Data\RolesData.cs" />
     <Compile Include="Data\MasterchannelsalesData.cs" />
     <Compile Include="Data\SalesData.cs" />
     <Compile Include="Entity\dataContext.cs" />
     <Compile Include="Entity\Masterchannelsales.cs" />
     <Compile Include="Models\Masterchannelsales.cs" />
+    <Compile Include="Models\Masterdivisi.cs" />
     <Compile Include="Models\Mastertimsales.cs" />
     <Compile Include="Models\Sales.cs" />
     <Compile Include="Models\SalesTeam.cs" />
@@ -349,6 +355,7 @@
     <Compile Include="Models\Masteruser.cs" />
     <Compile Include="Utils\ButtonToggleHelper.cs" />
     <Compile Include="Utils\DatatableGenerator.cs" />
+    <Compile Include="Utils\FormHelper.cs" />
     <Compile Include="Utils\InternetAvailabilityService.cs" />
     <Compile Include="View\HKategoribarangForm.cs">
       <SubType>Form</SubType>
@@ -380,35 +387,53 @@
     <Compile Include="View\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\PegawaiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PegawaiForm.Designer.cs">
+      <DependentUpon>PegawaiForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\RolesForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\RolesForm.Designer.cs">
       <DependentUpon>RolesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\SalesChannelForm.cs">
+    <Compile Include="View\Sales\SalesChannelControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Sales\SalesChannelControl.Designer.cs">
+      <DependentUpon>SalesChannelControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sales\SalesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Sales\SalesControl.Designer.cs">
+      <DependentUpon>SalesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Sales\SalesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\SalesChannelForm.Designer.cs">
-      <DependentUpon>SalesChannelForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\SalesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\SalesForm.Designer.cs">
+    <Compile Include="View\Sales\SalesForm.Designer.cs">
       <DependentUpon>SalesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\SalesTeamForm.cs">
-      <SubType>Form</SubType>
+    <Compile Include="View\Sales\SalesTeamControl.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="View\SalesTeamForm.Designer.cs">
-      <DependentUpon>SalesTeamForm.cs</DependentUpon>
+    <Compile Include="View\Sales\SalesTeamControl.Designer.cs">
+      <DependentUpon>SalesTeamControl.cs</DependentUpon>
     </Compile>
     <Compile Include="View\SyncDatabaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\SyncDatabaseForm.Designer.cs">
       <DependentUpon>SyncDatabaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pegawai\DivisiControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Pegawai\DivisiControl.Designer.cs">
+      <DependentUpon>DivisiControl.cs</DependentUpon>
     </Compile>
     <Compile Include="View\UserForm.cs">
       <SubType>Form</SubType>
@@ -444,20 +469,29 @@
     <EmbeddedResource Include="View\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\PegawaiForm.resx">
+      <DependentUpon>PegawaiForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\RolesForm.resx">
       <DependentUpon>RolesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\SalesChannelForm.resx">
-      <DependentUpon>SalesChannelForm.cs</DependentUpon>
+    <EmbeddedResource Include="View\Sales\SalesChannelControl.resx">
+      <DependentUpon>SalesChannelControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\SalesForm.resx">
+    <EmbeddedResource Include="View\Sales\SalesControl.resx">
+      <DependentUpon>SalesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Sales\SalesForm.resx">
       <DependentUpon>SalesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\SalesTeamForm.resx">
-      <DependentUpon>SalesTeamForm.cs</DependentUpon>
+    <EmbeddedResource Include="View\Sales\SalesTeamControl.resx">
+      <DependentUpon>SalesTeamControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\SyncDatabaseForm.resx">
       <DependentUpon>SyncDatabaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Pegawai\DivisiControl.resx">
+      <DependentUpon>DivisiControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>
@@ -506,6 +540,7 @@
   <ItemGroup>
     <None Include="Resources\Disconnect.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

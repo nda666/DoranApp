@@ -4,7 +4,6 @@ using DoranApp.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -110,12 +109,27 @@ namespace DoranApp.Utils
             }
             return await Get();
         }
-
         public async Task<TReturn> Get()
         {
 
             var response = await Resource.Get();
             return Return(response);
+        }
+
+        public async Task<TReturn<T>> Get<T>(dynamic query) where T : class
+        {
+
+            if (query != null)
+            {
+                Resource.Query(query);
+            }
+            return await Get<T>();
+        }
+        public async Task<TReturn<T>> Get<T>()
+        {
+
+            var response = await Resource.Get();
+            return Return<T>(response);
         }
 
         public async Task<TReturn> Post(dynamic postData)
@@ -153,6 +167,20 @@ namespace DoranApp.Utils
             tReturn.Response = response;
             return tReturn;
         }
+
+        private TReturn<T> Return<T>(dynamic response)
+        {
+            TReturn<T> tReturn = new TReturn<T>();
+            var error = FindError(response.HttpResponseMessage, response);
+            if (error != null)
+            {
+                throw new Exception(error);
+            }
+            tReturn.Response = response;
+            tReturn.HttpResponseMessage = response.HttpResponseMessage;
+            tReturn.Response = response;
+            return tReturn;
+        }
     }
 
     class TReturn
@@ -166,6 +194,19 @@ namespace DoranApp.Utils
             ErrorMessage = null;
             HttpResponseMessage = new Object();
             Response = new Object();
+        }
+    }
+
+    class TReturn<T>
+    {
+        public dynamic HttpResponseMessage { get; set; }
+        public T Response { get; set; }
+        public string ErrorMessage { get; set; }
+
+        public void Main()
+        {
+            ErrorMessage = null;
+            HttpResponseMessage = new Object();
         }
     }
 }

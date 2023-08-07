@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DoranApp.Components
@@ -51,7 +47,7 @@ namespace DoranApp.Components
 
         private void InitializeDefaultComponent()
         {
-            
+
             this.AutoCompleteSource = AutoCompleteSource.ListItems;
             this.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             this.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -78,7 +74,7 @@ namespace DoranApp.Components
             }
         }
 
-     
+
 
         // Get the selected value (bool?) from the ComboBox
         public bool? SelectedValue => (SelectedIndex >= 0) ? (bool?)((KeyValuePair<bool?, string>)SelectedItem).Key : null;
@@ -103,5 +99,5 @@ namespace DoranApp.Components
 
 
     }
-    
+
 }

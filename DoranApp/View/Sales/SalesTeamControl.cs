@@ -2,7 +2,6 @@
 using DoranApp.Utils;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,9 +9,9 @@ using System.Windows.Forms;
 
 namespace DoranApp.View
 {
-    public partial class SalesTeamForm : Form
+    public partial class SalesTeamControl : UserControl
     {
-        public SalesTeamForm()
+        public SalesTeamControl()
         {
             InitializeComponent();
         }
@@ -69,7 +68,8 @@ namespace DoranApp.View
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message);
+                //ConsoleDump.Extensions.Dump(ex);
+                MessageBox.Show(ex.Message);
             }
             buttonFilter.Enabled = true;
         }
@@ -97,11 +97,10 @@ namespace DoranApp.View
             }
         }
 
-        private async void SalesTeamForm_Load(object sender, System.EventArgs e)
-        {
-            this.WindowState = FormWindowState.Maximized;
-            buttonSave.Focus();
 
+
+        private async void SalesTeamControl_Load(object sender, EventArgs e)
+        {
             Dictionary<string, string> activeOption = new Dictionary<string, string>();
             activeOption.Add("true", "Aktif");
             activeOption.Add("false", "Tidak Aktif");
@@ -122,12 +121,12 @@ namespace DoranApp.View
             dataGridView1.DoubleBuffered(true);
             _dataTable = _salesTeamData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
-            dataGridView1.Columns[3].DefaultCellStyle.Format = "N0";
-            dataGridView1.Columns[4].DefaultCellStyle.Format = "N0";
-            dataGridView1.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-            dataGridView1.Columns[9].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            //dataGridView1.Columns[3].DefaultCellStyle.Format = "N0";
+            //dataGridView1.Columns[4].DefaultCellStyle.Format = "N0";
+            //dataGridView1.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            //dataGridView1.Columns[9].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
 
-            dataGridView1.Sort(dataGridView1.Columns[8], ListSortDirection.Descending);
+            //dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Descending);
             dataGridView1.ClearSelection();
 
             ResetForm();

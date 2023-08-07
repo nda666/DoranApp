@@ -40,10 +40,11 @@ namespace DoranApp.View
             }
             catch (RestException error)
             {
-               if (error.ErrorCode == 401)
+                if (error.ErrorCode == 401)
                 {
                     MessageBox.Show($"Username / password tidak cocok", $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                } else
+                }
+                else
                 {
                     MessageBox.Show($"{error.ErrorCode} {error.StatusText}", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }

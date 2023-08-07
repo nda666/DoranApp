@@ -1,5 +1,4 @@
-﻿using DoranApp.Exceptions;
-using DoranApp.Utils;
+﻿using DoranApp.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,26 +12,32 @@ namespace DoranApp.Data
         protected List<T> _data;
         protected dynamic _query;
         protected DataTable _dataTable;
-        protected DataTableGenerator<T> _dataTableGen;
+        protected DataTableGenerator _dataTableGen;
+
         protected virtual string RelativeUrl() { return ""; }
+
+        protected virtual List<ColumnSettings> ColumnSettings()
+        {
+            return new List<ColumnSettings>();
+        }
+
         protected AbstractData()
         {
-            _dataTableGen = new DataTableGenerator<T>();
-            _dataTable = _dataTableGen.CreateDataTable(null);
+            _dataTableGen = new DataTableGenerator(ColumnSettings());
+            _dataTable = _dataTableGen.CreateDataTable<T>(null);
             _isFetchComplete = false;
         }
 
         protected AbstractData(object query)
         {
             _query = query;
-            _dataTableGen = new DataTableGenerator<T>();
-            _dataTable = _dataTableGen.CreateDataTable(null);
+            _dataTableGen = new DataTableGenerator(ColumnSettings());
+            _dataTable = _dataTableGen.CreateDataTable<T>(null);
             _isFetchComplete = false;
         }
 
         public virtual DataColumn[] GetColumn()
         {
-
             return _dataTableGen.GetDataColumns().ToArray();
         }
 
@@ -59,7 +64,6 @@ namespace DoranApp.Data
 
         protected virtual async Task RunRefresh()
         {
-
         }
 
         public virtual DataTable GetDataTable()
@@ -85,7 +89,7 @@ namespace DoranApp.Data
 
         public virtual async Task<object> CreateOrUpdate(string primaryKeyValue, object data)
         {
-            return await CreateOrUpdate<TReturn>( primaryKeyValue,  data);
+            return await CreateOrUpdate<TReturn>(primaryKeyValue, data);
         }
 
         public virtual async Task<TReturn> CreateOrUpdate<TReturn>(string primaryKeyValue, object data)
@@ -110,4 +114,5 @@ namespace DoranApp.Data
             }
         }
     }
+
 }

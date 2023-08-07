@@ -1,7 +1,6 @@
 ﻿using DoranApp.Data;
 using DoranApp.Utils;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -35,7 +34,7 @@ namespace DoranApp.View
             this.WindowState = FormWindowState.Maximized;
             buttonSave.Focus();
 
-         
+
             //await fetchRoleData();
 
             await fetchData();
@@ -45,9 +44,9 @@ namespace DoranApp.View
             dataGridView1.DoubleBuffered(true);
             _dataTable = _userData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
-            dataGridView1.Sort(dataGridView1.Columns[5], ListSortDirection.Descending);
-            dataGridView1.Columns[5].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Descending);
             dataGridView1.Columns[6].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            dataGridView1.Columns[7].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
             dataGridView1.ClearSelection();
             ResetForm();
         }
@@ -77,10 +76,10 @@ namespace DoranApp.View
             if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 this.toolTip1.SetToolTip(this.buttonSave, "This is a tooltip for the button.");
-           ButtonToggleHelper.DisableButtonsByTag(this, "action");
+                ButtonToggleHelper.DisableButtonsByTag(this, "action");
                 var selectedRowIndex = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 0;
                 var isEdit = textboxId.Text.Length > 0;
-              
+
                 try
                 {
                     await _userData.CreateOrUpdate(textboxId.Text, new
@@ -199,5 +198,22 @@ namespace DoranApp.View
             }
         }
 
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == 4)
+            {
+                e.FormattingApplied = true; // <===VERY, VERY important tell it you've taken care of it.
+                string temp = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                if (String.IsNullOrEmpty(temp))
+                {
+                    e.Value = "Sudah";
+                }
+                else
+                {
+                    e.Value = "Belum";
+                }
+
+            }
+        }
     }
 }

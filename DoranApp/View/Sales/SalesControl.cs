@@ -1,7 +1,6 @@
 ﻿using DoranApp.Data;
 using DoranApp.Utils;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -10,25 +9,27 @@ using System.Windows.Forms;
 
 namespace DoranApp.View
 {
-    public partial class SalesForm : Form
+    public partial class SalesControl : UserControl
     {
         private DataTable _dataTable { get; set; }
 
         private SalesData _salesData = new SalesData();
 
+        private SalesData _managerData = new SalesData();
+
         private MastertimsalesData _salesTeamData = new MastertimsalesData();
 
-        public SalesForm()
+        public SalesControl()
         {
             InitializeComponent();
         }
 
         public async Task FetchManager()
         {
-            _salesData.SetQuery(new { aktif = "true", manager = "true" });
-            await _salesData.Refresh();
+            _managerData.SetQuery(new { aktif = "true", manager = "true" });
+            await _managerData.Refresh();
             var bsComboManager = new BindingSource();
-            bsComboManager.DataSource = _salesData.GetData();
+            bsComboManager.DataSource = _managerData.GetData();
             comboManager.DataSource = bsComboManager;
             comboManager.DisplayMember = "Nama";
             comboManager.ValueMember = "Kode";
@@ -57,7 +58,7 @@ namespace DoranApp.View
             comboFilterSalesTeam.DisplayMember = "Nama";
             comboFilterSalesTeam.ValueMember = "Kode";
 
-            
+
         }
 
         public async Task FetchData()
@@ -84,7 +85,7 @@ namespace DoranApp.View
 
         private async void SalesForm_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            
             buttonSave.Focus();
 
             await FetchManager();
@@ -118,7 +119,7 @@ namespace DoranApp.View
 
                 var uri = isEdit ? $"sales/{textboxId.Text}" : $"sales";
                 var rest = new Rest(uri);
-                
+
                 try
                 {
                     await _salesData.CreateOrUpdate(textboxId.Text, new
@@ -145,11 +146,11 @@ namespace DoranApp.View
                     MessageBox.Show(ex.Message);
                 }
                 await FetchData();
-                    if (isEdit && dataGridView1.Rows.Count > 0)
-                    {
-                        dataGridView1.Rows[selectedRowIndex].Selected = true;
-                    }
-                    textboxName.Focus();
+                if (isEdit && dataGridView1.Rows.Count > 0)
+                {
+                    dataGridView1.Rows[selectedRowIndex].Selected = true;
+                }
+                textboxName.Focus();
                 ButtonToggleHelper.EnableButtonsByTag(this, "action");
 
             }

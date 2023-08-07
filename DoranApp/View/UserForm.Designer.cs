@@ -32,6 +32,7 @@ namespace DoranApp.View
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserForm));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.comboboxFilterActive = new DoranApp.Components.ActiveComboBox(this.components);
             this.searchRoleLabel = new System.Windows.Forms.Label();
@@ -85,6 +86,10 @@ namespace DoranApp.View
             this.comboboxFilterActive.DisplayMember = "Value";
             this.comboboxFilterActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboboxFilterActive.FormattingEnabled = true;
+            this.comboboxFilterActive.Items.AddRange(new object[] {
+            ((object)(resources.GetObject("comboboxFilterActive.Items"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items1"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items2")))});
             this.comboboxFilterActive.Location = new System.Drawing.Point(253, 43);
             this.comboboxFilterActive.Name = "comboboxFilterActive";
             this.comboboxFilterActive.Size = new System.Drawing.Size(93, 21);
@@ -361,6 +366,7 @@ namespace DoranApp.View
             this.dataGridView1.Size = new System.Drawing.Size(362, 167);
             this.dataGridView1.TabIndex = 13;
             this.dataGridView1.TabStop = false;
+            this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);

@@ -1,6 +1,6 @@
 ﻿namespace DoranApp.View
 {
-    partial class SalesTeamForm
+    partial class SalesTeamControl
     {
         /// <summary>
         /// Required designer variable.
@@ -367,18 +367,15 @@
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             // 
-            // SalesTeamForm
+            // SalesTeamControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(718, 364);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.totalDataLabel);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "SalesTeamForm";
-            this.Text = "Tim Sales";
-            this.Load += new System.EventHandler(this.SalesTeamForm_Load);
+            this.Name = "SalesTeamControl";
+            this.Size = new System.Drawing.Size(718, 364);
+            this.Load += new System.EventHandler(this.SalesTeamControl_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);

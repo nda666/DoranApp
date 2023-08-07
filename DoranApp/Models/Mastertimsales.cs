@@ -2,10 +2,9 @@
 
 namespace DoranApp.Models
 {
-    internal class Mastertimsales
+    public class Mastertimsales
     {
         public Guid Id { get; set; }
-
         public sbyte Kode { get; set; }
         public string Nama { get; set; }
         public long Targetjete { get; set; }
@@ -17,7 +16,6 @@ namespace DoranApp.Models
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public DateTime? DeletedAt { get; set; }
-
         public virtual Masterchannelsales Masterchannelsales { get; set; } = null;
     }
 }

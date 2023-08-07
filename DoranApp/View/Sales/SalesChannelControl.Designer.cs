@@ -1,6 +1,6 @@
 ﻿namespace DoranApp.View
 {
-    partial class SalesChannelForm
+    partial class SalesChannelControl
     {
         /// <summary>
         /// Required designer variable.
@@ -251,25 +251,22 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(364, 136);
+            this.dataGridView1.Size = new System.Drawing.Size(367, 136);
             this.dataGridView1.TabIndex = 19;
             this.dataGridView1.TabStop = false;
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
             // 
-            // SalesChannelForm
+            // SalesChannelControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(699, 300);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.totalDataLabel);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "SalesChannelForm";
-            this.Text = "Channel Sales";
-            this.Load += new System.EventHandler(this.SalesChannelForm_Load);
+            this.Name = "SalesChannelControl";
+            this.Size = new System.Drawing.Size(702, 300);
+            this.Load += new System.EventHandler(this.SalesChannelControl_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);

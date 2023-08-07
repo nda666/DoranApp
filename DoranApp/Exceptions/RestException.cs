@@ -8,7 +8,7 @@ namespace DoranApp.Exceptions
         public string StatusText { get; }
 
 
-        public RestException( int errorCode, string statusText) : base(statusText)
+        public RestException(int errorCode, string statusText) : base(statusText)
         {
             ErrorCode = errorCode;
             StatusText = statusText;

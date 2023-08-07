@@ -17,6 +17,9 @@ namespace DoranApp
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new _Container());
             //Application.Run(new SyncDatabaseForm());
+
+
+
         }
     }
 
