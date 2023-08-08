@@ -10,12 +10,15 @@ using System.Windows.Forms;
 
 namespace DoranApp.View.Pegawai
 {
-    public partial class DivisiControl : UserControl
+    public partial class JabatanControl : UserControl
     {
+        private DataTableGenerator _dtGenPegawai = new DataTableGenerator(new ColumnSettings<Masterpegawai> { { "Nama", x => x.Nama } }
+        );
+
         private DataTable _dataTable { get; set; }
         private DataTable _dataTablePegawai { get; set; }
-        private MasterdivisiData _masterdivisiData = new MasterdivisiData();
-        public DivisiControl()
+        private MasterjabatanData _masterjabatanData = new MasterjabatanData();
+        public JabatanControl()
         {
             InitializeComponent();
         }
@@ -30,13 +33,13 @@ namespace DoranApp.View.Pegawai
         {
 
             ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
-            _masterdivisiData.SetQuery(new
+            _masterjabatanData.SetQuery(new
             {
                 nama = textBoxFilterNama.Text.ToString(),
             });
             try
             {
-                await _masterdivisiData.Refresh();
+                await _masterjabatanData.Refresh();
             }
             catch (Exception ex)
             {
@@ -45,12 +48,12 @@ namespace DoranApp.View.Pegawai
             ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
         }
 
-        private async void DivisiControl_Load(object sender, EventArgs e)
+        private async void JabatanControl_Load(object sender, EventArgs e)
         {
             await FetchData();
             dataGridView1.DoubleBuffered(true);
 
-            _dataTable = _masterdivisiData.GetDataTable();
+            _dataTable = _masterjabatanData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
             dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Descending);
             DataGridViewColumn column = dataGridView1.Columns[0];
@@ -58,8 +61,8 @@ namespace DoranApp.View.Pegawai
             //dataGridView1.Columns[2].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
             //dataGridView1.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
             dataGridView1.ClearSelection();
-
-
+           
+            dataGridView2.DataSource = _dataTablePegawai;
             ResetForm();
         }
 
@@ -79,16 +82,12 @@ namespace DoranApp.View.Pegawai
                 return;
             }
 
-            var selectedUser = _masterdivisiData.GetData().Where(x => x.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
+            var selectedUser = _masterjabatanData.GetData().Where(x => x.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
             textBoxNama.Text = selectedUser.Nama;
             textBoxKode.Text = selectedUser.Kode.ToString();
             buttonDelete.Enabled = true;
-            var columnSettingsList = new ColumnSettings<Masterpegawai>
-                {
-                    { "Nama", x => x.Nama },
-                };
-            var dtGen = new DataTableGenerator(columnSettingsList);
-            _dataTablePegawai = dtGen.CreateDataTable(selectedUser.Masterpegawais);
+            
+            _dataTablePegawai = _dtGenPegawai.CreateDataTable(selectedUser.Masterpegawais);
             dataGridView2.DataSource = _dataTablePegawai;
         }
 
@@ -106,14 +105,14 @@ namespace DoranApp.View.Pegawai
                 };
                 try
                 {
-                    await _masterdivisiData.CreateOrUpdate(textBoxKode.Text, dataToSend);
+                    await _masterjabatanData.CreateOrUpdate(textBoxKode.Text, dataToSend);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
 
-                await _masterdivisiData.Refresh();
+                await _masterjabatanData.Refresh();
 
                 if (isEdit && dataGridView1.Rows.Count > 0)
                 {
@@ -140,7 +139,7 @@ namespace DoranApp.View.Pegawai
                 ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
                 try
                 {
-                    await _masterdivisiData.Delete(textBoxKode.Text);
+                    await _masterjabatanData.Delete(textBoxKode.Text);
                     ResetForm();
                 }
                 catch (Exception ex)
@@ -175,7 +174,7 @@ namespace DoranApp.View.Pegawai
             dataGridView1.ClearSelection();
             dataGridView2.ClearSelection();
             ResetForm();
-            labelTotalDivisi.Text = $"Total Data: {dataGridView1.RowCount}";
+            labelTotalJabatan.Text = $"Total Data: {dataGridView1.RowCount}";
             labelTotalPegawai.Text = $"Total Pegawai: {dataGridView2.RowCount}";
         }
 

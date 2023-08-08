@@ -328,6 +328,7 @@
     </Compile>
     <Compile Include="Data\AbstractData.cs" />
     <Compile Include="Data\DKategoriBarangData.cs" />
+    <Compile Include="Data\MasterjabatanData.cs" />
     <Compile Include="Data\MasterGudangData.cs" />
     <Compile Include="Data\HKategoribarangData.cs" />
     <Compile Include="Data\MasterBarangData.cs" />
@@ -338,7 +339,9 @@
     <Compile Include="Entity\dataContext.cs" />
     <Compile Include="Entity\Masterchannelsales.cs" />
     <Compile Include="Models\Masterchannelsales.cs" />
+    <Compile Include="Models\Masterjabatan.cs" />
     <Compile Include="Models\Masterdivisi.cs" />
+    <Compile Include="Models\Masterpegawai.cs" />
     <Compile Include="Models\Mastertimsales.cs" />
     <Compile Include="Models\Sales.cs" />
     <Compile Include="Models\SalesTeam.cs" />
@@ -392,6 +395,12 @@
     </Compile>
     <Compile Include="View\PegawaiForm.Designer.cs">
       <DependentUpon>PegawaiForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pegawai\JabatanControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Pegawai\JabatanControl.Designer.cs">
+      <DependentUpon>JabatanControl.cs</DependentUpon>
     </Compile>
     <Compile Include="View\RolesForm.cs">
       <SubType>Form</SubType>
@@ -471,6 +480,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PegawaiForm.resx">
       <DependentUpon>PegawaiForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Pegawai\JabatanControl.resx">
+      <DependentUpon>JabatanControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\RolesForm.resx">
       <DependentUpon>RolesForm.cs</DependentUpon>

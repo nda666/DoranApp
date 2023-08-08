@@ -1,6 +1,6 @@
 ﻿namespace DoranApp.View.Pegawai
 {
-    partial class DivisiControl
+    partial class JabatanControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -34,7 +34,7 @@
             this.textBoxNama = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.labelTotalDivisi = new System.Windows.Forms.Label();
+            this.labelTotalJabatan = new System.Windows.Forms.Label();
             this.labelTotalPegawai = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxFilterNama = new System.Windows.Forms.TextBox();
@@ -64,9 +64,8 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(319, 157);
+            this.dataGridView1.Size = new System.Drawing.Size(344, 157);
             this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.VirtualMode = true;
             this.dataGridView1.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView1_DataBindingComplete);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown);
@@ -82,17 +81,17 @@
             this.dataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView2.Location = new System.Drawing.Point(331, 122);
+            this.dataGridView2.Location = new System.Drawing.Point(356, 122);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.Size = new System.Drawing.Size(328, 221);
+            this.dataGridView2.Size = new System.Drawing.Size(303, 221);
             this.dataGridView2.TabIndex = 1;
             // 
             // SimpanBtn
             // 
             this.SimpanBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SimpanBtn.Location = new System.Drawing.Point(88, 105);
+            this.SimpanBtn.Location = new System.Drawing.Point(102, 105);
             this.SimpanBtn.Name = "SimpanBtn";
             this.SimpanBtn.Size = new System.Drawing.Size(93, 33);
             this.SimpanBtn.TabIndex = 2;
@@ -103,9 +102,9 @@
             // 
             // textBoxNama
             // 
-            this.textBoxNama.Location = new System.Drawing.Point(88, 79);
+            this.textBoxNama.Location = new System.Drawing.Point(102, 80);
             this.textBoxNama.Name = "textBoxNama";
-            this.textBoxNama.Size = new System.Drawing.Size(225, 20);
+            this.textBoxNama.Size = new System.Drawing.Size(233, 20);
             this.textBoxNama.TabIndex = 3;
             // 
             // label1
@@ -114,34 +113,34 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(8, 79);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.Size = new System.Drawing.Size(88, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Nama Divisi";
+            this.label1.Text = "Nama Jabatan";
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(88, 19);
+            this.button1.Location = new System.Drawing.Point(102, 19);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(225, 28);
+            this.button1.Size = new System.Drawing.Size(233, 28);
             this.button1.TabIndex = 5;
             this.button1.Text = "Buat Baru";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // labelTotalDivisi
+            // labelTotalJabatan
             // 
-            this.labelTotalDivisi.AutoSize = true;
-            this.labelTotalDivisi.Location = new System.Drawing.Point(3, 168);
-            this.labelTotalDivisi.Name = "labelTotalDivisi";
-            this.labelTotalDivisi.Size = new System.Drawing.Size(66, 13);
-            this.labelTotalDivisi.TabIndex = 6;
-            this.labelTotalDivisi.Text = "Total Data: -";
+            this.labelTotalJabatan.AutoSize = true;
+            this.labelTotalJabatan.Location = new System.Drawing.Point(3, 168);
+            this.labelTotalJabatan.Name = "labelTotalJabatan";
+            this.labelTotalJabatan.Size = new System.Drawing.Size(66, 13);
+            this.labelTotalJabatan.TabIndex = 6;
+            this.labelTotalJabatan.Text = "Total Data: -";
             // 
             // labelTotalPegawai
             // 
             this.labelTotalPegawai.AutoSize = true;
-            this.labelTotalPegawai.Location = new System.Drawing.Point(331, 106);
+            this.labelTotalPegawai.Location = new System.Drawing.Point(353, 106);
             this.labelTotalPegawai.Name = "labelTotalPegawai";
             this.labelTotalPegawai.Size = new System.Drawing.Size(84, 13);
             this.labelTotalPegawai.TabIndex = 7;
@@ -153,13 +152,13 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(7, 19);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 13);
+            this.label2.Size = new System.Drawing.Size(88, 13);
             this.label2.TabIndex = 9;
-            this.label2.Text = "Nama Divisi";
+            this.label2.Text = "Nama Jabatan";
             // 
             // textBoxFilterNama
             // 
-            this.textBoxFilterNama.Location = new System.Drawing.Point(87, 19);
+            this.textBoxFilterNama.Location = new System.Drawing.Point(97, 19);
             this.textBoxFilterNama.Name = "textBoxFilterNama";
             this.textBoxFilterNama.Size = new System.Drawing.Size(188, 20);
             this.textBoxFilterNama.TabIndex = 8;
@@ -167,7 +166,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(87, 46);
+            this.button2.Location = new System.Drawing.Point(97, 46);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(93, 32);
             this.button2.TabIndex = 10;
@@ -180,7 +179,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(46, 53);
+            this.label3.Location = new System.Drawing.Point(60, 53);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 13);
             this.label3.TabIndex = 12;
@@ -188,10 +187,10 @@
             // 
             // textBoxKode
             // 
-            this.textBoxKode.Location = new System.Drawing.Point(88, 53);
+            this.textBoxKode.Location = new System.Drawing.Point(102, 53);
             this.textBoxKode.Name = "textBoxKode";
             this.textBoxKode.ReadOnly = true;
-            this.textBoxKode.Size = new System.Drawing.Size(225, 20);
+            this.textBoxKode.Size = new System.Drawing.Size(233, 20);
             this.textBoxKode.TabIndex = 11;
             // 
             // groupBox1
@@ -206,17 +205,17 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(6, 11);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(319, 154);
+            this.groupBox1.Size = new System.Drawing.Size(341, 154);
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Tambah/Ubah Divisi";
+            this.groupBox1.Text = "Tambah/Ubah Jabatan";
             // 
             // buttonDelete
             // 
             this.buttonDelete.Enabled = false;
             this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.Color.Red;
-            this.buttonDelete.Location = new System.Drawing.Point(239, 106);
+            this.buttonDelete.Location = new System.Drawing.Point(261, 106);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(74, 32);
             this.buttonDelete.TabIndex = 21;
@@ -231,26 +230,26 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(331, 11);
+            this.groupBox2.Location = new System.Drawing.Point(356, 11);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(284, 92);
+            this.groupBox2.Size = new System.Drawing.Size(271, 92);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Cari Divisi";
+            this.groupBox2.Text = "Cari Jabatan";
             // 
-            // DivisiControl
+            // JabatanControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.labelTotalPegawai);
-            this.Controls.Add(this.labelTotalDivisi);
+            this.Controls.Add(this.labelTotalJabatan);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "DivisiControl";
+            this.Name = "JabatanControl";
             this.Size = new System.Drawing.Size(662, 352);
-            this.Load += new System.EventHandler(this.DivisiControl_Load);
+            this.Load += new System.EventHandler(this.JabatanControl_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -270,7 +269,7 @@
         private System.Windows.Forms.TextBox textBoxNama;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label labelTotalDivisi;
+        private System.Windows.Forms.Label labelTotalJabatan;
         private System.Windows.Forms.Label labelTotalPegawai;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxFilterNama;

@@ -1,4 +1,5 @@
-﻿using DoranApp.View.Pegawai;
+﻿using DoranApp.Utils;
+using DoranApp.View.Pegawai;
 using System;
 using System.Windows.Forms;
 
@@ -13,12 +14,8 @@ namespace DoranApp.View
 
         private void PegawaiForm_Load(object sender, EventArgs e)
         {
-            var myUserControl = new DivisiControl();
-            myUserControl.Dock = DockStyle.Fill;
-            var myTabPage = new TabPage();//Create new tabpage
-            myTabPage.Controls.Add(myUserControl);
-            myTabPage.Text = "Master Divisi";
-            tabControl1.TabPages.Add(myTabPage);
+            FormHelper.AddUserControlToTabPage<DivisiControl>(tabControl1, "Master Divisi");
+            FormHelper.AddUserControlToTabPage<JabatanControl>(tabControl1, "Master Jabatan");
         }
     }
 }

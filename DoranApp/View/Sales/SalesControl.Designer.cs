@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SalesControl));
             this.comboFilterIsManager = new System.Windows.Forms.GroupBox();
-            this.isManagerComboBox1 = new DoranApp.Components.IsManagerComboBox(this.components);
-            this.comboboxFilterActive = new DoranApp.Components.ActiveComboBox(this.components);
             this.comboFilterManager = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -46,7 +44,6 @@
             this.checkBoxTerimaEmailOmzet = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
             this.textBoxEmail = new System.Windows.Forms.TextBox();
-            this.textBoxUrutan = new DoranApp.Components.NumericTextbox(this.components);
             this.label10 = new System.Windows.Forms.Label();
             this.checkBoxSalesOl = new System.Windows.Forms.CheckBox();
             this.checkBoxBisalihatomzettahunantim = new System.Windows.Forms.CheckBox();
@@ -71,6 +68,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textboxName = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.isManagerComboBox1 = new DoranApp.Components.IsManagerComboBox(this.components);
+            this.comboboxFilterActive = new DoranApp.Components.ActiveComboBox(this.components);
+            this.textBoxUrutan = new DoranApp.Components.NumericTextbox(this.components);
             this.comboFilterIsManager.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -95,71 +95,6 @@
             this.comboFilterIsManager.TabStop = false;
             this.comboFilterIsManager.Text = "Filter";
             this.comboFilterIsManager.Enter += new System.EventHandler(this.groupBox2_Enter);
-            // 
-            // isManagerComboBox1
-            // 
-            this.isManagerComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.isManagerComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.isManagerComboBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.isManagerComboBox1.DisplayMember = "Value";
-            this.isManagerComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.isManagerComboBox1.FormattingEnabled = true;
-            this.isManagerComboBox1.Items.AddRange(new object[] {
-            ((object)(resources.GetObject("isManagerComboBox1.Items"))),
-            ((object)(resources.GetObject("isManagerComboBox1.Items1"))),
-            ((object)(resources.GetObject("isManagerComboBox1.Items2"))),
-            ((object)(resources.GetObject("isManagerComboBox1.Items3"))),
-            ((object)(resources.GetObject("isManagerComboBox1.Items4"))),
-            ((object)(resources.GetObject("isManagerComboBox1.Items5"))),
-            ((object)(resources.GetObject("isManagerComboBox1.Items6"))),
-            ((object)(resources.GetObject("isManagerComboBox1.Items7"))),
-            ((object)(resources.GetObject("isManagerComboBox1.Items8"))),
-            ((object)(resources.GetObject("isManagerComboBox1.Items9"))),
-            ((object)(resources.GetObject("isManagerComboBox1.Items10"))),
-            ((object)(resources.GetObject("isManagerComboBox1.Items11")))});
-            this.isManagerComboBox1.Location = new System.Drawing.Point(80, 69);
-            this.isManagerComboBox1.Name = "isManagerComboBox1";
-            this.isManagerComboBox1.Size = new System.Drawing.Size(105, 21);
-            this.isManagerComboBox1.TabIndex = 33;
-            this.isManagerComboBox1.ValueMember = "Key";
-            // 
-            // comboboxFilterActive
-            // 
-            this.comboboxFilterActive.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboboxFilterActive.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboboxFilterActive.DisplayMember = "Value";
-            this.comboboxFilterActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboboxFilterActive.FormattingEnabled = true;
-            this.comboboxFilterActive.Items.AddRange(new object[] {
-            ((object)(resources.GetObject("comboboxFilterActive.Items"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items1"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items2"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items3"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items4"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items5"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items6"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items7"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items8"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items9"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items10"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items11"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items12"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items13"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items14"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items15"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items16"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items17"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items18"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items19"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items20"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items21"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items22"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items23")))});
-            this.comboboxFilterActive.Location = new System.Drawing.Point(250, 42);
-            this.comboboxFilterActive.Name = "comboboxFilterActive";
-            this.comboboxFilterActive.Size = new System.Drawing.Size(96, 21);
-            this.comboboxFilterActive.TabIndex = 32;
-            this.comboboxFilterActive.ValueMember = "Key";
             // 
             // comboFilterManager
             // 
@@ -196,7 +131,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(210, 42);
+            this.label4.Location = new System.Drawing.Point(211, 42);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(33, 13);
             this.label4.TabIndex = 1;
@@ -225,6 +160,7 @@
             // 
             // buttonFilter
             // 
+            this.buttonFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonFilter.Location = new System.Drawing.Point(80, 96);
             this.buttonFilter.Name = "buttonFilter";
             this.buttonFilter.Size = new System.Drawing.Size(266, 40);
@@ -315,15 +251,6 @@
             this.textBoxEmail.Name = "textBoxEmail";
             this.textBoxEmail.Size = new System.Drawing.Size(175, 20);
             this.textBoxEmail.TabIndex = 41;
-            // 
-            // textBoxUrutan
-            // 
-            this.textBoxUrutan.Location = new System.Drawing.Point(337, 255);
-            this.textBoxUrutan.Name = "textBoxUrutan";
-            this.textBoxUrutan.Size = new System.Drawing.Size(40, 20);
-            this.textBoxUrutan.TabIndex = 40;
-            this.textBoxUrutan.Text = "0";
-            this.textBoxUrutan.Leave += new System.EventHandler(this.textBoxUrutan_Leave);
             // 
             // label10
             // 
@@ -511,6 +438,7 @@
             // 
             // buttonSave
             // 
+            this.buttonSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSave.Location = new System.Drawing.Point(105, 304);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(302, 44);
@@ -597,10 +525,11 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(431, 172);
             this.dataGridView1.MultiSelect = false;
@@ -613,17 +542,105 @@
             this.dataGridView1.TabStop = false;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
-            // SalesForm
+            // isManagerComboBox1
+            // 
+            this.isManagerComboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.isManagerComboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.isManagerComboBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.isManagerComboBox1.DisplayMember = "Value";
+            this.isManagerComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.isManagerComboBox1.FormattingEnabled = true;
+            this.isManagerComboBox1.Items.AddRange(new object[] {
+            ((object)(resources.GetObject("isManagerComboBox1.Items"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items1"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items2"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items3"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items4"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items5"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items6"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items7"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items8"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items9"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items10"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items11"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items12"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items13"))),
+            ((object)(resources.GetObject("isManagerComboBox1.Items14")))});
+            this.isManagerComboBox1.Location = new System.Drawing.Point(80, 69);
+            this.isManagerComboBox1.Name = "isManagerComboBox1";
+            this.isManagerComboBox1.Size = new System.Drawing.Size(105, 21);
+            this.isManagerComboBox1.TabIndex = 33;
+            this.isManagerComboBox1.ValueMember = "Key";
+            // 
+            // comboboxFilterActive
+            // 
+            this.comboboxFilterActive.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboboxFilterActive.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboboxFilterActive.DisplayMember = "Value";
+            this.comboboxFilterActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboboxFilterActive.FormattingEnabled = true;
+            this.comboboxFilterActive.Items.AddRange(new object[] {
+            ((object)(resources.GetObject("comboboxFilterActive.Items"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items1"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items2"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items3"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items4"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items5"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items6"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items7"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items8"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items9"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items10"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items11"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items12"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items13"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items14"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items15"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items16"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items17"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items18"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items19"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items20"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items21"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items22"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items23"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items24"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items25"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items26"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items27"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items28"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items29"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items30"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items31"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items32"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items33"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items34"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items35")))});
+            this.comboboxFilterActive.Location = new System.Drawing.Point(250, 42);
+            this.comboboxFilterActive.Name = "comboboxFilterActive";
+            this.comboboxFilterActive.Size = new System.Drawing.Size(96, 21);
+            this.comboboxFilterActive.TabIndex = 32;
+            this.comboboxFilterActive.ValueMember = "Key";
+            // 
+            // textBoxUrutan
+            // 
+            this.textBoxUrutan.Location = new System.Drawing.Point(337, 255);
+            this.textBoxUrutan.Name = "textBoxUrutan";
+            this.textBoxUrutan.Size = new System.Drawing.Size(40, 20);
+            this.textBoxUrutan.TabIndex = 40;
+            this.textBoxUrutan.Text = "0";
+            this.textBoxUrutan.Leave += new System.EventHandler(this.textBoxUrutan_Leave);
+            // 
+            // SalesControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(802, 421);
             this.Controls.Add(this.comboFilterIsManager);
             this.Controls.Add(this.totalDataLabel);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "SalesForm";
-            this.Text = "SalesForm";
+            this.Name = "SalesControl";
+            this.Size = new System.Drawing.Size(802, 421);
             this.Load += new System.EventHandler(this.SalesForm_Load);
             this.comboFilterIsManager.ResumeLayout(false);
             this.comboFilterIsManager.PerformLayout();

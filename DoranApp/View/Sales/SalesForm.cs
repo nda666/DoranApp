@@ -15,7 +15,7 @@ namespace DoranApp.View
         {
             FormHelper.AddUserControlToTabPage<SalesControl>(tabControl1, "Master Sales");
             FormHelper.AddUserControlToTabPage<SalesChannelControl>(tabControl1, "Master Channel Sales");
-          FormHelper.AddUserControlToTabPage<SalesTeamControl>(tabControl1, "Master Tim Sales");
+             FormHelper.AddUserControlToTabPage<SalesTeamControl>(tabControl1, "Master Tim Sales");
         }
     }
 }

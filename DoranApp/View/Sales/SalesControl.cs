@@ -35,7 +35,7 @@ namespace DoranApp.View
             comboManager.ValueMember = "Kode";
 
             var bsComboFilterManager = new BindingSource();
-            bsComboFilterManager.DataSource = _salesData.GetData();
+            bsComboFilterManager.DataSource = _managerData.GetData();
             comboFilterManager.DataSource = bsComboFilterManager;
             comboFilterManager.DisplayMember = "Nama";
             comboFilterManager.ValueMember = "Kode";
@@ -194,8 +194,8 @@ namespace DoranApp.View
             checkboxGetOmzetEmail.Checked = selected.EmailOmzetTerdahsyat;
             checkboxEmailJeteterdahsyat.Checked = selected.EmailJeteterdahsyat;
             checkBoxEmailTargetTahunan.Checked = selected.EmailTargetTahunan;
-
-
+            checkBoxTerimaEmailOmzet.Checked = selected.Jenis;
+            checkBoxEmailresikiriman.Checked = selected.Emailresikiriman;
             buttonDelete.Enabled = true;
         }
 

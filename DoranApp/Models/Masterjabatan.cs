@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DoranApp.Models
 {
-    internal class Masterdivisi
+    internal class Masterjabatan
     {
         public Guid Id { get; set; }
         public int Kode { get; set; }

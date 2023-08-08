@@ -27,33 +27,22 @@ namespace DoranApp.Data
                   { "Kode", x => x.Kode },
                   { "Nama", x => x.Nama },
                   { "Tim", x => x.NamaTim },
-                    { "Manager", (x) => x.Manager },
+                  { "Manager", (x) => x.Manager },
                   { "Nama Manager", (x) => x.NamaManager },
-                  { "Aktif", x => x.Aktif },
+                  { "Email", (x) => x.Email },
+                  { "Sales Ol", (x) => x.Salesol, typeof(bool) },
+                  { "Email Omzet", (x) => x.Jenis, typeof(bool) },
+                  { "Email Jete Terdahsyat", (x) => x.EmailJeteterdahsyat, typeof(bool) },
+                  { "Email Omzet Terdahsyat", (x) => x.EmailOmzetTerdahsyat, typeof(bool)},
+                  { "Email Resi Kiriman", (x) => x.Emailresikiriman, typeof(bool)},
+                  { "Email Target Tahunan", (x) => x.EmailTargetTahunan, typeof(bool)},
+                  { "Lihat Omzet Tahunan", (x) => x.Bisalihatomzettahunantim, typeof(bool)},
+                  { "Aktif", x => x.Aktif, typeof(bool) },
+                  { "Urutan", x => x.Urutan },
                   { "Created At", x => x.CreatedAt },
                   { "Updated At", x => x.UpdatedAt },
             };
             return columnSettingsList;
-        }
-
-        public override DataColumn[] GetColumn()
-        {
-
-            DataColumn[] dataColumns = new DataColumn[] {
-                new DataColumn("Kode", typeof(Int32)),
-                new DataColumn("Nama"),
-                new DataColumn("Tim"),
-                new DataColumn("Manager", Type.GetType("System.Boolean")),
-                new DataColumn("Nama Manager"),
-                new DataColumn("Sales Ol", Type.GetType("System.Boolean")),
-                new DataColumn("Email"),
-            new DataColumn("Email Jete Terdahsyat", Type.GetType("System.Boolean")),
-                   new DataColumn("Email Omzet Terdahsyat", Type.GetType("System.Boolean")),
-                new DataColumn("Aktif", Type.GetType("System.Boolean")),
-                new DataColumn("Created At", Type.GetType("System.DateTime")),
-                new DataColumn("Updated At", Type.GetType("System.DateTime")),
-                };
-            return dataColumns;
         }
 
         protected override async Task RunRefresh()
