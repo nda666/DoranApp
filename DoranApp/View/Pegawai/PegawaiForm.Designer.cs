@@ -1,4 +1,4 @@
-﻿namespace DoranApp.View
+﻿namespace DoranApp.View.Pegawai
 {
     partial class PegawaiForm
     {

@@ -1,4 +1,5 @@
 ﻿using DoranApp.Properties;
+using DoranApp.View.Pegawai;
 using Dotmim.Sync;
 using Dotmim.Sync.Sqlite;
 using Dotmim.Sync.Web.Client;
@@ -352,6 +353,11 @@ namespace DoranApp.View
         private void salesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm<SalesForm>();
+        }
+
+        private void gudangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<MasterGudangForm>();
         }
     }
 }

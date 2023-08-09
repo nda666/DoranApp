@@ -3,7 +3,7 @@ using DoranApp.View.Pegawai;
 using System;
 using System.Windows.Forms;
 
-namespace DoranApp.View
+namespace DoranApp.View.Pegawai
 {
     public partial class PegawaiForm : Form
     {

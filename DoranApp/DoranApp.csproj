@@ -328,8 +328,8 @@
     </Compile>
     <Compile Include="Data\AbstractData.cs" />
     <Compile Include="Data\DKategoriBarangData.cs" />
+    <Compile Include="Data\MastergudangData.cs" />
     <Compile Include="Data\MasterjabatanData.cs" />
-    <Compile Include="Data\MasterGudangData.cs" />
     <Compile Include="Data\HKategoribarangData.cs" />
     <Compile Include="Data\MasterBarangData.cs" />
     <Compile Include="Data\MasterdivisiData.cs" />
@@ -351,7 +351,7 @@
     <Compile Include="Models\DKategoriBarang.cs" />
     <Compile Include="Models\HKategoribarang.cs" />
     <Compile Include="Models\MasterBarang.cs" />
-    <Compile Include="Models\MasterGudang.cs" />
+    <Compile Include="Models\Mastergudang.cs" />
     <Compile Include="Models\Pagination.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\SalesChannel.cs" />
@@ -390,10 +390,16 @@
     <Compile Include="View\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\PegawaiForm.cs">
+    <Compile Include="View\MasterGudangForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\PegawaiForm.Designer.cs">
+    <Compile Include="View\MasterGudangForm.Designer.cs">
+      <DependentUpon>MasterGudangForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Pegawai\PegawaiForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Pegawai\PegawaiForm.Designer.cs">
       <DependentUpon>PegawaiForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Pegawai\JabatanControl.cs">
@@ -478,7 +484,10 @@
     <EmbeddedResource Include="View\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\PegawaiForm.resx">
+    <EmbeddedResource Include="View\MasterGudangForm.resx">
+      <DependentUpon>MasterGudangForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Pegawai\PegawaiForm.resx">
       <DependentUpon>PegawaiForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Pegawai\JabatanControl.resx">

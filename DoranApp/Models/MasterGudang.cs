@@ -1,13 +1,11 @@
 ﻿namespace DoranApp.Models
 {
-    class MasterGudang
+    class Mastergudang
     {
-        public int kode { get; set; }
-        public string nama { get; set; }
-        public int aktif { get; set; }
-
-        public int urut { get; set; }
-
-        public int boletransit { get; set; }
+        public int Kode { get; set; }
+        public string Nama { get; set; }
+        public bool Aktif { get; set; }
+        public sbyte Urut { get; set; }
+        public bool Boletransit { get; set; }
     }
 }

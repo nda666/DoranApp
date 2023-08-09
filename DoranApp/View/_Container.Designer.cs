@@ -44,12 +44,13 @@ namespace DoranApp.View
             this.systemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.roleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pegawaiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.syncDBManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabForms = new System.Windows.Forms.TabControl();
             this.tessssssToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pegawaiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gudangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -75,7 +76,8 @@ namespace DoranApp.View
             this.syncToolStripMenuItem,
             this.salesToolStripMenuItem,
             this.systemToolStripMenuItem,
-            this.pegawaiToolStripMenuItem});
+            this.pegawaiToolStripMenuItem,
+            this.gudangToolStripMenuItem});
             this.masterToolStripMenuItem.Name = "masterToolStripMenuItem";
             this.masterToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.masterToolStripMenuItem.Text = "Master";
@@ -91,7 +93,7 @@ namespace DoranApp.View
             // brandToolStripMenuItem
             // 
             this.brandToolStripMenuItem.Name = "brandToolStripMenuItem";
-            this.brandToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.brandToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.brandToolStripMenuItem.Text = "Brand";
             this.brandToolStripMenuItem.Click += new System.EventHandler(this.brandToolStripMenuItem_Click);
             // 
@@ -124,14 +126,12 @@ namespace DoranApp.View
             this.channelSalesToolStripMenuItem.Name = "channelSalesToolStripMenuItem";
             this.channelSalesToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.channelSalesToolStripMenuItem.Text = "Channel Sales";
-           
             // 
             // timSalesToolStripMenuItem
             // 
             this.timSalesToolStripMenuItem.Name = "timSalesToolStripMenuItem";
             this.timSalesToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.timSalesToolStripMenuItem.Text = "Tim Sales";
-           
             // 
             // salesToolStripMenuItem1
             // 
@@ -162,6 +162,13 @@ namespace DoranApp.View
             this.roleToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
             this.roleToolStripMenuItem.Text = "Role";
             this.roleToolStripMenuItem.Click += new System.EventHandler(this.roleToolStripMenuItem_Click);
+            // 
+            // pegawaiToolStripMenuItem
+            // 
+            this.pegawaiToolStripMenuItem.Name = "pegawaiToolStripMenuItem";
+            this.pegawaiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pegawaiToolStripMenuItem.Text = "Pegawai";
+            this.pegawaiToolStripMenuItem.Click += new System.EventHandler(this.pegawaiToolStripMenuItem_Click);
             // 
             // syncDBManualToolStripMenuItem
             // 
@@ -215,12 +222,12 @@ namespace DoranApp.View
             this.tessssssToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.tessssssToolStripMenuItem.Text = "tessssss";
             // 
-            // pegawaiToolStripMenuItem
+            // gudangToolStripMenuItem
             // 
-            this.pegawaiToolStripMenuItem.Name = "pegawaiToolStripMenuItem";
-            this.pegawaiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.pegawaiToolStripMenuItem.Text = "Pegawai";
-            this.pegawaiToolStripMenuItem.Click += new System.EventHandler(this.pegawaiToolStripMenuItem_Click);
+            this.gudangToolStripMenuItem.Name = "gudangToolStripMenuItem";
+            this.gudangToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gudangToolStripMenuItem.Text = "Gudang";
+            this.gudangToolStripMenuItem.Click += new System.EventHandler(this.gudangToolStripMenuItem_Click);
             // 
             // _Container
             // 
@@ -271,5 +278,6 @@ namespace DoranApp.View
         private System.Windows.Forms.ToolStripMenuItem roleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem brandToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pegawaiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gudangToolStripMenuItem;
     }
 }

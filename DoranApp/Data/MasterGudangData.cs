@@ -1,86 +1,42 @@
 ﻿using DoranApp.Models;
 using DoranApp.Utils;
-using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace DoranApp.Data
 {
-    class MasterGudangData
+    internal class MastergudangData : AbstractData<Mastergudang>
     {
-        private string URL = "master-gudang";
-        private dynamic Query;
-        public DataTable DataTable { get; private set; }
-        private BindingSource BindingSource;
+        public MastergudangData() : base() { }
 
-        public MasterGudangData(dynamic query)
+        public MastergudangData(object query) : base(query) { }
+        protected override string RelativeUrl()
         {
-            Query = query;
-            DataTable = new DataTable();
-            DataTable.Columns.AddRange(MasterGudangData.GetColumn().ToArray());
-            BindingSource = new BindingSource();
+            return "mastergudang";
         }
 
-        public static List<DataColumn> GetColumn()
+        protected override List<ColumnSettings> ColumnSettings()
         {
-            var model = new MasterGudang();
-            var columnLength = model.GetType().GetProperties().Length;
-
-            List<DataColumn> dataColumns = new List<DataColumn>();
-            foreach (var property in model.GetType().GetProperties())
-            {
-                DataColumn column = new DataColumn(property.Name, property.PropertyType);
-                column.AllowDBNull = true;
-                dataColumns.Add(column);
-            }
-
-            return dataColumns;
-        }
-
-        public async Task<BindingSource> GetBindingSource(bool forComboBox = false)
-        {
-            Rest rest = new Rest(URL);
-            BindingSource = new BindingSource();
-            if (forComboBox)
-            {
-                DataRow r = DataTable.NewRow();
-                r.BeginEdit();
-                r["kode"] = DBNull.Value;
-                r["nama"] = "SEMUA";
-                r["aktif"] = 1;
-                r["urut"] = 1;
-                r["boletransit"] = 1;
-                r.EndEdit();
-                DataTable.Rows.Add(r);
-            }
-            var response = await rest.Get(Query);
-            if (response.ErrorMessage != null)
-            {
-                MessageBox.Show(response.ErrorMessage);
-            }
-            else
-            {
-
-                List<MasterGudang> masterGudangs = response.Response;
-                foreach (MasterGudang masterGudang in masterGudangs)
+            var columnSettingsList = new ColumnSettings<Mastergudang>
                 {
-                    DataRow r = DataTable.NewRow();
-                    r.BeginEdit();
-                    r["kode"] = masterGudang.kode;
-                    r["nama"] = masterGudang.nama;
-                    r["aktif"] = masterGudang.aktif;
-                    r["aktif"] = masterGudang.urut;
-                    r["urut"] = masterGudang.boletransit;
-                    r["boletransit"] = 1;
-                    r.EndEdit();
-                    DataTable.Rows.Add(r);
-                }
+                    { "Kode", x => x.Kode },
+                    { "Nama", x => x.Nama },
+                    { "Urut", x=> x.Urut, typeof(sbyte) },
+                    { "Bisa Transit", x=> x.Boletransit, typeof(bool) },
+                    { "Aktif", x=> x.Aktif, typeof(bool) }
+                };
 
-            }
-            BindingSource.DataSource = DataTable;
-            return BindingSource;
+            return columnSettingsList;
         }
+
+        protected override async Task RunRefresh()
+        {
+            Rest rest = new Rest(RelativeUrl());
+            var response = await rest.Get(_query);
+            _data = response.Response;
+            _dataTable = _dataTableGen.CreateDataTable<Mastergudang>(_data);
+        }
+
     }
+
 }
