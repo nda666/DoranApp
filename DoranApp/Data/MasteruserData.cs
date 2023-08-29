@@ -1,4 +1,6 @@
-﻿using DoranApp.Utils;
+﻿using DoranApp.Models;
+using DoranApp.Utils;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DoranApp.Data
@@ -8,6 +10,19 @@ namespace DoranApp.Data
         protected override string RelativeUrl()
         {
             return "masteruser";
+        }
+
+        protected override List<ColumnSettings> ColumnSettings()
+        {
+            var columnSettingsList = new ColumnSettings<Masteruser> {
+                  { "Kode", x => x.Kodeku },
+                  { "Username", x => x.Usernameku },
+                  { "Akses", x => x.Akses },
+                  { "Aktif", x => x.Aktif, typeof(bool) },
+                 
+
+            };
+            return columnSettingsList;
         }
 
         protected override async Task RunRefresh()

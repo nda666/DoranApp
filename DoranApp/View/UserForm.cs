@@ -45,8 +45,7 @@ namespace DoranApp.View
             _dataTable = _userData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
             dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Descending);
-            dataGridView1.Columns[6].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-            dataGridView1.Columns[7].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+           
             dataGridView1.ClearSelection();
             ResetForm();
         }

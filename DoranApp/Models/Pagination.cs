@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DoranApp.Models
 {
-    class Pagination
+    internal class Pagination
     {
         public int current_page { get; set; }
         public List<dynamic> data { get; set; }

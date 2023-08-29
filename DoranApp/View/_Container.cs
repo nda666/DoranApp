@@ -10,7 +10,6 @@ using System.Windows.Forms;
 
 namespace DoranApp.View
 {
-
     public partial class _Container : Form
     {
         public bool _runSync = false;
@@ -20,7 +19,6 @@ namespace DoranApp.View
         public _Container()
         {
             InitializeComponent();
-
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -34,8 +32,6 @@ namespace DoranApp.View
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-
-
         private void tabForms_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Tab && tabForms == null)
@@ -45,13 +41,10 @@ namespace DoranApp.View
             }
         }
 
-
         public void OpenForm<T>() where T : Form, new()
         {
             foreach (Form form in Application.OpenForms)
             {
-
-
                 if (form.GetType() == typeof(T))
                 {
                     form.WindowState = FormWindowState.Maximized;
@@ -68,8 +61,7 @@ namespace DoranApp.View
             openForm.Show();
         }
 
-
-        delegate void SetStatusInternetCallback(string text);
+        private delegate void SetStatusInternetCallback(string text);
 
         private void SetInternetStatusText(string status)
         {
@@ -87,7 +79,6 @@ namespace DoranApp.View
                 this.toolStripStatusLabel1.Text = status;
                 toolStripStatusLabel1.Image = status == "Online" ? Resources.Connect : Resources.Disconnect;
             }
-
         }
 
         public async void syncDb()
@@ -112,8 +103,6 @@ namespace DoranApp.View
                 SQLiteConnection.CreateFile(filePath);
             }
 
-
-
             try
             {
                 // Second provider is using plain old Sql Server provider,
@@ -127,8 +116,6 @@ namespace DoranApp.View
 
                 // Creating an agent that will handle all the process
                 var agent = new SyncAgent(clientProvider, serverOrchestrator);
-
-
 
                 var progress = new Progress<ProgressArgs>(update =>
                 {
@@ -164,7 +151,6 @@ namespace DoranApp.View
 
             if (string.IsNullOrEmpty(Properties.Settings.Default.AuthToken))
             {
-
                 var login = new Login();
 
                 DialogResult loginModal = login.ShowDialog();
@@ -189,19 +175,19 @@ namespace DoranApp.View
         {
             if (this.ActiveMdiChild == null)
                 tabForms.Visible = false;
-            // If no any child form, hide tabControl 
+            // If no any child form, hide tabControl
             else
             {
                 this.ActiveMdiChild.WindowState =
                 FormWindowState.Maximized;
-                // Child form always maximized 
+                // Child form always maximized
 
-                // If child form is new and no has tabPage, 
-                // create new tabPage 
+                // If child form is new and no has tabPage,
+                // create new tabPage
                 if (this.ActiveMdiChild.Tag == null)
                 {
-                    // Add a tabPage to tabControl with child 
-                    // form caption 
+                    // Add a tabPage to tabControl with child
+                    // form caption
                     TabPage tp = new TabPage(this.ActiveMdiChild.Text);
                     tp.Name = this.ActiveMdiChild.Text;
                     tp.Tag = this.ActiveMdiChild;
@@ -215,7 +201,6 @@ namespace DoranApp.View
                 }
 
                 if (!tabForms.Visible) tabForms.Visible = true;
-
             }
         }
 
@@ -237,7 +222,6 @@ namespace DoranApp.View
 
         private void _Container_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void tabForms_MouseDown(object sender, MouseEventArgs e)
@@ -261,7 +245,6 @@ namespace DoranApp.View
             }
         }
 
-
         private void tabForms_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
@@ -275,7 +258,6 @@ namespace DoranApp.View
             int hoverTabIndex = GetHoverTabIndex(tabControl, clientPoint);
             if (hoverTabIndex != dragTabIndex)
             {
-
                 TabPage tabPage = tabControl.TabPages[dragTabIndex];
                 tabControl.TabPages.RemoveAt(dragTabIndex);
                 tabControl.TabPages.Insert(hoverTabIndex, tabPage);
@@ -310,8 +292,6 @@ namespace DoranApp.View
             OpenForm<SyncDatabaseForm>();
         }
 
-
-
         private void tesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm<UserForm>();
@@ -344,7 +324,6 @@ namespace DoranApp.View
             OpenForm<HKategoribarangForm>();
         }
 
-
         private void pegawaiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm<PegawaiForm>();
@@ -359,5 +338,12 @@ namespace DoranApp.View
         {
             OpenForm<MasterGudangForm>();
         }
+
+        private void brandToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenForm<HKategoribarangForm>();
+        }
+
+       
     }
 }

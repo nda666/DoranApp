@@ -1,6 +1,6 @@
 ﻿namespace DoranApp.Models
 {
-    class DKategoriBarang
+    internal class DKategoriBarang
     {
         public int koded { get; set; }
         public string nama { get; set; }

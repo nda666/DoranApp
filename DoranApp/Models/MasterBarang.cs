@@ -1,6 +1,12 @@
 ﻿namespace DoranApp.Models
 {
-    class MasterBarang
+    internal class MasterbarangOption
+    {
+        public int brgKode { get; set; }
+        public string brgNama { get; set; }
+    }
+
+    internal class Masterbarang
     {
         public int brgKode { get; set; }
         public string brgNama { get; set; }
@@ -31,6 +37,4 @@
 
         public DKategoriBarang dKategoriBarang { get; set; }
     }
-
-
 }

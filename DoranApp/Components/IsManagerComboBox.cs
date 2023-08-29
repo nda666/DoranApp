@@ -25,9 +25,8 @@ namespace DoranApp.Components
             set => base.ValueMember = value;
         }
 
-
-
         public event EventHandler Leave;
+
         public IsManagerComboBox()
         {
             InitializeComponent();
@@ -37,12 +36,9 @@ namespace DoranApp.Components
 
         public IsManagerComboBox(IContainer container)
         {
-
             container.Add(this);
             InitializeDefaultItems();
             InitializeComponent();
-
-
         }
 
         private void InitializeDefaultItems()
@@ -66,7 +62,6 @@ namespace DoranApp.Components
         // Get the selected display text from the ComboBox
         public string SelectedDisplayText => (SelectedIndex >= 0) ? ((KeyValuePair<bool?, string>)SelectedItem).Value : "";
 
-
         protected override void OnSelectedIndexChanged(EventArgs e)
         {
             //do the initial custom logic here
@@ -84,5 +79,4 @@ namespace DoranApp.Components
             Leave?.Invoke(this, e);
         }
     }
-
 }

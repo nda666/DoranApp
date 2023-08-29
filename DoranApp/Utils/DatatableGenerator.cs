@@ -9,8 +9,8 @@ namespace DoranApp.Utils
 {
     public class DataTableGenerator
     {
-        DataTable dt = new DataTable();
-        List<ColumnSettings> columnSettingsList = new List<ColumnSettings>();
+        private DataTable dt = new DataTable();
+        private List<ColumnSettings> columnSettingsList = new List<ColumnSettings>();
 
         public DataTableGenerator(List<ColumnSettings> columnSettingsList)
         {

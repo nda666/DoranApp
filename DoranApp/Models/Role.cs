@@ -2,7 +2,7 @@
 
 namespace DoranApp.Models
 {
-    class Role
+    internal class Role
     {
         public Guid id { get; set; }
         public string name { get; set; }

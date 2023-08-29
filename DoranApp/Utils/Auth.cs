@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace DoranApp.Utils
 {
-    class Auth
+    internal class Auth
     {
-
         private void findError(dynamic response)
         {
-
             try
             {
                 response.EnsureSuccessStatusCode();
@@ -22,7 +20,6 @@ namespace DoranApp.Utils
             {
                 throw new Exception("Koneksi ke server Error");
             }
-
         }
 
         public async Task<dynamic> getAsync(string actionName)

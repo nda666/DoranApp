@@ -1,20 +1,38 @@
 ﻿using DoranApp.Models;
 using DoranApp.Utils;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DoranApp.Data
 {
-    class HKategoriBarangData : AbstractData<HKategoribarang>
+    internal class HKategoriBarangData : AbstractData<HKategoribarang>
     {
         public HKategoriBarangData() : base()
         {
         }
+
         public HKategoriBarangData(object query) : base(query)
         {
         }
+
         protected override string RelativeUrl()
         {
             return "hkategoribarang";
+        }
+
+        protected override List<ColumnSettings> ColumnSettings()
+        {
+            var columnSettingsList = new ColumnSettings<HKategoribarang> {
+                  { "Kode", x => x.Kodeh },
+                  { "Nama", x => x.Nama },
+                  { "Harga khusus", x => x.Hargakhusus, typeof(bool) },
+                  { "Perlu set harga", (x) => x.Perlusetharga, typeof(bool) },
+                  { "Cek tahunan", (x) => x.Cektahunan, typeof(bool) },
+                  { "Created At", (x) => x.CreatedAt, typeof(DateTime) },
+                 
+            };
+            return columnSettingsList;
         }
 
         protected override async Task RunRefresh()
@@ -23,9 +41,6 @@ namespace DoranApp.Data
             var response = await rest.Get(_query);
             _data = response.Response;
             _dataTable = _dataTableGen.CreateDataTable(_data);
-
         }
     }
-
-
 }

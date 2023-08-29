@@ -62,7 +62,6 @@ namespace DoranApp.View
             dataGridView1.DataSource = _dataTable;
             dataGridView1.Sort(dataGridView1.Columns[3], ListSortDirection.Descending);
             dataGridView1.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-            dataGridView1.Columns[4].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
             dataGridView1.ClearSelection();
 
             Dictionary<string, string> activeOption = new Dictionary<string, string>();

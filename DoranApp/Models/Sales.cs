@@ -2,6 +2,12 @@
 
 namespace DoranApp.Models
 {
+    internal class SalesOption
+    {
+        public int Kode { get; set; }
+        public string Nama { get; set; }
+    }
+
     internal class Sales
     {
         public Guid Id { get; set; }

@@ -33,24 +33,19 @@ namespace DoranApp.View
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.masterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.barangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.brandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.brandToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.kategoriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.syncToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.channelSalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.timSalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.salesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.systemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.roleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pegawaiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gudangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.syncDBManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabForms = new System.Windows.Forms.TabControl();
             this.tessssssToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gudangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -71,9 +66,8 @@ namespace DoranApp.View
             // masterToolStripMenuItem
             // 
             this.masterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.barangToolStripMenuItem,
+            this.brandToolStripMenuItem1,
             this.kategoriToolStripMenuItem,
-            this.syncToolStripMenuItem,
             this.salesToolStripMenuItem,
             this.systemToolStripMenuItem,
             this.pegawaiToolStripMenuItem,
@@ -82,20 +76,12 @@ namespace DoranApp.View
             this.masterToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.masterToolStripMenuItem.Text = "Master";
             // 
-            // barangToolStripMenuItem
+            // brandToolStripMenuItem1
             // 
-            this.barangToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.brandToolStripMenuItem});
-            this.barangToolStripMenuItem.Name = "barangToolStripMenuItem";
-            this.barangToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.barangToolStripMenuItem.Text = "Barang";
-            // 
-            // brandToolStripMenuItem
-            // 
-            this.brandToolStripMenuItem.Name = "brandToolStripMenuItem";
-            this.brandToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.brandToolStripMenuItem.Text = "Brand";
-            this.brandToolStripMenuItem.Click += new System.EventHandler(this.brandToolStripMenuItem_Click);
+            this.brandToolStripMenuItem1.Name = "brandToolStripMenuItem1";
+            this.brandToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.brandToolStripMenuItem1.Text = "Brand";
+            this.brandToolStripMenuItem1.Click += new System.EventHandler(this.brandToolStripMenuItem1_Click);
             // 
             // kategoriToolStripMenuItem
             // 
@@ -103,42 +89,12 @@ namespace DoranApp.View
             this.kategoriToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.kategoriToolStripMenuItem.Text = "Kategori";
             // 
-            // syncToolStripMenuItem
-            // 
-            this.syncToolStripMenuItem.Name = "syncToolStripMenuItem";
-            this.syncToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.syncToolStripMenuItem.Text = "Sync";
-            this.syncToolStripMenuItem.Click += new System.EventHandler(this.syncToolStripMenuItem_Click);
-            // 
             // salesToolStripMenuItem
             // 
-            this.salesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.channelSalesToolStripMenuItem,
-            this.timSalesToolStripMenuItem,
-            this.salesToolStripMenuItem1});
             this.salesToolStripMenuItem.Name = "salesToolStripMenuItem";
             this.salesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.salesToolStripMenuItem.Text = "Sales";
             this.salesToolStripMenuItem.Click += new System.EventHandler(this.salesToolStripMenuItem_Click);
-            // 
-            // channelSalesToolStripMenuItem
-            // 
-            this.channelSalesToolStripMenuItem.Name = "channelSalesToolStripMenuItem";
-            this.channelSalesToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-            this.channelSalesToolStripMenuItem.Text = "Channel Sales";
-            // 
-            // timSalesToolStripMenuItem
-            // 
-            this.timSalesToolStripMenuItem.Name = "timSalesToolStripMenuItem";
-            this.timSalesToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-            this.timSalesToolStripMenuItem.Text = "Tim Sales";
-            // 
-            // salesToolStripMenuItem1
-            // 
-            this.salesToolStripMenuItem1.Name = "salesToolStripMenuItem1";
-            this.salesToolStripMenuItem1.Size = new System.Drawing.Size(151, 22);
-            this.salesToolStripMenuItem1.Text = "Sales";
-            this.salesToolStripMenuItem1.Click += new System.EventHandler(this.salesToolStripMenuItem1_Click);
             // 
             // systemToolStripMenuItem
             // 
@@ -169,6 +125,13 @@ namespace DoranApp.View
             this.pegawaiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.pegawaiToolStripMenuItem.Text = "Pegawai";
             this.pegawaiToolStripMenuItem.Click += new System.EventHandler(this.pegawaiToolStripMenuItem_Click);
+            // 
+            // gudangToolStripMenuItem
+            // 
+            this.gudangToolStripMenuItem.Name = "gudangToolStripMenuItem";
+            this.gudangToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gudangToolStripMenuItem.Text = "Gudang";
+            this.gudangToolStripMenuItem.Click += new System.EventHandler(this.gudangToolStripMenuItem_Click);
             // 
             // syncDBManualToolStripMenuItem
             // 
@@ -222,13 +185,6 @@ namespace DoranApp.View
             this.tessssssToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.tessssssToolStripMenuItem.Text = "tessssss";
             // 
-            // gudangToolStripMenuItem
-            // 
-            this.gudangToolStripMenuItem.Name = "gudangToolStripMenuItem";
-            this.gudangToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.gudangToolStripMenuItem.Text = "Gudang";
-            this.gudangToolStripMenuItem.Click += new System.EventHandler(this.gudangToolStripMenuItem_Click);
-            // 
             // _Container
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,23 +217,18 @@ namespace DoranApp.View
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem masterToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem barangToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kategoriToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem syncToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem syncDBManualToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         public System.Windows.Forms.TabControl tabForms;
         private System.Windows.Forms.ToolStripMenuItem salesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem channelSalesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tessssssToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem timSalesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem salesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem systemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem roleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem brandToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pegawaiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gudangToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem brandToolStripMenuItem1;
     }
 }

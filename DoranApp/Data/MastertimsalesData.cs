@@ -7,9 +7,14 @@ namespace DoranApp.Data
 {
     internal class MastertimsalesData : AbstractData<Mastertimsales>
     {
-        public MastertimsalesData() : base() { }
+        public MastertimsalesData() : base()
+        {
+        }
 
-        public MastertimsalesData(object query) : base(query) { }
+        public MastertimsalesData(object query) : base(query)
+        {
+        }
+
         protected override string RelativeUrl()
         {
             return "mastertimsales";
@@ -18,7 +23,6 @@ namespace DoranApp.Data
         protected override List<ColumnSettings> ColumnSettings()
         {
             var columnSettingsList = new List<ColumnSettings> {
-
                 new ColumnSettings("Kode", item => ((Mastertimsales) item).Kode),
                 new ColumnSettings("Nama", item => ((Mastertimsales) item).Nama),
                 new ColumnSettings("Nama Channel", item => ((Mastertimsales) item).Masterchannelsales?.Nama),
@@ -29,7 +33,6 @@ namespace DoranApp.Data
                 new ColumnSettings("Kodechannel", item => ((Mastertimsales) item).SyaratKomisi),
                 new ColumnSettings("CreatedAt", item => ((Mastertimsales) item).CreatedAt),
                 new ColumnSettings("UpdatedAt", item => ((Mastertimsales) item).UpdatedAt)
-
             };
             return columnSettingsList;
         }
@@ -41,7 +44,5 @@ namespace DoranApp.Data
             _data = response.Response;
             _dataTableGen.CreateDataTable<Mastertimsales>(_data);
         }
-
     }
-
 }

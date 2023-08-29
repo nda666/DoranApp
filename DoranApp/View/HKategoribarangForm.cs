@@ -47,7 +47,6 @@ namespace DoranApp.View
             }
             if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
-
                 try
                 {
                     buttonDelete.Enabled = false;
@@ -60,9 +59,9 @@ namespace DoranApp.View
                     MessageBox.Show(ex.Message);
                 }
                 buttonDelete.Enabled = true;
-
             }
         }
+
         private async void HKategoribarangForm_Load(object sender, EventArgs e)
         {
             await FetchData();
@@ -70,8 +69,7 @@ namespace DoranApp.View
             _dataTable = _hkategoribarangData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
             dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Descending);
-            dataGridView1.Columns[6].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-            dataGridView1.Columns[7].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
+            dataGridView1.Columns[5].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
             dataGridView1.ClearSelection();
             ResetForm();
         }
@@ -124,8 +122,6 @@ namespace DoranApp.View
                 }
                 textboxNama.Focus();
 
-
-
                 ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
                 buttonDelete.Enabled = true;
             }
@@ -168,6 +164,11 @@ namespace DoranApp.View
             dataGridView1.ClearSelection();
             ResetForm();
             totalDataLabel.Text = $"Total Data: {dataGridView1.RowCount}";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ResetForm();
         }
     }
 }

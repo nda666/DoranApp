@@ -15,7 +15,6 @@ namespace DoranApp.Data
         {
         }
 
-
         protected override string RelativeUrl()
         {
             return "masterchannelsales";

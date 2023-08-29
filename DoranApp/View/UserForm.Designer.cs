@@ -89,7 +89,10 @@ namespace DoranApp.View
             this.comboboxFilterActive.Items.AddRange(new object[] {
             ((object)(resources.GetObject("comboboxFilterActive.Items"))),
             ((object)(resources.GetObject("comboboxFilterActive.Items1"))),
-            ((object)(resources.GetObject("comboboxFilterActive.Items2")))});
+            ((object)(resources.GetObject("comboboxFilterActive.Items2"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items3"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items4"))),
+            ((object)(resources.GetObject("comboboxFilterActive.Items5")))});
             this.comboboxFilterActive.Location = new System.Drawing.Point(253, 43);
             this.comboboxFilterActive.Name = "comboboxFilterActive";
             this.comboboxFilterActive.Size = new System.Drawing.Size(93, 21);

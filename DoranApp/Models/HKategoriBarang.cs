@@ -2,7 +2,7 @@
 
 namespace DoranApp.Models
 {
-    class HKategoribarang
+    internal class HKategoribarang
     {
         public Guid Id { get; set; }
         public int Kodeh { get; set; }

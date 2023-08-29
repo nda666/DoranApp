@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace DoranApp.Data
 {
-    class DKategoriBarangData
+    internal class DKategoriBarangData
     {
         private dynamic Query;
         public DataTable DataTable { get; private set; }
@@ -61,7 +61,6 @@ namespace DoranApp.Data
             }
             else
             {
-
                 List<DKategoriBarang> kategoriBarangs = response.Response;
                 foreach (DKategoriBarang dKategori in kategoriBarangs)
                 {
@@ -76,9 +75,6 @@ namespace DoranApp.Data
                     r.EndEdit();
                     DataTable.Rows.Add(r);
                 }
-
-
-
             }
             BindingSource.DataSource = DataTable;
             return BindingSource;

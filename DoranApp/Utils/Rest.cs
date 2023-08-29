@@ -1,8 +1,8 @@
 ﻿using DalSoft.RestClient;
 using DoranApp.Exceptions;
-using DoranApp.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Net.Http;
 using System.Reflection;
@@ -10,15 +10,14 @@ using System.Threading.Tasks;
 
 namespace DoranApp.Utils
 {
-
-    class Rest
+    internal class Rest
     {
-
         public void Main()
         {
             HttpResponseMessage = new Object();
             Response = new Object();
         }
+
         public RestClient Client { get; private set; }
 
         public dynamic Response { get; private set; }
@@ -42,39 +41,29 @@ namespace DoranApp.Utils
                     NullValueHandling = NullValueHandling.Ignore,
                     DateParseHandling = DateParseHandling.DateTime,
                     DateFormatString = "yyyy-MM-dd HH:mm:ss",
-                    ContractResolver = new CustomDateContractResolver("yyyy-MM-dd hh:mm:ss"),
-
-
-                    //ContractResolver = new DefaultContractResolver
-                    //{
-                    //  NamingStrategy = new SnakeCaseNamingStrategy()
-                    //}
+                    ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() },
                 }
             ));
             Resource = Client.Resource(uri);
         }
 
-
         private string FindError(HttpResponseMessage httpResponseMessage, dynamic response)
         {
-
             var status = (Int32)httpResponseMessage.StatusCode;
             var xx = (string)response.ToString();
             var error = httpResponseMessage.ReasonPhrase;
 
             if (!status.ToString().StartsWith("2"))
             {
+                JObject dynamicErrors = response;
+                var reparsed = JsonConvert.SerializeObject(dynamicErrors);
 
-                ConsoleDump.Extensions.Dump(httpResponseMessage);
+                dynamic d = JsonConvert.DeserializeObject<dynamic>(reparsed);
+
+                TypeInfo type = d.GetType();
                 switch (status)
                 {
                     case 400:
-                        JObject dynamicErrors = response;
-                        var reparsed = JsonConvert.SerializeObject(dynamicErrors);
-
-                        dynamic d = JsonConvert.DeserializeObject<dynamic>(reparsed);
-
-                        TypeInfo type = d.GetType();
                         var errors = d.errors;
                         if (errors != null)
                         {
@@ -87,13 +76,15 @@ namespace DoranApp.Utils
                                         error = $"{error + message}\n";
                                     }
                                 }
-
                             }
                         }
                         throw new RestException(status, error);
                     default:
+                        if (d?.message != null)
+                        {
+                            throw new RestException(status, d.message);
+                        }
                         throw new RestException(status, error);
-
                 }
             }
 
@@ -102,33 +93,31 @@ namespace DoranApp.Utils
 
         public async Task<TReturn> Get(dynamic query)
         {
-
             if (query != null)
             {
                 Resource.Query(query);
             }
             return await Get();
         }
+
         public async Task<TReturn> Get()
         {
-
             var response = await Resource.Get();
             return Return(response);
         }
 
-        public async Task<TReturn<T>> Get<T>(dynamic query) where T : class
+        public async Task<TReturn<T>> Get<T>(dynamic query)
         {
-
             if (query != null)
             {
                 Resource.Query(query);
             }
             return await Get<T>();
         }
+
         public async Task<TReturn<T>> Get<T>()
         {
-
-            var response = await Resource.Get();
+            T response = await Resource.Get();
             return Return<T>(response);
         }
 
@@ -143,6 +132,7 @@ namespace DoranApp.Utils
             var response = await Resource.Patch(postData);
             return Return(response);
         }
+
         public async Task<TReturn> Put(dynamic postData)
         {
             var response = await Resource.Put(postData);
@@ -176,14 +166,13 @@ namespace DoranApp.Utils
             {
                 throw new Exception(error);
             }
-            tReturn.Response = response;
             tReturn.HttpResponseMessage = response.HttpResponseMessage;
             tReturn.Response = response;
             return tReturn;
         }
     }
 
-    class TReturn
+    internal class TReturn
     {
         public dynamic HttpResponseMessage { get; set; }
         public dynamic Response { get; set; }
@@ -197,7 +186,7 @@ namespace DoranApp.Utils
         }
     }
 
-    class TReturn<T>
+    internal class TReturn<T>
     {
         public dynamic HttpResponseMessage { get; set; }
         public T Response { get; set; }

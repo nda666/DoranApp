@@ -7,9 +7,14 @@ namespace DoranApp.Data
 {
     internal class MasterjabatanData : AbstractData<Masterjabatan>
     {
-        public MasterjabatanData() : base() { }
+        public MasterjabatanData() : base()
+        {
+        }
 
-        public MasterjabatanData(object query) : base(query) { }
+        public MasterjabatanData(object query) : base(query)
+        {
+        }
+
         protected override string RelativeUrl()
         {
             return "masterjabatan";
@@ -33,7 +38,5 @@ namespace DoranApp.Data
             _data = response.Response;
             _dataTable = _dataTableGen.CreateDataTable<Masterjabatan>(_data);
         }
-
     }
-
 }

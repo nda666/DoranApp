@@ -2,10 +2,10 @@
 
 namespace DoranApp.Models
 {
-    class Masteruser
+    internal class Masteruser
     {
         public Guid Id { get; set; }
-        public sbyte Kodeku { get; set; }
+        public int Kodeku { get; set; }
         public string Usernameku { get; set; }
         public string Passwordku { get; set; }
         public string Akses { get; set; }

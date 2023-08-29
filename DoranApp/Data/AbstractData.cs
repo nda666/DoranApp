@@ -14,7 +14,8 @@ namespace DoranApp.Data
         protected DataTable _dataTable;
         protected DataTableGenerator _dataTableGen;
 
-        protected virtual string RelativeUrl() { return ""; }
+        protected virtual string RelativeUrl()
+        { return ""; }
 
         protected virtual List<ColumnSettings> ColumnSettings()
         {
@@ -45,12 +46,13 @@ namespace DoranApp.Data
         {
             _query = query;
         }
+
         public bool IsFetchComplete()
         {
             return _isFetchComplete;
         }
 
-        public List<T> GetData()
+        public virtual List<T> GetData()
         {
             return _data;
         }
@@ -71,14 +73,11 @@ namespace DoranApp.Data
             return _dataTable;
         }
 
-
         internal virtual async Task<TReturn> Delete(string primaryKeyValue)
         {
             var rest = new Rest($"{RelativeUrl()}/{primaryKeyValue}");
             return await rest.Delete();
         }
-
-
 
         internal virtual async Task<DoranApp.Utils.TReturn> Restore(string primaryKeyValue)
         {
@@ -94,7 +93,6 @@ namespace DoranApp.Data
 
         public virtual async Task<TReturn> CreateOrUpdate<TReturn>(string primaryKeyValue, object data)
         {
-
             var isEdit = string.IsNullOrEmpty(primaryKeyValue) == false;
             var uri = isEdit ? $"{RelativeUrl()}/{primaryKeyValue}" : $"{RelativeUrl()}";
 
@@ -114,5 +112,4 @@ namespace DoranApp.Data
             }
         }
     }
-
 }

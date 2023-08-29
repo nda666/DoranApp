@@ -45,12 +45,12 @@
             this.radioUrutNama = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonUbah = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.textboxUrut = new DoranApp.Components.NumericTextbox(this.components);
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
+            this.textboxUrut = new DoranApp.Components.NumericTextbox(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -211,6 +211,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 33);
             this.button1.TabIndex = 7;
+            this.button1.Tag = "actionButton";
             this.button1.Text = "CARI";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -221,17 +222,21 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 33);
             this.button2.TabIndex = 8;
+            this.button2.Tag = "actionButton";
             this.button2.Text = "SIMPAN";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // buttonUbah
             // 
-            this.button3.Location = new System.Drawing.Point(177, 93);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 33);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "UBAH";
-            this.button3.UseVisualStyleBackColor = true;
+            this.buttonUbah.Location = new System.Drawing.Point(177, 93);
+            this.buttonUbah.Name = "buttonUbah";
+            this.buttonUbah.Size = new System.Drawing.Size(75, 33);
+            this.buttonUbah.TabIndex = 9;
+            this.buttonUbah.Tag = "actionButton";
+            this.buttonUbah.Text = "UBAH";
+            this.buttonUbah.UseVisualStyleBackColor = true;
+            this.buttonUbah.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -239,8 +244,10 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 33);
             this.button4.TabIndex = 10;
+            this.button4.Tag = "actionButton";
             this.button4.Text = "Aktif/Non";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
@@ -248,20 +255,16 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 33);
             this.button5.TabIndex = 11;
+            this.button5.Tag = "actionButton";
             this.button5.Text = "Transit/Non";
             this.button5.UseVisualStyleBackColor = true;
-            // 
-            // textboxUrut
-            // 
-            this.textboxUrut.Location = new System.Drawing.Point(314, 12);
-            this.textboxUrut.Name = "textboxUrut";
-            this.textboxUrut.Size = new System.Drawing.Size(82, 20);
-            this.textboxUrut.TabIndex = 13;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -288,6 +291,13 @@
             this.label3.TabIndex = 21;
             this.label3.Text = "Jumlah Data: -";
             // 
+            // textboxUrut
+            // 
+            this.textboxUrut.Location = new System.Drawing.Point(314, 12);
+            this.textboxUrut.Name = "textboxUrut";
+            this.textboxUrut.Size = new System.Drawing.Size(82, 20);
+            this.textboxUrut.TabIndex = 13;
+            // 
             // MasterGudangForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -298,7 +308,7 @@
             this.Controls.Add(this.textboxUrut);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.buttonUbah);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox3);
@@ -340,7 +350,7 @@
         private System.Windows.Forms.RadioButton radioUrutNama;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonUbah;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private Components.NumericTextbox textboxUrut;

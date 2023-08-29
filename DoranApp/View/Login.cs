@@ -1,6 +1,8 @@
 ﻿using DoranApp.Exceptions;
 using DoranApp.Utils;
 using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 
@@ -8,6 +10,9 @@ namespace DoranApp.View
 {
     public partial class Login : Form
     {
+        [DllImport("shell32.dll", CharSet = CharSet.Auto)]
+        private static extern IntPtr ExtractIcon(IntPtr hInst, string lpszExeFileName, int nIconIndex);
+
         public Login()
         {
             InitializeComponent();
@@ -62,7 +67,27 @@ namespace DoranApp.View
 
         private void Login_Load(object sender, EventArgs e)
         {
+            IntPtr iconHandle = ExtractIcon(IntPtr.Zero, "shell32.dll", 316);
+
+            if (iconHandle != IntPtr.Zero)
+            {
+                Icon icon = Icon.FromHandle(iconHandle);
+                Bitmap bitmap = new Bitmap(16, 16);
+                using (Graphics graphics = Graphics.FromImage(bitmap))
+                {
+                    graphics.DrawIcon(icon, new Rectangle(Point.Empty, bitmap.Size));
+                }
+                // Display the icon in a PictureBox
+                linkLabel1.Image = bitmap;
+              
+
+                // Don't forget to release the icon handle
+                DestroyIcon(iconHandle);
+            }
         }
+
+        [DllImport("user32.dll")]
+        private static extern bool DestroyIcon(IntPtr hIcon);
 
         private void Login_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -77,6 +102,17 @@ namespace DoranApp.View
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void Login_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            linkLabel1.Image?.Dispose();
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            SettingForm settingForm = new SettingForm();
+            settingForm.ShowDialog();
         }
     }
 }

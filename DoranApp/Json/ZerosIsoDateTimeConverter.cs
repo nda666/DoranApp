@@ -3,7 +3,6 @@ using System;
 
 namespace DoranApp.Json
 {
-
     internal class ZerosIsoDateTimeConverter : Newtonsoft.Json.Converters.IsoDateTimeConverter
     {
         private readonly string _zeroDateString;

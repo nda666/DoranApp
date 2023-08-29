@@ -3,14 +3,15 @@
     using System;
     using System.Net.NetworkInformation;
     using System.Reactive.Linq;
+
     public static class InternetAvailabilityService
     {
         public static bool isOnline;
 
         public static bool? forceStatus = null;
+
         public static IObservable<bool> CheckInternetAvailability()
         {
-
             return Observable.Interval(TimeSpan.FromSeconds(5))
             .StartWith(-1L)
             .Select(_ => IsInternetAvailable());
@@ -37,5 +38,4 @@
             }
         }
     }
-
 }

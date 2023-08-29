@@ -18,12 +18,10 @@ namespace DoranApp.View
         private void HomeForm_Resize(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
-
         }
 
         private void HomeForm_Load(object sender, EventArgs e)
         {
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -36,6 +34,11 @@ namespace DoranApp.View
             ((_Container)MdiParent)._stopSync = false;
             ((_Container)MdiParent)._runSync = false;
             ((_Container)MdiParent).syncDb();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ((_Container)MdiParent).OpenForm<TransaksiForm>();
         }
     }
 }

@@ -1,15 +1,15 @@
 ﻿using DoranApp.Models;
 using DoranApp.Utils;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DoranApp.Data
 {
-    class RolesData : AbstractData<Role>
+    internal class RolesData : AbstractData<Role>
     {
-
         public RolesData() : base()
         {
         }
@@ -18,55 +18,31 @@ namespace DoranApp.Data
         {
         }
 
-        public override DataColumn[] GetColumn()
-        {
 
-            DataColumn[] dataColumns = new DataColumn[] {
-                new DataColumn("ID"),
-                new DataColumn("Nama"),
-                new DataColumn("Aktif", Type.GetType("System.Boolean")),
-                new DataColumn("Created At", Type.GetType("System.DateTime")),
-                new DataColumn("Updated At", Type.GetType("System.DateTime")),
-                };
-            return dataColumns;
+        protected override string RelativeUrl()
+        {
+            return "role";
+        }
+
+        protected override List<ColumnSettings> ColumnSettings()
+        {
+            var columnSettingsList = new ColumnSettings<Role> {
+                  { "Kode", x => x.id },
+                  { "Nama", x => x.name },
+                  { "aktif", x => x.active, typeof(bool) },
+                  { "Created at", (x) => x.createdAt, typeof(bool) },
+                 
+
+            };
+            return columnSettingsList;
         }
 
         protected override async Task RunRefresh()
         {
-            Rest rest = new Rest("roles");
+            Rest rest = new Rest(RelativeUrl());
             var response = await rest.Get(_query);
-            if (response.ErrorMessage != null)
-            {
-                MessageBox.Show(response.ErrorMessage);
-            }
-            else
-            {
-                _data = response.Response;
-
-                if (_data != null)
-                {
-                    _dataTable.BeginInit();
-                    _dataTable.Rows.Clear();
-                    foreach (Role role in _data)
-                    {
-                        DataRow r = _dataTable.NewRow();
-                        r.BeginEdit();
-                        r["ID"] = role.id;
-                        r["Nama"] = role.name;
-                        r["Aktif"] = role.active;
-                        r["Created At"] = string.IsNullOrEmpty(role.createdAt) ? DBNull.Value : (object)DateTime.Parse(role.createdAt);
-                        r["Updated At"] = string.IsNullOrEmpty(role.updatedAt) ? DBNull.Value : (object)DateTime.Parse(role.updatedAt);
-                        r.EndEdit();
-                        _dataTable.Rows.Add(r);
-                    }
-                    _dataTable.EndInit();
-                }
-                else
-                {
-                    _dataTable.Rows.Clear();
-                    Console.WriteLine("Role Null");
-                }
-            }
+            _data = response.Response;
+            _dataTable = _dataTableGen.CreateDataTable(_data);
         }
     }
 }

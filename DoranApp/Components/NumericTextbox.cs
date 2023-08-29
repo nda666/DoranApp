@@ -7,6 +7,7 @@ namespace DoranApp.Components
     public partial class NumericTextbox : TextBox
     {
         private const int WM_CHAR = 0x0102;
+
         public NumericTextbox()
         {
             InitializeComponent();

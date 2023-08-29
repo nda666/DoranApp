@@ -9,6 +9,7 @@ namespace DoranApp.Components
     public partial class ActiveComboBox : ComboBox
     {
         private bool isItemsAdded = false;
+
         public event EventHandler Leave;
 
         [Browsable(false)]
@@ -47,13 +48,11 @@ namespace DoranApp.Components
 
         private void InitializeDefaultComponent()
         {
-
             this.AutoCompleteSource = AutoCompleteSource.ListItems;
             this.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             this.DropDownStyle = ComboBoxStyle.DropDownList;
             this.DisplayMember = "Value";
             this.ValueMember = "Key";
-
         }
 
         protected override void OnCreateControl()
@@ -73,8 +72,6 @@ namespace DoranApp.Components
                 isItemsAdded = true;
             }
         }
-
-
 
         // Get the selected value (bool?) from the ComboBox
         public bool? SelectedValue => (SelectedIndex >= 0) ? (bool?)((KeyValuePair<bool?, string>)SelectedItem).Key : null;
@@ -96,8 +93,5 @@ namespace DoranApp.Components
                 this.Text = "";
             }
         }
-
-
     }
-
 }

@@ -1,8 +1,6 @@
 ﻿using DoranApp.Models;
 using DoranApp.Utils;
-using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Threading.Tasks;
 
 namespace DoranApp.Data
@@ -16,6 +14,7 @@ namespace DoranApp.Data
         public SalesData(object query) : base(query)
         {
         }
+
         protected override string RelativeUrl()
         {
             return "sales";
@@ -52,8 +51,16 @@ namespace DoranApp.Data
 
             _data = response.Response;
             _dataTable = _dataTableGen.CreateDataTable<Sales>(_data);
+        }
 
+        public async Task<TReturn> GetNameAndKodeOnly()
+        {
+            Rest rest = new Rest($"{RelativeUrl()}/nama");
+
+            return await rest.Get(new
+            {
+                aktif = true
+            });
         }
     }
-
 }
