@@ -605,6 +605,15 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\imageres_5341.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\msdbrptr_5311.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\msdbrptr_5312.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

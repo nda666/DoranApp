@@ -28,6 +28,22 @@ namespace DoranApp.View
         private List<Mastergudang> _mastergudangOptions = new List<Mastergudang>();
         private List<Setlevelharga> _setlevelhargaOptions = new List<Setlevelharga>();
 
+        public long _laporanTransaksiLastPage = 0;
+        public long _laporanTransaksiPage
+        {
+            get {
+                long page;
+                if (!long.TryParse(toolStripTextBox1.Text, out page) || toolStripTextBox1.Text == "")
+                {
+                    page = 1;
+                }
+                return page;
+            }
+            set
+            {
+                toolStripTextBox1.Text = value.ToString();
+            }
+        }
 
         private decimal _subtotal = 0;
         public TransaksiForm()
@@ -194,6 +210,7 @@ namespace DoranApp.View
             dataGridView1.DoubleBuffered(true);
             dataGridView2.DoubleBuffered(true);
             dataGridView3.DoubleBuffered(true);
+            toolStripProgressBar1.ProgressBar.Visible = false;
             comboTempo.SelectedIndex = 1;
             FetchSales();
             FetchPelanggan();
@@ -404,20 +421,38 @@ namespace DoranApp.View
             CalculateTotal();
         }
 
-        private async void button10_Click(object sender, EventArgs e)
+        private async void fetchLaporanTransaksi()
         {
-            try {
+            toolStripProgressBar1.ProgressBar.Visible = true;
+            dataGridView3.Rows.Clear();
+            toolStrip1.Enabled = false;
+            button10.Enabled = false;
+            try
+            {
+                _transaksiData.SetQuery(new {
+                    page = _laporanTransaksiPage <= 0 ? 1 : _laporanTransaksiPage,
+                    Kodegudang = comboFilterGudang.SelectedValue.ToString()
+                });
                 await _transaksiData.Refresh();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ConsoleDump.Extensions.Dump(ex.Message);
                 MessageBox.Show(ex.Message);
             }
-            
+
             var paginationData = _transaksiData.GetPaginationData();
-            bindingNavigatorPositionItem1.Text = paginationData.Page.ToString();
+            _laporanTransaksiPage = paginationData.Page;
+            _laporanTransaksiLastPage = paginationData.TotalPage;
             toolStripLabel1.Text = $"dari {paginationData.TotalPage.ToString()}";
-           
+            toolStrip1.Enabled = true;
+            button10.Enabled = true;
+            toolStripProgressBar1.ProgressBar.Visible = false;
+        }
+
+        private async void button10_Click(object sender, EventArgs e)
+        {
+            fetchLaporanTransaksi();
         }
 
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
@@ -524,6 +559,35 @@ namespace DoranApp.View
             }
             button6.Enabled = true;
             button6.Cursor = Cursors.Default;
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            _laporanTransaksiPage++;
+            fetchLaporanTransaksi();
+        }
+
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            _laporanTransaksiPage--;
+            fetchLaporanTransaksi();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            _laporanTransaksiPage = 1;
+            fetchLaporanTransaksi();
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+                _laporanTransaksiPage = _laporanTransaksiLastPage;
+                fetchLaporanTransaksi();
+        }
+        private void toolStripTextBox1_Leave(object sender, EventArgs e)
+        {
+            fetchLaporanTransaksi();
         }
     }
 

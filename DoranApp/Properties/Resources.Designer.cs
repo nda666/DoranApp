@@ -93,9 +93,39 @@ namespace DoranApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap imageres_5341 {
+            get {
+                object obj = ResourceManager.GetObject("imageres_5341", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap Logo {
             get {
                 object obj = ResourceManager.GetObject("Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap msdbrptr_5311 {
+            get {
+                object obj = ResourceManager.GetObject("msdbrptr_5311", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap msdbrptr_5312 {
+            get {
+                object obj = ResourceManager.GetObject("msdbrptr_5312", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
