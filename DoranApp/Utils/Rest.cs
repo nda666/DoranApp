@@ -50,17 +50,20 @@ namespace DoranApp.Utils
         private string FindError(HttpResponseMessage httpResponseMessage, dynamic response)
         {
             var status = (Int32)httpResponseMessage.StatusCode;
-            var xx = (string)response.ToString();
             var error = httpResponseMessage.ReasonPhrase;
-
             if (!status.ToString().StartsWith("2"))
             {
                 JObject dynamicErrors = response;
                 var reparsed = JsonConvert.SerializeObject(dynamicErrors);
-
                 dynamic d = JsonConvert.DeserializeObject<dynamic>(reparsed);
+                if (d == null)
+                {
+                    throw new RestException(status, error);
+                }
 
+              
                 TypeInfo type = d.GetType();
+
                 switch (status)
                 {
                     case 400:
@@ -148,11 +151,8 @@ namespace DoranApp.Utils
         private TReturn Return(dynamic response)
         {
             TReturn tReturn = new TReturn();
-            var error = FindError(response.HttpResponseMessage, response);
-            if (error != null)
-            {
-                throw new Exception(error);
-            }
+            FindError(response.HttpResponseMessage, response);
+           
             tReturn.HttpResponseMessage = response.HttpResponseMessage;
             tReturn.Response = response;
             return tReturn;
@@ -161,11 +161,8 @@ namespace DoranApp.Utils
         private TReturn<T> Return<T>(dynamic response)
         {
             TReturn<T> tReturn = new TReturn<T>();
-            var error = FindError(response.HttpResponseMessage, response);
-            if (error != null)
-            {
-                throw new Exception(error);
-            }
+            FindError(response.HttpResponseMessage, response);
+            
             tReturn.HttpResponseMessage = response.HttpResponseMessage;
             tReturn.Response = response;
             return tReturn;

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,7 +15,7 @@ namespace DoranApp.View
     public partial class TransaksiForm : Form
     {
         private BindingList<dynamic> cart;
-
+        private int? KodeEdit = null;
         private MasterbarangData _masterbarang = new MasterbarangData();
         private SalesData _salesData = new SalesData();
         private MasterpelangganData _masterpelangganData = new MasterpelangganData();
@@ -186,15 +187,7 @@ namespace DoranApp.View
             dataGridView1.Columns["ord"].ReadOnly = true;
             dataGridView1.Columns["sisa"].ReadOnly = true;
 
-            cart = new BindingList<dynamic>();
-
-            // Create a BindingSource and bind it to the data
-            BindingSource bindingSource = new BindingSource();
-            bindingSource.DataSource = cart;
-
-            // Bind the BindingNavigator and DataGridView to the BindingSource
-            bindingNavigator1.BindingSource = bindingSource;
-            dataGridView1.DataSource = bindingSource;
+            
 
             dataGridView2.DataSource = null;
             dataGridView2.DataSource = _transaksiData.GetDataTable();
@@ -270,8 +263,9 @@ namespace DoranApp.View
                     MessageBox.Show("Isi terlebih dahulu item nya");
                     return;
                 }
+                buttonBatalUbah.Enabled = false;
                 button9.Enabled = false;
-                var res = await _transaksiData.CreateOrUpdate(null, new
+                var res = await _transaksiData.CreateOrUpdate(KodeEdit == null ? null : KodeEdit.ToString(), new
                 {
                     KodeSales = comboSales.SelectedValue,
                     KodeGudang = comboGudang.SelectedValue,
@@ -289,16 +283,18 @@ namespace DoranApp.View
                     Dpp = textBoxDpp.UnformattedValue,
                     Details = Details
                 });
-                button9.Enabled = true;
+              
                 MessageBox.Show("Transaksi berhasil disimpan");
                 dataGridView1.Rows.Clear();
-
+                buttonBatalUbah.Visible = false;
             }
             catch (Exception ex)
             {
                 button9.Enabled = true;
                 MessageBox.Show(ex.Message);
             }
+            button9.Enabled = true;
+            buttonBatalUbah.Enabled = true;
         }
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -588,6 +584,80 @@ namespace DoranApp.View
         private void toolStripTextBox1_Leave(object sender, EventArgs e)
         {
             fetchLaporanTransaksi();
+        }
+
+        private void ResetForm()
+        {
+            comboGudang.SelectedIndex = 0;
+            comboSales.SelectedIndex = 0;
+            comboPelanggan.SelectedIndex = 0;
+            datePickerTransaksi.Value = DateTime.Now;
+            textBoxInfoPenting.Text = "";
+            comboTempo.SelectedIndex = 2;
+            dataGridView1.Rows.Clear();
+            textBoxOngkir.Text = "";
+            textBoxBiaya.Text = "";
+            textBoxDiskon.Text = "";
+            textBoxDpp.Text = "";
+            checkBoxPPN.Checked = false;
+            textBoxTotal.Text = "";
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedRows.Count <= 0 && dataGridView2.Rows.Count <= 0)
+            {
+                return;
+            }
+            ResetForm();
+            var kodeh = (long)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
+            var htrans = _transaksiData.GetData().Where(x => x.kodeH == kodeh).FirstOrDefault();
+            if (htrans == null)
+            {
+                return;
+            }
+            KodeEdit = (int)htrans.kodeH;
+            comboGudang.SelectedValue = (int) htrans.kodegudang;
+            comboPelanggan.SelectedValue = (int)htrans.kodePelanggan;
+            comboSales.SelectedValue = (int) htrans.kodeSales;
+            datePickerTransaksi.Value = htrans.tglTrans;
+            textBoxInfoPenting.Text = htrans.infopenting;
+            comboTempo.SelectedValue = htrans.tipetempo;
+            dataGridView1.Rows.Clear();
+
+            textBoxOngkir.Text = Convert.ToString(htrans.tambahanLainnya);
+            textBoxBiaya.Text = Convert.ToString(htrans.jumlahbarangbiaya);
+            textBoxDiskon.Text = Convert.ToString(htrans.diskon);
+            textBoxDpp.Text = Convert.ToString(htrans.dpp);
+            checkBoxPPN.Checked = htrans.ppn > 0;
+            textBoxTotal.Text = Convert.ToString(htrans.jumlah);
+
+            foreach(var d in htrans.dtrans)
+            {
+
+                DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
+                row.Cells[0].Value = d.jumlah;
+                row.Cells[1].Value = (int) d.kodebarang;
+                row.Cells[2].Value = d.harga;
+                row.Cells[3].Value = d.harga * d.jumlah;
+                row.Cells[6].Value = d.nmrsn;
+                dataGridView1.Rows.Add(row);
+            }
+            buttonBatalUbah.Visible = true;
+        }
+
+        private void buttonBatalUbah_Click(object sender, EventArgs e)
+        {
+            KodeEdit = null;
+            buttonBatalUbah.Visible = false;
+        }
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            using (SolidBrush b = new SolidBrush(dataGridView1.RowHeadersDefaultCellStyle.ForeColor))
+            {
+                e.Graphics.DrawString((e.RowIndex + 1).ToString(), e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 20, e.RowBounds.Location.Y + 4);
+            }
         }
     }
 
