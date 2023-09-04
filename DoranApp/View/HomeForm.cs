@@ -40,5 +40,10 @@ namespace DoranApp.View
         {
             ((_Container)MdiParent).OpenForm<TransaksiForm>();
         }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            ((_Container)MdiParent).OpenForm<OrderInputForm>();
+        }
     }
 }

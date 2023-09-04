@@ -343,6 +343,7 @@
     <Compile Include="Data\AbstractData.cs" />
     <Compile Include="Data\DKategoriBarangData.cs" />
     <Compile Include="Data\HkelompokbarangData.cs" />
+    <Compile Include="Data\MasterpengeluaranData.cs" />
     <Compile Include="Data\SetlevelhargaData.cs" />
     <Compile Include="Data\TransaksiData.cs" />
     <Compile Include="Data\MasterpelangganData.cs" />
@@ -358,6 +359,7 @@
     <Compile Include="Models\LokasiKota.cs" />
     <Compile Include="Models\Masterchannelsales.cs" />
     <Compile Include="Models\Hkelompokbarang.cs" />
+    <Compile Include="Models\Masterpengeluaran.cs" />
     <Compile Include="Models\Setlevelharga.cs" />
     <Compile Include="Models\Masterjabatan.cs" />
     <Compile Include="Models\Masterdivisi.cs" />
@@ -383,6 +385,12 @@
     <Compile Include="Utils\FormHelper.cs" />
     <Compile Include="Utils\InternetAvailabilityService.cs" />
     <Compile Include="Utils\RestV2.cs" />
+    <Compile Include="View\OrderInputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\OrderInputForm.Designer.cs">
+      <DependentUpon>OrderInputForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\SettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -522,6 +530,9 @@
     <EmbeddedResource Include="View\MasterGudangForm.resx">
       <DependentUpon>MasterGudangForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\OrderInputForm.resx">
+      <DependentUpon>OrderInputForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\Pegawai\PegawaiForm.resx">
       <DependentUpon>PegawaiForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -613,6 +624,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\msdbrptr_5312.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-calculator-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-create-order-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-cash-register-48.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

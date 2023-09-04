@@ -65,20 +65,20 @@ namespace DoranApp.View
 
         private void SetInternetStatusText(string status)
         {
-            if (toolStripStatusLabel1.GetCurrentParent() == null)
-            {
-                return;
-            }
-            if (toolStripStatusLabel1.GetCurrentParent().InvokeRequired)
-            {
-                SetStatusInternetCallback d = new SetStatusInternetCallback(SetInternetStatusText);
-                this.Invoke(d, new object[] { status });
-            }
-            else
-            {
-                this.toolStripStatusLabel1.Text = status;
-                toolStripStatusLabel1.Image = status == "Online" ? Resources.Connect : Resources.Disconnect;
-            }
+            //if (toolStripStatusLabel1.GetCurrentParent() == null)
+            //{
+            //    return;
+            //}
+            //if (toolStripStatusLabel1.GetCurrentParent().InvokeRequired)
+            //{
+            //    SetStatusInternetCallback d = new SetStatusInternetCallback(SetInternetStatusText);
+            //    this.Invoke(d, new object[] { status });
+            //}
+            //else
+            //{
+            //    this.toolStripStatusLabel1.Text = status;
+            //    toolStripStatusLabel1.Image = status == "Online" ? Resources.Connect : Resources.Disconnect;
+            //}
         }
 
         public async void syncDb()
