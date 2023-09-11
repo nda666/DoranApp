@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DoranApp.Data
 {
-    internal class HKategoriBarangData : AbstractData<HKategoribarang>
+    internal class HKategoriBarangData : AbstractData<Hkategoribarang>
     {
         public HKategoriBarangData() : base()
         {
@@ -23,13 +23,12 @@ namespace DoranApp.Data
 
         protected override List<ColumnSettings> ColumnSettings()
         {
-            var columnSettingsList = new ColumnSettings<HKategoribarang> {
+            var columnSettingsList = new ColumnSettings<Hkategoribarang> {
                   { "Kode", x => x.Kodeh },
                   { "Nama", x => x.Nama },
                   { "Harga khusus", x => x.Hargakhusus, typeof(bool) },
                   { "Perlu set harga", (x) => x.Perlusetharga, typeof(bool) },
                   { "Cek tahunan", (x) => x.Cektahunan, typeof(bool) },
-                  { "Created At", (x) => x.CreatedAt, typeof(DateTime) },
                  
             };
             return columnSettingsList;

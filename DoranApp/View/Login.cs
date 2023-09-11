@@ -10,11 +10,19 @@ namespace DoranApp.View
 {
     public partial class Login : Form
     {
+        private HomeForm _homeForm;
+
         [DllImport("shell32.dll", CharSet = CharSet.Auto)]
         private static extern IntPtr ExtractIcon(IntPtr hInst, string lpszExeFileName, int nIconIndex);
 
         public Login()
         {
+            InitializeComponent();
+        }
+
+        public Login(HomeForm homeForm)
+        {
+            _homeForm = homeForm;
             InitializeComponent();
         }
 
@@ -41,6 +49,10 @@ namespace DoranApp.View
                 Properties.Settings.Default.AuthToken = $"BEARER {result.api_token}";
                 Console.WriteLine($"Auth TOken: { Properties.Settings.Default.AuthToken}");
                 this.Hide();
+                if (_homeForm != null)
+                {
+                    _homeForm.homeStart = true;
+                }
 
             }
             catch (RestException error)

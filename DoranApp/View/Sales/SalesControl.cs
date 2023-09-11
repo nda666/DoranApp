@@ -101,9 +101,6 @@ namespace DoranApp.View
             dataGridView1.DoubleBuffered(true);
             _dataTable = _salesData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
-            dataGridView1.Sort(dataGridView1.Columns[8], ListSortDirection.Descending);
-            dataGridView1.Columns[7].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-            dataGridView1.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
             dataGridView1.ClearSelection();
 
             //ResetForm();

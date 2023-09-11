@@ -69,7 +69,6 @@ namespace DoranApp.View
             _dataTable = _hkategoribarangData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
             dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Descending);
-            dataGridView1.Columns[5].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
             dataGridView1.ClearSelection();
             ResetForm();
         }

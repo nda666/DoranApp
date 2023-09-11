@@ -4,7 +4,7 @@ namespace DoranApp.Models
 {
     internal class Masterpegawai
     {
-        public Guid Id { get; set; }
+        //public Guid Id { get; set; }
         public int Kode { get; set; }
         public string Nama { get; set; } = null!;
         public int Kodejabatan { get; set; }
@@ -32,9 +32,9 @@ namespace DoranApp.Models
         public int Kodeatasan { get; set; }
         public sbyte Laporan { get; set; }
         public sbyte KodeAgama { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public DateTime? DeletedAt { get; set; }
+        //public DateTime? CreatedAt { get; set; }
+        //public DateTime? UpdatedAt { get; set; }
+        //public DateTime? DeletedAt { get; set; }
         public Masterdivisi? Masterdivisi { get; set; }
     }
 }

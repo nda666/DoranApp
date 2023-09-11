@@ -5,6 +5,8 @@ namespace DoranApp.View
 {
     public partial class HomeForm : Form
     {
+        public bool homeStart = false;
+        public long timer = 8 * 60 * 60; // 8 hours
         public HomeForm()
         {
             InitializeComponent();
@@ -44,6 +46,18 @@ namespace DoranApp.View
         private void button2_Click_1(object sender, EventArgs e)
         {
             ((_Container)MdiParent).OpenForm<OrderInputForm>();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (!homeStart)
+            {
+                return;
+            }
+            timer--;
+            TimeSpan timeSpan = TimeSpan.FromSeconds(timer);
+            var countDown = timeSpan.ToString(@"hh\:mm\:ss");
+            //label3.Text = $"WAKTU ANDA TERSISA:\n{countDown}";
         }
     }
 }

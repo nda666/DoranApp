@@ -12,6 +12,7 @@ namespace DoranApp.View
 {
     public partial class _Container : Form
     {
+        public HomeForm _homeForm;
         public bool _runSync = false;
         public bool _stopSync = false;
         private int dragTabIndex;
@@ -41,7 +42,7 @@ namespace DoranApp.View
             }
         }
 
-        public void OpenForm<T>() where T : Form, new()
+        public T OpenForm<T>() where T : Form, new()
         {
             foreach (Form form in Application.OpenForms)
             {
@@ -50,7 +51,7 @@ namespace DoranApp.View
                     form.WindowState = FormWindowState.Maximized;
                     tabForms.SelectedTab = tabForms.TabPages[form.Text];
                     form.Activate();
-                    return;
+                    return (T) form;
                 }
             }
 
@@ -59,6 +60,7 @@ namespace DoranApp.View
             openForm.MdiParent = this;
             // Display the new form.
             openForm.Show();
+            return openForm;
         }
 
         private delegate void SetStatusInternetCallback(string text);
@@ -143,6 +145,7 @@ namespace DoranApp.View
             });
 
             HomeForm homeForm = new HomeForm();
+            _homeForm = homeForm;
             homeForm.MdiParent = this;
             homeForm.ControlBox = false;
             homeForm.TopLevel = false;
@@ -151,7 +154,7 @@ namespace DoranApp.View
 
             if (string.IsNullOrEmpty(Properties.Settings.Default.AuthToken))
             {
-                var login = new Login();
+                var login = new Login(_homeForm);
 
                 DialogResult loginModal = login.ShowDialog();
                 login.MaximizeBox = true;
@@ -344,6 +347,14 @@ namespace DoranApp.View
             OpenForm<HKategoribarangForm>();
         }
 
-       
+        private void laporanTransaksiPenjualanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<LaporanTransaksiPenjualan>();
+        }
+
+        private void penjualanByBarangToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<LaporanPenjualanBarangByBarang>(); 
+        }
     }
 }

@@ -30,9 +30,7 @@ namespace DoranApp.Data
                 new ColumnSettings("Targetomzet", item => ((Mastertimsales) item).Targetomzet),
                 new ColumnSettings("Tampiltahunlalu", item => ((Mastertimsales) item).Tampiltahunlalu),
                 new ColumnSettings("SyaratKomisi", item => ((Mastertimsales) item).SyaratKomisi),
-                new ColumnSettings("Kodechannel", item => ((Mastertimsales) item).SyaratKomisi),
-                new ColumnSettings("CreatedAt", item => ((Mastertimsales) item).CreatedAt),
-                new ColumnSettings("UpdatedAt", item => ((Mastertimsales) item).UpdatedAt)
+                new ColumnSettings("Kodechannel", item => ((Mastertimsales) item).SyaratKomisi)
             };
             return columnSettingsList;
         }
@@ -43,6 +41,17 @@ namespace DoranApp.Data
             var response = await rest.Get(_query);
             _data = response.Response;
             _dataTableGen.CreateDataTable<Mastertimsales>(_data);
+        }
+
+        public async Task<List<Mastertimsales>> GetWithSales()
+        {
+            Rest rest = new Rest(RelativeUrl());
+            var response = await rest.Get(new
+            {
+                active = true,
+                withSales = true
+            });
+            return (List<Mastertimsales>) response.Response;
         }
     }
 }

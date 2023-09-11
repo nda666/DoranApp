@@ -4,13 +4,13 @@ namespace DoranApp.Models
 {
     public class MasterpelangganOption
     {
-        public int Kode { get; set; }
+        public int? Kode { get; set; }
         public string Nama { get; set; } = null!;
     }
 
     public partial class Masterpelanggan
     {
-        public int Kode { get; set; }
+        public int? Kode { get; set; }
         public string Nama { get; set; } = null!;
         public string Namaformal { get; set; } = null!;
         public string Lokasi { get; set; } = null!;

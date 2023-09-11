@@ -48,8 +48,8 @@ namespace DoranApp.View
             var bsComboFilterChannel = new BindingSource();
             bsComboFilterChannel.DataSource = _salesChannelData.GetData();
             comboFilterChannel.DataSource = bsComboFilterChannel;
-            comboFilterChannel.DisplayMember = "Name";
-            comboFilterChannel.ValueMember = "Id";
+            comboFilterChannel.DisplayMember = "Nama";
+            comboFilterChannel.ValueMember = "Kode";
         }
 
         public async Task FetchData()
@@ -121,12 +121,7 @@ namespace DoranApp.View
             dataGridView1.DoubleBuffered(true);
             _dataTable = _salesTeamData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
-            //dataGridView1.Columns[3].DefaultCellStyle.Format = "N0";
-            //dataGridView1.Columns[4].DefaultCellStyle.Format = "N0";
-            //dataGridView1.Columns[8].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-            //dataGridView1.Columns[9].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-
-            //dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Descending);
+           
             dataGridView1.ClearSelection();
 
             ResetForm();

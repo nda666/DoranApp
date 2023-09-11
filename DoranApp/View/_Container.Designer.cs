@@ -41,9 +41,13 @@ namespace DoranApp.View
             this.roleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pegawaiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gudangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.laporanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.laporanTransaksiPenjualanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.syncDBManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabForms = new System.Windows.Forms.TabControl();
             this.tessssssToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.penjualanByBarangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,7 +56,9 @@ namespace DoranApp.View
             this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.masterToolStripMenuItem});
+            this.masterToolStripMenuItem,
+            this.laporanToolStripMenuItem,
+            this.salesToolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -130,6 +136,21 @@ namespace DoranApp.View
             this.gudangToolStripMenuItem.Text = "Gudang";
             this.gudangToolStripMenuItem.Click += new System.EventHandler(this.gudangToolStripMenuItem_Click);
             // 
+            // laporanToolStripMenuItem
+            // 
+            this.laporanToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.laporanTransaksiPenjualanToolStripMenuItem});
+            this.laporanToolStripMenuItem.Name = "laporanToolStripMenuItem";
+            this.laporanToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.laporanToolStripMenuItem.Text = "Laporan";
+            // 
+            // laporanTransaksiPenjualanToolStripMenuItem
+            // 
+            this.laporanTransaksiPenjualanToolStripMenuItem.Name = "laporanTransaksiPenjualanToolStripMenuItem";
+            this.laporanTransaksiPenjualanToolStripMenuItem.Size = new System.Drawing.Size(233, 22);
+            this.laporanTransaksiPenjualanToolStripMenuItem.Text = "Laporan Transaksi Penjualan";
+            this.laporanTransaksiPenjualanToolStripMenuItem.Click += new System.EventHandler(this.laporanTransaksiPenjualanToolStripMenuItem_Click);
+            // 
             // syncDBManualToolStripMenuItem
             // 
             this.syncDBManualToolStripMenuItem.Name = "syncDBManualToolStripMenuItem";
@@ -161,6 +182,21 @@ namespace DoranApp.View
             this.tessssssToolStripMenuItem.Name = "tessssssToolStripMenuItem";
             this.tessssssToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.tessssssToolStripMenuItem.Text = "tessssss";
+            // 
+            // salesToolStripMenuItem1
+            // 
+            this.salesToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.penjualanByBarangToolStripMenuItem});
+            this.salesToolStripMenuItem1.Name = "salesToolStripMenuItem1";
+            this.salesToolStripMenuItem1.Size = new System.Drawing.Size(48, 20);
+            this.salesToolStripMenuItem1.Text = "Sales";
+            // 
+            // penjualanByBarangToolStripMenuItem
+            // 
+            this.penjualanByBarangToolStripMenuItem.Name = "penjualanByBarangToolStripMenuItem";
+            this.penjualanByBarangToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.penjualanByBarangToolStripMenuItem.Text = "Penjualan By Barang";
+            this.penjualanByBarangToolStripMenuItem.Click += new System.EventHandler(this.penjualanByBarangToolStripMenuItem_Click);
             // 
             // _Container
             // 
@@ -202,5 +238,9 @@ namespace DoranApp.View
         private System.Windows.Forms.ToolStripMenuItem pegawaiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gudangToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem brandToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem laporanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem laporanTransaksiPenjualanToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem salesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem penjualanByBarangToolStripMenuItem;
     }
 }

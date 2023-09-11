@@ -27,8 +27,6 @@ namespace DoranApp.Data
                     { "Kode", x => x.Kode },
                     { "Nama", x => x.Nama },
                     { "Aktif", x => x.Aktif },
-                    { "Created At", x => x.CreatedAt },
-                    { "Updated At", x => x.UpdatedAt },
                 };
 
             return columnSettingsList;

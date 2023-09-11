@@ -25,8 +25,6 @@ namespace DoranApp.Data
             var columnSettingsList = new List<ColumnSettings> {
                 new ColumnSettings("Kode", item => ((Masterdivisi) item).Kode),
                 new ColumnSettings("Nama", item => ((Masterdivisi) item).Nama)
-                //new ColumnSettings("CreatedAt", item => ((Masterdivisi) item).CreatedAt),
-                //new ColumnSettings("UpdatedAt", item => ((Masterdivisi) item).UpdatedAt)
             };
             return columnSettingsList;
         }

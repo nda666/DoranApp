@@ -81,6 +81,16 @@ namespace DoranApp.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap doran_gadget {
+            get {
+                object obj = ResourceManager.GetObject("doran-gadget", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         public static System.Drawing.Icon icon {
@@ -116,6 +126,16 @@ namespace DoranApp.Properties {
         public static System.Drawing.Bitmap icons8_create_order_48 {
             get {
                 object obj = ResourceManager.GetObject("icons8-create-order-48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap icons8_loading {
+            get {
+                object obj = ResourceManager.GetObject("icons8-loading", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

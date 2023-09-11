@@ -55,8 +55,6 @@ namespace DoranApp.View.Pegawai
             dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Descending);
             DataGridViewColumn column = dataGridView1.Columns[0];
             column.Width = 60;
-            //dataGridView1.Columns[2].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
-            //dataGridView1.Columns[3].DefaultCellStyle.Format = "dd/MM/yyyy HH:mm:ss";
             dataGridView1.ClearSelection();
 
 

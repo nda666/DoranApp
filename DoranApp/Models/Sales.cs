@@ -2,16 +2,17 @@
 
 namespace DoranApp.Models
 {
-    internal class SalesOption
+    public class SalesOption
     {
-        public int Kode { get; set; }
+        public int? Kode { get; set; }
         public string Nama { get; set; }
+        public sbyte Kodetimsales { get; set; }
     }
 
-    internal class Sales
+    public class Sales
     {
-        public Guid Id { get; set; }
-        public int Kode { get; set; }
+        //public Guid Id { get; set; }
+        public int? Kode { get; set; }
         public string Nama { get; set; }
         public bool Aktif { get; set; }
         public sbyte Urutan { get; set; }
@@ -41,9 +42,9 @@ namespace DoranApp.Models
         public bool EmailTargetTahunan { get; set; }
         public bool Emailresikiriman { get; set; }
         public int BonusJete { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public DateTime? DeletedAt { get; set; }
+        //public DateTime? CreatedAt { get; set; }
+        //public DateTime? UpdatedAt { get; set; }
+        //public DateTime? DeletedAt { get; set; }
         public string NamaManager { get; set; }
         public string NamaTim { get; set; }
     }

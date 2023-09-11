@@ -61,17 +61,17 @@ namespace DoranApp.Data
             }
             else
             {
-                List<DKategoriBarang> kategoriBarangs = response.Response;
-                foreach (DKategoriBarang dKategori in kategoriBarangs)
+                List<Dkategoribarang> kategoriBarangs = response.Response;
+                foreach (Dkategoribarang dKategori in kategoriBarangs)
                 {
                     DataRow r = DataTable.NewRow();
                     r.BeginEdit();
-                    r["koded"] = dKategori.koded;
-                    r["nama"] = dKategori.nama;
-                    r["kodeh"] = dKategori.kodeh;
-                    r["munculdimasterbarangapps"] = dKategori.munculdimasterbarangapps;
-                    r["cnp"] = dKategori.cnp;
-                    r["sn"] = dKategori.sn;
+                    r["koded"] = dKategori.Koded;
+                    r["nama"] = dKategori.Nama;
+                    r["kodeh"] = dKategori.Kodeh;
+                    r["munculdimasterbarangapps"] = dKategori.Munculdimasterbarangapps;
+                    r["cnp"] = dKategori.Cnp;
+                    r["sn"] = dKategori.Sn;
                     r.EndEdit();
                     DataTable.Rows.Add(r);
                 }

@@ -44,6 +44,7 @@ namespace DoranApp.Utils
                     ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() },
                 }
             ));
+           
             Resource = Client.Resource(uri);
         }
 
@@ -155,6 +156,7 @@ namespace DoranApp.Utils
            
             tReturn.HttpResponseMessage = response.HttpResponseMessage;
             tReturn.Response = response;
+            Client.Dispose();
             return tReturn;
         }
 
@@ -165,6 +167,7 @@ namespace DoranApp.Utils
             
             tReturn.HttpResponseMessage = response.HttpResponseMessage;
             tReturn.Response = response;
+             Client.Dispose();
             return tReturn;
         }
     }

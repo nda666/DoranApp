@@ -2,11 +2,11 @@
 {
     internal class MasterbarangOption
     {
-        public int brgKode { get; set; }
+        public int? brgKode { get; set; }
         public string brgNama { get; set; }
     }
 
-    internal class Masterbarang
+    public class Masterbarang
     {
         public int brgKode { get; set; }
         public string brgNama { get; set; }
@@ -35,6 +35,6 @@
         public int statusKirimanCina { get; set; }
         public string ketKirimanCina { get; set; }
 
-        public DKategoriBarang dKategoriBarang { get; set; }
+        public Dkategoribarang Dkategoribarang { get; set; }
     }
 }

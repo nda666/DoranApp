@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace DoranApp.Data
 {
-    internal class TransaksiData : AbstractData<dynamic>
+    internal class LaporanTransaksiData : AbstractData<dynamic>
     {
         protected dynamic _dynamicData { get; set; }
         protected PaginationData _paginationData = new PaginationData();
 
-        public TransaksiData() : base()
+        public LaporanTransaksiData() : base()
         {
         }
 
-        public TransaksiData(object query) : base(query)
+        public LaporanTransaksiData(object query) : base(query)
         {
         }
 
@@ -24,18 +24,50 @@ namespace DoranApp.Data
             return "transaksi";
         }
 
+        private string TipeTempo(int day)
+        {
+            switch (day)
+            {
+                case 0:
+                    return "Cash";
+                case 1:
+                    return "1 Hari";
+                case 7:
+                    return "1 Minggu";
+                case 14:
+                    return "2 Minggu";
+                case 30:
+                    return "1 Bulan";
+                case 60:
+                    return "2 Bulan";
+                default:
+                    return $"{day.ToString()} Hari";
+            }
+            return "Cash";
+        }
         protected override List<ColumnSettings> ColumnSettings()
         {
             var columnSettingsList = new ColumnSettings<dynamic>
                 {
-                    { "No Nota", x => x.kodenota },
                     { "Tanggal", x => x.tglTrans, typeof(DateTime) },
                     { "Nama", x => x.masterpelanggan?.nama + " - " +  x.masterpelanggan?.lokasiKota?.nama },
                     { "Jumlah", x => x.jumlah },
-                    { "Sales", x => x.kodeSales },
-                    { "Tipe", x => x.tipetempo, typeof(sbyte) },
+                    { "Lainnya", x => x.tambahanLainnya },
+                    { "Sales", x => x.sales?.nama },
+                    { "Lunas", x => Convert.ToSByte(x.lunas), typeof(Boolean) },
+                    { "No Nota", x => x.kodenota },
+                    { "Tipe", x =>  TipeTempo( Convert.ToInt32(x.tipetempo))},
+                    { "Gudang", x => x.mastergudang?.nama ?? ""},
+                    {"DPP", x => x.dpp },
+                     {"Faktur PPN", x => x.ppn },
+                     {"PPN 100%", x => x.ppnreal },
+                {"Tanggal Input", x => x.insertTime,  typeof(DateTime) },
                     { "Keterangan", x => x.keterangan },
-                    { "Kodeh", x=>x.kodeH }
+                     { "Seri OL", x => x.noSeriOnline },
+                     { "Barcode OL", x => x.barcodeonline },
+                { "Retur", x => Convert.ToSByte(x.retur), typeof(Boolean) },
+                    { "Kodeh", x=>x.kodeH },
+                { "Jurnal", x => Convert.ToSByte(x.akanDiJurnalkan), typeof(Boolean) },
                 };
 
             return columnSettingsList;
@@ -47,8 +79,6 @@ namespace DoranApp.Data
             var response = await rest.Get(_query);
             var data = new List<dynamic>();
             var responseData = response.Response?.data;
-            _data = null;
-            _dynamicData = null;
             _dynamicData = responseData;
             _data = responseData;
             _paginationData.Page = response.Response?.page;
@@ -59,7 +89,6 @@ namespace DoranApp.Data
             {
                 data.Add(x);
             }
-            _dataTable = null;
             _dataTable = _dataTableGen.CreateDataTable<dynamic>(data);
         }
 
@@ -82,5 +111,6 @@ namespace DoranApp.Data
             });
         }
     }
+
 
 }

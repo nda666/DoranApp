@@ -200,16 +200,17 @@ namespace DoranApp.View
 
         private async void TransaksiForm_Load(object sender, EventArgs e)
         {
+            
             dataGridView1.DoubleBuffered(true);
             dataGridView2.DoubleBuffered(true);
             dataGridView3.DoubleBuffered(true);
-            toolStripProgressBar1.ProgressBar.Visible = false;
             comboTempo.SelectedIndex = 1;
             FetchSales();
             FetchPelanggan();
             FetchGudang();
             FetchLevelHarga();
             CreateDatagridview();
+        
         }
 
         private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
@@ -419,15 +420,19 @@ namespace DoranApp.View
 
         private async void fetchLaporanTransaksi()
         {
-            toolStripProgressBar1.ProgressBar.Visible = true;
+            toolStripLabel2.Visible = true;
             dataGridView3.Rows.Clear();
             toolStrip1.Enabled = false;
             button10.Enabled = false;
             try
             {
-                _transaksiData.SetQuery(new {
+                _transaksiData.SetQuery(new
+                {
                     page = _laporanTransaksiPage <= 0 ? 1 : _laporanTransaksiPage,
-                    Kodegudang = comboFilterGudang.SelectedValue.ToString()
+                    pageSize = comboPageSize.SelectedItem?.ToString() ?? "50",
+                    Kodegudang = comboFilterGudang.SelectedValue.ToString(),
+                    namaPelanggan = textBoxFilterNama.Text.Trim().ToString()
+                    //MinDate = DateTime.Now.AddMonths(-3)
                 });
                 await _transaksiData.Refresh();
             }
@@ -443,7 +448,7 @@ namespace DoranApp.View
             toolStripLabel1.Text = $"dari {paginationData.TotalPage.ToString()}";
             toolStrip1.Enabled = true;
             button10.Enabled = true;
-            toolStripProgressBar1.ProgressBar.Visible = false;
+            toolStripLabel2.Visible = false;
         }
 
         private async void button10_Click(object sender, EventArgs e)
@@ -657,6 +662,45 @@ namespace DoranApp.View
             using (SolidBrush b = new SolidBrush(dataGridView1.RowHeadersDefaultCellStyle.ForeColor))
             {
                 e.Graphics.DrawString((e.RowIndex + 1).ToString(), e.InheritedRowStyle.Font, b, e.RowBounds.Location.X + 20, e.RowBounds.Location.Y + 4);
+            }
+        }
+
+        private void comboPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _laporanTransaksiPage = 1;
+            fetchLaporanTransaksi();
+        }
+
+        private void TransaksiForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            var keyPress = e.KeyChar.ToString();
+            if (dataGridView2.Focused)
+            {
+                if (keyPress == "q")
+                {
+                    _laporanTransaksiPage--;
+                }
+
+                if (keyPress == "e")
+                {
+                    _laporanTransaksiPage++;
+                }
+            }
+        }
+
+        private void TransaksiForm_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (dataGridView2.Focused)
+            {
+                if (e.KeyCode == Keys.Q)
+                {
+                    fetchLaporanTransaksi();
+                }
+
+                if (e.KeyCode == Keys.E)
+                {
+                    fetchLaporanTransaksi();
+                }
             }
         }
     }

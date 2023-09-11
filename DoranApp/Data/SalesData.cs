@@ -38,8 +38,6 @@ namespace DoranApp.Data
                   { "Lihat Omzet Tahunan", (x) => x.Bisalihatomzettahunantim, typeof(bool)},
                   { "Aktif", x => x.Aktif, typeof(bool) },
                   { "Urutan", x => x.Urutan },
-                  { "Created At", x => x.CreatedAt },
-                  { "Updated At", x => x.UpdatedAt },
             };
             return columnSettingsList;
         }

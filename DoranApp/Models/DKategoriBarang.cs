@@ -1,12 +1,25 @@
-﻿namespace DoranApp.Models
+﻿using System.Collections.Generic;
+
+namespace DoranApp.Models
 {
-    internal class DKategoriBarang
+    public class Dkategoribarang
     {
-        public int koded { get; set; }
-        public string nama { get; set; }
-        public int kodeh { get; set; }
-        public int munculdimasterbarangapps { get; set; }
-        public int cnp { get; set; }
-        public int sn { get; set; }
+        public int Koded { get; set; }
+        public string Nama { get; set; } = null!;
+        public int Kodeh { get; set; }
+        public sbyte Munculdimasterbarangapps { get; set; }
+        public sbyte Cnp { get; set; }
+        public bool Sn { get; set; }
+        public sbyte Perlusetharga { get; set; }
+        public virtual ICollection<Masterbarang> Masterbarang { get; set; }
+
+        public virtual Hkategoribarang? Hkategoribarang { get; set; }
+    }
+
+    public partial class DkategoribarangOption
+    {
+        public int? Koded { get; set; }
+        public string Nama { get; set; } = null!;
+        public int? Kodeh { get; set; }
     }
 }

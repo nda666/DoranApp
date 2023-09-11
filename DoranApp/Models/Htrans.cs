@@ -8,7 +8,7 @@ namespace DoranApp.Models
         public int KodeH { get; set; }
         public DateTime TglTrans { get; set; }
         public int KodePelanggan { get; set; }
-        public long Jumlah { get; set; }
+        public long? Jumlah { get; set; }
 
         /// <summary>
         /// TOTAL DARI BRG2 YG BERUPA BIAYA NON JURNAL PENJUALAN
@@ -17,7 +17,7 @@ namespace DoranApp.Models
 
         public int TambahanLainnya { get; set; }
         public int Diskon { get; set; }
-        public long Dpp { get; set; }
+        public long? Dpp { get; set; }
         public int Ppn { get; set; }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace DoranApp.Models
         public int Notrans { get; set; }
         public int Noretur { get; set; }
         public string Kodenota { get; set; } = null!;
-        public int Kodeonline { get; set; }
+        public long? Kodeonline { get; set; }
         public string NamaCust { get; set; } = null!;
         public string NmrHp { get; set; } = null!;
         public string CustOlkota { get; set; } = null!;
