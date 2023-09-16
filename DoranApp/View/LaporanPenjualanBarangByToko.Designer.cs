@@ -1,6 +1,6 @@
 ﻿namespace DoranApp.View
 {
-    partial class LaporanPenjualanBarangByBarang
+    partial class LaporanPenjualanBarangByToko
     {
         /// <summary>
         /// Required designer variable.
@@ -44,17 +44,12 @@
             this.comboFilterMasterchannelsales = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.comboFilterPelanggan = new System.Windows.Forms.ComboBox();
-            this.checkBoxShow = new System.Windows.Forms.CheckBox();
-            this.checkFilterRetur = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.comboFilterLokasiKota = new System.Windows.Forms.ComboBox();
             this.comboFilterProvinsi = new System.Windows.Forms.ComboBox();
             this.comboBox7 = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.labelJumlahSum = new System.Windows.Forms.ToolStripLabel();
@@ -63,23 +58,23 @@
             this.labelTotalOmzet = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.labelLoading = new System.Windows.Forms.ToolStripLabel();
-            this.groupBoxBayar = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.groupBoxJurnalPenjualan = new System.Windows.Forms.GroupBox();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.checkboxGroupBos = new System.Windows.Forms.CheckBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.groupBoxTampilkan = new System.Windows.Forms.GroupBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
-            this.groupBoxBayar.SuspendLayout();
             this.groupBoxJurnalPenjualan.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxTampilkan.SuspendLayout();
             this.SuspendLayout();
             // 
             // label8
@@ -169,7 +164,7 @@
             this.comboMastergudang.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboMastergudang.DisplayMember = "Nama";
             this.comboMastergudang.FormattingEnabled = true;
-            this.comboMastergudang.Location = new System.Drawing.Point(593, 39);
+            this.comboMastergudang.Location = new System.Drawing.Point(357, 11);
             this.comboMastergudang.Name = "comboMastergudang";
             this.comboMastergudang.Size = new System.Drawing.Size(112, 21);
             this.comboMastergudang.TabIndex = 68;
@@ -246,28 +241,6 @@
             this.comboFilterPelanggan.TabIndex = 73;
             this.comboFilterPelanggan.Text = "Semua Sales";
             // 
-            // checkBoxShow
-            // 
-            this.checkBoxShow.AutoSize = true;
-            this.checkBoxShow.Checked = true;
-            this.checkBoxShow.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShow.Location = new System.Drawing.Point(307, 96);
-            this.checkBoxShow.Name = "checkBoxShow";
-            this.checkBoxShow.Size = new System.Drawing.Size(53, 17);
-            this.checkBoxShow.TabIndex = 75;
-            this.checkBoxShow.Text = "Show";
-            this.checkBoxShow.UseVisualStyleBackColor = true;
-            // 
-            // checkFilterRetur
-            // 
-            this.checkFilterRetur.AutoSize = true;
-            this.checkFilterRetur.Location = new System.Drawing.Point(366, 96);
-            this.checkFilterRetur.Name = "checkFilterRetur";
-            this.checkFilterRetur.Size = new System.Drawing.Size(52, 17);
-            this.checkFilterRetur.TabIndex = 76;
-            this.checkFilterRetur.Text = "Retur";
-            this.checkFilterRetur.UseVisualStyleBackColor = true;
-            // 
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -305,7 +278,7 @@
             this.comboBox7.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBox7.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(347, 119);
+            this.comboBox7.Location = new System.Drawing.Point(117, 146);
             this.comboBox7.Name = "comboBox7";
             this.comboBox7.Size = new System.Drawing.Size(109, 21);
             this.comboBox7.TabIndex = 80;
@@ -313,60 +286,29 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(13, 203);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 233);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(785, 93);
+            this.dataGridView1.Size = new System.Drawing.Size(709, 75);
             this.dataGridView1.TabIndex = 81;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(117, 167);
+            this.button1.Location = new System.Drawing.Point(117, 197);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(82, 30);
+            this.button1.Size = new System.Drawing.Size(109, 30);
             this.button1.TabIndex = 82;
             this.button1.Text = "Lihat [F3]";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(205, 167);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(103, 30);
-            this.button2.TabIndex = 83;
-            this.button2.Text = "Omzet By Brand";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(507, 167);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(89, 30);
-            this.button4.TabIndex = 85;
-            this.button4.Text = "Cetak";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(602, 168);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(112, 30);
-            this.button5.TabIndex = 86;
-            this.button5.Text = "Cetak LR";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
             // bindingNavigator1
             // 
             this.bindingNavigator1.AddNewItem = null;
             this.bindingNavigator1.AllowMerge = false;
-            this.bindingNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.bindingNavigator1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.bindingNavigator1.AutoSize = false;
             this.bindingNavigator1.BackColor = System.Drawing.SystemColors.Control;
             this.bindingNavigator1.CountItem = this.toolStripLabel1;
@@ -374,15 +316,8 @@
             this.bindingNavigator1.DeleteItem = null;
             this.bindingNavigator1.Dock = System.Windows.Forms.DockStyle.None;
             this.bindingNavigator1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.labelJumlahSum,
-            this.toolStripSeparator1,
-            this.toolStripLabel1,
-            this.toolStripSeparator2,
-            this.labelTotalOmzet,
-            this.toolStripSeparator3,
-            this.labelLoading});
-            this.bindingNavigator1.Location = new System.Drawing.Point(13, 302);
+            this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.labelJumlahSum, this.toolStripSeparator1, this.toolStripLabel1, this.toolStripSeparator2, this.labelTotalOmzet, this.toolStripSeparator3, this.labelLoading });
+            this.bindingNavigator1.Location = new System.Drawing.Point(13, 314);
             this.bindingNavigator1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.bindingNavigator1.MoveFirstItem = null;
             this.bindingNavigator1.MoveLastItem = null;
@@ -390,7 +325,7 @@
             this.bindingNavigator1.MovePreviousItem = null;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = null;
-            this.bindingNavigator1.Size = new System.Drawing.Size(785, 40);
+            this.bindingNavigator1.Size = new System.Drawing.Size(703, 40);
             this.bindingNavigator1.TabIndex = 87;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -438,68 +373,20 @@
             // 
             // labelLoading
             // 
-            this.labelLoading.Image = global::DoranApp.Properties.Resources.icons8_loading;
             this.labelLoading.Name = "labelLoading";
-            this.labelLoading.Size = new System.Drawing.Size(112, 37);
+            this.labelLoading.Size = new System.Drawing.Size(96, 37);
             this.labelLoading.Text = "Mohon tunggu...";
             this.labelLoading.Visible = false;
-            // 
-            // groupBoxBayar
-            // 
-            this.groupBoxBayar.Controls.Add(this.radioButton3);
-            this.groupBoxBayar.Controls.Add(this.radioButton2);
-            this.groupBoxBayar.Controls.Add(this.radioButton1);
-            this.groupBoxBayar.Location = new System.Drawing.Point(507, 66);
-            this.groupBoxBayar.Name = "groupBoxBayar";
-            this.groupBoxBayar.Size = new System.Drawing.Size(80, 96);
-            this.groupBoxBayar.TabIndex = 88;
-            this.groupBoxBayar.TabStop = false;
-            this.groupBoxBayar.Text = "Bayar";
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(7, 20);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(58, 17);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Tag = "";
-            this.radioButton1.Text = "Semua";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(7, 43);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(63, 17);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.Tag = "1";
-            this.radioButton2.Text = "Orderan";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(7, 66);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(52, 17);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.Tag = "0";
-            this.radioButton3.Text = "Gratis";
-            this.radioButton3.UseVisualStyleBackColor = true;
             // 
             // groupBoxJurnalPenjualan
             // 
             this.groupBoxJurnalPenjualan.Controls.Add(this.radioButton4);
             this.groupBoxJurnalPenjualan.Controls.Add(this.radioButton5);
             this.groupBoxJurnalPenjualan.Controls.Add(this.radioButton6);
-            this.groupBoxJurnalPenjualan.Location = new System.Drawing.Point(697, 66);
+            this.groupBoxJurnalPenjualan.Location = new System.Drawing.Point(385, 95);
             this.groupBoxJurnalPenjualan.Name = "groupBoxJurnalPenjualan";
             this.groupBoxJurnalPenjualan.Size = new System.Drawing.Size(101, 96);
-            this.groupBoxJurnalPenjualan.TabIndex = 89;
+            this.groupBoxJurnalPenjualan.TabIndex = 90;
             this.groupBoxJurnalPenjualan.TabStop = false;
             this.groupBoxJurnalPenjualan.Text = "Jurnal Penjualan";
             // 
@@ -537,57 +424,109 @@
             this.radioButton6.Text = "Semua";
             this.radioButton6.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // label5
             // 
-            this.groupBox1.Controls.Add(this.checkboxGroupBos);
-            this.groupBox1.Location = new System.Drawing.Point(596, 119);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(95, 43);
-            this.groupBox1.TabIndex = 90;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Group Bos";
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(15, 146);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(96, 21);
+            this.label5.TabIndex = 91;
+            this.label5.Text = "Lokasi :";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // checkboxGroupBos
+            // groupBoxTampilkan
             // 
-            this.checkboxGroupBos.AutoSize = true;
-            this.checkboxGroupBos.Location = new System.Drawing.Point(6, 19);
-            this.checkboxGroupBos.Name = "checkboxGroupBos";
-            this.checkboxGroupBos.Size = new System.Drawing.Size(52, 17);
-            this.checkboxGroupBos.TabIndex = 91;
-            this.checkboxGroupBos.Text = "Index";
-            this.checkboxGroupBos.UseVisualStyleBackColor = true;
+            this.groupBoxTampilkan.Controls.Add(this.radioButton2);
+            this.groupBoxTampilkan.Controls.Add(this.radioButton3);
+            this.groupBoxTampilkan.Location = new System.Drawing.Point(232, 146);
+            this.groupBoxTampilkan.Name = "groupBoxTampilkan";
+            this.groupBoxTampilkan.Size = new System.Drawing.Size(143, 45);
+            this.groupBoxTampilkan.TabIndex = 91;
+            this.groupBoxTampilkan.TabStop = false;
+            this.groupBoxTampilkan.Text = "Tampilkan By";
             // 
-            // button3
+            // radioButton2
             // 
-            this.button3.Location = new System.Drawing.Point(314, 167);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(118, 30);
-            this.button3.TabIndex = 84;
-            this.button3.Text = "Omzet By Sub Brand";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(90, 19);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(43, 17);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.Tag = "1";
+            this.radioButton2.Text = "Pcs";
+            this.radioButton2.UseVisualStyleBackColor = true;
             // 
-            // LaporanPenjualanBarangByBarang
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Checked = true;
+            this.radioButton3.Location = new System.Drawing.Point(7, 20);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(55, 17);
+            this.radioButton3.TabIndex = 0;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Omzet";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(493, 210);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(97, 17);
+            this.checkBox3.TabIndex = 92;
+            this.checkBox3.Text = "Grouping Toko";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(596, 210);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(116, 17);
+            this.checkBox1.TabIndex = 93;
+            this.checkBox1.Text = "Tampilkan Harga 0";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(346, 210);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(140, 17);
+            this.checkBox2.TabIndex = 94;
+            this.checkBox2.Text = "Munculkan pembanding";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(231, 197);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(109, 30);
+            this.button2.TabIndex = 95;
+            this.button2.Text = "By Kota";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
+            // LaporanPenjualanBarangByToko
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(810, 349);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBoxJurnalPenjualan);
-            this.Controls.Add(this.groupBoxBayar);
-            this.Controls.Add(this.bindingNavigator1);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(728, 361);
             this.Controls.Add(this.button2);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.groupBoxTampilkan);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.groupBoxJurnalPenjualan);
+            this.Controls.Add(this.bindingNavigator1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.comboBox7);
             this.Controls.Add(this.comboFilterProvinsi);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboFilterLokasiKota);
-            this.Controls.Add(this.checkFilterRetur);
-            this.Controls.Add(this.checkBoxShow);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboFilterPelanggan);
             this.Controls.Add(this.comboFilterMasterchannelsales);
@@ -603,23 +542,20 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.datePickerFilterMax);
             this.Controls.Add(this.datePickerFilterMin);
-            this.Name = "LaporanPenjualanBarangByBarang";
-            this.Text = "Penjualan Barang By Barang";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LaporanPenjualanBarangByBarang_FormClosing);
-            this.Load += new System.EventHandler(this.LaporanPenjualanBarangByBarang_Load);
+            this.Name = "LaporanPenjualanBarangByToko";
+            this.Text = "Penjualan Barang By Toko";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LaporanPenjualanBarangByToko_FormClosing);
+            this.Load += new System.EventHandler(this.LaporanPenjualanBarangByToko_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
-            this.groupBoxBayar.ResumeLayout(false);
-            this.groupBoxBayar.PerformLayout();
             this.groupBoxJurnalPenjualan.ResumeLayout(false);
             this.groupBoxJurnalPenjualan.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxTampilkan.ResumeLayout(false);
+            this.groupBoxTampilkan.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -639,17 +575,12 @@
         private System.Windows.Forms.ComboBox comboFilterMasterchannelsales;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboFilterPelanggan;
-        private System.Windows.Forms.CheckBox checkBoxShow;
-        private System.Windows.Forms.CheckBox checkFilterRetur;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox comboFilterLokasiKota;
         private System.Windows.Forms.ComboBox comboFilterProvinsi;
         private System.Windows.Forms.ComboBox comboBox7;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.BindingNavigator bindingNavigator1;
         private System.Windows.Forms.ToolStripLabel labelJumlahSum;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
@@ -658,16 +589,17 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripLabel labelTotalOmzet;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.GroupBox groupBoxBayar;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.GroupBox groupBoxJurnalPenjualan;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox checkboxGroupBos;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.GroupBox groupBoxTampilkan;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Button button2;
     }
 }

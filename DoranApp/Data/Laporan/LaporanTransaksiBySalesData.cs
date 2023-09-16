@@ -8,27 +8,34 @@ using System.Threading.Tasks;
 
 namespace DoranApp.Data.Laporan
 {
-    internal class LaporanTransaksiByBarangData : AbstractData<LaporanTransaksiByBarang>
+    public class LaporanTransaksiBySales
     {
-        public LaporanTransaksiByBarangData() : base()
+        public short Kode { get; set; }
+        public string Nama { get; set; }
+        public long SumTotal { get; set; }
+        public double Persen { get; set; }
+    }
+    internal class LaporanTransaksiBySalesData : AbstractData<LaporanTransaksiBySales>
+    {
+        public LaporanTransaksiBySalesData() : base()
         {
         }
 
-        public LaporanTransaksiByBarangData(object query) : base(query)
+        public LaporanTransaksiBySalesData(object query) : base(query)
         {
         }
 
         protected override string RelativeUrl()
         {
-            return "laporan/transaksibybarang";
+            return "laporan/transaksibysales";
         }
 
         protected override List<ColumnSettings> ColumnSettings()
         {
-            var columnSettingsList = new ColumnSettings<LaporanTransaksiByBarang> {
+            var columnSettingsList = new ColumnSettings<LaporanTransaksiBySales> {
                   { "Nama", x => x.Nama },
-                  { "Jumlah", x => x.Jumlah },
-                  { "Total", x => x.SumTotal },
+                  { "Jumlah", x => x.SumTotal },
+                  { "Persen", x => x.Persen },
             };
             return columnSettingsList;
         }
@@ -40,7 +47,7 @@ namespace DoranApp.Data.Laporan
             ConsoleDump.Extensions.Dump(RelativeUrl());
             var response = await rest.Get(_query);
             _data = response.Response;
-            _dataTable = _dataTableGen.CreateDataTable<LaporanTransaksiByBarang>(_data);
+            _dataTable = _dataTableGen.CreateDataTable<LaporanTransaksiBySales>(_data);
         }
     }
 }

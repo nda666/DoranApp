@@ -2,9 +2,11 @@
 {
     public class LaporanTransaksiByBarang
     {
-        public short BrgKode { get; set; }
-        public string BrgNama { get; set; }
+        public short Kode { get; set; }
+        public string Nama { get; set; }
         public long Jumlah { get; set; }
         public long SumTotal { get; set; }
     }
+
+    
 }

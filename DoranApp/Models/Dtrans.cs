@@ -1,6 +1,6 @@
 ﻿namespace DoranApp.Models
 {
-    internal class Dtrans
+    public class Dtrans
     {
         public int Id { get; set; }
         public int Kodeh { get; set; }

@@ -16,7 +16,7 @@ namespace DoranApp.Models
 
     public class MastergudangOption
     {
-        public int Kode { get; set; }
+        public int? Kode { get; set; }
         public string Nama { get; set; }
     }
 }

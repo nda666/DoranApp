@@ -114,6 +114,8 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
+            this.printPreviewControl1 = new System.Windows.Forms.PrintPreviewControl();
+            this.printPreviewControl2 = new System.Windows.Forms.PrintPreviewControl();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -615,6 +617,7 @@
             this.button15.TabIndex = 108;
             this.button15.Text = "Cetak PPN";
             this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // button14
             // 
@@ -624,6 +627,7 @@
             this.button14.TabIndex = 107;
             this.button14.Text = "Cetak [CTRL + 1]";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // checkBox4
             // 
@@ -870,7 +874,6 @@
             "1000"});
             this.comboPageSize.Name = "comboPageSize";
             this.comboPageSize.Size = new System.Drawing.Size(55, 22);
-            this.comboPageSize.Text = "50";
             this.comboPageSize.SelectedIndexChanged += new System.EventHandler(this.comboPageSize_SelectedIndexChanged);
             // 
             // toolStripLabel4
@@ -959,9 +962,8 @@
             // 
             // toolStripLabel2
             // 
-            this.toolStripLabel2.Image = global::DoranApp.Properties.Resources.icons8_loading;
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(115, 22);
+            this.toolStripLabel2.Size = new System.Drawing.Size(99, 22);
             this.toolStripLabel2.Text = "Mohon tunggu ...";
             this.toolStripLabel2.Visible = false;
             // 
@@ -971,6 +973,20 @@
             this.toolStripLabel5.Name = "toolStripLabel5";
             this.toolStripLabel5.Size = new System.Drawing.Size(204, 22);
             this.toolStripLabel5.Text = "Tekan \"E\" untuk next dan \"Q\" untuk prev";
+            // 
+            // printPreviewControl1
+            // 
+            this.printPreviewControl1.Location = new System.Drawing.Point(0, 0);
+            this.printPreviewControl1.Name = "printPreviewControl1";
+            this.printPreviewControl1.Size = new System.Drawing.Size(100, 100);
+            this.printPreviewControl1.TabIndex = 0;
+            // 
+            // printPreviewControl2
+            // 
+            this.printPreviewControl2.Location = new System.Drawing.Point(0, 0);
+            this.printPreviewControl2.Name = "printPreviewControl2";
+            this.printPreviewControl2.Size = new System.Drawing.Size(100, 100);
+            this.printPreviewControl2.TabIndex = 0;
             // 
             // TransaksiForm
             // 
@@ -1026,6 +1042,9 @@
             this.PerformLayout();
 
         }
+
+        private System.Windows.Forms.PrintPreviewControl printPreviewControl1;
+        private System.Windows.Forms.PrintPreviewControl printPreviewControl2;
 
         #endregion
 

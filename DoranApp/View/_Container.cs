@@ -356,5 +356,15 @@ namespace DoranApp.View
         {
             OpenForm<LaporanPenjualanBarangByBarang>(); 
         }
+
+        private void penjualanByTokoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<LaporanPenjualanBarangByToko>();
+        }
+
+        private void penjualanBySalesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<LaporanPenjualanBarangBySales>();
+        }
     }
 }

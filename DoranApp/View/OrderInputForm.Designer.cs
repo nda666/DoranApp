@@ -48,8 +48,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.comboTempo = new System.Windows.Forms.ComboBox();
-            this.buttonRefreshPelanggan = new System.Windows.Forms.Button();
-            this.buttonRefreshBarang = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -90,7 +88,6 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -134,6 +131,11 @@
             this.btnPendingOrder = new System.Windows.Forms.Button();
             this.btnLunasPaksa = new System.Windows.Forms.Button();
             this.btnBatalkan = new System.Windows.Forms.Button();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.comboPageSize = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -335,24 +337,6 @@
             this.comboTempo.Size = new System.Drawing.Size(99, 21);
             this.comboTempo.TabIndex = 33;
             this.comboTempo.Text = "Pilih Tempo";
-            // 
-            // buttonRefreshPelanggan
-            // 
-            this.buttonRefreshPelanggan.Location = new System.Drawing.Point(541, 14);
-            this.buttonRefreshPelanggan.Name = "buttonRefreshPelanggan";
-            this.buttonRefreshPelanggan.Size = new System.Drawing.Size(108, 28);
-            this.buttonRefreshPelanggan.TabIndex = 34;
-            this.buttonRefreshPelanggan.Text = "Refresh Pelanggan";
-            this.buttonRefreshPelanggan.UseVisualStyleBackColor = true;
-            // 
-            // buttonRefreshBarang
-            // 
-            this.buttonRefreshBarang.Location = new System.Drawing.Point(541, 48);
-            this.buttonRefreshBarang.Name = "buttonRefreshBarang";
-            this.buttonRefreshBarang.Size = new System.Drawing.Size(108, 28);
-            this.buttonRefreshBarang.TabIndex = 35;
-            this.buttonRefreshBarang.Text = "Refresh Barang";
-            this.buttonRefreshBarang.UseVisualStyleBackColor = true;
             // 
             // textBox3
             // 
@@ -646,6 +630,10 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel3,
+            this.comboPageSize,
+            this.toolStripLabel4,
+            this.toolStripSeparator4,
             this.toolStripButton1,
             this.toolStripButton2,
             this.toolStripSeparator1,
@@ -655,7 +643,7 @@
             this.toolStripButton3,
             this.toolStripButton4,
             this.toolStripSeparator3,
-            this.toolStripProgressBar1});
+            this.toolStripLabel2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(472, 25);
@@ -729,14 +717,6 @@
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripProgressBar1
-            // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 22);
-            this.toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.toolStripProgressBar1.ToolTipText = "Mohon Tunggu";
-            this.toolStripProgressBar1.Value = 50;
             // 
             // tabControl1
             // 
@@ -1184,6 +1164,45 @@
             this.btnBatalkan.Text = "Batalkan";
             this.btnBatalkan.UseVisualStyleBackColor = true;
             // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Image = global::DoranApp.Properties.Resources.icons8_loading;
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(115, 22);
+            this.toolStripLabel2.Text = "Mohon tunggu ...";
+            this.toolStripLabel2.Visible = false;
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(67, 22);
+            this.toolStripLabel3.Text = "Tampil per:";
+            // 
+            // comboPageSize
+            // 
+            this.comboPageSize.AutoSize = false;
+            this.comboPageSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPageSize.Items.AddRange(new object[] {
+            "50",
+            "100",
+            "200",
+            "500",
+            "1000"});
+            this.comboPageSize.SelectedIndex = 0;
+            this.comboPageSize.Name = "comboPageSize";
+            this.comboPageSize.Size = new System.Drawing.Size(55, 22);
+            // 
+            // toolStripLabel4
+            // 
+            this.toolStripLabel4.Name = "toolStripLabel4";
+            this.toolStripLabel4.Size = new System.Drawing.Size(32, 22);
+            this.toolStripLabel4.Text = "data";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
             // OrderInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1212,8 +1231,6 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.buttonRefreshBarang);
-            this.Controls.Add(this.buttonRefreshPelanggan);
             this.Controls.Add(this.comboTempo);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label9);
@@ -1290,8 +1307,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.ComboBox comboTempo;
-        private System.Windows.Forms.Button buttonRefreshPelanggan;
-        private System.Windows.Forms.Button buttonRefreshBarang;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox4;
@@ -1332,7 +1347,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TextBox textBoxFilterNama;
@@ -1376,5 +1390,10 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripComboBox comboPageSize;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }

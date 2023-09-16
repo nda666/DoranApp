@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DoranApp.Models
 {
-    internal class Htrans
+    public class Htrans
     {
         public int KodeH { get; set; }
         public DateTime TglTrans { get; set; }

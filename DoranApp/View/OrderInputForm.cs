@@ -39,7 +39,6 @@ namespace DoranApp.View
             dataGridView1.DoubleBuffered(true);
             dataGridView2.DoubleBuffered(true);
             dataGridView3.DoubleBuffered(true);
-            toolStripProgressBar1.ProgressBar.Visible = false;
             comboTempo.SelectedIndex = 0;
             FetchSales();
             FetchPelanggan();

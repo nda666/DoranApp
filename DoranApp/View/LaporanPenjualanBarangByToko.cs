@@ -9,9 +9,15 @@ using System.Windows.Forms;
 
 namespace DoranApp.View
 {
-    public partial class LaporanPenjualanBarangByBarang : Form
+    public partial class LaporanPenjualanBarangByToko : Form
     {
-        private TipeGroup _TipeGroup = TipeGroup.GROUP_BY_BARANG;
+        public enum TransaksiByTokoTipeGroup
+        {
+            GROUP_BY_TOKO = 0,
+            GROUP_BY_KOTA = 1,
+        }
+
+        private TransaksiByTokoTipeGroup _TipeGroup = TransaksiByTokoTipeGroup.GROUP_BY_TOKO;
         private bool _FetchRun = false;
         private IDisposable _MastergudangSubscribe;
         private List<MastergudangOption> _MastergudangOptions = new List<MastergudangOption>();
@@ -32,9 +38,9 @@ namespace DoranApp.View
         private IDisposable _MasterpelangganSubscribe;
         private List<MasterpelangganOption> _Masterpelanggan = new List<MasterpelangganOption>();
 
-        private LaporanTransaksiByBarangData _laporanTransaksi = new LaporanTransaksiByBarangData();
+        private LaporanTransaksiByTokoData _laporanTransaksi = new LaporanTransaksiByTokoData();
 
-        public LaporanPenjualanBarangByBarang()
+        public LaporanPenjualanBarangByToko()
         {
             InitializeComponent();
         }
@@ -160,7 +166,7 @@ namespace DoranApp.View
             });
             FetchMastergudangOption.Run();
         }
-        private async void LaporanPenjualanBarangByBarang_Load(object sender, EventArgs e)
+        private async void LaporanPenjualanBarangByToko_Load(object sender, EventArgs e)
         {
             var bs = new BindingSource();
             bs.DataSource = _laporanTransaksi.GetDataTable();
@@ -177,7 +183,7 @@ namespace DoranApp.View
             SubscribeMasterpelanggan();
         }
 
-        private void LaporanPenjualanBarangByBarang_FormClosing(object sender, FormClosingEventArgs e)
+        private void LaporanPenjualanBarangByToko_FormClosing(object sender, FormClosingEventArgs e)
         {
             _LokasiProvinsiSubscribe?.Dispose();
             _MasterpelangganSubscribe?.Dispose();
@@ -208,9 +214,6 @@ namespace DoranApp.View
                     KodeBrand = comboFilterHkategoribarang.SelectedValue?.ToString(),
                     KodeKategori = comboFilterDkategoribarang.SelectedValue?.ToString(),
                     KodeGudang = comboMastergudang.SelectedValue?.ToString(),
-                    Retur = checkFilterRetur.Checked,
-                    //Bayar = Helper.GetSelectedRadioButtonTag(groupBoxBayar),
-                    //Jurnal = Helper.GetSelectedRadioButtonTag(groupBoxJurnalPenjualan),
                     TipeGroup = _TipeGroup
                 });
                 await _laporanTransaksi.Refresh();
@@ -225,32 +228,20 @@ namespace DoranApp.View
             }
             _FetchRun = false;
             labelLoading.Visible = false;
-            dataGridView1.Columns[2].Visible = checkBoxShow.Checked;
         }
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            _TipeGroup = TipeGroup.GROUP_BY_BARANG;
+            _TipeGroup = TransaksiByTokoTipeGroup.GROUP_BY_TOKO;
             await FetchLaporan();
         }
 
-        private async void button2_Click(object sender, EventArgs e)
+        private async void button2_Click_1(object sender, EventArgs e)
         {
-            _TipeGroup = TipeGroup.GROUP_BY_BRAND;
-            await FetchLaporan();
-        }
-
-        private async void button3_Click(object sender, EventArgs e)
-        {
-            _TipeGroup = TipeGroup.GROUP_BY_SUBBRAND;
+            _TipeGroup = TransaksiByTokoTipeGroup.GROUP_BY_KOTA;
             await FetchLaporan();
         }
     }
 
-    internal enum TipeGroup
-    {
-        GROUP_BY_BARANG = 0,
-        GROUP_BY_BRAND = 1,
-        GROUP_BY_SUBBRAND = 2,
-    }
+   
 }

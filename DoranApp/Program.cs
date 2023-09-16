@@ -1,4 +1,5 @@
-﻿using DoranApp.View;
+﻿using AutoMapper;
+using DoranApp.View;
 using System;
 using System.Reflection;
 using System.Windows.Forms;
@@ -17,6 +18,8 @@ namespace DoranApp
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new _Container());
             //Application.Run(new SyncDatabaseForm());
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("id-ID");
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("id-ID");
         }
     }
 

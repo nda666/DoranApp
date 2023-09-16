@@ -1,10 +1,14 @@
-﻿using DoranApp.Data;
+﻿using AutoMapper;
+using DoranApp.Data;
 using DoranApp.Models;
+using DoranApp.Utils;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -703,6 +707,80 @@ namespace DoranApp.View
                 }
             }
         }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            if (dataGridView2.SelectedRows.Count <= 0 && dataGridView2.Rows.Count <= 0)
+            {
+                return;
+            }
+            
+            var kodeh = (long)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
+            var htrans = _transaksiData.GetData().Where(x => x.kodeH == kodeh).FirstOrDefault();
+            ConsoleDump.Extensions.Dump(htrans);
+            ReportViewer reportViewer = new ReportViewer();
+            reportViewer.ProcessingMode = ProcessingMode.Local;
+            reportViewer.LocalReport.ReportEmbeddedResource = "DoranApp.Report.NotaTransaksi.rdlc"; // Path to your RDLC file
+
+            var dt = new DataTable();
+            dt.Columns.Add("no");
+            dt.Columns.Add("jumlah");
+            dt.Columns.Add("brgNama");
+            dt.Columns.Add("harga");
+            dt.Columns.Add("subTotal");
+            var no = 1;
+            foreach(var dtrans in htrans.dtrans)
+            {
+                DataRow row = dt.NewRow();
+                row["no"] = no;
+                row["jumlah"] = dtrans.jumlah;
+                row["brgNama"] = dtrans.masterbarang?.brgNama;
+                row["harga"] = dtrans.harga;
+                row["subTotal"] = dtrans.harga * dtrans.jumlah;
+                dt.Rows.Add(row);
+                no++;
+            }
+
+            // Set parameters (if any)
+            List<ReportParameter> parameters = new List<ReportParameter>();
+            parameters.Add(new ReportParameter("total", string.Format("{0:N0}", htrans.jumlah)));
+            parameters.Add(new ReportParameter("lainnya", string.Format("{0:N0}", htrans.tambahanLainnya)));
+            parameters.Add(new ReportParameter("ppn", string.Format("{0:N0}", htrans.ppn)));
+            parameters.Add(new ReportParameter("tglTrans", htrans.tglTrans?.ToString("dd/MM/yyyy")));
+            parameters.Add(new ReportParameter("kodenota", htrans.kodenota));
+            parameters.Add(new ReportParameter("namaPelanggan", htrans.masterpelanggan?.nama));
+            parameters.Add(new ReportParameter("namaSales", htrans.sales?.nama));
+            parameters.Add(new ReportParameter("tipeTempo", Helper.TipeTempoToString((sbyte)htrans.tipetempo)));
+            parameters.Add(new ReportParameter("tglTempo", htrans.tgltempo?.ToString("dd/MM/yyyy")));
+            parameters.Add(new ReportParameter("R", "0"));
+            parameters.Add(new ReportParameter("N", "0"));
+
+            if (! String.IsNullOrWhiteSpace(htrans.kodenota))
+            {
+                var barcode64String = BarcodeGenerator.GenerateBase64Barcode(htrans.kodenota, ZXing.BarcodeFormat.CODE_128, 400, 40);
+              
+                parameters.Add(new ReportParameter("barcodeImage", barcode64String));
+            }
+
+            reportViewer.LocalReport.SetParameters(parameters.ToArray());
+
+            reportViewer.LocalReport.DataSources.Add(new ReportDataSource("DetailTransaksi", dt));
+            // Refresh the report
+            reportViewer.RefreshReport();
+
+            var directPrint = new DirectPrint();
+            float widthInInches = 24 / 2.54f; // Convert 24 cm to inches
+            float heightInInches = 14 / 2.54f; // Convert 14 cm to inches
+            directPrint.Export(reportViewer.LocalReport).Print("CustomSize", 970, 551);
+           
+        }
+
+        
     }
 
     internal class HargaByLevelResult
