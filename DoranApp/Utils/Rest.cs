@@ -7,6 +7,7 @@ using System;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DoranApp.Utils
 {
@@ -50,8 +51,10 @@ namespace DoranApp.Utils
 
         private string FindError(HttpResponseMessage httpResponseMessage, dynamic response)
         {
+           
             var status = (Int32)httpResponseMessage.StatusCode;
             var error = httpResponseMessage.ReasonPhrase;
+
             if (!status.ToString().StartsWith("2"))
             {
                 JObject dynamicErrors = response;
@@ -84,6 +87,7 @@ namespace DoranApp.Utils
                         }
                         throw new RestException(status, error);
                     default:
+
                         if (d?.message != null)
                         {
                             throw new RestException(status, d.message);

@@ -7,7 +7,7 @@ namespace DoranApp.Components
 {
     public partial class CurrencyTextBox : TextBox
     {
-        private int unformattedValue = 0;
+        private decimal unformattedValue = 0;
 
         public CurrencyTextBox()
         {
@@ -39,7 +39,7 @@ namespace DoranApp.Components
 
                 if (!string.IsNullOrWhiteSpace(value))
                 {
-                    unformattedValue = (int)decimal.Parse(value);
+                    unformattedValue = decimal.Parse(value);
                     textBox.Text = string.Format(CultureInfo.CreateSpecificCulture("en-US"), "{0:N0}", unformattedValue);
                     textBox.Select(textBox.Text.Length, 0);
                 }
@@ -56,14 +56,14 @@ namespace DoranApp.Components
                 }
                 else
                 {
-                    unformattedValue = (int)decimal.Parse(textBox.Text.Replace(CultureInfo.CurrentUICulture.NumberFormat.CurrencyGroupSeparator, ""));
+                    unformattedValue = decimal.Parse(textBox.Text.Replace(CultureInfo.CurrentUICulture.NumberFormat.CurrencyGroupSeparator, ""));
                 }
                 textBox.Text = string.Format(CultureInfo.CreateSpecificCulture("en-US"), "{0:N0}", unformattedValue);
             }
         }
 
         // Property to get the unformatted value as decimal
-        public int UnformattedValue
+        public decimal UnformattedValue
         {
             get
             {

@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace DoranApp.View
 {
-    public partial class MasterGudangForm : Form, INotifyPropertyChanged
+    public partial class MasterGudangForm : MdiChildForm, INotifyPropertyChanged
     {
         private string _itemId;
 

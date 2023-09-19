@@ -8,17 +8,17 @@ namespace DoranApp.Models
         public int Kodeh { get; set; }
         public DateTime Tglorder { get; set; }
         public string Keterangan { get; set; } = null!;
-        public sbyte Insertname { get; set; }
+        public int Insertname { get; set; }
         public DateTime Inserttime { get; set; }
-        public sbyte Updatename { get; set; }
+        public int Updatename { get; set; }
         public DateTime Updatetime { get; set; }
         /// <summary>
         /// 5=BelumdicekOL
         /// </summary>
         public bool? Historynya { get; set; }
         public int Kodepelanggan { get; set; }
-        public sbyte Kodesales { get; set; }
-        public sbyte Kodepenyiap { get; set; }
+        public int Kodesales { get; set; }
+        public int Kodepenyiap { get; set; }
         public bool Dicetak { get; set; }
         public bool Lunas { get; set; }
         public DateTime Tglcetak { get; set; }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DoranApp.Models
 {
-    public class Horder
+    public class Dorder
     {
         public int Kodeh { get; set; }
         public DateTime Tglorder { get; set; }

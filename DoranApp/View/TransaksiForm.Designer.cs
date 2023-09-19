@@ -131,8 +131,7 @@
             // 
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridView1.Location = new System.Drawing.Point(15, 151);
@@ -325,12 +324,7 @@
             // 
             this.comboTempo.FormattingEnabled = true;
             this.comboTempo.ItemHeight = 13;
-            this.comboTempo.Items.AddRange(new object[] {
-            "Cash",
-            "1 Minggu",
-            "2 Minggu",
-            "1 Bulan",
-            "2 Bulan"});
+            this.comboTempo.Items.AddRange(new object[] { "Cash", "1 Minggu", "2 Minggu", "1 Bulan", "2 Bulan" });
             this.comboTempo.Location = new System.Drawing.Point(416, 124);
             this.comboTempo.Name = "comboTempo";
             this.comboTempo.Size = new System.Drawing.Size(79, 21);
@@ -392,6 +386,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(725, 159);
             this.panel1.TabIndex = 25;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // buttonBatalUbah
             // 
@@ -590,9 +585,7 @@
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.button15);
             this.panel2.Controls.Add(this.button14);
             this.panel2.Controls.Add(this.checkBox4);
@@ -746,9 +739,7 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 2);
@@ -780,13 +771,7 @@
             this.dataGridView3.AllowUserToAddRows = false;
             this.dataGridView3.AllowUserToDeleteRows = false;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Pcs,
-            this.NamaBarang,
-            this.Harga,
-            this.Jumlah,
-            this.SN,
-            this.KurangiStok});
+            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.Pcs, this.NamaBarang, this.Harga, this.Jumlah, this.SN, this.KurangiStok });
             this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView3.Location = new System.Drawing.Point(3, 16);
             this.dataGridView3.Name = "dataGridView3";
@@ -834,22 +819,7 @@
             // 
             // toolStrip1
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel3,
-            this.comboPageSize,
-            this.toolStripLabel4,
-            this.toolStripSeparator4,
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripSeparator1,
-            this.toolStripTextBox1,
-            this.toolStripLabel1,
-            this.toolStripSeparator2,
-            this.toolStripButton3,
-            this.toolStripButton4,
-            this.toolStripSeparator3,
-            this.toolStripLabel2,
-            this.toolStripLabel5});
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.toolStripLabel3, this.comboPageSize, this.toolStripLabel4, this.toolStripSeparator4, this.toolStripButton1, this.toolStripButton2, this.toolStripSeparator1, this.toolStripTextBox1, this.toolStripLabel1, this.toolStripSeparator2, this.toolStripButton3, this.toolStripButton4, this.toolStripSeparator3, this.toolStripLabel2, this.toolStripLabel5 });
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(621, 25);
@@ -859,27 +829,22 @@
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(67, 22);
+            this.toolStripLabel3.Size = new System.Drawing.Size(65, 22);
             this.toolStripLabel3.Text = "Tampil per:";
             // 
             // comboPageSize
             // 
             this.comboPageSize.AutoSize = false;
             this.comboPageSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboPageSize.Items.AddRange(new object[] {
-            "50",
-            "100",
-            "200",
-            "500",
-            "1000"});
+            this.comboPageSize.Items.AddRange(new object[] { "50", "100", "200", "500", "1000" });
             this.comboPageSize.Name = "comboPageSize";
-            this.comboPageSize.Size = new System.Drawing.Size(55, 22);
+            this.comboPageSize.Size = new System.Drawing.Size(55, 23);
             this.comboPageSize.SelectedIndexChanged += new System.EventHandler(this.comboPageSize_SelectedIndexChanged);
             // 
             // toolStripLabel4
             // 
             this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(32, 22);
+            this.toolStripLabel4.Size = new System.Drawing.Size(30, 22);
             this.toolStripLabel4.Text = "data";
             // 
             // toolStripSeparator4
@@ -916,7 +881,6 @@
             // 
             this.toolStripTextBox1.AccessibleName = "Position";
             this.toolStripTextBox1.AutoSize = false;
-            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Size = new System.Drawing.Size(50, 23);
             this.toolStripTextBox1.Text = "0";
@@ -926,7 +890,7 @@
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(46, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(44, 22);
             this.toolStripLabel1.Text = "dari {0}";
             this.toolStripLabel1.ToolTipText = "Total number of items";
             // 
@@ -963,15 +927,15 @@
             // toolStripLabel2
             // 
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(99, 22);
+            this.toolStripLabel2.Size = new System.Drawing.Size(100, 22);
             this.toolStripLabel2.Text = "Mohon tunggu ...";
             this.toolStripLabel2.Visible = false;
             // 
             // toolStripLabel5
             // 
-            this.toolStripLabel5.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel5.Name = "toolStripLabel5";
-            this.toolStripLabel5.Size = new System.Drawing.Size(204, 22);
+            this.toolStripLabel5.Size = new System.Drawing.Size(207, 22);
             this.toolStripLabel5.Text = "Tekan \"E\" untuk next dan \"Q\" untuk prev";
             // 
             // printPreviewControl1
@@ -1040,7 +1004,6 @@
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         private System.Windows.Forms.PrintPreviewControl printPreviewControl1;

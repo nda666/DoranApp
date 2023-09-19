@@ -344,7 +344,7 @@ namespace DoranApp.View
             textBoxTotal.Text = (_subtotal - textBoxDiskon.UnformattedValue + textBoxBiaya.UnformattedValue + textBoxOngkir.UnformattedValue).ToString();
         }
          private int getTipeTempo()
-        {
+         {
             var subDay = 0;
             switch (comboTempo.SelectedIndex)
             {
@@ -780,7 +780,11 @@ namespace DoranApp.View
            
         }
 
-        
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     internal class HargaByLevelResult

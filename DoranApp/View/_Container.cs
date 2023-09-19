@@ -48,6 +48,7 @@ namespace DoranApp.View
             {
                 if (form.GetType() == typeof(T))
                 {
+                  
                     form.WindowState = FormWindowState.Maximized;
                     tabForms.SelectedTab = tabForms.TabPages[form.Text];
                     form.Activate();
@@ -58,8 +59,12 @@ namespace DoranApp.View
             var openForm = new T();
             // Set the Parent Form of the Child window.
             openForm.MdiParent = this;
+            openForm.MinimizeBox = false;
+            openForm.MaximizeBox = true;
             // Display the new form.
             openForm.Show();
+            openForm.WindowState = FormWindowState.Maximized;
+            openForm.Activate();
             return openForm;
         }
 
@@ -365,6 +370,26 @@ namespace DoranApp.View
         private void penjualanBySalesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm<LaporanPenjualanBarangBySales>();
+        }
+        
+        
+
+        private void tabForms_DrawItem(object sender, DrawItemEventArgs e)
+        {
+           
+        }
+    }
+    
+    public class MdiChildForm : Form
+    {
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.Style &= ~0x00020000; // WS_MAXIMIZEBOX
+                return cp;
+            }
         }
     }
 }
