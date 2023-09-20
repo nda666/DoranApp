@@ -110,8 +110,8 @@
             this.buttonSetPenyiap = new System.Windows.Forms.Button();
             this.comboSetPenyiap = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonUbahAtas = new System.Windows.Forms.Button();
+            this.buttonUpdateFull = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnFilter = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -224,6 +224,7 @@
             this.datePickerOrder.Name = "datePickerOrder";
             this.datePickerOrder.Size = new System.Drawing.Size(121, 20);
             this.datePickerOrder.TabIndex = 12;
+            this.datePickerOrder.ValueChanged += new System.EventHandler(this.datePickerOrder_ValueChanged);
             // 
             // label2
             // 
@@ -430,6 +431,7 @@
             this.button7.TabIndex = 47;
             this.button7.Text = "Cek Harga Otomatis";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
@@ -439,6 +441,7 @@
             this.button6.TabIndex = 45;
             this.button6.Text = "Cek Harga";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // comboHarga
             // 
@@ -504,6 +507,7 @@
             this.buttonBatalUbah.Text = "Batal Ubah";
             this.buttonBatalUbah.UseVisualStyleBackColor = true;
             this.buttonBatalUbah.Visible = false;
+            this.buttonBatalUbah.Click += new System.EventHandler(this.buttonBatalUbah_Click);
             // 
             // textBoxTotal
             // 
@@ -564,6 +568,7 @@
             // 
             this.dataGridView3.AllowUserToAddRows = false;
             this.dataGridView3.AllowUserToDeleteRows = false;
+            this.dataGridView3.AllowUserToResizeRows = false;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.Pcs, this.NamaBarang, this.Harga, this.Jumlah, this.Keterangan });
             this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -624,6 +629,7 @@
             // 
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AllowUserToResizeRows = false;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView2.Location = new System.Drawing.Point(3, 16);
@@ -743,9 +749,10 @@
             // 
             // toolStripLabel2
             // 
+            this.toolStripLabel2.Image = global::DoranApp.Properties.Resources.icons8_loading;
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(100, 22);
-            this.toolStripLabel2.Text = "Mohon tunggu ...";
+            this.toolStripLabel2.Size = new System.Drawing.Size(122, 22);
+            this.toolStripLabel2.Text = "Mohon tunggxu ...";
             this.toolStripLabel2.Visible = false;
             // 
             // panel2
@@ -759,8 +766,8 @@
             this.panel2.Controls.Add(this.buttonSetPenyiap);
             this.panel2.Controls.Add(this.comboSetPenyiap);
             this.panel2.Controls.Add(this.label18);
-            this.panel2.Controls.Add(this.button2);
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.buttonUbahAtas);
+            this.panel2.Controls.Add(this.buttonUpdateFull);
             this.panel2.Controls.Add(this.groupBox6);
             this.panel2.Location = new System.Drawing.Point(1254, 14);
             this.panel2.Name = "panel2";
@@ -828,84 +835,103 @@
             // 
             // btnInfoDetail
             // 
+            this.btnInfoDetail.Enabled = false;
             this.btnInfoDetail.Location = new System.Drawing.Point(6, 112);
             this.btnInfoDetail.Name = "btnInfoDetail";
             this.btnInfoDetail.Size = new System.Drawing.Size(102, 25);
             this.btnInfoDetail.TabIndex = 73;
+            this.btnInfoDetail.Tag = "enableOnSelect";
             this.btnInfoDetail.Text = "Info Detail";
             this.btnInfoDetail.UseVisualStyleBackColor = true;
             // 
             // btnPendingOrder
             // 
+            this.btnPendingOrder.Enabled = false;
             this.btnPendingOrder.Location = new System.Drawing.Point(6, 81);
             this.btnPendingOrder.Name = "btnPendingOrder";
             this.btnPendingOrder.Size = new System.Drawing.Size(102, 25);
             this.btnPendingOrder.TabIndex = 72;
+            this.btnPendingOrder.Tag = "enableOnSelect";
             this.btnPendingOrder.Text = "Pending Order";
             this.btnPendingOrder.UseVisualStyleBackColor = true;
             // 
             // btnLunasPaksa
             // 
+            this.btnLunasPaksa.Enabled = false;
             this.btnLunasPaksa.Location = new System.Drawing.Point(6, 50);
             this.btnLunasPaksa.Name = "btnLunasPaksa";
             this.btnLunasPaksa.Size = new System.Drawing.Size(102, 25);
             this.btnLunasPaksa.TabIndex = 71;
+            this.btnLunasPaksa.Tag = "enableOnSelect";
             this.btnLunasPaksa.Text = "Lunaskan Paksa";
             this.btnLunasPaksa.UseVisualStyleBackColor = true;
             // 
             // btnBatalkan
             // 
+            this.btnBatalkan.Enabled = false;
             this.btnBatalkan.Location = new System.Drawing.Point(6, 19);
             this.btnBatalkan.Name = "btnBatalkan";
             this.btnBatalkan.Size = new System.Drawing.Size(102, 25);
             this.btnBatalkan.TabIndex = 70;
+            this.btnBatalkan.Tag = "enableOnSelect";
             this.btnBatalkan.Text = "Batalkan";
             this.btnBatalkan.UseVisualStyleBackColor = true;
             // 
             // btnBatalkanHeader
             // 
+            this.btnBatalkanHeader.Enabled = false;
             this.btnBatalkanHeader.Location = new System.Drawing.Point(5, 439);
             this.btnBatalkanHeader.Name = "btnBatalkanHeader";
-            this.btnBatalkanHeader.Size = new System.Drawing.Size(215, 25);
+            this.btnBatalkanHeader.Size = new System.Drawing.Size(214, 25);
             this.btnBatalkanHeader.TabIndex = 75;
+            this.btnBatalkanHeader.Tag = "enableOnSelect";
             this.btnBatalkanHeader.Text = "Batalkan Header";
             this.btnBatalkanHeader.UseVisualStyleBackColor = true;
             // 
             // buttonCekAndSetSiap
             // 
+            this.buttonCekAndSetSiap.Enabled = false;
             this.buttonCekAndSetSiap.Location = new System.Drawing.Point(5, 409);
             this.buttonCekAndSetSiap.Name = "buttonCekAndSetSiap";
-            this.buttonCekAndSetSiap.Size = new System.Drawing.Size(212, 24);
+            this.buttonCekAndSetSiap.Size = new System.Drawing.Size(214, 24);
             this.buttonCekAndSetSiap.TabIndex = 74;
+            this.buttonCekAndSetSiap.Tag = "enableOnSelect";
             this.buttonCekAndSetSiap.Text = "Cek + Set Penyiap Online";
             this.buttonCekAndSetSiap.UseVisualStyleBackColor = true;
             // 
             // btnCetakTanpaKertas
             // 
+            this.btnCetakTanpaKertas.Enabled = false;
             this.btnCetakTanpaKertas.Location = new System.Drawing.Point(79, 379);
             this.btnCetakTanpaKertas.Name = "btnCetakTanpaKertas";
-            this.btnCetakTanpaKertas.Size = new System.Drawing.Size(139, 24);
+            this.btnCetakTanpaKertas.Size = new System.Drawing.Size(140, 24);
             this.btnCetakTanpaKertas.TabIndex = 73;
+            this.btnCetakTanpaKertas.Tag = "enableOnSelect";
             this.btnCetakTanpaKertas.Text = "Cetak Tanpa Kertas";
             this.btnCetakTanpaKertas.UseVisualStyleBackColor = true;
             // 
             // btnCetak
             // 
+            this.btnCetak.Enabled = false;
             this.btnCetak.Location = new System.Drawing.Point(5, 379);
             this.btnCetak.Name = "btnCetak";
             this.btnCetak.Size = new System.Drawing.Size(71, 24);
             this.btnCetak.TabIndex = 72;
+            this.btnCetak.Tag = "enableOnSelect";
             this.btnCetak.Text = "Cetak";
             this.btnCetak.UseVisualStyleBackColor = true;
             // 
             // buttonSetPenyiap
             // 
+            this.buttonSetPenyiap.Enabled = false;
             this.buttonSetPenyiap.Location = new System.Drawing.Point(75, 349);
             this.buttonSetPenyiap.Name = "buttonSetPenyiap";
             this.buttonSetPenyiap.Size = new System.Drawing.Size(144, 24);
             this.buttonSetPenyiap.TabIndex = 71;
+            this.buttonSetPenyiap.Tag = "enableOnSelect";
             this.buttonSetPenyiap.Text = "Set Penyiap";
             this.buttonSetPenyiap.UseVisualStyleBackColor = true;
+            this.buttonSetPenyiap.Click += new System.EventHandler(this.buttonSetPenyiap_Click);
             // 
             // comboSetPenyiap
             // 
@@ -927,23 +953,28 @@
             this.label18.TabIndex = 70;
             this.label18.Text = "Penyiap :";
             // 
-            // button2
+            // buttonUbahAtas
             // 
-            this.button2.Location = new System.Drawing.Point(119, 290);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 26);
-            this.button2.TabIndex = 68;
-            this.button2.Text = "Ubah Atas";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonUbahAtas.Enabled = false;
+            this.buttonUbahAtas.Location = new System.Drawing.Point(119, 290);
+            this.buttonUbahAtas.Name = "buttonUbahAtas";
+            this.buttonUbahAtas.Size = new System.Drawing.Size(100, 26);
+            this.buttonUbahAtas.TabIndex = 68;
+            this.buttonUbahAtas.Tag = "enableOnSelect";
+            this.buttonUbahAtas.Text = "Ubah Atas";
+            this.buttonUbahAtas.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonUpdateFull
             // 
-            this.button1.Location = new System.Drawing.Point(5, 289);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 26);
-            this.button1.TabIndex = 67;
-            this.button1.Text = "Update Full";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonUpdateFull.Enabled = false;
+            this.buttonUpdateFull.Location = new System.Drawing.Point(5, 289);
+            this.buttonUpdateFull.Name = "buttonUpdateFull";
+            this.buttonUpdateFull.Size = new System.Drawing.Size(105, 26);
+            this.buttonUpdateFull.TabIndex = 67;
+            this.buttonUpdateFull.Tag = "enableOnSelect";
+            this.buttonUpdateFull.Text = "Update Full";
+            this.buttonUpdateFull.UseVisualStyleBackColor = true;
+            this.buttonUpdateFull.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox6
             // 
@@ -1012,7 +1043,7 @@
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(55, 17);
             this.radioButton1.TabIndex = 5;
-            this.radioButton1.Tag = "1";
+            this.radioButton1.Tag = "true";
             this.radioButton1.Text = "Online";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
@@ -1023,7 +1054,7 @@
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(54, 17);
             this.radioButton2.TabIndex = 4;
-            this.radioButton2.Tag = "0";
+            this.radioButton2.Tag = "false";
             this.radioButton2.Text = "Trdsnl";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
@@ -1058,7 +1089,7 @@
             this.radioLevelGudang.Name = "radioLevelGudang";
             this.radioLevelGudang.Size = new System.Drawing.Size(63, 17);
             this.radioLevelGudang.TabIndex = 1;
-            this.radioLevelGudang.Tag = "gudang";
+            this.radioLevelGudang.Tag = "1";
             this.radioLevelGudang.Text = "Gudang";
             this.radioLevelGudang.UseVisualStyleBackColor = true;
             // 
@@ -1071,6 +1102,7 @@
             this.radioLevelAdmin.Size = new System.Drawing.Size(54, 17);
             this.radioLevelAdmin.TabIndex = 0;
             this.radioLevelAdmin.TabStop = true;
+            this.radioLevelAdmin.Tag = "0";
             this.radioLevelAdmin.Text = "Admin";
             this.radioLevelAdmin.UseVisualStyleBackColor = true;
             // 
@@ -1093,7 +1125,7 @@
             this.radioDicetakSudah.Name = "radioDicetakSudah";
             this.radioDicetakSudah.Size = new System.Drawing.Size(56, 17);
             this.radioDicetakSudah.TabIndex = 2;
-            this.radioDicetakSudah.Tag = "1";
+            this.radioDicetakSudah.Tag = "true";
             this.radioDicetakSudah.Text = "Sudah";
             this.radioDicetakSudah.UseVisualStyleBackColor = true;
             // 
@@ -1106,7 +1138,7 @@
             this.radioDicetakBelum.Size = new System.Drawing.Size(54, 17);
             this.radioDicetakBelum.TabIndex = 1;
             this.radioDicetakBelum.TabStop = true;
-            this.radioDicetakBelum.Tag = "0";
+            this.radioDicetakBelum.Tag = "false";
             this.radioDicetakBelum.Text = "Belum";
             this.radioDicetakBelum.UseVisualStyleBackColor = true;
             // 
@@ -1399,8 +1431,8 @@
         private System.Windows.Forms.Button buttonSetPenyiap;
         private System.Windows.Forms.ComboBox comboSetPenyiap;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonUbahAtas;
+        private System.Windows.Forms.Button buttonUpdateFull;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.TabControl tabControl1;

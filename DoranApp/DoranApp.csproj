@@ -179,6 +179,7 @@
     <Compile Include="Data\Laporan\LaporanTransaksiByTokoData.cs" />
     <Compile Include="Data\Laporan\LaporanTransaksiByBarangData.cs" />
     <Compile Include="Data\MasterpengeluaranData.cs" />
+      <Compile Include="Data\PenyiaporderData.cs"/>
     <Compile Include="Data\SetlevelhargaData.cs" />
     <Compile Include="Data\LaporanTransaksiData.cs" />
     <Compile Include="Data\OrderData.cs" />
@@ -203,6 +204,7 @@
     <Compile Include="Models\Masterchannelsales.cs" />
     <Compile Include="Models\Hkelompokbarang.cs" />
     <Compile Include="Models\Masterpengeluaran.cs" />
+      <Compile Include="Models\Penyiaporder.cs"/>
     <Compile Include="Models\Setlevelharga.cs" />
     <Compile Include="Models\Masterjabatan.cs" />
     <Compile Include="Models\Masterdivisi.cs" />
@@ -221,6 +223,8 @@
     <Compile Include="Models\Pagination.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Masteruser.cs" />
+      <Compile Include="RequestParams\Order\FindOrderDto.cs"/>
+      <Compile Include="RequestParams\PaginationDto.cs"/>
     <Compile Include="Utils\BarcodeGenerator.cs" />
     <Compile Include="Utils\ButtonToggleHelper.cs" />
     <Compile Include="Utils\DatatableGenerator.cs" />
@@ -257,6 +261,12 @@
     </Compile>
     <Compile Include="View\OrderInputForm.Designer.cs">
       <DependentUpon>OrderInputForm.cs</DependentUpon>
+    </Compile>
+      <Compile Include="View\PenyiaporderForm.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\PenyiaporderForm.Designer.cs">
+          <DependentUpon>PenyiaporderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\PrintContainer.cs">
       <SubType>Form</SubType>
@@ -425,6 +435,9 @@
     <EmbeddedResource Include="View\Pegawai\JabatanControl.resx">
       <DependentUpon>JabatanControl.cs</DependentUpon>
     </EmbeddedResource>
+      <EmbeddedResource Include="View\PenyiaporderForm.resx">
+          <DependentUpon>PenyiaporderForm.cs</DependentUpon>
+      </EmbeddedResource>
     <EmbeddedResource Include="View\PrintContainer.resx">
       <DependentUpon>PrintContainer.cs</DependentUpon>
     </EmbeddedResource>
@@ -484,7 +497,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Logo-Doran-Gadget-a.png" />
+      <None Include="Resources\Logo_Doran_Gadget_a.png"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon.ico" />
@@ -511,20 +524,19 @@
     <None Include="Resources\msdbrptr_5312.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icons8-calculator-48.png" />
+      <None Include="Resources\icons8_calculator_48.png"/>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icons8-create-order-48.png" />
+      <None Include="Resources\icons8_create_order_48.png"/>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icons8-cash-register-48.png" />
+      <None Include="Resources\icons8_cash_register_48.png"/>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\doran-gadget.png" />
+      <None Include="Resources\doran_gadget.png"/>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icons8-loading.gif" />
+      <None Include="Resources\icons8_loading.gif"/>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

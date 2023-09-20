@@ -1,21 +1,21 @@
-﻿using DoranApp.Models;
-using DoranApp.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DoranApp.Models;
+using DoranApp.Utils;
 
 namespace DoranApp.Data
 {
     enum OrderKirimMelaluiEnum
     {
-        BELUM_DIISI=0,
-        DARAT=1,
-        UDARA=2,
-        LAUT=3
+        BELUM_DIISI = 0,
+        DARAT = 1,
+        UDARA = 2,
+        LAUT = 3
     }
+
     internal class OrderData : AbstractData<dynamic>
     {
-        protected dynamic _dynamicData { get; set; }
         protected PaginationData _paginationData = new PaginationData();
 
         public OrderData() : base()
@@ -26,6 +26,8 @@ namespace DoranApp.Data
         {
         }
 
+        protected dynamic _dynamicData { get; set; }
+
         protected override string RelativeUrl()
         {
             return "order";
@@ -34,27 +36,26 @@ namespace DoranApp.Data
         protected override List<ColumnSettings> ColumnSettings()
         {
             var columnSettingsList = new ColumnSettings<dynamic>
-                {
-                    { "Tanggal", x => x.tglorder, typeof(DateTime) },
-                    { "Nama", x => x.masterpelanggan?.nama + " - " +  x.masterpelanggan?.lokasiKota?.nama },
-                    { "Jumlah", x => x.jumlah },
-                    { "Sales", x => x.sales?.nama },
-                    { "Penyiap", x => x.penyiap?.usernameku },
-                    { "PPN", x => x.ppn },
-                    { "Ekspedisi", x => x.ekspedisi?.nama ?? "Belum Diisi" },
-                    { "Info Penting", x => x.infopenting },
-                    { "No Seri OL", x => x.noSeriOnline },
-                    { "Oleh", x => x.masteruserInsert?.usernameku },
-                    { "Keterangan", x => x.keterangan },
-                    { "Kodeh", x=>x.kodeh }
-                };
+            {
+                { "Tanggal", x => x.tglorder, typeof(DateTime) },
+                { "Nama", x => x.masterpelanggan?.nama + " - " + x.masterpelanggan?.lokasiKota?.nama },
+                { "Jumlah", x => x.jumlah },
+                { "Sales", x => x.sales?.nama },
+                { "Penyiap", x => x.penyiaporder?.nama },
+                { "PPN", x => x.ppn },
+                { "Ekspedisi", x => x.ekspedisi?.nama ?? "Belum Diisi" },
+                { "Info Penting", x => x.infopenting },
+                { "No Seri OL", x => x.noSeriOnline },
+                { "Oleh", x => x.masteruserInsert?.usernameku },
+                { "Keterangan", x => x.keterangan },
+                { "Kodeh", x => x.kodeh }
+            };
 
             return columnSettingsList;
         }
 
         protected override async Task RunRefresh()
         {
-
             Rest rest = new Rest(RelativeUrl());
             var response = await rest.Get(_query);
             var data = new List<dynamic>();
@@ -71,6 +72,7 @@ namespace DoranApp.Data
             {
                 data.Add(x);
             }
+
             _dataTable = null;
             _dataTable = _dataTableGen.CreateDataTable<dynamic>(data);
         }
@@ -85,6 +87,16 @@ namespace DoranApp.Data
             return _paginationData;
         }
 
+        public async Task<dynamic> SetPenyiapOrder(long kode, int kodepenyiap)
+        {
+            Rest rest = new Rest($"{RelativeUrl()}/{kode}/set-penyiap");
+            var response = await rest.Put(new
+            {
+                kodepenyiap = kodepenyiap
+            });
+            return response.Response;
+        }
+
         public async Task<TReturn> GetNameAndKodeOnly()
         {
             Rest rest = new Rest($"{RelativeUrl()}/nama");
@@ -94,5 +106,4 @@ namespace DoranApp.Data
             });
         }
     }
-
 }

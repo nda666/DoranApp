@@ -41,6 +41,7 @@ namespace DoranApp.View
             this.roleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pegawaiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gudangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.penyiapOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.laporanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.laporanTransaksiPenjualanToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,7 +68,7 @@ namespace DoranApp.View
             // 
             // masterToolStripMenuItem
             // 
-            this.masterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.brandToolStripMenuItem1, this.kategoriToolStripMenuItem, this.salesToolStripMenuItem, this.systemToolStripMenuItem, this.pegawaiToolStripMenuItem, this.gudangToolStripMenuItem });
+            this.masterToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.brandToolStripMenuItem1, this.kategoriToolStripMenuItem, this.salesToolStripMenuItem, this.systemToolStripMenuItem, this.pegawaiToolStripMenuItem, this.gudangToolStripMenuItem, this.penyiapOrderToolStripMenuItem });
             this.masterToolStripMenuItem.Name = "masterToolStripMenuItem";
             this.masterToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.masterToolStripMenuItem.Text = "Master";
@@ -75,20 +76,20 @@ namespace DoranApp.View
             // brandToolStripMenuItem1
             // 
             this.brandToolStripMenuItem1.Name = "brandToolStripMenuItem1";
-            this.brandToolStripMenuItem1.Size = new System.Drawing.Size(118, 22);
+            this.brandToolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
             this.brandToolStripMenuItem1.Text = "Brand";
             this.brandToolStripMenuItem1.Click += new System.EventHandler(this.brandToolStripMenuItem1_Click);
             // 
             // kategoriToolStripMenuItem
             // 
             this.kategoriToolStripMenuItem.Name = "kategoriToolStripMenuItem";
-            this.kategoriToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.kategoriToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.kategoriToolStripMenuItem.Text = "Kategori";
             // 
             // salesToolStripMenuItem
             // 
             this.salesToolStripMenuItem.Name = "salesToolStripMenuItem";
-            this.salesToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.salesToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.salesToolStripMenuItem.Text = "Sales";
             this.salesToolStripMenuItem.Click += new System.EventHandler(this.salesToolStripMenuItem_Click);
             // 
@@ -96,7 +97,7 @@ namespace DoranApp.View
             // 
             this.systemToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { this.tesToolStripMenuItem, this.roleToolStripMenuItem });
             this.systemToolStripMenuItem.Name = "systemToolStripMenuItem";
-            this.systemToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.systemToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.systemToolStripMenuItem.Text = "System";
             // 
             // tesToolStripMenuItem
@@ -116,16 +117,23 @@ namespace DoranApp.View
             // pegawaiToolStripMenuItem
             // 
             this.pegawaiToolStripMenuItem.Name = "pegawaiToolStripMenuItem";
-            this.pegawaiToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.pegawaiToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.pegawaiToolStripMenuItem.Text = "Pegawai";
             this.pegawaiToolStripMenuItem.Click += new System.EventHandler(this.pegawaiToolStripMenuItem_Click);
             // 
             // gudangToolStripMenuItem
             // 
             this.gudangToolStripMenuItem.Name = "gudangToolStripMenuItem";
-            this.gudangToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.gudangToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.gudangToolStripMenuItem.Text = "Gudang";
             this.gudangToolStripMenuItem.Click += new System.EventHandler(this.gudangToolStripMenuItem_Click);
+            // 
+            // penyiapOrderToolStripMenuItem
+            // 
+            this.penyiapOrderToolStripMenuItem.Name = "penyiapOrderToolStripMenuItem";
+            this.penyiapOrderToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.penyiapOrderToolStripMenuItem.Text = "Penyiap Order";
+            this.penyiapOrderToolStripMenuItem.Click += new System.EventHandler(this.penyiapOrderToolStripMenuItem_Click);
             // 
             // laporanToolStripMenuItem
             // 
@@ -225,6 +233,8 @@ namespace DoranApp.View
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.ToolStripMenuItem penyiapOrderToolStripMenuItem;
 
         private System.Windows.Forms.ToolStripMenuItem penjualanBySalesToolStripMenuItem;
 

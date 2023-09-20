@@ -1,12 +1,11 @@
-﻿using DoranApp.Properties;
+﻿using System;
+using System.Data.SQLite;
+using System.Drawing;
+using System.Windows.Forms;
 using DoranApp.View.Pegawai;
 using Dotmim.Sync;
 using Dotmim.Sync.Sqlite;
 using Dotmim.Sync.Web.Client;
-using System;
-using System.Data.SQLite;
-using System.Drawing;
-using System.Windows.Forms;
 
 namespace DoranApp.View
 {
@@ -48,11 +47,10 @@ namespace DoranApp.View
             {
                 if (form.GetType() == typeof(T))
                 {
-                  
                     form.WindowState = FormWindowState.Maximized;
                     tabForms.SelectedTab = tabForms.TabPages[form.Text];
                     form.Activate();
-                    return (T) form;
+                    return (T)form;
                 }
             }
 
@@ -67,8 +65,6 @@ namespace DoranApp.View
             openForm.Activate();
             return openForm;
         }
-
-        private delegate void SetStatusInternetCallback(string text);
 
         private void SetInternetStatusText(string status)
         {
@@ -94,6 +90,7 @@ namespace DoranApp.View
             {
                 return;
             }
+
             _runSync = true;
             var serverOrchestrator = new WebRemoteOrchestrator("https://localhost:44376/api/sync");
             var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\Doran Office";
@@ -136,6 +133,7 @@ namespace DoranApp.View
             {
                 //MessageBox.Show(ex.Message);
             }
+
             _runSync = false;
             _stopSync = true;
         }
@@ -187,7 +185,7 @@ namespace DoranApp.View
             else
             {
                 this.ActiveMdiChild.WindowState =
-                FormWindowState.Maximized;
+                    FormWindowState.Maximized;
                 // Child form always maximized
 
                 // If child form is new and no has tabPage,
@@ -205,7 +203,7 @@ namespace DoranApp.View
                     this.ActiveMdiChild.Tag = tp;
                     this.ActiveMdiChild.FormClosed +=
                         new FormClosedEventHandler(
-                                        _Container_FormClosed);
+                            _Container_FormClosed);
                 }
 
                 if (!tabForms.Visible) tabForms.Visible = true;
@@ -224,7 +222,7 @@ namespace DoranApp.View
         private void tabForms_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((tabForms.SelectedTab != null) &&
-        (tabForms.SelectedTab.Tag != null))
+                (tabForms.SelectedTab.Tag != null))
                 (tabForms.SelectedTab.Tag as Form).Select();
         }
 
@@ -282,6 +280,7 @@ namespace DoranApp.View
                     return i;
                 }
             }
+
             return dragTabIndex;
         }
 
@@ -359,7 +358,7 @@ namespace DoranApp.View
 
         private void penjualanByBarangToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm<LaporanPenjualanBarangByBarang>(); 
+            OpenForm<LaporanPenjualanBarangByBarang>();
         }
 
         private void penjualanByTokoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -371,15 +370,20 @@ namespace DoranApp.View
         {
             OpenForm<LaporanPenjualanBarangBySales>();
         }
-        
-        
+
 
         private void tabForms_DrawItem(object sender, DrawItemEventArgs e)
         {
-           
         }
+
+        private void penyiapOrderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm<PenyiaporderForm>();
+        }
+
+        private delegate void SetStatusInternetCallback(string text);
     }
-    
+
     public class MdiChildForm : Form
     {
         protected override CreateParams CreateParams
