@@ -1,33 +1,20 @@
-﻿using DalSoft.RestClient;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
+using DalSoft.RestClient;
 using DoranApp.Exceptions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
-using System;
-using System.Net.Http;
-using System.Reflection;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DoranApp.Utils
 {
     internal class Rest
     {
-        public void Main()
-        {
-            HttpResponseMessage = new Object();
-            Response = new Object();
-        }
-
-        public RestClient Client { get; private set; }
-
-        public dynamic Response { get; private set; }
-        public dynamic HttpResponseMessage { get; private set; }
-
-        private IQuery Resource { get; set; }
-
         public Rest(string uri)
         {
+            aaa = uri;
             Headers header = new Headers();
             if (!string.IsNullOrEmpty(Properties.Settings.Default.AuthToken))
             {
@@ -37,61 +24,69 @@ namespace DoranApp.Utils
             Client = new RestClient(DoranApp.Properties.Settings.Default.BASE_API_URL,
                 header
                 , new Config().SetJsonSerializerSettings(
-                new JsonSerializerSettings
-                {
-                    NullValueHandling = NullValueHandling.Ignore,
-                    DateParseHandling = DateParseHandling.DateTime,
-                    DateFormatString = "yyyy-MM-dd HH:mm:ss",
-                    ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() },
-                }
-            ));
-           
+                    new JsonSerializerSettings
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        DateParseHandling = DateParseHandling.DateTime,
+                        DateFormatString = "yyyy-MM-dd HH:mm:ss",
+                        ContractResolver = new DefaultContractResolver
+                            { NamingStrategy = new CamelCaseNamingStrategy() },
+                    }
+                ));
+
             Resource = Client.Resource(uri);
+        }
+
+        public string aaa { get; set; } = "";
+        public RestClient Client { get; private set; }
+
+        public dynamic Response { get; private set; }
+        public dynamic HttpResponseMessage { get; private set; }
+
+        private IQuery Resource { get; set; }
+
+        public void Main()
+        {
+            HttpResponseMessage = new Object();
+            Response = new Object();
         }
 
         private string FindError(HttpResponseMessage httpResponseMessage, dynamic response)
         {
-           
+            ConsoleDump.Extensions.Dump(httpResponseMessage);
             var status = (Int32)httpResponseMessage.StatusCode;
             var error = httpResponseMessage.ReasonPhrase;
-
             if (!status.ToString().StartsWith("2"))
             {
                 JObject dynamicErrors = response;
-                var reparsed = JsonConvert.SerializeObject(dynamicErrors);
-                dynamic d = JsonConvert.DeserializeObject<dynamic>(reparsed);
-                if (d == null)
+
+                if (dynamicErrors == null)
                 {
                     throw new RestException(status, error);
                 }
 
-              
-                TypeInfo type = d.GetType();
-
                 switch (status)
                 {
-                    case 400:
-                        var errors = d.errors;
+                    case 422:
+                        var errors = response.errors;
+                        List<string> errorTexts = new List<string>();
+                        errorTexts.Add($"{error}:");
                         if (errors != null)
                         {
                             foreach (dynamic memberError in errors)
                             {
-                                foreach (dynamic errorLabel in memberError)
-                                {
-                                    foreach (dynamic message in errorLabel)
-                                    {
-                                        error = $"{error + message}\n";
-                                    }
-                                }
+                                errorTexts.Add((string)memberError);
                             }
                         }
-                        throw new RestException(status, error);
+
+                        throw new RestException(status, String.Join("\n", errorTexts));
                     default:
 
-                        if (d?.message != null)
+                        if (response?.message != null)
                         {
-                            throw new RestException(status, d.message);
+                            throw new RestException(status, response.message);
                         }
+
                         throw new RestException(status, error);
                 }
             }
@@ -105,6 +100,7 @@ namespace DoranApp.Utils
             {
                 Resource.Query(query);
             }
+
             return await Get();
         }
 
@@ -114,19 +110,23 @@ namespace DoranApp.Utils
             return Return(response);
         }
 
-        public async Task<TReturn<T>> Get<T>(dynamic query)
+        public async Task<TReturn<T>> Get<T>(dynamic? query)
         {
             if (query != null)
             {
                 Resource.Query(query);
             }
-            return await Get<T>();
-        }
 
-        public async Task<TReturn<T>> Get<T>()
-        {
-            T response = await Resource.Get();
-            return Return<T>(response);
+            try
+            {
+                dynamic response = await Resource.Get();
+                return Return<T>(response);
+            }
+            catch (Exception ex)
+            {
+                ConsoleDump.Extensions.Dump(ex);
+                throw;
+            }
         }
 
         public async Task<TReturn> Post(dynamic postData)
@@ -157,7 +157,6 @@ namespace DoranApp.Utils
         {
             TReturn tReturn = new TReturn();
             FindError(response.HttpResponseMessage, response);
-           
             tReturn.HttpResponseMessage = response.HttpResponseMessage;
             tReturn.Response = response;
             Client.Dispose();
@@ -167,11 +166,9 @@ namespace DoranApp.Utils
         private TReturn<T> Return<T>(dynamic response)
         {
             TReturn<T> tReturn = new TReturn<T>();
-            FindError(response.HttpResponseMessage, response);
-            
             tReturn.HttpResponseMessage = response.HttpResponseMessage;
             tReturn.Response = response;
-             Client.Dispose();
+            Client.Dispose();
             return tReturn;
         }
     }

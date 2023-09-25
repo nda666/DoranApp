@@ -1,30 +1,29 @@
-﻿using DoranApp.Exceptions;
-using DoranApp.Utils;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-
+using DoranApp.Exceptions;
+using DoranApp.Utils;
 
 namespace DoranApp.View
 {
-    public partial class Login : Form
+    public partial class LoginForm : Form
     {
         private HomeForm _homeForm;
 
-        [DllImport("shell32.dll", CharSet = CharSet.Auto)]
-        private static extern IntPtr ExtractIcon(IntPtr hInst, string lpszExeFileName, int nIconIndex);
-
-        public Login()
+        public LoginForm()
         {
             InitializeComponent();
         }
 
-        public Login(HomeForm homeForm)
+        public LoginForm(HomeForm homeForm)
         {
             _homeForm = homeForm;
             InitializeComponent();
         }
+
+        [DllImport("shell32.dll", CharSet = CharSet.Auto)]
+        private static extern IntPtr ExtractIcon(IntPtr hInst, string lpszExeFileName, int nIconIndex);
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -34,7 +33,6 @@ namespace DoranApp.View
 
         public async void login()
         {
-
             Rest rest = new Rest("/login");
             try
             {
@@ -47,23 +45,24 @@ namespace DoranApp.View
                 var result = response.Response;
 
                 Properties.Settings.Default.AuthToken = $"BEARER {result.api_token}";
-                Console.WriteLine($"Auth TOken: { Properties.Settings.Default.AuthToken}");
+                Console.WriteLine($"Auth TOken: {Properties.Settings.Default.AuthToken}");
                 this.Hide();
                 if (_homeForm != null)
                 {
                     _homeForm.homeStart = true;
                 }
-
             }
             catch (RestException error)
             {
                 if (error.ErrorCode == 401)
                 {
-                    MessageBox.Show($"Username / password tidak cocok", $"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Username / password tidak cocok", $"Error", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show($"{error.ErrorCode} {error.StatusText}", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"{error.ErrorCode} {error.StatusText}", "Error!", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                 }
             }
             catch (Exception error)
@@ -74,7 +73,6 @@ namespace DoranApp.View
             {
                 button1.Enabled = true;
             }
-
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -89,9 +87,10 @@ namespace DoranApp.View
                 {
                     graphics.DrawIcon(icon, new Rectangle(Point.Empty, bitmap.Size));
                 }
+
                 // Display the icon in a PictureBox
                 linkLabel1.Image = bitmap;
-              
+
 
                 // Don't forget to release the icon handle
                 DestroyIcon(iconHandle);
@@ -108,12 +107,10 @@ namespace DoranApp.View
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void Login_FormClosing(object sender, FormClosingEventArgs e)

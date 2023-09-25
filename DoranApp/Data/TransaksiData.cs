@@ -1,15 +1,14 @@
-﻿using DoranApp.Models;
-using DoranApp.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DoranApp.Dtos;
+using DoranApp.Utils;
 
 namespace DoranApp.Data
 {
     internal class TransaksiData : AbstractData<dynamic>
     {
-        protected dynamic _dynamicData { get; set; }
-        protected PaginationData _paginationData = new PaginationData();
+        protected PaginationResultDto _paginationData = new PaginationResultDto();
 
         public TransaksiData() : base()
         {
@@ -19,6 +18,8 @@ namespace DoranApp.Data
         {
         }
 
+        protected dynamic _dynamicData { get; set; }
+
         protected override string RelativeUrl()
         {
             return "transaksi";
@@ -27,16 +28,16 @@ namespace DoranApp.Data
         protected override List<ColumnSettings> ColumnSettings()
         {
             var columnSettingsList = new ColumnSettings<dynamic>
-                {
-                    { "No Nota", x => x.kodenota },
-                    { "Tanggal", x => x.tglTrans, typeof(DateTime) },
-                    { "Nama", x => x.masterpelanggan?.nama + " - " +  x.masterpelanggan?.lokasiKota?.nama },
-                    { "Jumlah", x => x.jumlah },
-                    { "Sales", x => x.kodeSales },
-                    { "Tipe", x => x.tipetempo, typeof(sbyte) },
-                    { "Keterangan", x => x.keterangan },
-                    { "Kodeh", x=>x.kodeH }
-                };
+            {
+                { "No Nota", x => x.kodenota },
+                { "Tanggal", x => x.tglTrans, typeof(DateTime) },
+                { "Nama", x => x.masterpelanggan?.nama + " - " + x.masterpelanggan?.lokasiKota?.nama },
+                { "Jumlah", x => x.jumlah },
+                { "Sales", x => x.kodeSales },
+                { "Tipe", x => x.tipetempo, typeof(sbyte) },
+                { "Keterangan", x => x.keterangan },
+                { "Kodeh", x => x.kodeH }
+            };
 
             return columnSettingsList;
         }
@@ -59,6 +60,7 @@ namespace DoranApp.Data
             {
                 data.Add(x);
             }
+
             _dataTable = null;
             _dataTable = _dataTableGen.CreateDataTable<dynamic>(data);
         }
@@ -68,7 +70,7 @@ namespace DoranApp.Data
             return _dynamicData;
         }
 
-        public PaginationData GetPaginationData()
+        public PaginationResultDto GetPaginationData()
         {
             return _paginationData;
         }
@@ -82,5 +84,4 @@ namespace DoranApp.Data
             });
         }
     }
-
 }

@@ -1,15 +1,14 @@
-﻿using DoranApp.Models;
-using DoranApp.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DoranApp.Dtos;
+using DoranApp.Utils;
 
 namespace DoranApp.Data
 {
     internal class LaporanTransaksiData : AbstractData<dynamic>
     {
-        protected dynamic _dynamicData { get; set; }
-        protected PaginationData _paginationData = new PaginationData();
+        protected PaginationResultDto _paginationData = new PaginationResultDto();
 
         public LaporanTransaksiData() : base()
         {
@@ -18,6 +17,8 @@ namespace DoranApp.Data
         public LaporanTransaksiData(object query) : base(query)
         {
         }
+
+        protected dynamic _dynamicData { get; set; }
 
         protected override string RelativeUrl()
         {
@@ -43,32 +44,34 @@ namespace DoranApp.Data
                 default:
                     return $"{day.ToString()} Hari";
             }
+
             return "Cash";
         }
+
         protected override List<ColumnSettings> ColumnSettings()
         {
             var columnSettingsList = new ColumnSettings<dynamic>
-                {
-                    { "Tanggal", x => x.tglTrans, typeof(DateTime) },
-                    { "Nama", x => x.masterpelanggan?.nama + " - " +  x.masterpelanggan?.lokasiKota?.nama },
-                    { "Jumlah", x => x.jumlah },
-                    { "Lainnya", x => x.tambahanLainnya },
-                    { "Sales", x => x.sales?.nama },
-                    { "Lunas", x => Convert.ToSByte(x.lunas), typeof(Boolean) },
-                    { "No Nota", x => x.kodenota },
-                    { "Tipe", x =>  TipeTempo( Convert.ToInt32(x.tipetempo))},
-                    { "Gudang", x => x.mastergudang?.nama ?? ""},
-                    {"DPP", x => x.dpp },
-                     {"Faktur PPN", x => x.ppn },
-                     {"PPN 100%", x => x.ppnreal },
-                {"Tanggal Input", x => x.insertTime,  typeof(DateTime) },
-                    { "Keterangan", x => x.keterangan },
-                     { "Seri OL", x => x.noSeriOnline },
-                     { "Barcode OL", x => x.barcodeonline },
+            {
+                { "Tanggal", x => x.tglTrans, typeof(DateTime) },
+                { "Nama", x => x.masterpelanggan?.nama + " - " + x.masterpelanggan?.lokasiKota?.nama },
+                { "Jumlah", x => x.jumlah },
+                { "Lainnya", x => x.tambahanLainnya },
+                { "Sales", x => x.sales?.nama },
+                { "Lunas", x => Convert.ToSByte(x.lunas), typeof(Boolean) },
+                { "No Nota", x => x.kodenota },
+                { "Tipe", x => TipeTempo(Convert.ToInt32(x.tipetempo)) },
+                { "Gudang", x => x.mastergudang?.nama ?? "" },
+                { "DPP", x => x.dpp },
+                { "Faktur PPN", x => x.ppn },
+                { "PPN 100%", x => x.ppnreal },
+                { "Tanggal Input", x => x.insertTime, typeof(DateTime) },
+                { "Keterangan", x => x.keterangan },
+                { "Seri OL", x => x.noSeriOnline },
+                { "Barcode OL", x => x.barcodeonline },
                 { "Retur", x => Convert.ToSByte(x.retur), typeof(Boolean) },
-                    { "Kodeh", x=>x.kodeH },
+                { "Kodeh", x => x.kodeH },
                 { "Jurnal", x => Convert.ToSByte(x.akanDiJurnalkan), typeof(Boolean) },
-                };
+            };
 
             return columnSettingsList;
         }
@@ -89,6 +92,7 @@ namespace DoranApp.Data
             {
                 data.Add(x);
             }
+
             _dataTable = _dataTableGen.CreateDataTable<dynamic>(data);
         }
 
@@ -97,20 +101,9 @@ namespace DoranApp.Data
             return _dynamicData;
         }
 
-        public PaginationData GetPaginationData()
+        public PaginationResultDto GetPaginationData()
         {
             return _paginationData;
         }
-
-        public async Task<TReturn> GetNameAndKodeOnly()
-        {
-            Rest rest = new Rest($"{RelativeUrl()}/nama");
-            return await rest.Get(new
-            {
-                brgAktif = true
-            });
-        }
     }
-
-
 }

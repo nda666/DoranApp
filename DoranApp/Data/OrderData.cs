@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DoranApp.Models;
+using DoranApp.Dtos;
 using DoranApp.Utils;
 
 namespace DoranApp.Data
@@ -16,7 +16,7 @@ namespace DoranApp.Data
 
     internal class OrderData : AbstractData<dynamic>
     {
-        protected PaginationData _paginationData = new PaginationData();
+        protected PaginationResultDto _paginationData = new PaginationResultDto();
 
         public OrderData() : base()
         {
@@ -60,6 +60,7 @@ namespace DoranApp.Data
             var response = await rest.Get(_query);
             var data = new List<dynamic>();
             var responseData = response.Response?.data;
+
             _data = null;
             _dynamicData = null;
             _dynamicData = responseData;
@@ -82,9 +83,26 @@ namespace DoranApp.Data
             return _dynamicData;
         }
 
-        public PaginationData GetPaginationData()
+        public PaginationResultDto GetPaginationData()
         {
             return _paginationData;
+        }
+
+        public async Task<TReturn> UpdateHeader(string primaryKeyValue, object data)
+        {
+            var uri = $"{RelativeUrl()}/{primaryKeyValue}/header";
+
+            var rest = new Rest(uri);
+            try
+            {
+                var response = await rest.Put(data);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                ConsoleDump.Extensions.Dump(ex, "ERRRR");
+                throw;
+            }
         }
 
         public async Task<dynamic> SetPenyiapOrder(long kode, int kodepenyiap)

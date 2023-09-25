@@ -14,8 +14,6 @@ namespace DoranApp.View
     public partial class OrderInputForm : Form
     {
         private List<Masterpengeluaran> _ekspedisiOption = new List<Masterpengeluaran>();
-
-        public long _laporanOrderLastPage = 0;
         private MasterbarangData _masterbarang = new MasterbarangData();
         private List<MasterbarangOption> _masterbarangOptions = new List<MasterbarangOption>();
         private List<Mastergudang> _mastergudangOptions = new List<Mastergudang>();
@@ -31,11 +29,14 @@ namespace DoranApp.View
         private List<SalesOption> _salesOptions = new List<SalesOption>();
         private SetlevelhargaData _setlevelhargaData = new SetlevelhargaData();
         private List<Setlevelharga> _setlevelhargaOptions = new List<Setlevelharga>();
+        private bool EditHeaderOnly = false;
 
         public bool FetchOrderRun = false;
         private decimal GrandTotal = 0;
 
         private int? KodeEdit = null;
+
+        public long LaporanOrderLastPage = 0;
         public bool SaveRun = false;
 
         private decimal SubTotal = 0;
@@ -62,6 +63,15 @@ namespace DoranApp.View
 
         private void OrderInputForm_Load(object sender, EventArgs e)
         {
+            var clientManager = new WebSocketClientManager();
+            clientManager.Subscribe("order", eventData =>
+            {
+                if (eventData != null)
+                {
+                    MessageBox.Show("123");
+                }
+            });
+
             dataGridView1.DoubleBuffered(true);
             dataGridView2.DoubleBuffered(true);
             dataGridView3.DoubleBuffered(true);
@@ -294,7 +304,7 @@ namespace DoranApp.View
 
             var paginationData = _OrderData.GetPaginationData();
             _laporanOrderPage = paginationData.Page;
-            _laporanOrderLastPage = paginationData.TotalPage;
+            LaporanOrderLastPage = paginationData.TotalPage;
             toolStripLabel1.Text = $"dari {paginationData.TotalPage.ToString()}";
             ToggleLoading();
         }
@@ -374,7 +384,7 @@ namespace DoranApp.View
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            _laporanOrderPage = _laporanOrderLastPage;
+            _laporanOrderPage = LaporanOrderLastPage;
             FetchOrder();
         }
 
@@ -428,18 +438,6 @@ namespace DoranApp.View
             CalculateTotal();
         }
 
-        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.ColumnIndex == 0 || e.ColumnIndex == 2 || e.ColumnIndex == 3) // Replace with the actual column index
-            {
-                DataGridViewCell cell = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                if (cell.Value != null && cell.Value.ToString().Length > 15)
-                {
-                    ConsoleDump.Extensions.Dump(123);
-                    cell.Value = Decimal.Parse(cell.Value.ToString().Substring(0, 15));
-                }
-            }
-        }
 
         private void dataGridView1_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
@@ -464,7 +462,7 @@ namespace DoranApp.View
             }
 
             // Allow only one decimal point
-            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            if (e.KeyChar == '.' && (sender as TextBox)?.Text.IndexOf('.') > -1)
             {
                 e.Handled = true;
             }
@@ -473,10 +471,13 @@ namespace DoranApp.View
         private void textBoxNumberOnly_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = sender as TextBox;
-            string text = textBox.Text;
+            if (textBox != null)
+            {
+                string text = textBox.Text;
 
-            // Remove non-numeric characters
-            textBox.Text = new string(text.Where(c => char.IsDigit(c) || c == '.').ToArray());
+                // Remove non-numeric characters
+                textBox.Text = new string(text.Where(c => char.IsDigit(c) || c == '.').ToArray());
+            }
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -544,6 +545,53 @@ namespace DoranApp.View
             datePickerJatuhTempo.Value = datePickerOrder.Value.AddDays(getTipeTempo());
         }
 
+        private async Task SaveHeader()
+        {
+            if (SaveRun)
+            {
+                return;
+            }
+
+            SaveRun = true;
+            try
+            {
+                buttonBatalUbah.Enabled = false;
+                button9.Enabled = false;
+                var res = await _OrderData.UpdateHeader(KodeEdit.ToString(), new
+                {
+                    tglorder = datePickerOrder.Value,
+                    keterangan = textBoxKeterangan.Text,
+                    Kodepelanggan = comboPelanggan.SelectedValue,
+                    kodesales = comboSales.SelectedValue,
+                    kodeexp = comboEkspedisi.SelectedValue,
+                    kirimmelalui = comboJenisEkspedisi.SelectedIndex,
+                    ppn = checkBoxPPN.Checked ? (int)Math.Floor(textBoxPPN.UnformattedValue) : 0,
+                    tipetempo = getTipeTempo(),
+                    Tgltempo = datePickerJatuhTempo.Value.ToString("yyyy-MM-dd"),
+                    Infopenting = textBoxInfoPenting.Text,
+                    noSeriOnline = textBoxNoSeriOnline.Text.Trim(),
+                    barcodeonline = textBoxBarcodeonline.Text.Trim(),
+                    namaCust = textboxNamaCust.Text.Trim(),
+                    nmrHp = textboxNmrHp.Text.Trim(),
+                });
+
+                MessageBox.Show("Transaksi berhasil disimpan");
+                dataGridView1.Rows.Clear();
+                buttonBatalUbah.Visible = false;
+                ResetForm();
+                FetchOrder();
+            }
+            catch (Exception ex)
+            {
+                button9.Enabled = true;
+                MessageBox.Show(ex.Message);
+            }
+
+            button9.Enabled = true;
+            buttonBatalUbah.Enabled = true;
+            SaveRun = false;
+        }
+
         private async Task SaveOrder()
         {
             if (SaveRun)
@@ -608,6 +656,7 @@ namespace DoranApp.View
                 dataGridView1.Rows.Clear();
                 buttonBatalUbah.Visible = false;
                 ResetForm();
+                FetchOrder();
             }
             catch (Exception ex)
             {
@@ -622,7 +671,14 @@ namespace DoranApp.View
 
         private void button9_Click(object sender, EventArgs e)
         {
-            SaveOrder();
+            if (EditHeaderOnly)
+            {
+                SaveHeader();
+            }
+            else
+            {
+                SaveOrder();
+            }
         }
 
         private void comboTempo_SelectedIndexChanged(object sender, EventArgs e)
@@ -742,56 +798,7 @@ namespace DoranApp.View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (dataGridView2.SelectedRows.Count <= 0 || dataGridView2.Rows.Count <= 0)
-                {
-                    return;
-                }
-
-                ResetForm();
-                var kodeh = (long)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
-                var horder = _OrderData.GetData().Where(x => x.kodeh == kodeh).FirstOrDefault();
-                if (horder == null)
-                {
-                    return;
-                }
-
-                KodeEdit = (int)horder.kodeh;
-                comboPelanggan.SelectedValue = (int)horder.kodepelanggan;
-                comboSales.SelectedValue = (int)horder.kodesales;
-                datePickerOrder.Value = horder.tglorder;
-                textboxNamaCust.Text = horder.namaCust;
-                textboxNmrHp.Text = horder.nmrHp;
-                textBoxBarcodeonline.Text = horder.barcodeonline;
-                textBoxNoSeriOnline.Text = horder.noSeriOnline;
-                textBoxKodeOrderApps.Text = horder.kodeorderapps?.ToString();
-                textBoxInfoPenting.Text = horder.infopenting;
-                comboTempo.SelectedValue = horder.tipetempo;
-                comboEkspedisi.SelectedValue = horder.kodeexp;
-                comboJenisEkspedisi.SelectedValue = horder.kirimmelalui;
-                dataGridView1.Rows.Clear();
-
-                checkBoxPPN.Checked = horder.ppn > 0;
-                textBoxTotal.Text = Convert.ToString(horder.jumlah);
-
-                foreach (var d in horder.dorder)
-                {
-                    DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
-                    row.Cells[0].Value = (decimal)d.jumlah;
-                    row.Cells[1].Value = (int)d.kodebarang;
-                    row.Cells[2].Value = (decimal)d.harga;
-                    row.Cells[3].Value = d.harga * d.jumlah;
-                    row.Cells[4].Value = d.keterangan;
-                    dataGridView1.Rows.Add(row);
-                }
-
-                buttonBatalUbah.Visible = true;
-            }
-            catch (Exception ex)
-            {
-                ConsoleDump.Extensions.DumpObject(ex);
-            }
+            BaseUbah(true);
         }
 
         private void buttonBatalUbah_Click(object sender, EventArgs e)
@@ -837,6 +844,78 @@ namespace DoranApp.View
             }
 
             SaveRun = false;
+        }
+
+        private void BaseUbah(bool withDetail = false)
+        {
+            try
+            {
+                if (dataGridView2.SelectedRows.Count <= 0 || dataGridView2.Rows.Count <= 0)
+                {
+                    return;
+                }
+
+                ResetForm();
+                var kodeh = (long)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
+                var horder = _OrderData.GetData().Where(x => x.kodeh == kodeh).FirstOrDefault();
+                if (horder == null)
+                {
+                    return;
+                }
+
+                KodeEdit = (int)horder.kodeh;
+                EditHeaderOnly = !withDetail;
+                comboPelanggan.SelectedValue = (int)horder.kodepelanggan;
+                comboSales.SelectedValue = (int)horder.kodesales;
+                datePickerOrder.Value = horder.tglorder;
+                textboxNamaCust.Text = horder.namaCust;
+                textboxNmrHp.Text = horder.nmrHp;
+                textBoxBarcodeonline.Text = horder.barcodeonline;
+                textBoxNoSeriOnline.Text = horder.noSeriOnline;
+                textBoxKodeOrderApps.Text = horder.kodeorderapps?.ToString();
+                textBoxInfoPenting.Text = horder.infopenting;
+                comboTempo.SelectedValue = horder.tipetempo;
+                comboEkspedisi.SelectedValue = horder.kodeexp;
+                comboJenisEkspedisi.SelectedValue = horder.kirimmelalui;
+                dataGridView1.Rows.Clear();
+
+                checkBoxPPN.Checked = horder.ppn > 0;
+                textBoxTotal.Text = Convert.ToString(horder.jumlah);
+                if (withDetail)
+                {
+                    foreach (var d in horder.dorder)
+                    {
+                        DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
+                        row.Cells[0].Value = (decimal)d.jumlah;
+                        row.Cells[1].Value = (int)d.kodebarang;
+                        row.Cells[2].Value = (decimal)d.harga;
+                        row.Cells[3].Value = d.harga * d.jumlah;
+                        row.Cells[4].Value = d.keterangan;
+                        dataGridView1.Rows.Add(row);
+                    }
+                }
+
+                buttonBatalUbah.Visible = true;
+            }
+            catch (Exception ex)
+            {
+                ConsoleDump.Extensions.DumpObject(ex);
+            }
+        }
+
+        private void buttonUbahAtas_Click(object sender, EventArgs e)
+        {
+            BaseUbah();
+        }
+
+        private void btnCetakTanpaKertas_Click(object sender, EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void btnCetak_Click(object sender, EventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

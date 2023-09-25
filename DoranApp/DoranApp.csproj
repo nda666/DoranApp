@@ -58,6 +58,9 @@
     <StartupObject>DoranApp.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AgileObjects.AgileMapper">
+      <Version>1.8.1</Version>
+    </PackageReference>
     <PackageReference Include="AutoMapper">
       <Version>10.1.1</Version>
     </PackageReference>
@@ -121,6 +124,9 @@
     <PackageReference Include="System.Threading.Tasks.Dataflow">
       <Version>6.0.0</Version>
     </PackageReference>
+    <PackageReference Include="Websocket.Client">
+      <Version>4.7.0</Version>
+    </PackageReference>
     <PackageReference Include="ZXing.Net">
       <Version>0.16.9</Version>
     </PackageReference>
@@ -163,9 +169,11 @@
       <DependentUpon>NumericTextbox.cs</DependentUpon>
     </Compile>
     <Compile Include="DataGlobal\FetchBase.cs" />
+    <Compile Include="DataGlobal\FetchMastergudangBoleTransitOption.cs"/>
+    <Compile Include="DataGlobal\FetchPenyiaporder.cs"/>
     <Compile Include="DataGlobal\FetchSalesOption.cs" />
     <Compile Include="DataGlobal\FetchChannelSalesOption.cs" />
-    <Compile Include="DataGlobal\FetchMasterbarang.cs" />
+    <Compile Include="DataGlobal\FetchMasterbarangOptionWithSn.cs"/>
     <Compile Include="DataGlobal\FetchSetlevelharga.cs" />
     <Compile Include="DataGlobal\FetchMastergudangOption.cs" />
     <Compile Include="DataGlobal\FetchHkategoribarangOption.cs" />
@@ -193,10 +201,15 @@
     <Compile Include="Data\RolesData.cs" />
     <Compile Include="Data\MasterchannelsalesData.cs" />
     <Compile Include="Data\SalesData.cs" />
+    <Compile Include="Data\TransitData.cs"/>
+    <Compile Include="Dtos\HtransitDto.cs"/>
+    <Compile Include="Dtos\PaginationDto.cs"/>
     <Compile Include="Helper.cs" />
     <Compile Include="LocalModel\NotaTransaksiDetail.cs" />
     <Compile Include="Models\Dorder.cs" />
+    <Compile Include="Models\Dtransit.cs"/>
     <Compile Include="Models\Horder.cs" />
+    <Compile Include="Models\Htransit.cs"/>
     <Compile Include="Models\Laporan.cs" />
     <Compile Include="Models\Dtrans.cs" />
     <Compile Include="Models\LokasiProvinsi.cs" />
@@ -231,7 +244,9 @@
     <Compile Include="Utils\FormHelper.cs" />
     <Compile Include="Utils\InternetAvailabilityService.cs" />
     <Compile Include="Utils\DirectPrint.cs" />
+    <Compile Include="Utils\LoadingButtonHelper.cs"/>
     <Compile Include="Utils\RestV2.cs" />
+    <Compile Include="Utils\WebSocketClientManager.cs"/>
     <Compile Include="View\LaporanPenjualanBarangBySales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -298,11 +313,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Auth.cs" />
     <Compile Include="Utils\Rest.cs" />
-    <Compile Include="View\Login.cs">
+    <Compile Include="View\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="View\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\HkelompokbarangForm.cs">
       <SubType>Form</SubType>
@@ -376,6 +391,24 @@
     <Compile Include="View\TransaksiForm.Designer.cs">
       <DependentUpon>TransaksiForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\Transit\PermintaanSalesControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Transit\PermintaanSalesControl.Designer.cs">
+      <DependentUpon>PermintaanSalesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Transit\TransitBarangControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\Transit\TransitBarangControl.Designer.cs">
+      <DependentUpon>TransitBarangControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Transit\TransitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Transit\TransitForm.Designer.cs">
+      <DependentUpon>TransitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\UserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -417,8 +450,8 @@
     <EmbeddedResource Include="View\LaporanTransaksiPenjualan.resx">
       <DependentUpon>LaporanTransaksiPenjualan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
+    <EmbeddedResource Include="View\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\HkelompokbarangForm.resx">
       <DependentUpon>HkelompokbarangForm.cs</DependentUpon>
@@ -467,6 +500,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\TransaksiForm.resx">
       <DependentUpon>TransaksiForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Transit\TransitBarangControl.resx">
+      <DependentUpon>TransitBarangControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Transit\TransitForm.resx">
+      <DependentUpon>TransitForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>
@@ -537,6 +576,9 @@
   </ItemGroup>
   <ItemGroup>
       <None Include="Resources\icons8_loading.gif"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\icons8_truck_48.png"/>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,12 @@
 ﻿namespace DoranApp.Models
 {
+    public class MasterbarangOptionWithSn
+    {
+        public int? brgKode { get; set; }
+        public string brgNama { get; set; }
+        public bool Sn { get; set; }
+    }
+
     internal class MasterbarangOption
     {
         public int? brgKode { get; set; }

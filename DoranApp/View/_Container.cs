@@ -157,7 +157,7 @@ namespace DoranApp.View
 
             if (string.IsNullOrEmpty(Properties.Settings.Default.AuthToken))
             {
-                var login = new Login(_homeForm);
+                var login = new LoginForm(_homeForm);
 
                 DialogResult loginModal = login.ShowDialog();
                 login.MaximizeBox = true;

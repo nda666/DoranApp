@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace DoranApp.Models
+﻿namespace DoranApp.Models
 {
-    internal class Masteruser
+    public class Masteruser
     {
         //public Guid Id { get; set; }
         public int Kodeku { get; set; }
@@ -11,6 +9,7 @@ namespace DoranApp.Models
         public string Akses { get; set; }
         public string Sidikjari { get; set; }
         public bool Aktif { get; set; }
+
         public int Kodesales { get; set; }
         //public string CreatedAt { get; set; }
         //public string UpdatedAt { get; set; }

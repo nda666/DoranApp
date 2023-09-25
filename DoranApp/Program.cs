@@ -1,8 +1,7 @@
-﻿using AutoMapper;
-using DoranApp.View;
-using System;
+﻿using System;
 using System.Reflection;
 using System.Windows.Forms;
+using DoranApp.View;
 
 namespace DoranApp
 {
@@ -14,12 +13,12 @@ namespace DoranApp
         [STAThread]
         private static void Main()
         {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("id-ID");
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("id-ID");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new _Container());
             //Application.Run(new SyncDatabaseForm());
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("id-ID");
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("id-ID");
         }
     }
 
