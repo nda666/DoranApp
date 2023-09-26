@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DoranApp.Data;
-using DoranApp.Models;
 using DoranApp.Properties;
 using DoranApp.Utils;
 
@@ -15,10 +14,10 @@ namespace DoranApp.View
     {
         private List<Masterpengeluaran> _ekspedisiOption = new List<Masterpengeluaran>();
         private MasterbarangData _masterbarang = new MasterbarangData();
-        private List<MasterbarangOption> _masterbarangOptions = new List<MasterbarangOption>();
+        private List<MasterbarangOptionDto> _masterbarangOptions = new List<MasterbarangOptionDto>();
         private List<Mastergudang> _mastergudangOptions = new List<Mastergudang>();
         private MasterpelangganData _masterpelangganData = new MasterpelangganData();
-        private List<MasterpelangganOption> _masterpelangganOptions = new List<MasterpelangganOption>();
+        private List<CommonResultDto> _masterpelangganOptions = new List<CommonResultDto>();
         private MasterpengeluaranData _masterpengeluaranData = new MasterpengeluaranData();
 
         private OrderData _OrderData = new OrderData();
@@ -26,9 +25,9 @@ namespace DoranApp.View
 
         private List<Penyiaporder> _PenyiaporderOptions = new List<Penyiaporder>();
         private SalesData _salesData = new SalesData();
-        private List<SalesOption> _salesOptions = new List<SalesOption>();
+        private List<CommonResultDto> _salesOptions = new List<CommonResultDto>();
         private SetlevelhargaData _setlevelhargaData = new SetlevelhargaData();
-        private List<Setlevelharga> _setlevelhargaOptions = new List<Setlevelharga>();
+        private List<CommonResultDto> _setlevelhargaOptions = new List<CommonResultDto>();
         private bool EditHeaderOnly = false;
 
         public bool FetchOrderRun = false;
@@ -132,7 +131,7 @@ namespace DoranApp.View
         public async Task FetchMasterbarang()
         {
             var data = await _masterbarang.GetNameAndKodeOnly();
-            _masterbarangOptions = (List<MasterbarangOption>)data.Response;
+            _masterbarangOptions = (List<MasterbarangOptionDto>)data.Response;
         }
 
         public async Task FetchPenyiapOrder()
@@ -155,7 +154,7 @@ namespace DoranApp.View
             try
             {
                 var data = await _salesData.GetNameAndKodeOnly();
-                _salesOptions = (List<SalesOption>)data.Response;
+                _salesOptions = (List<CommonResultDto>)data.Response;
             }
             catch (Exception ex)
             {
@@ -194,7 +193,7 @@ namespace DoranApp.View
             try
             {
                 var data = await _masterpelangganData.GetNameAndKodeOnly();
-                _masterpelangganOptions = (List<MasterpelangganOption>)data.Response;
+                _masterpelangganOptions = (List<CommonResultDto>)data.Response;
             }
             catch (Exception ex)
             {

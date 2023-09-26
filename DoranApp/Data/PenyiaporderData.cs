@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using DoranApp.Models;
 using DoranApp.Utils;
 
 namespace DoranApp.Data

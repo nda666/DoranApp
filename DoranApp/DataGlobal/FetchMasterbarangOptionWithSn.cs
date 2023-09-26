@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using DoranApp.Models;
 using DoranApp.Utils;
 
 namespace DoranApp.DataGlobal
 {
     public static class FetchMasterbarangOptionWithSn
     {
-        private static readonly BehaviorSubject<List<MasterbarangOptionWithSn>> subject =
-            new BehaviorSubject<List<MasterbarangOptionWithSn>>(new List<MasterbarangOptionWithSn>());
+        private static readonly BehaviorSubject<List<MasterbarangOptionWithSnDto>> subject =
+            new BehaviorSubject<List<MasterbarangOptionWithSnDto>>(new List<MasterbarangOptionWithSnDto>());
 
         private static bool IsRun = false;
 
@@ -28,13 +27,13 @@ namespace DoranApp.DataGlobal
             {
                 BrgAktif = true
             });
-            var data = (List<MasterbarangOptionWithSn>)response.Response;
+            var data = (List<MasterbarangOptionWithSnDto>)response.Response;
             NotifyObservers(data);
 
             IsRun = false;
         }
 
-        public static IDisposable Subscribe(Action<List<MasterbarangOptionWithSn>> onNext)
+        public static IDisposable Subscribe(Action<List<MasterbarangOptionWithSnDto>> onNext)
         {
             return new CompositeDisposable(
                 subject.Subscribe(new MyObserver(onNext)),
@@ -42,16 +41,16 @@ namespace DoranApp.DataGlobal
             );
         }
 
-        private static void NotifyObservers(List<MasterbarangOptionWithSn> data)
+        private static void NotifyObservers(List<MasterbarangOptionWithSnDto> data)
         {
             subject.OnNext(data);
         }
 
-        private class MyObserver : IObserver<List<MasterbarangOptionWithSn>>
+        private class MyObserver : IObserver<List<MasterbarangOptionWithSnDto>>
         {
-            private readonly Action<List<MasterbarangOptionWithSn>> _onNext;
+            private readonly Action<List<MasterbarangOptionWithSnDto>> _onNext;
 
-            public MyObserver(Action<List<MasterbarangOptionWithSn>> onNext)
+            public MyObserver(Action<List<MasterbarangOptionWithSnDto>> onNext)
             {
                 _onNext = onNext;
             }
@@ -66,7 +65,7 @@ namespace DoranApp.DataGlobal
                 /* Implementation */
             }
 
-            public void OnNext(List<MasterbarangOptionWithSn> value)
+            public void OnNext(List<MasterbarangOptionWithSnDto> value)
             {
                 _onNext(value);
             }

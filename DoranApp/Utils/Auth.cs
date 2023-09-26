@@ -1,9 +1,9 @@
-﻿using DalSoft.RestClient;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using DalSoft.RestClient;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace DoranApp.Utils
 {
@@ -11,6 +11,7 @@ namespace DoranApp.Utils
     {
         private void findError(dynamic response)
         {
+            var x = new Client();
             try
             {
                 response.EnsureSuccessStatusCode();

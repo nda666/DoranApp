@@ -1,14 +1,6 @@
-﻿using DoranApp.Models;
-using Microsoft.Reporting.WinForms;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
+using Microsoft.Reporting.WinForms;
 
 namespace DoranApp.View
 {
@@ -20,7 +12,7 @@ namespace DoranApp.View
             ReportViewer reportViewer = new ReportViewer();
             reportViewer.ProcessingMode = ProcessingMode.Local;
             reportViewer.LocalReport.ReportEmbeddedResource = "DoranApp.NotaTransaksi.rdlc"; // Path to your RDLC file
-          
+
             // Set parameters (if any)
             ReportParameter[] parameters = new ReportParameter[1];
             parameters[0] = new ReportParameter("tglTrans", htrans.tglTrans.ToString());
@@ -37,7 +29,6 @@ namespace DoranApp.View
 
         private void PrintContainer_Load(object sender, EventArgs e)
         {
-            
         }
     }
 }

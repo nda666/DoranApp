@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using DoranApp.DataGlobal;
-using DoranApp.Models;
+using DoranApp.Utils;
 
 namespace DoranApp.View.Transit;
 
@@ -15,9 +15,9 @@ public partial class TransitForm : Form
 
     public IDisposable FetchMastergudangOptionSubs;
     public IDisposable FetchPenyiaporderSubs;
-    public List<MasterbarangOptionWithSn> MasterbarangOptionWithSnOptions = new List<MasterbarangOptionWithSn>();
-    public List<MastergudangOption> MastergudangOptions = new List<MastergudangOption>();
-    public List<MastergudangOption> MastergudangTujuanOptions = new List<MastergudangOption>();
+    public List<MasterbarangOptionDto> MasterbarangOptionWithSnOptions = new List<MasterbarangOptionDto>();
+    public List<CommonResultDto> MastergudangOptions = new List<CommonResultDto>();
+    public List<CommonResultDto> MastergudangTujuanOptions = new List<CommonResultDto>();
     public List<Penyiaporder> PenyiapOrderOptions = new List<Penyiaporder>();
     public PermintaanSalesControl permintaanSalesControl;
 
@@ -59,7 +59,7 @@ public partial class TransitForm : Form
         FetchMastergudangBoleTransitOptionSubs = FetchMastergudangBoleTransitOption.Subscribe(x =>
         {
             transitBarangControl.comboBoxMastergudangTujuan.DataSource = x.ToList();
-            transitBarangControl.comboBoxFilterGudangTujuan.DataSource = x.Prepend(new MastergudangOption()
+            transitBarangControl.comboBoxFilterGudangTujuan.DataSource = x.Prepend(new CommonResultDto()
             {
                 Kode = null, Nama = "Semua Tujuan"
             }).ToList();
@@ -72,7 +72,7 @@ public partial class TransitForm : Form
         FetchMastergudangOptionSubs = FetchMastergudangOption.Subscribe(x =>
         {
             transitBarangControl.comboBoxMastergudang.DataSource = x.ToList();
-            transitBarangControl.comboBoxFilterGudang.DataSource = x.Prepend(new MastergudangOption()
+            transitBarangControl.comboBoxFilterGudang.DataSource = x.Prepend(new MastergudangOptionDto()
             {
                 Kode = null, Nama = "Semua Tujuan"
             }).ToList();
@@ -85,7 +85,7 @@ public partial class TransitForm : Form
         FetchPenyiaporderSubs = FetchPenyiaporder.Subscribe(x =>
         {
             transitBarangControl.comboBoxPenyiapOrder.DataSource = x.ToList();
-            transitBarangControl.comboBoxFilterPenyiap.DataSource = x.ToList().Prepend(new Penyiaporder()
+            transitBarangControl.comboBoxFilterPenyiap.DataSource = x.ToList().Prepend(new Utils.Penyiaporder()
             {
                 Kode = null, Nama = "Semua Penyiap"
             }).ToList();

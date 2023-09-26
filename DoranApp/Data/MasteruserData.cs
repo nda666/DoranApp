@@ -1,11 +1,10 @@
-﻿using DoranApp.Models;
-using DoranApp.Utils;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using DoranApp.Utils;
 
 namespace DoranApp.Data
 {
-    internal class MasteruserData : AbstractData<Models.Masteruser>
+    internal class MasteruserData : AbstractData<Masteruser>
     {
         protected override string RelativeUrl()
         {
@@ -14,13 +13,12 @@ namespace DoranApp.Data
 
         protected override List<ColumnSettings> ColumnSettings()
         {
-            var columnSettingsList = new ColumnSettings<Masteruser> {
-                  { "Kode", x => x.Kodeku },
-                  { "Username", x => x.Usernameku },
-                  { "Akses", x => x.Akses },
-                  { "Aktif", x => x.Aktif, typeof(bool) },
-                 
-
+            var columnSettingsList = new ColumnSettings<Masteruser>
+            {
+                { "Kode", x => x.Kodeku },
+                { "Username", x => x.Usernameku },
+                { "Akses", x => x.Akses },
+                { "Aktif", x => x.Aktif, typeof(bool) },
             };
             return columnSettingsList;
         }

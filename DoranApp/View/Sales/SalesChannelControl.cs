@@ -1,26 +1,25 @@
-﻿using DoranApp.Data;
-using DoranApp.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DoranApp.Data;
+using DoranApp.Utils;
 
 namespace DoranApp.View
 {
-
     public partial class SalesChannelControl : UserControl
     {
-        private DataTable _dataTable { get; set; }
-
         private MasterchannelsalesData _salesChannelData = new MasterchannelsalesData();
 
         public SalesChannelControl()
         {
             InitializeComponent();
         }
+
+        private DataTable _dataTable { get; set; }
 
         public void ResetForm()
         {
@@ -31,7 +30,6 @@ namespace DoranApp.View
 
         public async Task FetchData()
         {
-
             ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
             _salesChannelData.SetQuery(new
             {
@@ -46,6 +44,7 @@ namespace DoranApp.View
             {
                 MessageBox.Show(ex.Message);
             }
+
             ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
         }
 
@@ -56,7 +55,8 @@ namespace DoranApp.View
 
         private async void buttonSave_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
                 buttonDelete.Enabled = false;
@@ -82,8 +82,8 @@ namespace DoranApp.View
                 {
                     dataGridView1.Rows[selectedRowIndex].Selected = true;
                 }
-                textboxName.Focus();
 
+                textboxName.Focus();
 
 
                 ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
@@ -97,7 +97,9 @@ namespace DoranApp.View
             {
                 return;
             }
-            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+
+            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Confirmation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 var rest = new Rest($"masterchannelsales/{textboxId.Text}");
                 try
@@ -131,10 +133,10 @@ namespace DoranApp.View
                 return;
             }
 
-            var selectedUser = _salesChannelData.GetData().Where(role => role.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
+            var selectedUser = _salesChannelData.GetData().Where(role =>
+                role.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
             textboxName.Text = selectedUser.Nama;
             textboxId.Text = selectedUser.Kode.ToString();
-            checkboxActive.Checked = selectedUser.Aktif;
             buttonDelete.Enabled = true;
         }
 

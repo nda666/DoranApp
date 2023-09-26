@@ -1,24 +1,24 @@
-﻿using DoranApp.Data;
-using DoranApp.Utils;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DoranApp.Data;
+using DoranApp.Utils;
 
 namespace DoranApp.View
 {
     public partial class HKategoribarangForm : Form
     {
-        private DataTable _dataTable { get; set; }
-
         private HKategoriBarangData _hkategoribarangData = new HKategoriBarangData();
 
         public HKategoribarangForm()
         {
             InitializeComponent();
         }
+
+        private DataTable _dataTable { get; set; }
 
         public async Task FetchData()
         {
@@ -36,6 +36,7 @@ namespace DoranApp.View
             {
                 MessageBox.Show(ex.Message);
             }
+
             ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
         }
 
@@ -45,7 +46,9 @@ namespace DoranApp.View
             {
                 return;
             }
-            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+
+            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Confirmation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 try
                 {
@@ -58,6 +61,7 @@ namespace DoranApp.View
                 {
                     MessageBox.Show(ex.Message);
                 }
+
                 buttonDelete.Enabled = true;
             }
         }
@@ -90,7 +94,8 @@ namespace DoranApp.View
 
         private async void buttonSave_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
                 buttonDelete.Enabled = false;
@@ -119,6 +124,7 @@ namespace DoranApp.View
                 {
                     dataGridView1.Rows[selectedRowIndex].Selected = true;
                 }
+
                 textboxNama.Focus();
 
                 ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
@@ -140,13 +146,14 @@ namespace DoranApp.View
                 return;
             }
 
-            var selected = _hkategoribarangData.GetData().Where(role => role.Kodeh.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
+            var selected = _hkategoribarangData.GetData().Where(role =>
+                role.Kodeh.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
             textboxNama.Text = selected.Nama;
             textboxId.Text = selected.Kodeh.ToString();
-            checkboxActive.Checked = selected.Aktif;
-            checkboxCekTahunan.Checked = selected.Cektahunan;
-            checkBoxHargaKhusus.Checked = selected.Hargakhusus;
-            checkboxPerluSetHarga.Checked = selected.Perlusetharga;
+            checkboxActive.Checked = selected.Aktif ?? false;
+            checkboxCekTahunan.Checked = selected.Cektahunan ?? false;
+            checkBoxHargaKhusus.Checked = selected.Hargakhusus ?? false;
+            checkboxPerluSetHarga.Checked = selected.Perlusetharga ?? false;
             buttonDelete.Enabled = true;
         }
 

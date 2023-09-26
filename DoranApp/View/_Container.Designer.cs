@@ -112,7 +112,6 @@ namespace DoranApp.View
             this.roleToolStripMenuItem.Name = "roleToolStripMenuItem";
             this.roleToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.roleToolStripMenuItem.Text = "Role";
-            this.roleToolStripMenuItem.Click += new System.EventHandler(this.roleToolStripMenuItem_Click);
             // 
             // pegawaiToolStripMenuItem
             // 

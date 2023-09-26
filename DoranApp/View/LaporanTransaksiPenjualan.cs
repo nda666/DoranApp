@@ -1,36 +1,37 @@
-﻿using DoranApp.Data;
-using DoranApp.DataGlobal;
-using DoranApp.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DoranApp.Data;
+using DoranApp.DataGlobal;
+using DoranApp.Utils;
 
 namespace DoranApp.View
 {
     public partial class LaporanTransaksiPenjualan : Form
     {
-        private IDisposable _LokasiKotaSubscribe;
-        private MasterbarangData _masterbarang = new MasterbarangData();
-        private MastertimsalesData _mastertimsalesData = new MastertimsalesData();
-        private MasterpelangganData _masterpelangganData = new MasterpelangganData();
-        private MastergudangData _mastergudangData = new MastergudangData();
-
-        private LaporanTransaksiData _transaksiData = new LaporanTransaksiData();
-        private List<MasterbarangOption> _masterbarangOptions = new List<MasterbarangOption>();
-        private List<Mastertimsales> _mastertimsales = new List<Mastertimsales>();
-        private List<Sales> _sales = new List<Sales>();
-        private List<MasterpelangganOption> _masterpelangganOptions = new List<MasterpelangganOption>();
-        private List<Mastergudang> _mastergudangOptions = new List<Mastergudang>();
+        public long _laporanTransaksiLastPage = 0;
 
         private List<LokasiKota> _lokasiKota = new List<LokasiKota>();
+        private IDisposable _LokasiKotaSubscribe;
+        private MasterbarangData _masterbarang = new MasterbarangData();
+        private List<MasterbarangOptionDto> _masterbarangOptions = new List<MasterbarangOptionDto>();
+        private MastergudangData _mastergudangData = new MastergudangData();
+        private List<Mastergudang> _mastergudangOptions = new List<Mastergudang>();
+        private MasterpelangganData _masterpelangganData = new MasterpelangganData();
+        private List<CommonResultDto> _masterpelangganOptions = new List<CommonResultDto>();
+        private List<Mastertimsales> _mastertimsales = new List<Mastertimsales>();
+        private MastertimsalesData _mastertimsalesData = new MastertimsalesData();
+        private List<Sales> _sales = new List<Sales>();
 
-        public long _laporanTransaksiLastPage = 0;
+        private LaporanTransaksiData _transaksiData = new LaporanTransaksiData();
+
+        public LaporanTransaksiPenjualan()
+        {
+            InitializeComponent();
+        }
+
         public long _laporanTransaksiPage
         {
             get
@@ -40,17 +41,10 @@ namespace DoranApp.View
                 {
                     page = 1;
                 }
+
                 return page;
             }
-            set
-            {
-                toolStripTextBox1.Text = value.ToString();
-            }
-        }
-
-        public LaporanTransaksiPenjualan()
-        {
-            InitializeComponent();
+            set { toolStripTextBox1.Text = value.ToString(); }
         }
 
         public async Task FetchMasterbarang()
@@ -58,17 +52,17 @@ namespace DoranApp.View
             try
             {
                 var data = await _masterbarang.GetNameAndKodeOnly();
-                var resp = (List<MasterbarangOption>)data.Response;
-                _masterbarangOptions = resp.Prepend(new MasterbarangOption
+                var resp = (List<MasterbarangOptionDto>)data.Response;
+                _masterbarangOptions = resp.Prepend(new MasterbarangOptionDto()
                 {
-                    brgKode = null,
-                    brgNama = "Semua Barang"
+                    BrgKode = null,
+                    BrgNama = "Semua Barang"
                 }).ToList();
-                
-            } catch (Exception ex)
-            {
-
             }
+            catch (Exception ex)
+            {
+            }
+
             comboFilterBarang.ValueMember = "brgKode";
             comboFilterBarang.DisplayMember = "brgNama";
             comboFilterBarang.DataSource = _masterbarangOptions;
@@ -88,7 +82,6 @@ namespace DoranApp.View
                 {
                     Kode = -1,
                     Nama = "Semua Tim Sales",
-
                 }).ToList();
                 _sales = _sales.Prepend(new Sales
                 {
@@ -100,6 +93,7 @@ namespace DoranApp.View
             {
                 MessageBox.Show(ex.Message);
             }
+
             comboFilterMastertimsales.ValueMember = "Kode";
             comboFilterMastertimsales.DisplayMember = "Nama";
             comboFilterMastertimsales.DataSource = _mastertimsales;
@@ -168,18 +162,21 @@ namespace DoranApp.View
             try
             {
                 var data = await _masterpelangganData.GetNameAndKodeOnly();
-                _masterpelangganOptions = (List<MasterpelangganOption>)data.Response;
-                _masterpelangganOptions = _masterpelangganOptions.Prepend(new MasterpelangganOption { Kode = null, Nama = "Semua Pelanggan" }).ToList();
+                _masterpelangganOptions = (List<CommonResultDto>)data.Response;
+                _masterpelangganOptions = _masterpelangganOptions
+                    .Prepend(new CommonResultDto { Kode = null, Nama = "Semua Pelanggan" }).ToList();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
             comboFilterPelanggan.ValueMember = "Kode";
             comboFilterPelanggan.DisplayMember = "Nama";
             comboFilterPelanggan.DataSource = _masterpelangganOptions;
             button11.Enabled = true;
         }
+
         private async Task fetchLaporanTransaksi()
         {
             GC.Collect();
@@ -201,7 +198,6 @@ namespace DoranApp.View
                     Kodenota = textBoxFilterKodenota.Text.Trim(),
                     kodeh = textBoxFilterKodeh.Text.Trim(),
                     lunas = GetFilterLunas()
-
                 });
                 await _transaksiData.Refresh();
             }
@@ -225,10 +221,12 @@ namespace DoranApp.View
             {
                 return "0";
             }
+
             if (radioFilterLunasSudah.Checked)
             {
                 return "1";
             }
+
             return null;
         }
 
@@ -242,14 +240,15 @@ namespace DoranApp.View
             _LokasiKotaSubscribe = FetchLokasiKota.Subscribe(data =>
             {
                 _lokasiKota = data;
-                if (_lokasiKota != null) {
-                    _lokasiKota = data.Prepend(new LokasiKota
+                if (_lokasiKota != null)
                 {
-                    Kode = null,
-                    Nama = "Semua Kota"
-                }).ToList();
-               
+                    _lokasiKota = data.Prepend(new LokasiKota
+                    {
+                        Kode = null,
+                        Nama = "Semua Kota"
+                    }).ToList();
                 }
+
                 comboFilterKota.DataSource = _lokasiKota;
             });
             // Trigger a fetch
@@ -261,13 +260,15 @@ namespace DoranApp.View
             dataGridView1.DoubleBuffered(true);
             dataGridView2.DoubleBuffered(true);
             dataGridView1.DataSource = _transaksiData.GetDataTable();
-            dataGridView1.Columns.Cast<DataGridViewColumn>().ToList().ForEach(f => f.SortMode = DataGridViewColumnSortMode.NotSortable);
+            dataGridView1.Columns.Cast<DataGridViewColumn>().ToList()
+                .ForEach(f => f.SortMode = DataGridViewColumnSortMode.NotSortable);
             comboPageSize.SelectedIndex = 0;
             int[] numCols = new int[] { 2, 3 };
             foreach (var i in numCols)
             {
                 dataGridView1.Columns[i].DefaultCellStyle.Format = "N0";
             }
+
             FetchMastertimWithSales();
             FetchPelanggan();
             FetchMasterbarang();
@@ -308,7 +309,7 @@ namespace DoranApp.View
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            _laporanTransaksiPage = _laporanTransaksiLastPage ;
+            _laporanTransaksiPage = _laporanTransaksiLastPage;
             fetchLaporanTransaksi();
         }
 
@@ -319,6 +320,7 @@ namespace DoranApp.View
             {
                 return;
             }
+
             dataGridView2.Rows.Clear();
             try
             {
@@ -328,6 +330,7 @@ namespace DoranApp.View
                 {
                     return;
                 }
+
                 var dtrans = new List<dynamic>();
                 foreach (var d in htrans.dtrans)
                 {
@@ -338,13 +341,11 @@ namespace DoranApp.View
                     dataGridView2.Rows[index].Cells["Jumlah"].Value = d.jumlah * d.harga;
                     dataGridView2.Rows[index].Cells["KurangiStok"].Value = d.kuranginStok;
                     dataGridView2.Rows[index].Cells["SN"].Value = d.SN;
-
                 }
-            } catch (Exception ex)
-            {
-
             }
-            
+            catch (Exception ex)
+            {
+            }
         }
 
         private void LaporanTransaksiPenjualan_FormClosing(object sender, FormClosingEventArgs e)
@@ -354,6 +355,7 @@ namespace DoranApp.View
             {
                 dataGridView1.DataSource = null;
             }
+
             dataGridView1.Dispose();
             GC.Collect();
         }
@@ -374,9 +376,8 @@ namespace DoranApp.View
             ConsoleDump.Extensions.Dump(e.Type);
             int count = dataGridView1.Rows[dataGridView1.RowCount - 1].Height;
             int display = dataGridView1.Rows.Count - dataGridView1.DisplayedRowCount(false);
-            if ( e.Type == ScrollEventType.Last)
+            if (e.Type == ScrollEventType.Last)
             {
-
                 MessageBox.Show("123");
                 if (dataGridView1.FirstDisplayedScrollingRowIndex + 8 >= dataGridView1.Rows.Count - 1)
                 {
@@ -384,12 +385,11 @@ namespace DoranApp.View
             }
         }
 
-        
 
         private void LaporanTransaksiPenjualan_KeyPress(object sender, KeyPressEventArgs e)
         {
             var keyPress = e.KeyChar.ToString();
-            if ( dataGridView1.Focused)
+            if (dataGridView1.Focused)
             {
                 if (keyPress == "q")
                 {
@@ -405,7 +405,6 @@ namespace DoranApp.View
 
         private void LaporanTransaksiPenjualan_KeyUp(object sender, KeyEventArgs e)
         {
-           
             if (dataGridView1.Focused)
             {
                 if (e.KeyCode == Keys.Q)

@@ -284,10 +284,6 @@ namespace DoranApp.View
             return dragTabIndex;
         }
 
-        private void rolesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenForm<RolesForm>();
-        }
 
         private void userToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -304,10 +300,6 @@ namespace DoranApp.View
             OpenForm<UserForm>();
         }
 
-        private void roleToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenForm<RolesForm>();
-        }
 
         private void salesToolStripMenuItem1_Click(object sender, EventArgs e)
         {

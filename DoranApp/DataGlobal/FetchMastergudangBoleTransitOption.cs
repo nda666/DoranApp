@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using DoranApp.Models;
 using DoranApp.Utils;
 
 namespace DoranApp.DataGlobal
 {
     internal static class FetchMastergudangBoleTransitOption
     {
-        private static readonly string cName = "FetchMastergudangOption";
+        private static readonly string cName = "FetchCommonResultDto";
 
-        private static readonly BehaviorSubject<List<MastergudangOption>> subject =
-            new BehaviorSubject<List<MastergudangOption>>(new List<MastergudangOption>());
+        private static readonly BehaviorSubject<List<CommonResultDto>> subject =
+            new BehaviorSubject<List<CommonResultDto>>(new List<CommonResultDto>());
 
         private static bool IsRun = false;
 
@@ -32,11 +31,11 @@ namespace DoranApp.DataGlobal
                 Boletransit = true
             });
             IsRun = false;
-            var data = (List<MastergudangOption>)response.Response;
+            var data = (List<CommonResultDto>)response.Response;
             NotifyObservers(data);
         }
 
-        public static IDisposable Subscribe(Action<List<MastergudangOption>> onNext)
+        public static IDisposable Subscribe(Action<List<CommonResultDto>> onNext)
         {
             return new CompositeDisposable(
                 subject.Subscribe(new MyObserver(onNext)),
@@ -44,16 +43,16 @@ namespace DoranApp.DataGlobal
             );
         }
 
-        private static void NotifyObservers(List<MastergudangOption> data)
+        private static void NotifyObservers(List<CommonResultDto> data)
         {
             subject.OnNext(data);
         }
 
-        private class MyObserver : IObserver<List<MastergudangOption>>
+        private class MyObserver : IObserver<List<CommonResultDto>>
         {
-            private readonly Action<List<MastergudangOption>> _onNext;
+            private readonly Action<List<CommonResultDto>> _onNext;
 
-            public MyObserver(Action<List<MastergudangOption>> onNext)
+            public MyObserver(Action<List<CommonResultDto>> onNext)
             {
                 _onNext = onNext;
             }
@@ -68,7 +67,7 @@ namespace DoranApp.DataGlobal
                 /* Implementation */
             }
 
-            public void OnNext(List<MastergudangOption> value)
+            public void OnNext(List<CommonResultDto> value)
             {
                 _onNext(value);
             }

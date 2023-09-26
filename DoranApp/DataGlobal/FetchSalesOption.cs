@@ -1,16 +1,17 @@
-﻿using DoranApp.Models;
-using DoranApp.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using DoranApp.Utils;
 
 namespace DoranApp.DataGlobal
 {
     internal static class FetchSalesOption
     {
-        private static readonly BehaviorSubject<List<SalesOption>> subject = new BehaviorSubject<List<SalesOption>>(new List<SalesOption>());
+        private static readonly BehaviorSubject<List<SalesOptionDto>> subject =
+            new BehaviorSubject<List<SalesOptionDto>>(new List<SalesOptionDto>());
+
         private static bool IsRun = false;
 
         public static async Task Run()
@@ -19,15 +20,16 @@ namespace DoranApp.DataGlobal
             {
                 return;
             }
+
             IsRun = true;
             var rest = new Rest("sales/options");
             var response = await rest.Get();
             IsRun = false;
-            var data = (List<SalesOption>)response.Response;
+            var data = (List<SalesOptionDto>)response.Response;
             NotifyObservers(data);
         }
 
-        public static IDisposable Subscribe(Action<List<SalesOption>> onNext)
+        public static IDisposable Subscribe(Action<List<SalesOptionDto>> onNext)
         {
             return new CompositeDisposable(
                 subject.Subscribe(new MyObserver(onNext)),
@@ -38,24 +40,31 @@ namespace DoranApp.DataGlobal
             );
         }
 
-        private static void NotifyObservers(List<SalesOption> data)
+        private static void NotifyObservers(List<SalesOptionDto> data)
         {
             subject.OnNext(data);
         }
 
-        private class MyObserver : IObserver<List<SalesOption>>
+        private class MyObserver : IObserver<List<SalesOptionDto>>
         {
-            private readonly Action<List<SalesOption>> _onNext;
+            private readonly Action<List<SalesOptionDto>> _onNext;
 
-            public MyObserver(Action<List<SalesOption>> onNext)
+            public MyObserver(Action<List<SalesOptionDto>> onNext)
             {
                 _onNext = onNext;
             }
 
-            public void OnCompleted() { /* Implementation */ }
-            public void OnError(Exception error) { /* Implementation */ }
+            public void OnCompleted()
+            {
+                /* Implementation */
+            }
 
-            public void OnNext(List<SalesOption> value)
+            public void OnError(Exception error)
+            {
+                /* Implementation */
+            }
+
+            public void OnNext(List<SalesOptionDto> value)
             {
                 _onNext(value);
             }

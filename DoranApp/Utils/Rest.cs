@@ -153,6 +153,20 @@ namespace DoranApp.Utils
             return Return(response);
         }
 
+        public async Task<TReturn<T>> Delete<T>(dynamic? data)
+        {
+            try
+            {
+                dynamic response = await Resource.Delete(data);
+                return Return<T>(response);
+            }
+            catch (Exception ex)
+            {
+                ConsoleDump.Extensions.Dump(ex);
+                throw;
+            }
+        }
+
         private TReturn Return(dynamic response)
         {
             TReturn tReturn = new TReturn();

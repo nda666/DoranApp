@@ -1,11 +1,11 @@
-﻿using DoranApp.Data.Laporan;
-using DoranApp.DataGlobal;
-using DoranApp.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DoranApp.Data.Laporan;
+using DoranApp.DataGlobal;
+using DoranApp.Utils;
 
 namespace DoranApp.View
 {
@@ -17,28 +17,29 @@ namespace DoranApp.View
             GROUP_BY_KOTA = 1,
         }
 
-        private TransaksiByTokoTipeGroup _TipeGroup = TransaksiByTokoTipeGroup.GROUP_BY_TOKO;
+        private List<DkategoribarangOptionDto> _DkategoribarangOptions = new List<DkategoribarangOptionDto>();
         private bool _FetchRun = false;
-        private IDisposable _MastergudangSubscribe;
-        private List<MastergudangOption> _MastergudangOptions = new List<MastergudangOption>();
-
-        private IDisposable _MasterchannelsalesSubscribe;
-        private List<MasterchannelsalesOption> _MasterchannelsalesOptions = new List<MasterchannelsalesOption>();
-        private List<MastertimsalesOption> _MastertimsalesOptions = new List<MastertimsalesOption>();
-        private List<SalesOption> _SalesOptions = new List<SalesOption>();
+        private List<HkategoribarangOptionDto> _HkategoribarangOptions = new List<HkategoribarangOptionDto>();
 
         private IDisposable _HkategoribarangSubscribe;
-        private List<HkategoribarangOption> _HkategoribarangOptions = new List<HkategoribarangOption>();
-        private List<DkategoribarangOption> _DkategoribarangOptions = new List<DkategoribarangOption>();
-
-        private IDisposable _LokasiProvinsiSubscribe;
-        private List<LokasiKotaOption> _LokasiKota = new List<LokasiKotaOption>();
-        private List<LokasiProvinsiOption> _LokasiProvinsi = new List<LokasiProvinsiOption>();
-
-        private IDisposable _MasterpelangganSubscribe;
-        private List<MasterpelangganOption> _Masterpelanggan = new List<MasterpelangganOption>();
 
         private LaporanTransaksiByTokoData _laporanTransaksi = new LaporanTransaksiByTokoData();
+        private List<LokasiKota> _LokasiKota = new List<LokasiKota>();
+        private List<LokasiProvinsi> _LokasiProvinsi = new List<LokasiProvinsi>();
+
+        private IDisposable _LokasiProvinsiSubscribe;
+        private List<MasterchannelsalesOptionDto> _MasterchannelsalesOptions = new List<MasterchannelsalesOptionDto>();
+
+        private IDisposable _MasterchannelsalesSubscribe;
+        private List<MastergudangOptionDto> _MastergudangOptions = new List<MastergudangOptionDto>();
+        private IDisposable _MastergudangSubscribe;
+        private List<CommonResultDto> _Masterpelanggan = new List<CommonResultDto>();
+
+        private IDisposable _MasterpelangganSubscribe;
+        private List<MastertimsalesOptionDto> _MastertimsalesOptions = new List<MastertimsalesOptionDto>();
+        private List<SalesOptionDto> _SalesOptions = new List<SalesOptionDto>();
+
+        private TransaksiByTokoTipeGroup _TipeGroup = TransaksiByTokoTipeGroup.GROUP_BY_TOKO;
 
         public LaporanPenjualanBarangByToko()
         {
@@ -58,15 +59,16 @@ namespace DoranApp.View
                 _LokasiProvinsi = data;
                 if (_LokasiProvinsi != null)
                 {
-                    _LokasiProvinsi = data.Prepend(new LokasiProvinsiOption
+                    _LokasiProvinsi = data.Prepend(new LokasiProvinsi
                     {
                         Kode = null,
                         Nama = "Semua Kota"
                     }).ToList();
                 }
+
                 comboFilterProvinsi.DataSource = _LokasiProvinsi;
                 _LokasiKota.Clear();
-                _LokasiKota = _LokasiKota.Prepend(new LokasiKotaOption
+                _LokasiKota = _LokasiKota.Prepend(new LokasiKota
                 {
                     Kode = null,
                     Nama = "Semua Kota"
@@ -75,11 +77,13 @@ namespace DoranApp.View
                 {
                     _LokasiKota.AddRange(e.LokasiKota);
                 }
+
                 comboFilterLokasiKota.DataSource = _LokasiKota;
             });
             // Trigger a fetch
             await FetchLokasiProvinsiOption.Run();
         }
+
         private async Task SubscribeMasterpelanggan()
         {
             comboFilterPelanggan.ValueMember = "Kode";
@@ -91,38 +95,40 @@ namespace DoranApp.View
                 _Masterpelanggan = data;
                 if (_Masterpelanggan != null)
                 {
-                    _Masterpelanggan = data.Prepend(new MasterpelangganOption
+                    _Masterpelanggan = data.Prepend(new CommonResultDto()
                     {
                         Kode = null,
                         Nama = "Semua Pelanggan"
                     }).ToList();
                 }
+
                 comboFilterPelanggan.DataSource = _Masterpelanggan;
             });
             // Trigger a fetch
             await FetchMasterpelangganOption.Run();
         }
+
         private async Task SubscribeChannelSales()
         {
             _MasterchannelsalesSubscribe = FetchMasterchannelsalesOption.Subscribe(data =>
             {
-                _MasterchannelsalesOptions = data.Prepend(new MasterchannelsalesOption
+                _MasterchannelsalesOptions = data.Prepend(new MasterchannelsalesOptionDto()
                 {
                     Kode = null,
                     Nama = "Semua Channel Sales"
                 }).ToList();
-                _MastertimsalesOptions = data.SelectMany(e => e.Mastertimsales).Prepend(new MastertimsalesOption
+                _MastertimsalesOptions = data.SelectMany(e => e.Mastertimsales).Prepend(new MastertimsalesOptionDto()
                 {
                     Kode = null,
                     Nama = "Semua Tim Sales"
                 }).ToList();
                 _SalesOptions = data.SelectMany(e => e.Mastertimsales.SelectMany(
-                        e => e.Sales)
-                    ).Prepend(new SalesOption
-                    {
-                        Kode = null,
-                        Nama = "Semua Sales"
-                    }).ToList();
+                    e => e.Sales)
+                ).Prepend(new SalesOptionDto()
+                {
+                    Kode = null,
+                    Nama = "Semua Sales"
+                }).ToList();
                 comboFilterMasterchannelsales.DataSource = _MasterchannelsalesOptions;
                 comboFilterMastertimsales.DataSource = _MastertimsalesOptions;
                 comboFilterSales.DataSource = _SalesOptions;
@@ -130,34 +136,36 @@ namespace DoranApp.View
 
             FetchMasterchannelsalesOption.Run();
         }
+
         private async Task SubscribeHkategoribarang()
         {
             _HkategoribarangSubscribe = FetchHkategoribarangOption.Subscribe(data =>
             {
-                _HkategoribarangOptions = data.Prepend( new HkategoribarangOption
+                _HkategoribarangOptions = data.Prepend(new HkategoribarangOptionDto()
                 {
                     Kodeh = null,
                     Nama = "Semua Brand"
                 }).ToList();
                 _DkategoribarangOptions = data.SelectMany(e => e.Dkategoribarang)
-                .OrderBy(e => e.Nama)
-                .Prepend(new DkategoribarangOption
-                {
-                    Koded = null,
-                    Kodeh = null,
-                    Nama = "Semua Sub Brand"
-                })
-                .ToList();
+                    .OrderBy(e => e.Nama)
+                    .Prepend(new DkategoribarangOptionDto()
+                    {
+                        Koded = null,
+                        Kodeh = null,
+                        Nama = "Semua Sub Brand"
+                    })
+                    .ToList();
                 comboFilterDkategoribarang.DataSource = _DkategoribarangOptions;
                 comboFilterHkategoribarang.DataSource = _HkategoribarangOptions;
             });
             FetchHkategoribarangOption.Run();
         }
+
         private async Task SubscribeMastergudang()
         {
             FetchMastergudangOption.Subscribe(data =>
             {
-                _MastergudangOptions = data.Prepend(new MastergudangOption
+                _MastergudangOptions = data.Prepend(new MastergudangOptionDto()
                 {
                     Kode = null,
                     Nama = "Semua Gudang"
@@ -166,6 +174,7 @@ namespace DoranApp.View
             });
             FetchMastergudangOption.Run();
         }
+
         private async void LaporanPenjualanBarangByToko_Load(object sender, EventArgs e)
         {
             var bs = new BindingSource();
@@ -197,6 +206,7 @@ namespace DoranApp.View
             {
                 return;
             }
+
             _FetchRun = true;
             labelLoading.Visible = true;
             try
@@ -217,15 +227,16 @@ namespace DoranApp.View
                     TipeGroup = _TipeGroup
                 });
                 await _laporanTransaksi.Refresh();
-                var jumlah = _laporanTransaksi.GetData().Sum(e => e.Jumlah).ToString("#,0");
+                var jumlah = _laporanTransaksi.GetData().Sum(e => e.Jumlah).ToString();
                 labelJumlahSum.Text = $"Total: {jumlah}";
-                var total = _laporanTransaksi.GetData().Sum(e => e.SumTotal).ToString("#,0");
+                var total = _laporanTransaksi.GetData().Sum(e => e.SumTotal).ToString();
                 labelTotalOmzet.Text = $"Total Omzet: {total}";
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
             _FetchRun = false;
             labelLoading.Visible = false;
         }
@@ -242,6 +253,4 @@ namespace DoranApp.View
             await FetchLaporan();
         }
     }
-
-   
 }

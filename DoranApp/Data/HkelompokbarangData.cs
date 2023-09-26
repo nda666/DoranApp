@@ -1,7 +1,6 @@
-﻿using DoranApp.Models;
-using DoranApp.Utils;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using DoranApp.Utils;
 
 namespace DoranApp.Data
 {
@@ -23,11 +22,11 @@ namespace DoranApp.Data
         protected override List<ColumnSettings> ColumnSettings()
         {
             var columnSettingsList = new ColumnSettings<Hkelompokbarang>
-                {
-                    { "Kode", x => x.Kode },
-                    { "Nama", x => x.Nama },
-                    { "Aktif", x=> x.Aktif, typeof(bool) }
-                };
+            {
+                { "Kode", x => x.Kode },
+                { "Nama", x => x.Nama },
+                { "Aktif", x => x.Aktif, typeof(bool) }
+            };
 
             return columnSettingsList;
         }

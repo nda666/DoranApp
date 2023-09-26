@@ -1,24 +1,24 @@
-﻿using DoranApp.Data;
-using DoranApp.Utils;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DoranApp.Data;
+using DoranApp.Utils;
 
 namespace DoranApp.View
 {
     public partial class UserForm : Form
     {
-        private DataTable _dataTable { get; set; }
-
         private MasteruserData _userData = new MasteruserData();
 
         public UserForm()
         {
             InitializeComponent();
         }
+
+        private DataTable _dataTable { get; set; }
 
         public void ResetForm()
         {
@@ -45,7 +45,7 @@ namespace DoranApp.View
             _dataTable = _userData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
             dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Descending);
-           
+
             dataGridView1.ClearSelection();
             ResetForm();
         }
@@ -67,12 +67,14 @@ namespace DoranApp.View
             {
                 MessageBox.Show(ex.Message);
             }
+
             ButtonToggleHelper.EnableButtonsByTag(this, "action");
         }
 
         private async void buttonSave_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 this.toolTip1.SetToolTip(this.buttonSave, "This is a tooltip for the button.");
                 ButtonToggleHelper.DisableButtonsByTag(this, "action");
@@ -87,18 +89,21 @@ namespace DoranApp.View
                         passwordKu = textboxPassword.Text,
                         akses = comboRoles.SelectedItem.ToString(),
                         aktif = checkboxActive.Checked
-                    }); ;
+                    });
+                    ;
                     await _userData.Refresh();
                     if (isEdit && dataGridView1.Rows.Count > 0)
                     {
                         dataGridView1.Rows[selectedRowIndex].Selected = true;
                     }
+
                     textboxUsername.Focus();
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
+
                 ButtonToggleHelper.EnableButtonsByTag(this, "action");
 
                 this.toolTip1.SetToolTip(this.buttonSave, null);
@@ -121,18 +126,20 @@ namespace DoranApp.View
                 return;
             }
 
-            var selectedUser = _userData.GetData().Where(user => user.Kodeku.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
+            var selectedUser = _userData.GetData().Where(user =>
+                user.Kodeku.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
             textboxUsername.Text = selectedUser.Usernameku;
             textboxPassword.Text = selectedUser.Passwordku;
             comboRoles.SelectedItem = selectedUser.Akses;
-            checkboxActive.Checked = selectedUser.Aktif;
+            checkboxActive.Checked = selectedUser.Aktif ?? false;
             textboxId.Text = selectedUser.Kodeku.ToString();
             buttonDelete.Enabled = true;
         }
 
         private async Task Delete()
         {
-            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Confirmation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 var rest = new Rest($"users/{textboxId.Text}");
                 try
@@ -211,7 +218,6 @@ namespace DoranApp.View
                 {
                     e.Value = "Belum";
                 }
-
             }
         }
     }

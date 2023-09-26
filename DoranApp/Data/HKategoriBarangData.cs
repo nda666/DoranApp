@@ -1,8 +1,6 @@
-﻿using DoranApp.Models;
-using DoranApp.Utils;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using DoranApp.Utils;
 
 namespace DoranApp.Data
 {
@@ -23,13 +21,13 @@ namespace DoranApp.Data
 
         protected override List<ColumnSettings> ColumnSettings()
         {
-            var columnSettingsList = new ColumnSettings<Hkategoribarang> {
-                  { "Kode", x => x.Kodeh },
-                  { "Nama", x => x.Nama },
-                  { "Harga khusus", x => x.Hargakhusus, typeof(bool) },
-                  { "Perlu set harga", (x) => x.Perlusetharga, typeof(bool) },
-                  { "Cek tahunan", (x) => x.Cektahunan, typeof(bool) },
-                 
+            var columnSettingsList = new ColumnSettings<Hkategoribarang>
+            {
+                { "Kode", x => x.Kodeh },
+                { "Nama", x => x.Nama },
+                { "Harga khusus", x => x.Hargakhusus, typeof(bool) },
+                { "Perlu set harga", (x) => x.Perlusetharga, typeof(bool) },
+                { "Cek tahunan", (x) => x.Cektahunan, typeof(bool) },
             };
             return columnSettingsList;
         }

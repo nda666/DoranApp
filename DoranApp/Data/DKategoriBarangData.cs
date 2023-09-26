@@ -1,18 +1,16 @@
-﻿using DoranApp.Models;
-using DoranApp.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DoranApp.Utils;
 
 namespace DoranApp.Data
 {
     internal class DKategoriBarangData
     {
-        private dynamic Query;
-        public DataTable DataTable { get; private set; }
         private BindingSource BindingSource;
+        private dynamic Query;
 
         public DKategoriBarangData(dynamic query)
         {
@@ -22,18 +20,21 @@ namespace DoranApp.Data
             BindingSource = new BindingSource();
         }
 
+        public DataTable DataTable { get; private set; }
+
         public static DataColumn[] GetColumn()
         {
             DataColumn kodedCol = new DataColumn("koded", System.Type.GetType("System.Int32"));
             kodedCol.AllowDBNull = true;
-            DataColumn[] dataColumns = new DataColumn[] {
+            DataColumn[] dataColumns = new DataColumn[]
+            {
                 kodedCol,
                 new DataColumn("nama"),
                 new DataColumn("kodeh", System.Type.GetType("System.Int32")),
                 new DataColumn("munculdimasterbarangapps", System.Type.GetType("System.Int32")),
                 new DataColumn("cnp"),
                 new DataColumn("sn")
-                };
+            };
             return dataColumns;
         }
 
@@ -54,6 +55,7 @@ namespace DoranApp.Data
                 r.EndEdit();
                 DataTable.Rows.Add(r);
             }
+
             var response = await rest.Get(Query);
             if (response.ErrorMessage != null)
             {
@@ -76,6 +78,7 @@ namespace DoranApp.Data
                     DataTable.Rows.Add(r);
                 }
             }
+
             BindingSource.DataSource = DataTable;
             return BindingSource;
         }

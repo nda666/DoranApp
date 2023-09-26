@@ -133,6 +133,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+      <Reference Include="System.Runtime.Serialization"/>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -174,7 +175,7 @@
     <Compile Include="DataGlobal\FetchSalesOption.cs" />
     <Compile Include="DataGlobal\FetchChannelSalesOption.cs" />
     <Compile Include="DataGlobal\FetchMasterbarangOptionWithSn.cs"/>
-    <Compile Include="DataGlobal\FetchSetlevelharga.cs" />
+      <Compile Include="DataGlobal\FetchSethargalevel.cs"/>
     <Compile Include="DataGlobal\FetchMastergudangOption.cs" />
     <Compile Include="DataGlobal\FetchHkategoribarangOption.cs" />
     <Compile Include="DataGlobal\FetchLokasiProvinsiOption.cs" />
@@ -198,7 +199,6 @@
     <Compile Include="Data\HKategoribarangData.cs" />
     <Compile Include="Data\MasterbarangData.cs" />
     <Compile Include="Data\MasterdivisiData.cs" />
-    <Compile Include="Data\RolesData.cs" />
     <Compile Include="Data\MasterchannelsalesData.cs" />
     <Compile Include="Data\SalesData.cs" />
     <Compile Include="Data\TransitData.cs"/>
@@ -206,40 +206,15 @@
     <Compile Include="Dtos\PaginationDto.cs"/>
     <Compile Include="Helper.cs" />
     <Compile Include="LocalModel\NotaTransaksiDetail.cs" />
-    <Compile Include="Models\Dorder.cs" />
-    <Compile Include="Models\Dtransit.cs"/>
-    <Compile Include="Models\Horder.cs" />
-    <Compile Include="Models\Htransit.cs"/>
-    <Compile Include="Models\Laporan.cs" />
-    <Compile Include="Models\Dtrans.cs" />
-    <Compile Include="Models\LokasiProvinsi.cs" />
-    <Compile Include="Models\LokasiKota.cs" />
-    <Compile Include="Models\Masterchannelsales.cs" />
-    <Compile Include="Models\Hkelompokbarang.cs" />
-    <Compile Include="Models\Masterpengeluaran.cs" />
-      <Compile Include="Models\Penyiaporder.cs"/>
-    <Compile Include="Models\Setlevelharga.cs" />
-    <Compile Include="Models\Masterjabatan.cs" />
-    <Compile Include="Models\Masterdivisi.cs" />
-    <Compile Include="Models\Masterpegawai.cs" />
-    <Compile Include="Models\Masterpelanggan.cs" />
-    <Compile Include="Models\Mastertimsales.cs" />
-    <Compile Include="Models\Htrans.cs" />
-    <Compile Include="Models\Sales.cs" />
     <Compile Include="Data\MastertimsalesData.cs" />
     <Compile Include="Data\MasteruserData.cs" />
     <Compile Include="Exceptions\RestException.cs" />
-    <Compile Include="Models\Dkategoribarang.cs" />
-    <Compile Include="Models\Hkategoribarang.cs" />
-    <Compile Include="Models\MasterBarang.cs" />
-    <Compile Include="Models\Mastergudang.cs" />
-    <Compile Include="Models\Pagination.cs" />
-    <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\Masteruser.cs" />
       <Compile Include="RequestParams\Order\FindOrderDto.cs"/>
       <Compile Include="RequestParams\PaginationDto.cs"/>
     <Compile Include="Utils\BarcodeGenerator.cs" />
     <Compile Include="Utils\ButtonToggleHelper.cs" />
+      <Compile Include="Utils\ClientPartial.cs"/>
+      <Compile Include="Utils\Client.cs"/>
     <Compile Include="Utils\DatatableGenerator.cs" />
     <Compile Include="Utils\FormHelper.cs" />
     <Compile Include="Utils\InternetAvailabilityService.cs" />
@@ -342,12 +317,6 @@
     </Compile>
     <Compile Include="View\Pegawai\JabatanControl.Designer.cs">
       <DependentUpon>JabatanControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\RolesForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\RolesForm.Designer.cs">
-      <DependentUpon>RolesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\Sales\SalesChannelControl.cs">
       <SubType>UserControl</SubType>
@@ -473,9 +442,6 @@
       </EmbeddedResource>
     <EmbeddedResource Include="View\PrintContainer.resx">
       <DependentUpon>PrintContainer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\RolesForm.resx">
-      <DependentUpon>RolesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\Sales\SalesChannelControl.resx">
       <DependentUpon>SalesChannelControl.cs</DependentUpon>

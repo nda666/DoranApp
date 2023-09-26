@@ -1,17 +1,19 @@
-﻿using DoranApp.Models;
-using DoranApp.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using DoranApp.Utils;
 
 namespace DoranApp.DataGlobal
 {
     internal static class FetchMastergudangOption
     {
         private static readonly string cName = "FetchMastergudangOption";
-        private static readonly BehaviorSubject<List<MastergudangOption>> subject = new BehaviorSubject<List<MastergudangOption>>(new List<MastergudangOption>());
+
+        private static readonly BehaviorSubject<List<MastergudangOptionDto>> subject =
+            new BehaviorSubject<List<MastergudangOptionDto>>(new List<MastergudangOptionDto>());
+
         private static bool IsRun = false;
 
         public static async Task Run()
@@ -20,6 +22,7 @@ namespace DoranApp.DataGlobal
             {
                 return;
             }
+
             IsRun = true;
             var rest = new Rest("mastergudang/options");
             var response = await rest.Get(new
@@ -27,39 +30,43 @@ namespace DoranApp.DataGlobal
                 Aktif = true
             });
             IsRun = false;
-            var data = (List<MastergudangOption>)response.Response;
+            var data = (List<MastergudangOptionDto>)response.Response;
             NotifyObservers(data);
         }
 
-        public static IDisposable Subscribe(Action<List<MastergudangOption>> onNext)
+        public static IDisposable Subscribe(Action<List<MastergudangOptionDto>> onNext)
         {
             return new CompositeDisposable(
                 subject.Subscribe(new MyObserver(onNext)),
-                Disposable.Create(() =>
-                {
-                    Console.WriteLine($"Subscription {cName} has been disposed.");
-                })
+                Disposable.Create(() => { Console.WriteLine($"Subscription {cName} has been disposed."); })
             );
         }
 
-        private static void NotifyObservers(List<MastergudangOption> data)
+        private static void NotifyObservers(List<MastergudangOptionDto> data)
         {
             subject.OnNext(data);
         }
 
-        private class MyObserver : IObserver<List<MastergudangOption>>
+        private class MyObserver : IObserver<List<MastergudangOptionDto>>
         {
-            private readonly Action<List<MastergudangOption>> _onNext;
+            private readonly Action<List<MastergudangOptionDto>> _onNext;
 
-            public MyObserver(Action<List<MastergudangOption>> onNext)
+            public MyObserver(Action<List<MastergudangOptionDto>> onNext)
             {
                 _onNext = onNext;
             }
 
-            public void OnCompleted() { /* Implementation */ }
-            public void OnError(Exception error) { /* Implementation */ }
+            public void OnCompleted()
+            {
+                /* Implementation */
+            }
 
-            public void OnNext(List<MastergudangOption> value)
+            public void OnError(Exception error)
+            {
+                /* Implementation */
+            }
+
+            public void OnNext(List<MastergudangOptionDto> value)
             {
                 _onNext(value);
             }

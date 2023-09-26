@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Threading.Tasks;
 using DoranApp.Dtos;
 using DoranApp.Utils;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using HtransitResultDto = DoranApp.Utils.HtransitResultDto;
 
 namespace DoranApp.Data
 {
@@ -53,7 +51,7 @@ namespace DoranApp.Data
         {
             Rest rest = new Rest(RelativeUrl());
             var response = await rest.Get<HtransitResultDto>(_query);
-            var data = new List<dynamic>();
+
             List<HtransitResult> responseData = response.Response?.Data;
             _data = null;
             _data = responseData;
@@ -61,6 +59,8 @@ namespace DoranApp.Data
             _paginationData.PageSize = response.Response?.PageSize;
             _paginationData.TotalRow = response.Response?.TotalRow;
             _paginationData.TotalPage = response.Response?.TotalPage;
+
+            var data = new List<dynamic>();
             foreach (var x in responseData)
             {
                 data.Add(x);
@@ -80,13 +80,14 @@ namespace DoranApp.Data
             return _paginationData;
         }
 
-        public ExpandoObject ConvertToExpando(object anonymousObject)
+        public async Task<HtransitResult> DeleteDetailByKoded(int Kodet, int[] Koded)
         {
-            var json = JsonConvert.SerializeObject(anonymousObject);
-
-            ConsoleDump.Extensions.Dump(anonymousObject);
-            var jObject = JObject.Parse(json);
-            return jObject.ToObject<ExpandoObject>();
+            var client = new Client();
+            var response = await client.Delete_Detail_By_KodedAsync(Kodet, new DeleteDetailByKodedDto()
+            {
+                Koded = Koded
+            });
+            return response;
         }
     }
 }

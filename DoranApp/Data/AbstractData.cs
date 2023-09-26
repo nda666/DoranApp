@@ -1,26 +1,18 @@
-﻿using DoranApp.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
+using DoranApp.Utils;
 
 namespace DoranApp.Data
 {
     public abstract class AbstractData<T>
     {
-        protected bool _isFetchComplete;
         protected List<T> _data;
-        protected dynamic _query;
         protected DataTable _dataTable;
         protected DataTableGenerator _dataTableGen;
-
-        protected virtual string RelativeUrl()
-        { return ""; }
-
-        protected virtual List<ColumnSettings> ColumnSettings()
-        {
-            return new List<ColumnSettings>();
-        }
+        protected bool _isFetchComplete;
+        protected dynamic _query;
 
         protected AbstractData()
         {
@@ -35,6 +27,16 @@ namespace DoranApp.Data
             _dataTableGen = new DataTableGenerator(ColumnSettings());
             _dataTable = _dataTableGen.CreateDataTable<T>(null);
             _isFetchComplete = false;
+        }
+
+        protected virtual string RelativeUrl()
+        {
+            return "";
+        }
+
+        protected virtual List<ColumnSettings> ColumnSettings()
+        {
+            return new List<ColumnSettings>();
         }
 
         public virtual DataColumn[] GetColumn()
@@ -71,6 +73,17 @@ namespace DoranApp.Data
         public virtual DataTable GetDataTable()
         {
             return _dataTable;
+        }
+
+        public virtual void UpdateData(int i, T Data)
+        {
+            if (i < 0)
+            {
+                return;
+            }
+
+            _data[i] = Data;
+            _dataTable = _dataTableGen.CreateDataTable<T>(_data);
         }
 
         internal virtual async Task<TReturn> Delete(string primaryKeyValue)

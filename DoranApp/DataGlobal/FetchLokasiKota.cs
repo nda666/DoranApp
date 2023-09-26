@@ -1,16 +1,17 @@
-﻿using DoranApp.Models;
-using DoranApp.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using DoranApp.Utils;
 
 namespace DoranApp.DataGlobal
 {
     internal static class FetchLokasiKota
     {
-        private static readonly BehaviorSubject<List<LokasiKota>> subject = new BehaviorSubject<List<LokasiKota>>(new List<LokasiKota>());
+        private static readonly BehaviorSubject<List<LokasiKota>> subject =
+            new BehaviorSubject<List<LokasiKota>>(new List<LokasiKota>());
+
         private static bool IsRun = false;
 
         public static async Task Run()
@@ -19,6 +20,7 @@ namespace DoranApp.DataGlobal
             {
                 return;
             }
+
             IsRun = true;
             var rest = new Rest("lokasikota");
             var response = await rest.Get();
@@ -31,10 +33,7 @@ namespace DoranApp.DataGlobal
         {
             return new CompositeDisposable(
                 subject.Subscribe(new MyObserver(onNext)),
-                Disposable.Create(() =>
-                {
-                    Console.WriteLine("Subscription has been disposed.");
-                })
+                Disposable.Create(() => { Console.WriteLine("Subscription has been disposed."); })
             );
         }
 
@@ -52,8 +51,15 @@ namespace DoranApp.DataGlobal
                 _onNext = onNext;
             }
 
-            public void OnCompleted() { /* Implementation */ }
-            public void OnError(Exception error) { /* Implementation */ }
+            public void OnCompleted()
+            {
+                /* Implementation */
+            }
+
+            public void OnError(Exception error)
+            {
+                /* Implementation */
+            }
 
             public void OnNext(List<LokasiKota> value)
             {

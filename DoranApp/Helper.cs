@@ -1,7 +1,4 @@
-﻿using DoranApp.Models;
-using System;
-using System.Data;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace DoranApp
 {
@@ -16,12 +13,12 @@ namespace DoranApp
                     return radioButton.Tag?.ToString();
                 }
             }
+
             return null; // No radio button selected
         }
 
         public static string TipeTempoToString(sbyte tipeTempo)
         {
-
             switch (tipeTempo)
             {
                 case > 0:
@@ -30,6 +27,5 @@ namespace DoranApp
                     return "Cash";
             }
         }
-
     }
 }

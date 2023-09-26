@@ -7,10 +7,10 @@ using DoranApp.Utils;
 
 namespace DoranApp.DataGlobal
 {
-    internal static class FetchMasterpelangganOption
+    internal static class FetchSethargalevel
     {
-        private static readonly BehaviorSubject<List<CommonResultDto>> subject =
-            new BehaviorSubject<List<CommonResultDto>>(new List<CommonResultDto>());
+        private static readonly BehaviorSubject<List<Sethargalevel>> subject =
+            new BehaviorSubject<List<Sethargalevel>>(new List<Sethargalevel>());
 
         private static bool IsRun = false;
 
@@ -22,14 +22,14 @@ namespace DoranApp.DataGlobal
             }
 
             IsRun = true;
-            var rest = new Rest("masterpelanggan/nama");
+            var rest = new Rest("setlevelharga");
             var response = await rest.Get();
             IsRun = false;
-            var data = (List<CommonResultDto>)response.Response;
+            var data = (List<Sethargalevel>)response.Response;
             NotifyObservers(data);
         }
 
-        public static IDisposable Subscribe(Action<List<CommonResultDto>> onNext)
+        public static IDisposable Subscribe(Action<List<Sethargalevel>> onNext)
         {
             return new CompositeDisposable(
                 subject.Subscribe(new MyObserver(onNext)),
@@ -37,16 +37,16 @@ namespace DoranApp.DataGlobal
             );
         }
 
-        private static void NotifyObservers(List<CommonResultDto> data)
+        private static void NotifyObservers(List<Sethargalevel> data)
         {
             subject.OnNext(data);
         }
 
-        private class MyObserver : IObserver<List<CommonResultDto>>
+        private class MyObserver : IObserver<List<Sethargalevel>>
         {
-            private readonly Action<List<CommonResultDto>> _onNext;
+            private readonly Action<List<Sethargalevel>> _onNext;
 
-            public MyObserver(Action<List<CommonResultDto>> onNext)
+            public MyObserver(Action<List<Sethargalevel>> onNext)
             {
                 _onNext = onNext;
             }
@@ -61,7 +61,7 @@ namespace DoranApp.DataGlobal
                 /* Implementation */
             }
 
-            public void OnNext(List<CommonResultDto> value)
+            public void OnNext(List<Sethargalevel> value)
             {
                 _onNext(value);
             }

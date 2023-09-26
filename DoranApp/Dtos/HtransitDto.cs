@@ -5,10 +5,10 @@ namespace DoranApp.Dtos
 {
     public class HtransitResultDto : PaginationResultDto
     {
-        public List<HtransitResult> Data { get; set; }
+        public List<HtransitResult_> Data { get; set; }
     }
 
-    public class HtransitResult
+    public class HtransitResult_
     {
         public int KodeT { get; set; }
         public DateTime? TglTrans { get; set; }

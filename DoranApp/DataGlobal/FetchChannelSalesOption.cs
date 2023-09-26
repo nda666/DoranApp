@@ -1,16 +1,17 @@
-﻿using DoranApp.Models;
-using DoranApp.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using DoranApp.Utils;
 
 namespace DoranApp.DataGlobal
 {
     internal static class FetchMasterchannelsalesOption
     {
-        private static readonly BehaviorSubject<List<MasterchannelsalesOption>> subject = new BehaviorSubject<List<MasterchannelsalesOption>>(new List<MasterchannelsalesOption>());
+        private static readonly BehaviorSubject<List<MasterchannelsalesOptionDto>> subject =
+            new BehaviorSubject<List<MasterchannelsalesOptionDto>>(new List<MasterchannelsalesOptionDto>());
+
         private static bool IsRun = false;
 
         public static async Task Run()
@@ -19,15 +20,16 @@ namespace DoranApp.DataGlobal
             {
                 return;
             }
+
             IsRun = true;
             var rest = new Rest("masterchannelsales/withtimandsales");
             var response = await rest.Get();
             IsRun = false;
-            var data = (List<MasterchannelsalesOption>)response.Response;
+            var data = (List<MasterchannelsalesOptionDto>)response.Response;
             NotifyObservers(data);
         }
 
-        public static IDisposable Subscribe(Action<List<MasterchannelsalesOption>> onNext)
+        public static IDisposable Subscribe(Action<List<MasterchannelsalesOptionDto>> onNext)
         {
             return new CompositeDisposable(
                 subject.Subscribe(new MyObserver(onNext)),
@@ -38,24 +40,31 @@ namespace DoranApp.DataGlobal
             );
         }
 
-        private static void NotifyObservers(List<MasterchannelsalesOption> data)
+        private static void NotifyObservers(List<MasterchannelsalesOptionDto> data)
         {
             subject.OnNext(data);
         }
 
-        private class MyObserver : IObserver<List<MasterchannelsalesOption>>
+        private class MyObserver : IObserver<List<MasterchannelsalesOptionDto>>
         {
-            private readonly Action<List<MasterchannelsalesOption>> _onNext;
+            private readonly Action<List<MasterchannelsalesOptionDto>> _onNext;
 
-            public MyObserver(Action<List<MasterchannelsalesOption>> onNext)
+            public MyObserver(Action<List<MasterchannelsalesOptionDto>> onNext)
             {
                 _onNext = onNext;
             }
 
-            public void OnCompleted() { /* Implementation */ }
-            public void OnError(Exception error) { /* Implementation */ }
+            public void OnCompleted()
+            {
+                /* Implementation */
+            }
 
-            public void OnNext(List<MasterchannelsalesOption> value)
+            public void OnError(Exception error)
+            {
+                /* Implementation */
+            }
+
+            public void OnNext(List<MasterchannelsalesOptionDto> value)
             {
                 _onNext(value);
             }

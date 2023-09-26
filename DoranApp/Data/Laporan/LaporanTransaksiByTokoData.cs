@@ -1,10 +1,6 @@
-﻿using DoranApp.Models;
-using DoranApp.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using DoranApp.Utils;
 
 namespace DoranApp.Data.Laporan
 {
@@ -15,7 +11,8 @@ namespace DoranApp.Data.Laporan
         public long Jumlah { get; set; }
         public long SumTotal { get; set; }
     }
-    internal class LaporanTransaksiByTokoData : AbstractData<LaporanTransaksiByToko>
+
+    internal class LaporanTransaksiByTokoData : AbstractData<TransaksiByTokoResultDto>
     {
         public LaporanTransaksiByTokoData() : base()
         {
@@ -32,10 +29,11 @@ namespace DoranApp.Data.Laporan
 
         protected override List<ColumnSettings> ColumnSettings()
         {
-            var columnSettingsList = new ColumnSettings<LaporanTransaksiByToko> {
-                  { "Nama", x => x.Nama },
-                  { "Jumlah", x => x.Jumlah },
-                  { "Total", x => x.SumTotal },
+            var columnSettingsList = new ColumnSettings<TransaksiByTokoResultDto>
+            {
+                { "Nama", x => x.Nama },
+                { "Jumlah", x => x.Jumlah },
+                { "Total", x => x.SumTotal },
             };
             return columnSettingsList;
         }
@@ -47,7 +45,7 @@ namespace DoranApp.Data.Laporan
             ConsoleDump.Extensions.Dump(RelativeUrl());
             var response = await rest.Get(_query);
             _data = response.Response;
-            _dataTable = _dataTableGen.CreateDataTable<LaporanTransaksiByToko>(_data);
+            _dataTable = _dataTableGen.CreateDataTable<TransaksiByTokoResultDto>(_data);
         }
     }
 }

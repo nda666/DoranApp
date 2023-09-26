@@ -1,14 +1,11 @@
-﻿using DoranApp.Data;
-using DoranApp.Utils;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DoranApp.Data;
+using DoranApp.Utils;
 
 namespace DoranApp.View
 {
@@ -16,7 +13,12 @@ namespace DoranApp.View
     {
         private string _itemId;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        private MastergudangData _mastergudangData = new MastergudangData();
+
+        public MasterGudangForm()
+        {
+            InitializeComponent();
+        }
 
         public string ItemId
         {
@@ -33,13 +35,7 @@ namespace DoranApp.View
 
         private DataTable _dataTable { get; set; }
 
-        private MastergudangData _mastergudangData = new MastergudangData();
-
-        public MasterGudangForm()
-        {
-            InitializeComponent();
-
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private async void MasterGudangForm_Load(object sender, EventArgs e)
         {
@@ -80,11 +76,13 @@ namespace DoranApp.View
                 radioAktif.Checked = true;
                 return;
             }
+
             if (val == false)
             {
                 radioTidakAktif.Checked = true;
                 return;
             }
+
             radioAktifSemua.Checked = true;
         }
 
@@ -94,10 +92,12 @@ namespace DoranApp.View
             {
                 return true;
             }
+
             if (radioTidakAktif.Checked)
             {
                 return false;
             }
+
             return null;
         }
 
@@ -107,10 +107,12 @@ namespace DoranApp.View
             {
                 return true;
             }
+
             if (radioTransitTidak.Checked)
             {
                 return false;
             }
+
             return null;
         }
 
@@ -121,11 +123,13 @@ namespace DoranApp.View
                 radioTransitIya.Checked = true;
                 return;
             }
+
             if (val == false)
             {
                 radioTransitTidak.Checked = true;
                 return;
             }
+
             radioTransitSemua.Checked = true;
         }
 
@@ -143,19 +147,18 @@ namespace DoranApp.View
             try
             {
                 await _mastergudangData.Refresh();
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
             ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
         }
 
         private void dataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             label3.Text = $"Jumlah Data: {dataGridView1.Rows.Count}";
-
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -175,19 +178,20 @@ namespace DoranApp.View
 
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                var selected = _mastergudangData.GetData().Where(x => x.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
+                var selected = _mastergudangData.GetData().Where(x =>
+                    x.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
                 ItemId = selected.Kode.ToString();
                 textBoxNama.Text = selected.Nama.ToString();
                 textboxUrut.Text = selected.Urut.ToString();
                 setBolehTransitForm(selected.Boletransit);
                 setAktifForm(selected.Aktif);
-
             }
         }
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
                 var selectedRowIndex = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 0;
@@ -216,8 +220,8 @@ namespace DoranApp.View
                 {
                     dataGridView1.Rows[selectedRowIndex].Selected = true;
                 }
-                textBoxNama.Focus();
 
+                textBoxNama.Focus();
 
 
                 ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
@@ -233,25 +237,35 @@ namespace DoranApp.View
             {
                 return;
             }
+
             try
             {
                 ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
-                var selected = _mastergudangData.GetData().Where(x => x.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
+                var selected = _mastergudangData.GetData()
+                    .Where(x => x.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString())
+                    .FirstOrDefault();
+                if (selected == null)
+                {
+                    return;
+                }
+
                 if (isAktif == true)
                 {
-                    await _mastergudangData.SetActive(selected.Kode, !selected.Aktif);
+                    await _mastergudangData.SetActive(selected.Kode ?? 0, !selected.Aktif ?? false);
                 }
                 else
                 {
-                    await _mastergudangData.SetBolehTransit(selected.Kode, !selected.Boletransit);
+                    await _mastergudangData.SetBolehTransit(selected.Kode ?? 0, !selected.Boletransit ?? false);
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
             ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
         }
+
         private async void button4_Click(object sender, EventArgs e)
         {
             await runToggler(true);

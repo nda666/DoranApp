@@ -1,11 +1,10 @@
-﻿using DoranApp.Models;
-using DoranApp.Utils;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using DoranApp.Utils;
 
 namespace DoranApp.Data
 {
-    internal class SetlevelhargaData : AbstractData<Setlevelharga>
+    internal class SetlevelhargaData : AbstractData<CommonResultDto>
     {
         public SetlevelhargaData() : base()
         {
@@ -22,11 +21,11 @@ namespace DoranApp.Data
 
         protected override List<ColumnSettings> ColumnSettings()
         {
-            var columnSettingsList = new ColumnSettings<Setlevelharga>
-                {
-                    { "Kode", x => x.Kode },
-                    { "Nama", x => x.Nama },
-                };
+            var columnSettingsList = new ColumnSettings<CommonResultDto>
+            {
+                { "Kode", x => x.Kode },
+                { "Nama", x => x.Nama },
+            };
 
             return columnSettingsList;
         }
@@ -36,13 +35,14 @@ namespace DoranApp.Data
             Rest rest = new Rest(RelativeUrl());
             var response = await rest.Get(_query);
             _data = response.Response;
-            _dataTable = _dataTableGen.CreateDataTable<Setlevelharga>(_data);
+            _dataTable = _dataTableGen.CreateDataTable<CommonResultDto>(_data);
         }
 
         public async Task<dynamic> GetHargaByLevel(int[] kodeBarang, int kodeLevel, int kodePelanggan)
         {
             Rest rest = new Rest("harga/bylevel");
-            var response = await rest.Get(new { 
+            var response = await rest.Get(new
+            {
                 kodepelanggan = kodePelanggan,
                 kodeLevel = kodeLevel,
                 kodeBarang = kodeBarang

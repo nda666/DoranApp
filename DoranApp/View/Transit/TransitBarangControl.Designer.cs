@@ -33,12 +33,18 @@ partial class TransitBarangControl
     {
         this.components = new System.ComponentModel.Container();
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransitBarangControl));
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
         this.tabControl1 = new System.Windows.Forms.TabControl();
         this.tabPage1 = new System.Windows.Forms.TabPage();
         this.groupBox6 = new System.Windows.Forms.GroupBox();
         this.button9 = new System.Windows.Forms.Button();
         this.button8 = new System.Windows.Forms.Button();
-        this.button6 = new System.Windows.Forms.Button();
+        this.buttonFilterNama = new System.Windows.Forms.Button();
         this.textBoxFilterNamaGudangTujuan = new System.Windows.Forms.TextBox();
         this.label26 = new System.Windows.Forms.Label();
         this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -111,6 +117,11 @@ partial class TransitBarangControl
         this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
         this.dataGridView1 = new System.Windows.Forms.DataGridView();
         this.groupBox3 = new System.Windows.Forms.GroupBox();
+        this.buttonHapus = new System.Windows.Forms.Button();
+        this.buttonUbah = new System.Windows.Forms.Button();
+        this.buttonTambahData = new System.Windows.Forms.Button();
+        this.labelVarian = new System.Windows.Forms.Label();
+        this.labelPcs = new System.Windows.Forms.Label();
         this.dataGridView2 = new System.Windows.Forms.DataGridView();
         this.Pcs = new System.Windows.Forms.DataGridViewTextBoxColumn();
         this.NamaBarang = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -166,7 +177,7 @@ partial class TransitBarangControl
         // 
         this.groupBox6.Controls.Add(this.button9);
         this.groupBox6.Controls.Add(this.button8);
-        this.groupBox6.Controls.Add(this.button6);
+        this.groupBox6.Controls.Add(this.buttonFilterNama);
         this.groupBox6.Controls.Add(this.textBoxFilterNamaGudangTujuan);
         this.groupBox6.Controls.Add(this.label26);
         this.groupBox6.Location = new System.Drawing.Point(6, 510);
@@ -196,16 +207,15 @@ partial class TransitBarangControl
         this.button8.Text = "Cetak";
         this.button8.UseVisualStyleBackColor = true;
         // 
-        // button6
+        // buttonFilterNama
         // 
-        this.button6.Enabled = false;
-        this.button6.Location = new System.Drawing.Point(266, 16);
-        this.button6.Name = "button6";
-        this.button6.Size = new System.Drawing.Size(85, 34);
-        this.button6.TabIndex = 90;
-        this.button6.Text = "Filter [F3]";
-        this.button6.UseVisualStyleBackColor = true;
-        this.button6.Click += new System.EventHandler(this.button6_Click);
+        this.buttonFilterNama.Location = new System.Drawing.Point(266, 16);
+        this.buttonFilterNama.Name = "buttonFilterNama";
+        this.buttonFilterNama.Size = new System.Drawing.Size(85, 34);
+        this.buttonFilterNama.TabIndex = 90;
+        this.buttonFilterNama.Text = "Filter [F3]";
+        this.buttonFilterNama.UseVisualStyleBackColor = true;
+        this.buttonFilterNama.Click += new System.EventHandler(this.button6_Click);
         // 
         // textBoxFilterNamaGudangTujuan
         // 
@@ -790,7 +800,7 @@ partial class TransitBarangControl
         this.groupBox2.Controls.Add(this.dataGridView1);
         this.groupBox2.Location = new System.Drawing.Point(394, 5);
         this.groupBox2.Name = "groupBox2";
-        this.groupBox2.Size = new System.Drawing.Size(333, 280);
+        this.groupBox2.Size = new System.Drawing.Size(636, 280);
         this.groupBox2.TabIndex = 1;
         this.groupBox2.TabStop = false;
         this.groupBox2.Text = "groupBox2";
@@ -801,18 +811,16 @@ partial class TransitBarangControl
         this.panel2.Controls.Add(this.toolStrip1);
         this.panel2.Location = new System.Drawing.Point(3, 16);
         this.panel2.Name = "panel2";
-        this.panel2.Size = new System.Drawing.Size(327, 25);
+        this.panel2.Size = new System.Drawing.Size(630, 25);
         this.panel2.TabIndex = 83;
         this.panel2.TabStop = true;
         // 
         // toolStrip1
         // 
-        this.toolStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
-        this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
         this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.toolStripLabel3, this.comboPageSize, this.toolStripLabel4, this.toolStripSeparator4, this.toolStripButton1, this.toolStripButton2, this.toolStripSeparator1, this.toolStripTextBox1, this.toolStripLabel1, this.toolStripSeparator2, this.toolStripButton3, this.toolStripButton4, this.toolStripSeparator3, this.toolStripLabel5, this.toolStripLabel2 });
         this.toolStrip1.Location = new System.Drawing.Point(0, 0);
         this.toolStrip1.Name = "toolStrip1";
-        this.toolStrip1.Size = new System.Drawing.Size(583, 25);
+        this.toolStrip1.Size = new System.Drawing.Size(630, 25);
         this.toolStrip1.TabIndex = 106;
         this.toolStrip1.Text = "toolStrip1";
         // 
@@ -849,6 +857,7 @@ partial class TransitBarangControl
         this.toolStripButton1.RightToLeftAutoMirrorImage = true;
         this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
         this.toolStripButton1.Text = "Move first";
+        this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
         // 
         // toolStripButton2
         // 
@@ -858,6 +867,7 @@ partial class TransitBarangControl
         this.toolStripButton2.RightToLeftAutoMirrorImage = true;
         this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
         this.toolStripButton2.Text = "Move previous";
+        this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
         // 
         // toolStripSeparator1
         // 
@@ -893,6 +903,7 @@ partial class TransitBarangControl
         this.toolStripButton3.RightToLeftAutoMirrorImage = true;
         this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
         this.toolStripButton3.Text = "Move next";
+        this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
         // 
         // toolStripButton4
         // 
@@ -902,6 +913,7 @@ partial class TransitBarangControl
         this.toolStripButton4.RightToLeftAutoMirrorImage = true;
         this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
         this.toolStripButton4.Text = "Move last";
+        this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
         // 
         // toolStripSeparator3
         // 
@@ -917,8 +929,9 @@ partial class TransitBarangControl
         // 
         // toolStripLabel2
         // 
+        this.toolStripLabel2.Image = global::DoranApp.Properties.Resources.icons8_loading;
         this.toolStripLabel2.Name = "toolStripLabel2";
-        this.toolStripLabel2.Size = new System.Drawing.Size(100, 15);
+        this.toolStripLabel2.Size = new System.Drawing.Size(116, 16);
         this.toolStripLabel2.Text = "Mohon tunggu ...";
         this.toolStripLabel2.Visible = false;
         // 
@@ -928,42 +941,150 @@ partial class TransitBarangControl
         this.dataGridView1.AllowUserToDeleteRows = false;
         this.dataGridView1.AllowUserToResizeRows = false;
         this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+        dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+        dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+        this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
         this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+        dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+        dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+        this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
         this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
         this.dataGridView1.Location = new System.Drawing.Point(3, 47);
         this.dataGridView1.Name = "dataGridView1";
+        dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+        dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+        dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+        this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
         this.dataGridView1.RowHeadersVisible = false;
         this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-        this.dataGridView1.Size = new System.Drawing.Size(327, 230);
+        this.dataGridView1.Size = new System.Drawing.Size(630, 230);
         this.dataGridView1.TabIndex = 82;
         this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
         // 
         // groupBox3
         // 
         this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.groupBox3.Controls.Add(this.buttonHapus);
+        this.groupBox3.Controls.Add(this.buttonUbah);
+        this.groupBox3.Controls.Add(this.buttonTambahData);
+        this.groupBox3.Controls.Add(this.labelVarian);
+        this.groupBox3.Controls.Add(this.labelPcs);
         this.groupBox3.Controls.Add(this.dataGridView2);
         this.groupBox3.Location = new System.Drawing.Point(394, 291);
         this.groupBox3.Name = "groupBox3";
-        this.groupBox3.Size = new System.Drawing.Size(333, 371);
+        this.groupBox3.Size = new System.Drawing.Size(636, 371);
         this.groupBox3.TabIndex = 2;
         this.groupBox3.TabStop = false;
         this.groupBox3.Text = "groupBox3";
+        // 
+        // buttonHapus
+        // 
+        this.buttonHapus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+        this.buttonHapus.Enabled = false;
+        this.buttonHapus.Location = new System.Drawing.Point(546, 326);
+        this.buttonHapus.Name = "buttonHapus";
+        this.buttonHapus.Size = new System.Drawing.Size(75, 34);
+        this.buttonHapus.TabIndex = 92;
+        this.buttonHapus.Text = "Hapus";
+        this.buttonHapus.UseVisualStyleBackColor = true;
+        this.buttonHapus.Click += new System.EventHandler(this.buttonHapus_Click);
+        // 
+        // buttonUbah
+        // 
+        this.buttonUbah.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+        this.buttonUbah.Enabled = false;
+        this.buttonUbah.Location = new System.Drawing.Point(465, 326);
+        this.buttonUbah.Name = "buttonUbah";
+        this.buttonUbah.Size = new System.Drawing.Size(75, 34);
+        this.buttonUbah.TabIndex = 91;
+        this.buttonUbah.Text = "Ubah";
+        this.buttonUbah.UseVisualStyleBackColor = true;
+        // 
+        // buttonTambahData
+        // 
+        this.buttonTambahData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+        this.buttonTambahData.Enabled = false;
+        this.buttonTambahData.Location = new System.Drawing.Point(332, 326);
+        this.buttonTambahData.Name = "buttonTambahData";
+        this.buttonTambahData.Size = new System.Drawing.Size(127, 34);
+        this.buttonTambahData.TabIndex = 90;
+        this.buttonTambahData.Text = "TAMBAH DATA";
+        this.buttonTambahData.UseVisualStyleBackColor = true;
+        // 
+        // labelVarian
+        // 
+        this.labelVarian.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+        this.labelVarian.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelVarian.Location = new System.Drawing.Point(169, 335);
+        this.labelVarian.Name = "labelVarian";
+        this.labelVarian.Size = new System.Drawing.Size(157, 23);
+        this.labelVarian.TabIndex = 85;
+        this.labelVarian.Text = "Varian : -";
+        // 
+        // labelPcs
+        // 
+        this.labelPcs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+        this.labelPcs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.labelPcs.Location = new System.Drawing.Point(6, 335);
+        this.labelPcs.Name = "labelPcs";
+        this.labelPcs.Size = new System.Drawing.Size(157, 23);
+        this.labelPcs.TabIndex = 84;
+        this.labelPcs.Text = "PCS : -";
         // 
         // dataGridView2
         // 
         this.dataGridView2.AllowUserToAddRows = false;
         this.dataGridView2.AllowUserToDeleteRows = false;
         this.dataGridView2.AllowUserToResizeRows = false;
+        this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+        dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+        dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+        this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
         this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
         this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.Pcs, this.NamaBarang, this.Rak, this.Penerima, this.SN, this.SudahDiCek, this.Koded, this.Kodet });
-        this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
+        dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+        dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+        dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+        this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle5;
         this.dataGridView2.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-        this.dataGridView2.Location = new System.Drawing.Point(3, 16);
+        this.dataGridView2.Location = new System.Drawing.Point(6, 19);
         this.dataGridView2.Name = "dataGridView2";
+        dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+        dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+        dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+        dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+        dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+        this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
         this.dataGridView2.RowHeadersVisible = false;
         this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-        this.dataGridView2.Size = new System.Drawing.Size(327, 352);
+        this.dataGridView2.Size = new System.Drawing.Size(624, 301);
         this.dataGridView2.TabIndex = 83;
+        this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
         // 
         // Pcs
         // 
@@ -1025,7 +1146,7 @@ partial class TransitBarangControl
         this.Controls.Add(this.groupBox2);
         this.Controls.Add(this.tabControl1);
         this.Name = "TransitBarangControl";
-        this.Size = new System.Drawing.Size(730, 675);
+        this.Size = new System.Drawing.Size(1033, 675);
         this.Load += new System.EventHandler(this.TransitBarangControl_Load);
         this.tabControl1.ResumeLayout(false);
         this.tabPage1.ResumeLayout(false);
@@ -1051,11 +1172,20 @@ partial class TransitBarangControl
         this.ResumeLayout(false);
     }
 
+    private System.Windows.Forms.Button buttonUbah;
+    private System.Windows.Forms.Button buttonHapus;
+
+    private System.Windows.Forms.Button buttonTambahData;
+
+    private System.Windows.Forms.Label labelVarian;
+
+    private System.Windows.Forms.Label labelPcs;
+
     private System.Windows.Forms.Button button9;
 
     private System.Windows.Forms.Button button8;
 
-    private System.Windows.Forms.Button button6;
+    private System.Windows.Forms.Button buttonFilterNama;
 
     private System.Windows.Forms.TextBox textBoxFilterNamaGudangTujuan;
 

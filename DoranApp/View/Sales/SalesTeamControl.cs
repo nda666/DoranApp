@@ -1,26 +1,26 @@
-﻿using DoranApp.Data;
-using DoranApp.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DoranApp.Data;
+using DoranApp.Utils;
 
 namespace DoranApp.View
 {
     public partial class SalesTeamControl : UserControl
     {
+        private MasterchannelsalesData _salesChannelData = new MasterchannelsalesData();
+
+        private MastertimsalesData _salesTeamData = new MastertimsalesData();
+
         public SalesTeamControl()
         {
             InitializeComponent();
         }
 
         private DataTable _dataTable { get; set; }
-
-        private MasterchannelsalesData _salesChannelData = new MasterchannelsalesData();
-
-        private MastertimsalesData _salesTeamData = new MastertimsalesData();
 
 
         public void ResetForm()
@@ -54,7 +54,6 @@ namespace DoranApp.View
 
         public async Task FetchData()
         {
-
             buttonFilter.Enabled = false;
             _salesTeamData.SetQuery(new
             {
@@ -71,12 +70,14 @@ namespace DoranApp.View
                 //ConsoleDump.Extensions.Dump(ex);
                 MessageBox.Show(ex.Message);
             }
+
             buttonFilter.Enabled = true;
         }
 
         private async Task Delete()
         {
-            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Confirmation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 var rest = new Rest($"mastertimsales/{textboxId.Text}");
                 try
@@ -96,7 +97,6 @@ namespace DoranApp.View
                 }
             }
         }
-
 
 
         private async void SalesTeamControl_Load(object sender, EventArgs e)
@@ -121,7 +121,7 @@ namespace DoranApp.View
             dataGridView1.DoubleBuffered(true);
             _dataTable = _salesTeamData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
-           
+
             dataGridView1.ClearSelection();
 
             ResetForm();
@@ -134,7 +134,8 @@ namespace DoranApp.View
 
         private async void buttonSave_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 var selectedRowIndex = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 0;
                 var isEdit = textboxId.Text.Length > 0;
@@ -149,7 +150,6 @@ namespace DoranApp.View
                         tampiltahunlalu = checkboxShowLastYear.Checked,
                         syaratKomisi = checkboxShowLastYear.Checked,
                         aktif = checkboxActive.Checked,
-
                     };
                     var re = await _salesTeamData.CreateOrUpdate(textboxId.Text, dataToSend);
 
@@ -166,8 +166,8 @@ namespace DoranApp.View
                 {
                     dataGridView1.Rows[selectedRowIndex].Selected = true;
                 }
-                textboxName.Focus();
 
+                textboxName.Focus();
             }
         }
 
@@ -194,15 +194,16 @@ namespace DoranApp.View
                 return;
             }
 
-            var selectedUser = _salesTeamData.GetData().Where(x => x.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
+            var selectedUser = _salesTeamData.GetData()
+                .Where(x => x.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
 
             textboxId.Text = selectedUser.Kode.ToString();
             textboxName.Text = selectedUser.Nama;
             textboxOmzetTarget.Text = selectedUser.Targetomzet.ToString();
             textboxJeteTarget.Text = selectedUser.Targetjete.ToString();
-            checkboxComissionTerms.Checked = selectedUser.SyaratKomisi;
-            checkboxShowLastYear.Checked = selectedUser.Tampiltahunlalu;
-            checkboxActive.Checked = selectedUser.Aktif;
+            checkboxComissionTerms.Checked = selectedUser.SyaratKomisi ?? false;
+            checkboxShowLastYear.Checked = selectedUser.Tampiltahunlalu ?? false;
+            checkboxActive.Checked = selectedUser.Aktif ?? false;
             comboSalesChannel.SelectedValue = selectedUser.Kodechannel;
 
             buttonDelete.Enabled = true;

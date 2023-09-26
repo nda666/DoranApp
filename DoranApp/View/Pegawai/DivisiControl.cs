@@ -1,24 +1,25 @@
-﻿using DoranApp.Data;
-using DoranApp.Models;
-using DoranApp.Utils;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DoranApp.Data;
+using DoranApp.Utils;
 
 namespace DoranApp.View.Pegawai
 {
     public partial class DivisiControl : UserControl
     {
-        private DataTable _dataTable { get; set; }
-        private DataTable _dataTablePegawai { get; set; }
         private MasterdivisiData _masterdivisiData = new MasterdivisiData();
+
         public DivisiControl()
         {
             InitializeComponent();
         }
+
+        private DataTable _dataTable { get; set; }
+        private DataTable _dataTablePegawai { get; set; }
 
         protected override async void OnCreateControl()
         {
@@ -28,7 +29,6 @@ namespace DoranApp.View.Pegawai
 
         public async Task FetchData()
         {
-
             ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
             _masterdivisiData.SetQuery(new
             {
@@ -42,6 +42,7 @@ namespace DoranApp.View.Pegawai
             {
                 MessageBox.Show(ex.Message);
             }
+
             ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
         }
 
@@ -65,7 +66,6 @@ namespace DoranApp.View.Pegawai
         {
             textBoxKode.Text = "";
             textBoxNama.Text = "";
-
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -77,14 +77,15 @@ namespace DoranApp.View.Pegawai
                 return;
             }
 
-            var selectedUser = _masterdivisiData.GetData().Where(x => x.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
+            var selectedUser = _masterdivisiData.GetData()
+                .Where(x => x.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
             textBoxNama.Text = selectedUser.Nama;
             textBoxKode.Text = selectedUser.Kode.ToString();
             buttonDelete.Enabled = true;
             var columnSettingsList = new ColumnSettings<Masterpegawai>
-                {
-                    { "Nama", x => x.Nama },
-                };
+            {
+                { "Nama", x => x.Nama },
+            };
             var dtGen = new DataTableGenerator(columnSettingsList);
             _dataTablePegawai = dtGen.CreateDataTable(selectedUser.Masterpegawais);
             dataGridView2.DataSource = _dataTablePegawai;
@@ -92,7 +93,8 @@ namespace DoranApp.View.Pegawai
 
         private async void SimpanBtn_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
                 buttonDelete.Enabled = false;
@@ -132,7 +134,8 @@ namespace DoranApp.View.Pegawai
 
         private async Task DeleteData()
         {
-            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menghapus data ini?", "Confirmation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 buttonDelete.Enabled = false;
                 ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
@@ -157,7 +160,6 @@ namespace DoranApp.View.Pegawai
         private async void buttonDelete_Click(object sender, EventArgs e)
         {
             await DeleteData();
-          
         }
 
         private async void dataGridView1_KeyDown(object sender, KeyEventArgs e)

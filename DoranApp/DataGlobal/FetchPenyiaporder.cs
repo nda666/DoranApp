@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
 using System.Threading.Tasks;
-using DoranApp.Models;
 using DoranApp.Utils;
 
 namespace DoranApp.DataGlobal
