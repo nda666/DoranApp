@@ -14,14 +14,20 @@ public partial class TransitBarangControl : UserControl
 
     public long _TransitLastPage = 0;
     public bool AnyDataProcessRun = false;
+    public Client client = new Client();
+    public bool confirmSelectionChange = false;
+    public bool dontUpdateChangeDgv = false;
+
+    public bool IsEdit = false;
     public int? KodeEdit = null;
+
+    public int previousSelectedRow;
+    public int previousSelectedRow2;
     public dynamic TransitDataQuery = new { };
 
     public TransitBarangControl()
     {
         InitializeComponent();
-        dataGridView1.DoubleBuffered(true);
-        dataGridView2.DoubleBuffered(true);
     }
 
     public long _TransitPage
@@ -104,6 +110,8 @@ public partial class TransitBarangControl : UserControl
 
     private void TransitBarangControl_Load(object sender, EventArgs e)
     {
+        dataGridView1.DoubleBuffered(true);
+        dataGridView2.DoubleBuffered(true);
         comboPageSize.SelectedIndex = 0;
         dataGridView1.DataSource = _TransitData.GetDataTable();
     }
@@ -121,11 +129,55 @@ public partial class TransitBarangControl : UserControl
             return;
         }
 
-        dataGridView2.Rows.Clear();
+        if (confirmSelectionChange && previousSelectedRow >= 0 && !dontUpdateChangeDgv)
+        {
+            DialogResult result =
+                MessageBox.Show(
+                    "Anda sedang dalam mode \"Tambah/Ubah Detail Transit\" pada transit yang sedang Anda pilih. Apakah ingin keluar dari mode ini?",
+                    "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.No)
+            {
+                if (dataGridView2.SelectedRows.Count > 0)
+                {
+                    previousSelectedRow2 = dataGridView2.SelectedRows[0].Index;
+                }
+
+                confirmSelectionChange = false; // Set this to false to prevent further prompts
+                dontUpdateChangeDgv = true;
+                dataGridView1.ClearSelection(); // Clear the selection
+
+                try
+                {
+                    dataGridView1.Rows[previousSelectedRow].Selected = true; // Reselect the previous row
+                    dataGridView2.Rows[previousSelectedRow2].Selected = true;
+                }
+                catch (Exception ex)
+                {
+                }
+
+                confirmSelectionChange = true; // Set it back to true for future selection changes
+                dontUpdateChangeDgv = false;
+                return;
+            }
+            else
+            {
+                previousSelectedRow = dataGridView1.SelectedRows[0].Index; // Update the previous selected row
+                EnableGroupBoxDetail(false);
+            }
+        }
+        else
+        {
+            if (!dontUpdateChangeDgv)
+            {
+                previousSelectedRow = dataGridView1.SelectedRows[0].Index;
+                confirmSelectionChange = false;
+            }
+        }
+
         try
         {
-            var kodeh = (int)dataGridView1.SelectedRows[0].Cells["Kodet"].Value;
-
+            var kodeh = (int)dataGridView1.SelectedRows[0].Cells["KodeT"].Value;
             var htransit = _TransitData.GetData().Where(x => x.KodeT == kodeh).FirstOrDefault();
 
             if (htransit == null)
@@ -135,6 +187,8 @@ public partial class TransitBarangControl : UserControl
 
             var Pcs = 0;
             var Varian = 0;
+
+            dataGridView2.Rows.Clear();
             foreach (var d in htransit.Dtransit)
             {
                 var index = dataGridView2.Rows.Add();
@@ -146,13 +200,18 @@ public partial class TransitBarangControl : UserControl
                 dataGridView2.Rows[index].Cells["SudahDicek"].Value = d.Sudahdicek;
                 dataGridView2.Rows[index].Cells["Koded"].Value = d.Koded;
                 dataGridView2.Rows[index].Cells["Kodet"].Value = d.Kodet;
+                dataGridView2.Rows[index].Cells["KodeBarang"].Value = d.Kodebarang;
                 Pcs += d.Jumlah ?? 0;
                 Varian++;
             }
 
+            dataGridView2.ClearSelection();
             labelVarian.Text = $"Varian : {Pcs.ToString()}";
             labelPcs.Text = $"PCS : {Pcs.ToString()}";
-            buttonTambahData.Enabled = true;
+            if (!dontUpdateChangeDgv)
+            {
+                buttonTambahData.Enabled = true;
+            }
         }
         catch (Exception ex)
         {
@@ -247,6 +306,7 @@ public partial class TransitBarangControl : UserControl
             return;
         }
 
+        dontUpdateChangeDgv = true;
         var selectedIndex = dataGridView1.SelectedRows[0].Index;
         var Kodet = (int)dataGridView1.SelectedRows[0].Cells["Kodet"].Value;
         var htransit = _TransitData.GetData().Where(x => x.KodeT == Kodet).FirstOrDefault();
@@ -270,11 +330,12 @@ public partial class TransitBarangControl : UserControl
         buttonHapus.Enabled = false;
         try
         {
-            var result = await _TransitData.DeleteDetailByKoded(Kodet, koded.ToArray());
+            var result = await _TransitData.DeleteDetail(Kodet, koded.ToArray());
             var indexData = _TransitData.GetData().FindIndex(x => x.KodeT == result.KodeT);
             _TransitData.UpdateData(indexData, result);
             dataGridView1.ClearSelection();
             dataGridView1.Rows[selectedIndex].Selected = true;
+            dataGridView1.FirstDisplayedScrollingRowIndex = selectedIndex;
         }
         catch (Exception ex)
         {
@@ -283,6 +344,20 @@ public partial class TransitBarangControl : UserControl
 
         AnyDataProcessRun = false;
         buttonHapus.Enabled = true;
+        dontUpdateChangeDgv = false;
+    }
+
+    private void DatagridDetailOnUpdateChangeSelection()
+    {
+        if (IsEdit == true && dataGridView2.SelectedRows.Count > 0)
+        {
+            var jumlah = dataGridView2.SelectedRows[0].Cells["Pcs"].Value?.ToString() ?? "";
+            var kodeBarang = (int)dataGridView2.SelectedRows[0].Cells["KodeBarang"].Value;
+            var SN = (string)dataGridView2.SelectedRows[0].Cells["SN"].Value;
+            comboBoxTambahMasterbarang.SelectedValue = kodeBarang;
+            textBoxSn.Text = SN;
+            textBoxJumlah.Text = jumlah;
+        }
     }
 
     private void dataGridView2_SelectionChanged(object sender, EventArgs e)
@@ -292,7 +367,153 @@ public partial class TransitBarangControl : UserControl
             return;
         }
 
+        DatagridDetailOnUpdateChangeSelection();
         buttonHapus.Enabled = dataGridView2.SelectedRows.Count >= 1;
         buttonUbah.Enabled = dataGridView2.SelectedRows.Count == 1;
+    }
+
+    private void EnableGroupBoxDetailTambah(bool enable)
+    {
+        IsEdit = false;
+        confirmSelectionChange = enable;
+        groupBoxTambahDetail.Enabled = enable;
+        button1.Enabled = enable;
+        if (enable)
+        {
+            button1.Text = "Selesai Tambah";
+            button7.Text = "TAMBAH";
+            ButtonToggleHelper.DisableButtonsByTag(this, "FilterAction1");
+            ButtonToggleHelper.DisableButtonsByTag(this, "detailButton");
+        }
+        else
+        {
+            ButtonToggleHelper.EnableButtonsByTag(this, "FilterAction1");
+            ButtonToggleHelper.EnableButtonsByTag(this, "detailButton");
+        }
+    }
+
+    private void EnableGroupBoxDetail(bool enable)
+    {
+        button7.Text = "UPDATE";
+        confirmSelectionChange = enable;
+        groupBoxTambahDetail.Enabled = enable;
+        button1.Enabled = enable;
+        if (enable)
+        {
+            button1.Text = "Selesai Ubah";
+            ButtonToggleHelper.DisableButtonsByTag(this, "FilterAction1");
+        }
+        else
+        {
+            button1.Text = "Selesai Ubah";
+            IsEdit = false;
+            ButtonToggleHelper.EnableButtonsByTag(this, "FilterAction1");
+            ButtonToggleHelper.EnableButtonsByTag(this, "detailButton");
+        }
+    }
+
+    private void buttonUbah_Click(object sender, EventArgs e)
+    {
+        IsEdit = true;
+        EnableGroupBoxDetail(true);
+        DatagridDetailOnUpdateChangeSelection();
+    }
+
+    private void button1_Click_1(object sender, EventArgs e)
+    {
+        EnableGroupBoxDetail(false);
+    }
+
+    private async Task InsertDetail()
+    {
+        if (comboBoxTambahMasterbarang.SelectedValue == null || String.IsNullOrWhiteSpace(textBoxJumlah.Text))
+        {
+            return;
+        }
+
+        var item = (MasterbarangOptionWithSnDto)comboBoxTambahMasterbarang.SelectedItem;
+        if (item.Sn == true && String.IsNullOrWhiteSpace(textBoxSn.Text))
+        {
+            MessageBox.Show("SN harus di isi secara manual terlebih dahulu", "error", MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+        }
+
+        var kodet = (int)dataGridView1.SelectedRows[0].Cells["Kodet"].Value;
+        try
+        {
+            var selectedIndex = dataGridView1.SelectedRows[0].Index;
+            var result = await client.Insert_Detail_TransitAsync(kodet, new UpdateDetailByKodedDto()
+            {
+                Jumlah = Convert.ToInt32(textBoxJumlah.Text),
+                NmrSn = textBoxSn.Text,
+                Kodebarang = Convert.ToInt32(comboBoxTambahMasterbarang.SelectedValue)
+            });
+            var indexData = _TransitData.GetData().FindIndex(x => x.KodeT == result.KodeT);
+            _TransitData.UpdateData(indexData, result);
+            dataGridView1.ClearSelection();
+            dataGridView1.Rows[selectedIndex].Selected = true;
+            dataGridView1.FirstDisplayedScrollingRowIndex = selectedIndex;
+        }
+        catch (ApiException ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+    }
+
+    private async Task UpdateDetail()
+    {
+        if (comboBoxTambahMasterbarang.SelectedValue == null || String.IsNullOrWhiteSpace(textBoxJumlah.Text))
+        {
+            return;
+        }
+
+        var item = (MasterbarangOptionWithSnDto)comboBoxTambahMasterbarang.SelectedItem;
+        if (item.Sn == true && String.IsNullOrWhiteSpace(textBoxSn.Text))
+        {
+            MessageBox.Show("SN harus di isi secara manual terlebih dahulu", "error", MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+        }
+
+        var kodet = (int)dataGridView1.SelectedRows[0].Cells["Kodet"].Value;
+        var koded = (int)dataGridView2.SelectedRows[0].Cells["Koded"].Value;
+        try
+        {
+            var selectedIndex = dataGridView1.SelectedRows[0].Index;
+            var result = await client.Update_Detail_TransitAsync(kodet, koded, new UpdateDetailByKodedDto()
+            {
+                Jumlah = Convert.ToInt32(textBoxJumlah.Text),
+                NmrSn = textBoxSn.Text,
+                Kodebarang = Convert.ToInt32(comboBoxTambahMasterbarang.SelectedValue)
+            });
+            var indexData = _TransitData.GetData().FindIndex(x => x.KodeT == result.KodeT);
+            _TransitData.UpdateData(indexData, result);
+            dataGridView1.ClearSelection();
+            dataGridView1.Rows[selectedIndex].Selected = true;
+            dataGridView1.FirstDisplayedScrollingRowIndex = selectedIndex;
+        }
+        catch (ApiException ex)
+        {
+            MessageBox.Show(ex.Message);
+        }
+    }
+
+    private async void button7_Click(object sender, EventArgs e)
+    {
+        dontUpdateChangeDgv = true;
+        if (button7.Text == "UPDATE")
+        {
+            await UpdateDetail();
+        }
+        else
+        {
+            await InsertDetail();
+        }
+
+        dontUpdateChangeDgv = false;
+    }
+
+    private void buttonTambahData_Click(object sender, EventArgs e)
+    {
+        EnableGroupBoxDetailTambah(true);
     }
 }

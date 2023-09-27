@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using System.Windows.Forms;
 using DoranApp.View;
 
@@ -19,16 +18,6 @@ namespace DoranApp
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new _Container());
             //Application.Run(new SyncDatabaseForm());
-        }
-    }
-
-    public static class ExtensionMethods
-    {
-        public static void DoubleBuffered(this DataGridView dgv, bool setting)
-        {
-            Type dgvType = dgv.GetType();
-            PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
-            pi.SetValue(dgv, setting, null);
         }
     }
 }

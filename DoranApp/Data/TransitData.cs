@@ -10,6 +10,7 @@ namespace DoranApp.Data
     public class TransitData : AbstractData<HtransitResult>
     {
         protected PaginationResultDto _paginationData = new PaginationResultDto();
+        protected Client client = new Client();
 
         public TransitData() : base()
         {
@@ -80,10 +81,9 @@ namespace DoranApp.Data
             return _paginationData;
         }
 
-        public async Task<HtransitResult> DeleteDetailByKoded(int Kodet, int[] Koded)
+        public async Task<HtransitResult> DeleteDetail(int Kodet, int[] Koded)
         {
-            var client = new Client();
-            var response = await client.Delete_Detail_By_KodedAsync(Kodet, new DeleteDetailByKodedDto()
+            var response = await client.Delete_Detail_TransitAsync(Kodet, new DeleteDetailByKodedDto()
             {
                 Koded = Koded
             });

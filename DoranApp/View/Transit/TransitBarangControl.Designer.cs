@@ -47,11 +47,11 @@ partial class TransitBarangControl
         this.buttonFilterNama = new System.Windows.Forms.Button();
         this.textBoxFilterNamaGudangTujuan = new System.Windows.Forms.TextBox();
         this.label26 = new System.Windows.Forms.Label();
-        this.groupBox5 = new System.Windows.Forms.GroupBox();
-        this.textBox3 = new System.Windows.Forms.TextBox();
+        this.groupBoxTambahDetail = new System.Windows.Forms.GroupBox();
+        this.textBoxJumlah = new DoranApp.Components.NumericTextbox(this.components);
+        this.textBoxSn = new System.Windows.Forms.TextBox();
         this.label20 = new System.Windows.Forms.Label();
         this.comboBoxTambahMasterbarang = new System.Windows.Forms.ComboBox();
-        this.textBox2 = new System.Windows.Forms.TextBox();
         this.label17 = new System.Windows.Forms.Label();
         this.label18 = new System.Windows.Forms.Label();
         this.label15 = new System.Windows.Forms.Label();
@@ -131,11 +131,12 @@ partial class TransitBarangControl
         this.SudahDiCek = new System.Windows.Forms.DataGridViewCheckBoxColumn();
         this.Koded = new System.Windows.Forms.DataGridViewTextBoxColumn();
         this.Kodet = new System.Windows.Forms.DataGridViewTextBoxColumn();
+        this.KodeBarang = new System.Windows.Forms.DataGridViewTextBoxColumn();
         this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
         this.tabControl1.SuspendLayout();
         this.tabPage1.SuspendLayout();
         this.groupBox6.SuspendLayout();
-        this.groupBox5.SuspendLayout();
+        this.groupBoxTambahDetail.SuspendLayout();
         this.groupBox1.SuspendLayout();
         this.tabPage2.SuspendLayout();
         this.groupBox4.SuspendLayout();
@@ -163,7 +164,7 @@ partial class TransitBarangControl
         // tabPage1
         // 
         this.tabPage1.Controls.Add(this.groupBox6);
-        this.tabPage1.Controls.Add(this.groupBox5);
+        this.tabPage1.Controls.Add(this.groupBoxTambahDetail);
         this.tabPage1.Controls.Add(this.groupBox1);
         this.tabPage1.Location = new System.Drawing.Point(4, 22);
         this.tabPage1.Name = "tabPage1";
@@ -194,6 +195,7 @@ partial class TransitBarangControl
         this.button9.Name = "button9";
         this.button9.Size = new System.Drawing.Size(85, 34);
         this.button9.TabIndex = 92;
+        this.button9.Tag = "FilterAction1";
         this.button9.Text = "Update";
         this.button9.UseVisualStyleBackColor = true;
         // 
@@ -204,6 +206,7 @@ partial class TransitBarangControl
         this.button8.Name = "button8";
         this.button8.Size = new System.Drawing.Size(85, 34);
         this.button8.TabIndex = 91;
+        this.button8.Tag = "FilterAction1";
         this.button8.Text = "Cetak";
         this.button8.UseVisualStyleBackColor = true;
         // 
@@ -213,6 +216,7 @@ partial class TransitBarangControl
         this.buttonFilterNama.Name = "buttonFilterNama";
         this.buttonFilterNama.Size = new System.Drawing.Size(85, 34);
         this.buttonFilterNama.TabIndex = 90;
+        this.buttonFilterNama.Tag = "FilterAction1";
         this.buttonFilterNama.Text = "Filter [F3]";
         this.buttonFilterNama.UseVisualStyleBackColor = true;
         this.buttonFilterNama.Click += new System.EventHandler(this.button6_Click);
@@ -234,33 +238,41 @@ partial class TransitBarangControl
         this.label26.Text = "Gudang Tujuan :";
         this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
         // 
-        // groupBox5
+        // groupBoxTambahDetail
         // 
-        this.groupBox5.Controls.Add(this.textBox3);
-        this.groupBox5.Controls.Add(this.label20);
-        this.groupBox5.Controls.Add(this.comboBoxTambahMasterbarang);
-        this.groupBox5.Controls.Add(this.textBox2);
-        this.groupBox5.Controls.Add(this.label17);
-        this.groupBox5.Controls.Add(this.label18);
-        this.groupBox5.Controls.Add(this.label15);
-        this.groupBox5.Controls.Add(this.label16);
-        this.groupBox5.Controls.Add(this.labelTglTransit);
-        this.groupBox5.Controls.Add(this.button1);
-        this.groupBox5.Controls.Add(this.button7);
-        this.groupBox5.Controls.Add(this.label19);
-        this.groupBox5.Location = new System.Drawing.Point(6, 310);
-        this.groupBox5.Name = "groupBox5";
-        this.groupBox5.Size = new System.Drawing.Size(358, 194);
-        this.groupBox5.TabIndex = 1;
-        this.groupBox5.TabStop = false;
-        this.groupBox5.Text = "Tambah Detail Barang";
+        this.groupBoxTambahDetail.Controls.Add(this.textBoxJumlah);
+        this.groupBoxTambahDetail.Controls.Add(this.textBoxSn);
+        this.groupBoxTambahDetail.Controls.Add(this.label20);
+        this.groupBoxTambahDetail.Controls.Add(this.comboBoxTambahMasterbarang);
+        this.groupBoxTambahDetail.Controls.Add(this.label17);
+        this.groupBoxTambahDetail.Controls.Add(this.label18);
+        this.groupBoxTambahDetail.Controls.Add(this.label15);
+        this.groupBoxTambahDetail.Controls.Add(this.label16);
+        this.groupBoxTambahDetail.Controls.Add(this.labelTglTransit);
+        this.groupBoxTambahDetail.Controls.Add(this.button1);
+        this.groupBoxTambahDetail.Controls.Add(this.button7);
+        this.groupBoxTambahDetail.Controls.Add(this.label19);
+        this.groupBoxTambahDetail.Enabled = false;
+        this.groupBoxTambahDetail.Location = new System.Drawing.Point(6, 310);
+        this.groupBoxTambahDetail.Name = "groupBoxTambahDetail";
+        this.groupBoxTambahDetail.Size = new System.Drawing.Size(358, 194);
+        this.groupBoxTambahDetail.TabIndex = 1;
+        this.groupBoxTambahDetail.TabStop = false;
+        this.groupBoxTambahDetail.Text = "Tambah Detail Barang";
         // 
-        // textBox3
+        // textBoxJumlah
         // 
-        this.textBox3.Location = new System.Drawing.Point(53, 111);
-        this.textBox3.Name = "textBox3";
-        this.textBox3.Size = new System.Drawing.Size(167, 20);
-        this.textBox3.TabIndex = 89;
+        this.textBoxJumlah.Location = new System.Drawing.Point(9, 84);
+        this.textBoxJumlah.Name = "textBoxJumlah";
+        this.textBoxJumlah.Size = new System.Drawing.Size(38, 20);
+        this.textBoxJumlah.TabIndex = 90;
+        // 
+        // textBoxSn
+        // 
+        this.textBoxSn.Location = new System.Drawing.Point(53, 111);
+        this.textBoxSn.Name = "textBoxSn";
+        this.textBoxSn.Size = new System.Drawing.Size(167, 20);
+        this.textBoxSn.TabIndex = 89;
         // 
         // label20
         // 
@@ -284,13 +296,6 @@ partial class TransitBarangControl
         this.comboBoxTambahMasterbarang.TabIndex = 83;
         this.comboBoxTambahMasterbarang.Text = "Semua Item";
         this.comboBoxTambahMasterbarang.ValueMember = "BrgKode";
-        // 
-        // textBox2
-        // 
-        this.textBox2.Location = new System.Drawing.Point(6, 84);
-        this.textBox2.Name = "textBox2";
-        this.textBox2.Size = new System.Drawing.Size(41, 20);
-        this.textBox2.TabIndex = 83;
         // 
         // label17
         // 
@@ -351,6 +356,7 @@ partial class TransitBarangControl
         this.button1.TabIndex = 82;
         this.button1.Text = "Selesai Tambah";
         this.button1.UseVisualStyleBackColor = true;
+        this.button1.Click += new System.EventHandler(this.button1_Click_1);
         // 
         // button7
         // 
@@ -362,6 +368,7 @@ partial class TransitBarangControl
         this.button7.Text = "UPDATE";
         this.button7.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
         this.button7.UseVisualStyleBackColor = true;
+        this.button7.Click += new System.EventHandler(this.button7_Click);
         // 
         // label19
         // 
@@ -592,6 +599,7 @@ partial class TransitBarangControl
         this.button5.Name = "button5";
         this.button5.Size = new System.Drawing.Size(75, 34);
         this.button5.TabIndex = 119;
+        this.button5.Tag = "FilterAction1";
         this.button5.Text = "Export";
         this.button5.UseVisualStyleBackColor = true;
         // 
@@ -601,7 +609,7 @@ partial class TransitBarangControl
         this.button4.Name = "button4";
         this.button4.Size = new System.Drawing.Size(75, 34);
         this.button4.TabIndex = 118;
-        this.button4.Tag = "actionButton";
+        this.button4.Tag = "FilterAction1";
         this.button4.Text = "Filter";
         this.button4.UseVisualStyleBackColor = true;
         this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -999,6 +1007,7 @@ partial class TransitBarangControl
         this.buttonHapus.Name = "buttonHapus";
         this.buttonHapus.Size = new System.Drawing.Size(75, 34);
         this.buttonHapus.TabIndex = 92;
+        this.buttonHapus.Tag = "detailButton";
         this.buttonHapus.Text = "Hapus";
         this.buttonHapus.UseVisualStyleBackColor = true;
         this.buttonHapus.Click += new System.EventHandler(this.buttonHapus_Click);
@@ -1011,8 +1020,10 @@ partial class TransitBarangControl
         this.buttonUbah.Name = "buttonUbah";
         this.buttonUbah.Size = new System.Drawing.Size(75, 34);
         this.buttonUbah.TabIndex = 91;
+        this.buttonUbah.Tag = "detailButton";
         this.buttonUbah.Text = "Ubah";
         this.buttonUbah.UseVisualStyleBackColor = true;
+        this.buttonUbah.Click += new System.EventHandler(this.buttonUbah_Click);
         // 
         // buttonTambahData
         // 
@@ -1022,8 +1033,10 @@ partial class TransitBarangControl
         this.buttonTambahData.Name = "buttonTambahData";
         this.buttonTambahData.Size = new System.Drawing.Size(127, 34);
         this.buttonTambahData.TabIndex = 90;
+        this.buttonTambahData.Tag = "detailButton";
         this.buttonTambahData.Text = "TAMBAH DATA";
         this.buttonTambahData.UseVisualStyleBackColor = true;
+        this.buttonTambahData.Click += new System.EventHandler(this.buttonTambahData_Click);
         // 
         // labelVarian
         // 
@@ -1060,7 +1073,7 @@ partial class TransitBarangControl
         dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
         this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
         this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.Pcs, this.NamaBarang, this.Rak, this.Penerima, this.SN, this.SudahDiCek, this.Koded, this.Kodet });
+        this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.Pcs, this.NamaBarang, this.Rak, this.Penerima, this.SN, this.SudahDiCek, this.Koded, this.Kodet, this.KodeBarang });
         dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
         dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
         dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1082,7 +1095,7 @@ partial class TransitBarangControl
         this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
         this.dataGridView2.RowHeadersVisible = false;
         this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-        this.dataGridView2.Size = new System.Drawing.Size(624, 301);
+        this.dataGridView2.Size = new System.Drawing.Size(615, 301);
         this.dataGridView2.TabIndex = 83;
         this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
         // 
@@ -1134,6 +1147,12 @@ partial class TransitBarangControl
         this.Kodet.Name = "Kodet";
         this.Kodet.Visible = false;
         // 
+        // KodeBarang
+        // 
+        this.KodeBarang.HeaderText = "KodeBarang";
+        this.KodeBarang.Name = "KodeBarang";
+        this.KodeBarang.Visible = false;
+        // 
         // errorProvider1
         // 
         this.errorProvider1.ContainerControl = this;
@@ -1152,8 +1171,8 @@ partial class TransitBarangControl
         this.tabPage1.ResumeLayout(false);
         this.groupBox6.ResumeLayout(false);
         this.groupBox6.PerformLayout();
-        this.groupBox5.ResumeLayout(false);
-        this.groupBox5.PerformLayout();
+        this.groupBoxTambahDetail.ResumeLayout(false);
+        this.groupBoxTambahDetail.PerformLayout();
         this.groupBox1.ResumeLayout(false);
         this.groupBox1.PerformLayout();
         this.tabPage2.ResumeLayout(false);
@@ -1171,6 +1190,10 @@ partial class TransitBarangControl
         ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
         this.ResumeLayout(false);
     }
+
+    private System.Windows.Forms.DataGridViewTextBoxColumn KodeBarang;
+
+    private DoranApp.Components.NumericTextbox textBoxJumlah;
 
     private System.Windows.Forms.Button buttonUbah;
     private System.Windows.Forms.Button buttonHapus;
@@ -1192,20 +1215,18 @@ partial class TransitBarangControl
     private System.Windows.Forms.GroupBox groupBox6;
     private System.Windows.Forms.Label label26;
 
-    private System.Windows.Forms.TextBox textBox3;
+    private System.Windows.Forms.TextBox textBoxSn;
 
     private System.Windows.Forms.Label label20;
 
     public System.Windows.Forms.ComboBox comboBoxTambahMasterbarang;
-
-    private System.Windows.Forms.TextBox textBox2;
 
     private System.Windows.Forms.Label label17;
     private System.Windows.Forms.Label label18;
 
     private System.Windows.Forms.Label labelTglTransit;
 
-    private System.Windows.Forms.GroupBox groupBox5;
+    private System.Windows.Forms.GroupBox groupBoxTambahDetail;
     private System.Windows.Forms.Button button1;
     private System.Windows.Forms.Button button7;
     private System.Windows.Forms.Label label15;
