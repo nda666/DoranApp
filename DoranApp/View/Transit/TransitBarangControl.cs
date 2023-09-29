@@ -21,6 +21,8 @@ public partial class TransitBarangControl : UserControl
     public bool IsEdit = false;
     public int? KodeEdit = null;
 
+    public int? KodeTEdit = null;
+
     public int previousSelectedRow;
     public int previousSelectedRow2;
     public dynamic TransitDataQuery = new { };
@@ -332,10 +334,9 @@ public partial class TransitBarangControl : UserControl
         {
             var result = await _TransitData.DeleteDetail(Kodet, koded.ToArray());
             var indexData = _TransitData.GetData().FindIndex(x => x.KodeT == result.KodeT);
-            _TransitData.UpdateData(indexData, result);
+            _TransitData.UpdateDatatableAndData(x => (int)x["KodeT"] == result.KodeT, indexData, result);
             dataGridView1.ClearSelection();
             dataGridView1.Rows[selectedIndex].Selected = true;
-            dataGridView1.FirstDisplayedScrollingRowIndex = selectedIndex;
         }
         catch (Exception ex)
         {
@@ -432,9 +433,17 @@ public partial class TransitBarangControl : UserControl
         }
 
         var item = (MasterbarangOptionWithSnDto)comboBoxTambahMasterbarang.SelectedItem;
-        if (item.Sn == true && String.IsNullOrWhiteSpace(textBoxSn.Text))
+        if (item.Sn == true && String.IsNullOrEmpty(textBoxSn.Text))
         {
             MessageBox.Show("SN harus di isi secara manual terlebih dahulu", "error", MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+            return;
+        }
+
+        if (item.Sn == false && !String.IsNullOrEmpty(textBoxSn.Text))
+        {
+            MessageBox.Show("Item yang Anda pilih harus nya tidak memiliki SN, Akan dihapus secara Otomatis", "Warning",
+                MessageBoxButtons.OK,
                 MessageBoxIcon.Warning);
         }
 
@@ -445,14 +454,13 @@ public partial class TransitBarangControl : UserControl
             var result = await client.Insert_Detail_TransitAsync(kodet, new UpdateDetailByKodedDto()
             {
                 Jumlah = Convert.ToInt32(textBoxJumlah.Text),
-                NmrSn = textBoxSn.Text,
+                NmrSn = item.Sn == false ? "" : textBoxSn.Text,
                 Kodebarang = Convert.ToInt32(comboBoxTambahMasterbarang.SelectedValue)
             });
             var indexData = _TransitData.GetData().FindIndex(x => x.KodeT == result.KodeT);
-            _TransitData.UpdateData(indexData, result);
+            _TransitData.UpdateDatatableAndData(x => (int)x["KodeT"] == result.KodeT, indexData, result);
             dataGridView1.ClearSelection();
             dataGridView1.Rows[selectedIndex].Selected = true;
-            dataGridView1.FirstDisplayedScrollingRowIndex = selectedIndex;
         }
         catch (ApiException ex)
         {
@@ -486,10 +494,9 @@ public partial class TransitBarangControl : UserControl
                 Kodebarang = Convert.ToInt32(comboBoxTambahMasterbarang.SelectedValue)
             });
             var indexData = _TransitData.GetData().FindIndex(x => x.KodeT == result.KodeT);
-            _TransitData.UpdateData(indexData, result);
+            _TransitData.UpdateDatatableAndData(x => (int)x["KodeT"] == result.KodeT, indexData, result);
             dataGridView1.ClearSelection();
             dataGridView1.Rows[selectedIndex].Selected = true;
-            dataGridView1.FirstDisplayedScrollingRowIndex = selectedIndex;
         }
         catch (ApiException ex)
         {
@@ -515,5 +522,96 @@ public partial class TransitBarangControl : UserControl
     private void buttonTambahData_Click(object sender, EventArgs e)
     {
         EnableGroupBoxDetailTambah(true);
+    }
+
+    private void button9_Click(object sender, EventArgs e)
+    {
+        if (dataGridView1.Rows.Count <= 0 && dataGridView1.SelectedRows.Count <= 0)
+        {
+            return;
+        }
+
+        buttonBatalUbahheader.Enabled = true;
+        buttonSaveUpdate.Enabled = true;
+        buttonSimpan.Enabled = false;
+        try
+        {
+            var kodet = (int)dataGridView1.SelectedRows[0].Cells["KodeT"].Value;
+            var htransit = _TransitData.GetData().Where(x => x.KodeT == kodet).FirstOrDefault();
+
+            if (htransit.TglTrans.HasValue)
+            {
+                datePickerTglTransit.Value = (DateTime)htransit.TglTrans;
+            }
+
+            comboBoxMastergudang.SelectedValue = htransit.Kodegudang;
+            comboBoxMastergudangTujuan.SelectedValue = htransit.KodeGudangTujuan;
+            comboBoxPenyiapOrder.SelectedValue = htransit.Kodepenyiap;
+            textBoxKeterangan.Text = htransit.Keterangan;
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
+    private void buttonBatalUbahheader_Click(object sender, EventArgs e)
+    {
+        buttonBatalUbahheader.Enabled = false;
+        buttonSaveUpdate.Enabled = false;
+        buttonSimpan.Enabled = true;
+    }
+
+    private async void buttonSaveUpdate_Click(object sender, EventArgs e)
+    {
+        if (AnyDataProcessRun)
+        {
+            return;
+        }
+
+        AnyDataProcessRun = true;
+        dontUpdateChangeDgv = true;
+        buttonBatalUbahheader.Enabled = false;
+        buttonSaveUpdate.Enabled = false;
+        try
+        {
+            var kodet = (int)dataGridView1.SelectedRows[0].Cells["KodeT"].Value;
+            var selectedIndex = dataGridView1.SelectedRows[0].Index;
+            var result = await client.Update_TransitAsync(kodet, new SaveHeaderTransitDto()
+            {
+                TglTrans = datePickerTglTransit.Value,
+                Kodegudang =
+                    comboBoxMastergudang.SelectedValue != null ? (int)comboBoxMastergudang.SelectedValue : null,
+                KodeGudangTujuan = comboBoxMastergudangTujuan.SelectedValue != null
+                    ? (int)comboBoxMastergudangTujuan.SelectedValue
+                    : null,
+                Kodepenyiap = comboBoxPenyiapOrder.SelectedValue != null
+                    ? (int)comboBoxPenyiapOrder.SelectedValue
+                    : null,
+                Keterangan = textBoxKeterangan.Text.Trim()
+            });
+            var indexData = _TransitData.GetData().FindIndex(x => x.KodeT == result.KodeT);
+            _TransitData.UpdateDatatableAndData(x => (int)x["KodeT"] == result.KodeT, indexData, result);
+            dataGridView1.ClearSelection();
+            dataGridView1.Rows[selectedIndex].Selected = true;
+
+            buttonBatalUbahheader.Enabled = false;
+            buttonSaveUpdate.Enabled = false;
+            buttonSimpan.Enabled = true;
+            datePickerTglTransit.Value = DateTime.Now;
+            comboBoxPenyiapOrder.SelectedIndex = 0;
+            comboBoxMastergudang.SelectedIndex = 0;
+            comboBoxMastergudangTujuan.SelectedIndex = 0;
+            textBoxKeterangan.Clear();
+        }
+        catch (ApiException ex)
+        {
+            MessageBox.Show(ex.Message);
+            buttonBatalUbahheader.Enabled = true;
+            buttonSaveUpdate.Enabled = true;
+        }
+
+        dontUpdateChangeDgv = false;
+        AnyDataProcessRun = false;
     }
 }

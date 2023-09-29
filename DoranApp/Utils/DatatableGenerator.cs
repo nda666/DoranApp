@@ -9,8 +9,8 @@ namespace DoranApp.Utils
 {
     public class DataTableGenerator
     {
-        private DataTable dt = new DataTable();
         private List<ColumnSettings> columnSettingsList = new List<ColumnSettings>();
+        private DataTable dt = new DataTable();
 
         public DataTableGenerator(List<ColumnSettings> columnSettingsList)
         {
@@ -44,6 +44,7 @@ namespace DoranApp.Utils
                     dt.Rows.Add(row);
                 }
             }
+
             dt.EndInit();
             return dt;
         }
@@ -83,14 +84,26 @@ namespace DoranApp.Utils
         {
             return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
         }
+
+        public void UpdateRowWhere<T>(Func<DataRow, bool> condition, T newValue)
+        {
+            foreach (DataRow row in dt.Rows)
+            {
+                if (condition(row))
+                {
+                    foreach (var columnSettings in columnSettingsList)
+                    {
+                        string columnName = columnSettings.Name;
+                        object value = columnSettings.PropertySelector(newValue);
+                        row[columnName] = value ?? DBNull.Value;
+                    }
+                }
+            }
+        }
     }
 
     public class ColumnSettings
     {
-        public string Name { get; }
-        public Type DataType { get; }
-        public Func<object, object> PropertySelector { get; }
-
         public ColumnSettings(string name, Func<object, object> propertySelector, Type dataType = null)
         {
             Name = name;
@@ -98,11 +111,17 @@ namespace DoranApp.Utils
             PropertySelector = propertySelector;
         }
 
+        public string Name { get; }
+        public Type DataType { get; }
+        public Func<object, object> PropertySelector { get; }
+
         private Type GetPropertyType(Func<object, object> propertySelector)
         {
             if (propertySelector.Target is MemberExpression memberExpression)
             {
-                return memberExpression.Member is PropertyInfo propertyInfo ? propertyInfo.PropertyType : typeof(object);
+                return memberExpression.Member is PropertyInfo propertyInfo
+                    ? propertyInfo.PropertyType
+                    : typeof(object);
             }
 
             return typeof(object);

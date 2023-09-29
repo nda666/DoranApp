@@ -61,7 +61,8 @@ partial class TransitBarangControl
         this.button7 = new System.Windows.Forms.Button();
         this.label19 = new System.Windows.Forms.Label();
         this.groupBox1 = new System.Windows.Forms.GroupBox();
-        this.button3 = new System.Windows.Forms.Button();
+        this.buttonBatalUbahheader = new System.Windows.Forms.Button();
+        this.buttonSaveUpdate = new System.Windows.Forms.Button();
         this.button2 = new System.Windows.Forms.Button();
         this.label3 = new System.Windows.Forms.Label();
         this.textBoxKeterangan = new System.Windows.Forms.TextBox();
@@ -190,7 +191,6 @@ partial class TransitBarangControl
         // 
         // button9
         // 
-        this.button9.Enabled = false;
         this.button9.Location = new System.Drawing.Point(9, 52);
         this.button9.Name = "button9";
         this.button9.Size = new System.Drawing.Size(85, 34);
@@ -198,6 +198,7 @@ partial class TransitBarangControl
         this.button9.Tag = "FilterAction1";
         this.button9.Text = "Update";
         this.button9.UseVisualStyleBackColor = true;
+        this.button9.Click += new System.EventHandler(this.button9_Click);
         // 
         // button8
         // 
@@ -382,7 +383,8 @@ partial class TransitBarangControl
         // 
         // groupBox1
         // 
-        this.groupBox1.Controls.Add(this.button3);
+        this.groupBox1.Controls.Add(this.buttonBatalUbahheader);
+        this.groupBox1.Controls.Add(this.buttonSaveUpdate);
         this.groupBox1.Controls.Add(this.button2);
         this.groupBox1.Controls.Add(this.label3);
         this.groupBox1.Controls.Add(this.textBoxKeterangan);
@@ -404,15 +406,27 @@ partial class TransitBarangControl
         this.groupBox1.TabStop = false;
         this.groupBox1.Text = "Transit Barang";
         // 
-        // button3
+        // buttonBatalUbahheader
         // 
-        this.button3.Enabled = false;
-        this.button3.Location = new System.Drawing.Point(230, 258);
-        this.button3.Name = "button3";
-        this.button3.Size = new System.Drawing.Size(100, 34);
-        this.button3.TabIndex = 82;
-        this.button3.Text = "Save";
-        this.button3.UseVisualStyleBackColor = true;
+        this.buttonBatalUbahheader.Enabled = false;
+        this.buttonBatalUbahheader.Location = new System.Drawing.Point(6, 258);
+        this.buttonBatalUbahheader.Name = "buttonBatalUbahheader";
+        this.buttonBatalUbahheader.Size = new System.Drawing.Size(100, 34);
+        this.buttonBatalUbahheader.TabIndex = 83;
+        this.buttonBatalUbahheader.Text = "Batal Ubah";
+        this.buttonBatalUbahheader.UseVisualStyleBackColor = true;
+        this.buttonBatalUbahheader.Click += new System.EventHandler(this.buttonBatalUbahheader_Click);
+        // 
+        // buttonSaveUpdate
+        // 
+        this.buttonSaveUpdate.Enabled = false;
+        this.buttonSaveUpdate.Location = new System.Drawing.Point(252, 258);
+        this.buttonSaveUpdate.Name = "buttonSaveUpdate";
+        this.buttonSaveUpdate.Size = new System.Drawing.Size(100, 34);
+        this.buttonSaveUpdate.TabIndex = 82;
+        this.buttonSaveUpdate.Text = "Save";
+        this.buttonSaveUpdate.UseVisualStyleBackColor = true;
+        this.buttonSaveUpdate.Click += new System.EventHandler(this.buttonSaveUpdate_Click);
         // 
         // button2
         // 
@@ -438,12 +452,12 @@ partial class TransitBarangControl
         this.textBoxKeterangan.Location = new System.Drawing.Point(6, 175);
         this.textBoxKeterangan.Multiline = true;
         this.textBoxKeterangan.Name = "textBoxKeterangan";
-        this.textBoxKeterangan.Size = new System.Drawing.Size(324, 77);
+        this.textBoxKeterangan.Size = new System.Drawing.Size(346, 77);
         this.textBoxKeterangan.TabIndex = 5;
         // 
         // buttonSimpan
         // 
-        this.buttonSimpan.Location = new System.Drawing.Point(124, 258);
+        this.buttonSimpan.Location = new System.Drawing.Point(146, 258);
         this.buttonSimpan.Name = "buttonSimpan";
         this.buttonSimpan.Size = new System.Drawing.Size(100, 34);
         this.buttonSimpan.TabIndex = 6;
@@ -1191,6 +1205,8 @@ partial class TransitBarangControl
         this.ResumeLayout(false);
     }
 
+    private System.Windows.Forms.Button buttonBatalUbahheader;
+
     private System.Windows.Forms.DataGridViewTextBoxColumn KodeBarang;
 
     private DoranApp.Components.NumericTextbox textBoxJumlah;
@@ -1294,7 +1310,7 @@ partial class TransitBarangControl
     private System.Windows.Forms.GroupBox groupBox3;
 
     private System.Windows.Forms.Button button2;
-    private System.Windows.Forms.Button button3;
+    private System.Windows.Forms.Button buttonSaveUpdate;
 
     private System.Windows.Forms.Label label3;
 

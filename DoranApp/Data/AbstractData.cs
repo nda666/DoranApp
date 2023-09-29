@@ -86,6 +86,16 @@ namespace DoranApp.Data
             _dataTable = _dataTableGen.CreateDataTable<T>(_data);
         }
 
+        public virtual void UpdateDatatableAndData(Func<DataRow, bool> dataTableCondition, int dataIndex, T Data)
+        {
+            if (dataIndex >= 0)
+            {
+                _data[dataIndex] = Data;
+            }
+
+            _dataTableGen.UpdateRowWhere(dataTableCondition, Data);
+        }
+
         internal virtual async Task<TReturn> Delete(string primaryKeyValue)
         {
             var rest = new Rest($"{RelativeUrl()}/{primaryKeyValue}");

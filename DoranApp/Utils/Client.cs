@@ -8451,7 +8451,7 @@ namespace DoranApp.Utils
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Update_TransitAsync(int kode, SaveTransitDto body)
+        public virtual System.Threading.Tasks.Task<HtransitResult> Update_TransitAsync(int kode, SaveHeaderTransitDto body)
         {
             return Update_TransitAsync(kode, body, System.Threading.CancellationToken.None);
         }
@@ -8459,7 +8459,7 @@ namespace DoranApp.Utils
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Update_TransitAsync(int kode, SaveTransitDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<HtransitResult> Update_TransitAsync(int kode, SaveHeaderTransitDto body, System.Threading.CancellationToken cancellationToken)
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -8479,6 +8479,7 @@ namespace DoranApp.Utils
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -8503,7 +8504,12 @@ namespace DoranApp.Utils
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<HtransitResult>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -8902,23 +8908,6 @@ namespace DoranApp.Utils
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class DetailTransaksi
-    {
-        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodebarang { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlah { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Harga { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("nmrsn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nmrsn { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
-    public partial class DetailTransit
     {
         [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Kodebarang { get; set; }
@@ -11807,83 +11796,6 @@ namespace DoranApp.Utils
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<DetailTransaksi> Details { get; set; }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
-    public partial class SaveTransitDto
-    {
-        [Newtonsoft.Json.JsonProperty("tglTrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglTrans { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("kodePelanggan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodePelanggan { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlah { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("jumlahbarangbiaya", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlahbarangbiaya { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("tambahanLainnya", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? TambahanLainnya { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("dpp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Dpp { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ppn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Ppn { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("diskon", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Diskon { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("keterangan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Keterangan { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("kodeSales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodeSales { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("kodegudang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodegudang { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("salesPenagih", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? SalesPenagih { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("statusNota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? StatusNota { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("retur", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Retur { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("stoknota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Stoknota { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("noSeriOnline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NoSeriOnline { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("barcodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Barcodeonline { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("tipetempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Tipetempo { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("tgltempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tgltempo { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("infopenting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Infopenting { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeonline { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("namaCust", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NamaCust { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("nmrHp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NmrHp { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<DetailTransit> Details { get; set; }
 
     }
 
