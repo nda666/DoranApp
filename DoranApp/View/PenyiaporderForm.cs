@@ -40,7 +40,7 @@ namespace DoranApp.View
         private async void PenyiaporderForm_Load(object sender, EventArgs e)
         {
             await FetchData();
-            dataGridView1.DoubleBuffered(true);
+            dataGridView1.EnableDoubleBuffered(true);
             _dataTable = _mastergudangData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
             dataGridView1.ClearSelection();

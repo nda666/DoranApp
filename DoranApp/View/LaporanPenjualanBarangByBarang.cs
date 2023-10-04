@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ConsoleDump;
 using DoranApp.Data.Laporan;
 using DoranApp.DataGlobal;
 using DoranApp.Utils;
@@ -18,8 +19,8 @@ namespace DoranApp.View
         private IDisposable _HkategoribarangSubscribe;
 
         private LaporanTransaksiByBarangData _laporanTransaksi = new LaporanTransaksiByBarangData();
-        private List<LokasiKota> _LokasiKota = new List<LokasiKota>();
-        private List<LokasiProvinsi> _LokasiProvinsi = new List<LokasiProvinsi>();
+        private List<CommonResultDto> _LokasiKota = new List<CommonResultDto>();
+        private List<CommonResultDto> _LokasiProvinsi = new List<CommonResultDto>();
 
         private IDisposable _LokasiProvinsiSubscribe;
         private List<MasterchannelsalesOptionDto> _MasterchannelsalesOptions = new List<MasterchannelsalesOptionDto>();
@@ -49,10 +50,10 @@ namespace DoranApp.View
             // Subscribe directly without creating a new LocationObserver
             _LokasiProvinsiSubscribe = FetchLokasiProvinsiOption.Subscribe(data =>
             {
-                _LokasiProvinsi = data;
+                _LokasiProvinsi = data.Select(x => new CommonResultDto() { Kode = x.Kode, Nama = x.Nama }).ToList();
                 if (_LokasiProvinsi != null)
                 {
-                    _LokasiProvinsi = data.Prepend(new LokasiProvinsi
+                    _LokasiProvinsi = _LokasiProvinsi.Prepend(new CommonResultDto
                     {
                         Kode = null,
                         Nama = "Semua Kota"
@@ -61,14 +62,18 @@ namespace DoranApp.View
 
                 comboFilterProvinsi.DataSource = _LokasiProvinsi;
                 _LokasiKota.Clear();
-                _LokasiKota = _LokasiKota.Prepend(new LokasiKota
+                _LokasiKota = _LokasiKota.Prepend(new CommonResultDto
                 {
                     Kode = null,
                     Nama = "Semua Kota"
                 }).ToList();
-                foreach (var e in _LokasiProvinsi)
+                foreach (var e in data)
                 {
-                    _LokasiKota.AddRange(e.LokasiKota);
+                    _LokasiKota.AddRange(e.LokasiKota.Select(e => new CommonResultDto()
+                    {
+                        Kode = e.Kode,
+                        Nama = e.Nama
+                    }));
                 }
 
                 comboFilterLokasiKota.DataSource = _LokasiKota;
@@ -134,6 +139,7 @@ namespace DoranApp.View
         {
             _HkategoribarangSubscribe = FetchHkategoribarangOption.Subscribe(data =>
             {
+                data.Dump();
                 _HkategoribarangOptions = data.Prepend(new HkategoribarangOptionDto()
                 {
                     Kodeh = null,
@@ -151,7 +157,7 @@ namespace DoranApp.View
                 comboFilterDkategoribarang.DataSource = _DkategoribarangOptions;
                 comboFilterHkategoribarang.DataSource = _HkategoribarangOptions;
             });
-            FetchHkategoribarangOption.Run();
+            await FetchHkategoribarangOption.Run();
         }
 
         private async Task SubscribeMastergudang()

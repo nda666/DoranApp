@@ -94,7 +94,7 @@ namespace DoranApp.View
             comboFilterSalesTeam.SelectedIndex = -1;
 
             await FetchData();
-            dataGridView1.DoubleBuffered(true);
+            dataGridView1.EnableDoubleBuffered(true);
             _dataTable = _salesData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
             dataGridView1.ClearSelection();
@@ -182,14 +182,14 @@ namespace DoranApp.View
             textboxId.Text = selected.Kode.ToString();
             textboxName.Text = selected.Nama;
             comboSalesTeam.SelectedValue = selected.Kodetimsales;
-            checkboxIsManager.Checked = selected.Manager ?? false;
+            checkboxIsManager.Checked = selected.Manager;
             comboManager.SelectedValue = selected.Kodemanager;
-            checkBoxSalesOl.Checked = selected.Salesol ?? false;
-            checkboxGetOmzetEmail.Checked = selected.EmailOmzetTerdahsyat ?? false;
-            checkboxEmailJeteterdahsyat.Checked = selected.EmailJeteterdahsyat ?? false;
-            checkBoxEmailTargetTahunan.Checked = selected.EmailTargetTahunan ?? false;
-            checkBoxTerimaEmailOmzet.Checked = selected.Jenis ?? false;
-            checkBoxEmailresikiriman.Checked = selected.Emailresikiriman ?? false;
+            checkBoxSalesOl.Checked = selected.Salesol;
+            checkboxGetOmzetEmail.Checked = selected.EmailOmzetTerdahsyat;
+            checkboxEmailJeteterdahsyat.Checked = selected.EmailJeteterdahsyat;
+            checkBoxEmailTargetTahunan.Checked = selected.EmailTargetTahunan;
+            checkBoxTerimaEmailOmzet.Checked = selected.Jenis;
+            checkBoxEmailresikiriman.Checked = selected.Emailresikiriman;
             buttonDelete.Enabled = true;
         }
 

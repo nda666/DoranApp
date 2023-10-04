@@ -132,9 +132,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-      <Reference Include="DoranApp">
-          <HintPath>bin\Debug\DoranApp.exe</HintPath>
-      </Reference>
     <Reference Include="System" />
       <Reference Include="System.Runtime.Serialization"/>
     <Reference Include="System.Web" />
@@ -191,6 +188,7 @@
     <Compile Include="Data\Laporan\LaporanTransaksiByTokoData.cs" />
     <Compile Include="Data\Laporan\LaporanTransaksiByBarangData.cs" />
     <Compile Include="Data\MasterpengeluaranData.cs" />
+      <Compile Include="Data\MutasiStokData.cs"/>
       <Compile Include="Data\PenyiaporderData.cs"/>
     <Compile Include="Data\SetlevelhargaData.cs" />
     <Compile Include="Data\LaporanTransaksiData.cs" />
@@ -205,7 +203,7 @@
     <Compile Include="Data\MasterchannelsalesData.cs" />
     <Compile Include="Data\SalesData.cs" />
     <Compile Include="Data\TransitData.cs"/>
-      <Compile Include="DoubleBufferedExt.cs"/>
+      <Compile Include="EnableDoubleBufferedMethod.cs"/>
     <Compile Include="Dtos\HtransitDto.cs"/>
     <Compile Include="Dtos\PaginationDto.cs"/>
     <Compile Include="Helper.cs" />
@@ -213,8 +211,6 @@
     <Compile Include="Data\MastertimsalesData.cs" />
     <Compile Include="Data\MasteruserData.cs" />
     <Compile Include="Exceptions\RestException.cs" />
-      <Compile Include="RequestParams\Order\FindOrderDto.cs"/>
-      <Compile Include="RequestParams\PaginationDto.cs"/>
     <Compile Include="Utils\BarcodeGenerator.cs" />
     <Compile Include="Utils\ButtonToggleHelper.cs" />
       <Compile Include="Utils\ClientPartial.cs"/>
@@ -226,6 +222,24 @@
     <Compile Include="Utils\LoadingButtonHelper.cs"/>
     <Compile Include="Utils\RestV2.cs" />
     <Compile Include="Utils\WebSocketClientManager.cs"/>
+      <Compile Include="View\CekStok\CekStokForm.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\CekStok\CekStokForm.Designer.cs">
+          <DependentUpon>CekStokForm.cs</DependentUpon>
+      </Compile>
+      <Compile Include="View\CekStok\HistoryBarangMasukControl.cs">
+          <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Include="View\CekStok\HistoryBarangMasukControl.Designer.cs">
+          <DependentUpon>HistoryBarangMasukControl.cs</DependentUpon>
+      </Compile>
+      <Compile Include="View\CekStok\MutasiBarangControl.cs">
+          <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Include="View\CekStok\MutasiBarangControl.Designer.cs">
+          <DependentUpon>MutasiBarangControl.cs</DependentUpon>
+      </Compile>
     <Compile Include="View\LaporanPenjualanBarangBySales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -395,6 +409,12 @@
       <DependentUpon>_Container.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Report\NotaTransaksi.rdlc" />
+      <EmbeddedResource Include="View\CekStok\CekStokForm.resx">
+          <DependentUpon>CekStokForm.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="View\CekStok\MutasiBarangControl.resx">
+          <DependentUpon>MutasiBarangControl.cs</DependentUpon>
+      </EmbeddedResource>
     <EmbeddedResource Include="View\HKategoribarangForm.resx">
       <DependentUpon>HKategoribarangForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -548,7 +568,9 @@
       <None Include="Resources\icons8_loading.gif"/>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\icons8_truck_48.png"/>
+      <Content Include="Resources\icons8_truck_48.png"/>
+      <Content Include="Resources\icons8_warehouse.png"/>
+      <Content Include="Resources\icons8_warehouse1.png"/>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

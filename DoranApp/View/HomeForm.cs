@@ -62,5 +62,10 @@ namespace DoranApp.View
         {
             ((_Container)MdiParent).OpenForm<Transit.TransitForm>();
         }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            ((_Container)MdiParent).OpenForm<CekStok.CekStokForm>();
+        }
     }
 }

@@ -49,7 +49,7 @@ namespace DoranApp.View.Pegawai
         private async void DivisiControl_Load(object sender, EventArgs e)
         {
             await FetchData();
-            dataGridView1.DoubleBuffered(true);
+            dataGridView1.EnableDoubleBuffered(true);
 
             _dataTable = _masterdivisiData.GetDataTable();
             dataGridView1.DataSource = _dataTable;

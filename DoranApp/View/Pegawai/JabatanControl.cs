@@ -53,7 +53,7 @@ namespace DoranApp.View.Pegawai
         private async void JabatanControl_Load(object sender, EventArgs e)
         {
             await FetchData();
-            dataGridView1.DoubleBuffered(true);
+            dataGridView1.EnableDoubleBuffered(true);
 
             _dataTable = _masterjabatanData.GetDataTable();
             dataGridView1.DataSource = _dataTable;

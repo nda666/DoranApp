@@ -13,7 +13,7 @@ namespace DoranApp.View
     {
         public long _laporanTransaksiLastPage = 0;
 
-        private List<LokasiKota> _lokasiKota = new List<LokasiKota>();
+        private List<CommonResultDto> _lokasiKota = new List<CommonResultDto>();
         private IDisposable _LokasiKotaSubscribe;
         private MasterbarangData _masterbarang = new MasterbarangData();
         private List<MasterbarangOptionDto> _masterbarangOptions = new List<MasterbarangOptionDto>();
@@ -21,9 +21,9 @@ namespace DoranApp.View
         private List<Mastergudang> _mastergudangOptions = new List<Mastergudang>();
         private MasterpelangganData _masterpelangganData = new MasterpelangganData();
         private List<CommonResultDto> _masterpelangganOptions = new List<CommonResultDto>();
-        private List<Mastertimsales> _mastertimsales = new List<Mastertimsales>();
+        private List<MastertimsalesOptionDto> _mastertimsales = new List<MastertimsalesOptionDto>();
         private MastertimsalesData _mastertimsalesData = new MastertimsalesData();
-        private List<Sales> _sales = new List<Sales>();
+        private List<SalesOptionDto> _sales = new List<SalesOptionDto>();
 
         private LaporanTransaksiData _transaksiData = new LaporanTransaksiData();
 
@@ -73,17 +73,32 @@ namespace DoranApp.View
             try
             {
                 var resp = await _mastertimsalesData.GetWithSales();
-                _mastertimsales = resp.OrderBy(x => x.Nama).ToList();
+                var m = resp.OrderBy(x => x.Nama).ToList();
+                _mastertimsales = m.Select(x => new MastertimsalesOptionDto()
+                {
+                    Kode = x.Kode,
+                    Nama = x.Nama,
+                    Sales = x.Sales.Select(e => new SalesOptionDto()
+                    {
+                        Kode = e.Kode,
+                        Nama = e.Nama,
+                        Kodetimsales = e.Kodetimsales
+                    }).ToList(),
+                    Kodechannel = x.Kodechannel
+                }).ToList();
+
                 _sales.Clear();
                 _sales = _mastertimsales?.SelectMany(x => x.Sales)
                     .OrderBy(e => e.Nama)
                     .ToList();
-                _mastertimsales = _mastertimsales.Prepend(new Mastertimsales
+
+                _mastertimsales = _mastertimsales.Prepend(new MastertimsalesOptionDto()
                 {
                     Kode = -1,
                     Nama = "Semua Tim Sales",
                 }).ToList();
-                _sales = _sales.Prepend(new Sales
+
+                _sales = _sales.Prepend(new SalesOptionDto()
                 {
                     Kode = null,
                     Nama = "Semua Sales"
@@ -239,10 +254,14 @@ namespace DoranApp.View
 
             _LokasiKotaSubscribe = FetchLokasiKota.Subscribe(data =>
             {
-                _lokasiKota = data;
+                _lokasiKota = data.Select(e => new CommonResultDto()
+                {
+                    Kode = e.Kode,
+                    Nama = e.Nama
+                }).ToList();
                 if (_lokasiKota != null)
                 {
-                    _lokasiKota = data.Prepend(new LokasiKota
+                    _lokasiKota = _lokasiKota.Prepend(new CommonResultDto
                     {
                         Kode = null,
                         Nama = "Semua Kota"
@@ -257,8 +276,8 @@ namespace DoranApp.View
 
         private void LaporanTransaksiPenjualan_Load(object sender, EventArgs e)
         {
-            dataGridView1.DoubleBuffered(true);
-            dataGridView2.DoubleBuffered(true);
+            dataGridView1.EnableDoubleBuffered(true);
+            dataGridView2.EnableDoubleBuffered(true);
             dataGridView1.DataSource = _transaksiData.GetDataTable();
             dataGridView1.Columns.Cast<DataGridViewColumn>().ToList()
                 .ForEach(f => f.SortMode = DataGridViewColumnSortMode.NotSortable);

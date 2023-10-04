@@ -1,19 +1,23 @@
-﻿using DoranApp.Data;
-using DoranApp.Utils;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DoranApp.Data;
+using DoranApp.Utils;
 
 namespace DoranApp.View
 {
     public partial class HkelompokbarangForm : Form, INotifyPropertyChanged
     {
+        private HkelompokbarangData _hkelompokbarangData = new HkelompokbarangData();
         private string _itemId;
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public HkelompokbarangForm()
+        {
+            InitializeComponent();
+        }
 
         public string ItemId
         {
@@ -30,17 +34,12 @@ namespace DoranApp.View
 
         private DataTable _dataTable { get; set; }
 
-        private HkelompokbarangData _hkelompokbarangData = new HkelompokbarangData();
-
-        public HkelompokbarangForm()
-        {
-            InitializeComponent();
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private async void HkelompokbarangForm_Load(object sender, EventArgs e)
         {
             await FetchData();
-            dataGridView1.DoubleBuffered(true);
+            dataGridView1.EnableDoubleBuffered(true);
             _dataTable = _hkelompokbarangData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
             dataGridView1.ClearSelection();
@@ -76,11 +75,13 @@ namespace DoranApp.View
                 radioAktif.Checked = true;
                 return;
             }
+
             if (val == false)
             {
                 radioTidakAktif.Checked = true;
                 return;
             }
+
             radioAktifSemua.Checked = true;
         }
 
@@ -90,10 +91,12 @@ namespace DoranApp.View
             {
                 return true;
             }
+
             if (radioTidakAktif.Checked)
             {
                 return false;
             }
+
             return null;
         }
 
@@ -103,10 +106,12 @@ namespace DoranApp.View
             {
                 return true;
             }
+
             if (radioTransitTidak.Checked)
             {
                 return false;
             }
+
             return null;
         }
 
@@ -117,11 +122,13 @@ namespace DoranApp.View
                 radioTransitIya.Checked = true;
                 return;
             }
+
             if (val == false)
             {
                 radioTransitTidak.Checked = true;
                 return;
             }
+
             radioTransitSemua.Checked = true;
         }
 
@@ -144,6 +151,7 @@ namespace DoranApp.View
             {
                 MessageBox.Show(ex.Message);
             }
+
             ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
         }
 
@@ -169,7 +177,8 @@ namespace DoranApp.View
 
             if (dataGridView1.SelectedRows.Count > 0)
             {
-                var selected = _hkelompokbarangData.GetData().Where(x => x.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
+                var selected = _hkelompokbarangData.GetData().Where(x =>
+                    x.Kode.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
                 ItemId = selected.Kode.ToString();
                 textBoxNama.Text = selected.Nama.ToString();
                 setAktifForm(selected.Aktif);
@@ -178,7 +187,8 @@ namespace DoranApp.View
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (DialogResult.Yes == MessageBox.Show("Apakah Anda yakin ingin menyimpan data ini?", "Confirmation",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
                 ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
                 var selectedRowIndex = dataGridView1.SelectedRows.Count > 0 ? dataGridView1.SelectedRows[0].Index : 0;
@@ -207,6 +217,7 @@ namespace DoranApp.View
                 {
                     dataGridView1.Rows[selectedRowIndex].Selected = true;
                 }
+
                 textBoxNama.Focus();
 
                 ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");

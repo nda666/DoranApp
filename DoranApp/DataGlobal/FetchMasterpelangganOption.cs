@@ -22,11 +22,18 @@ namespace DoranApp.DataGlobal
             }
 
             IsRun = true;
-            var rest = new Rest("masterpelanggan/nama");
-            var response = await rest.Get();
+            try
+            {
+                var rest = new Rest("masterpelanggan/nama");
+                var response = await rest.Get();
+                var data = (List<CommonResultDto>)response.Response;
+                NotifyObservers(data);
+            }
+            catch (Exception ex)
+            {
+            }
+
             IsRun = false;
-            var data = (List<CommonResultDto>)response.Response;
-            NotifyObservers(data);
         }
 
         public static IDisposable Subscribe(Action<List<CommonResultDto>> onNext)

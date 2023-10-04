@@ -173,7 +173,7 @@ namespace DoranApp.View
             comboboxFilterActive.ValueMember = "Key";
 
             await FetchData();
-            dataGridView1.DoubleBuffered(true);
+            dataGridView1.EnableDoubleBuffered(true);
             _dataTable = _salesChannelData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
             dataGridView1.Sort(dataGridView1.Columns[2], ListSortDirection.Descending);

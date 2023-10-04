@@ -102,7 +102,7 @@ public partial class LaporanPenjualanBarangBySales : Form
         var ds = _laporanTransaksi.GetDataTable();
         bs.DataSource = ds;
         bindingNavigator1.BindingSource = bs;
-        dataGridView1.DoubleBuffered(true);
+        dataGridView1.EnableDoubleBuffered(true);
         dataGridView1.DataSource = ds;
         dataGridView1.Columns[0].Width = 300;
         dataGridView1.Columns[1].DefaultCellStyle.Format = "N0";

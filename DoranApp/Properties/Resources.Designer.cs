@@ -170,6 +170,16 @@ namespace DoranApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap icons8_warehouse {
+            get {
+                object obj = ResourceManager.GetObject("icons8_warehouse", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap imageres_5341 {
             get {
                 object obj = ResourceManager.GetObject("imageres_5341", resourceCulture);

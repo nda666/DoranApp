@@ -85,7 +85,7 @@ public partial class TransitForm : Form
         FetchPenyiaporderSubs = FetchPenyiaporder.Subscribe(x =>
         {
             transitBarangControl.comboBoxPenyiapOrder.DataSource = x.ToList();
-            transitBarangControl.comboBoxFilterPenyiap.DataSource = x.ToList().Prepend(new Utils.Penyiaporder()
+            transitBarangControl.comboBoxFilterPenyiap.DataSource = x.ToList().Prepend(new CommonResultDto()
             {
                 Kode = null, Nama = "Semua Penyiap"
             }).ToList();

@@ -115,6 +115,13 @@ namespace DoranApp.Data
             return response.Response;
         }
 
+        public async Task<HorderResult> FindUnprocesedOrderByKodeh(int kodeh)
+        {
+            var client = new Client();
+            var result = await client.Find_OrderAsync(kodeh: kodeh, lunas: 0, checkTransaksi: true);
+            return result;
+        }
+
         public async Task<TReturn> GetNameAndKodeOnly()
         {
             Rest rest = new Rest($"{RelativeUrl()}/nama");

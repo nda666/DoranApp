@@ -4,6 +4,8 @@
 // </auto-generated>
 //----------------------
 
+#nullable enable
+
 #pragma warning disable 108 // Disable "CS0108 '{derivedDto}.ToJson()' hides inherited member '{dtoBase}.ToJson()'. Use the new keyword if hiding was intended."
 #pragma warning disable 114 // Disable "CS0114 '{derivedDto}.RaisePropertyChanged(String)' hides inherited member 'dtoBase.RaisePropertyChanged(String)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword."
 #pragma warning disable 472 // Disable "CS0472 The result of the expression is always 'false' since a value of type 'Int32' is never equal to 'null' of type 'Int32?'
@@ -54,17 +56,10 @@ namespace DoranApp.Utils
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<HargaByLevelResult>> Get_Harga_By_LevelAsync(System.Collections.Generic.IEnumerable<int> kodebarang, int kodepelanggan, int kodelevel)
-        {
-            return Get_Harga_By_LevelAsync(kodebarang, kodepelanggan, kodelevel, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<HargaByLevelResult>> Get_Harga_By_LevelAsync(System.Collections.Generic.IEnumerable<int> kodebarang, int kodepelanggan, int kodelevel, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<HargaByLevelResult>> Get_Harga_By_LevelAsync(System.Collections.Generic.IEnumerable<int> kodebarang, int kodepelanggan, int kodelevel, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kodebarang == null)
                 throw new System.ArgumentNullException("kodebarang");
@@ -141,17 +136,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Hkategoribarang>> Get_Hkategori_BarangAllAsync(string nama, bool? aktif, bool? deleted)
-        {
-            return Get_Hkategori_BarangAllAsync(nama, aktif, deleted, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Hkategoribarang>> Get_Hkategori_BarangAllAsync(string nama, bool? aktif, bool? deleted, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Hkategoribarang>> Get_Hkategori_BarangAllAsync(string? nama = null, bool? aktif = null, bool? deleted = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/HkategoriBarang?");
@@ -176,7 +164,7 @@ namespace DoranApp.Utils
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -228,17 +216,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Hkategoribarang> Post_Hkategori_BarangAsync(SaveHkategoribarangDto body)
-        {
-            return Post_Hkategori_BarangAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Hkategoribarang> Post_Hkategori_BarangAsync(SaveHkategoribarangDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Hkategoribarang> Post_Hkategori_BarangAsync(SaveHkategoribarangDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/HkategoriBarang");
@@ -251,10 +232,10 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -306,17 +287,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<HkategoribarangOptionDto>> Get_Hkategori_Barang_With_DkategoribarangAsync(string nama, bool? aktif, bool? deleted)
-        {
-            return Get_Hkategori_Barang_With_DkategoribarangAsync(nama, aktif, deleted, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<HkategoribarangOptionDto>> Get_Hkategori_Barang_With_DkategoribarangAsync(string nama, bool? aktif, bool? deleted, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<HkategoribarangOptionDto>> Get_Hkategori_Barang_With_DkategoribarangAsync(string? nama = null, bool? aktif = null, bool? deleted = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/HkategoriBarang/with-dkategoribarang?");
@@ -341,7 +315,7 @@ namespace DoranApp.Utils
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -393,17 +367,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Hkategoribarang> Get_Hkategori_BarangAsync(int kodeh)
-        {
-            return Get_Hkategori_BarangAsync(kodeh, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Hkategoribarang> Get_Hkategori_BarangAsync(int kodeh, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Hkategoribarang> Get_Hkategori_BarangAsync(int kodeh, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kodeh == null)
                 throw new System.ArgumentNullException("kodeh");
@@ -419,7 +386,7 @@ namespace DoranApp.Utils
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -471,17 +438,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Hkategoribarang> Put_Hkategori_BarangAsync(int kodeh, SaveHkategoribarangDto body)
-        {
-            return Put_Hkategori_BarangAsync(kodeh, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Hkategoribarang> Put_Hkategori_BarangAsync(int kodeh, SaveHkategoribarangDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Hkategoribarang> Put_Hkategori_BarangAsync(int kodeh, SaveHkategoribarangDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kodeh == null)
                 throw new System.ArgumentNullException("kodeh");
@@ -498,10 +458,10 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -553,17 +513,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Delete_Hkategori_BarangAsync(int kodeh)
-        {
-            return Delete_Hkategori_BarangAsync(kodeh, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Delete_Hkategori_BarangAsync(int kodeh, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Delete_Hkategori_BarangAsync(int kodeh, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kodeh == null)
                 throw new System.ArgumentNullException("kodeh");
@@ -625,17 +578,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Hkelompokbarang>> Get_Hkelompokbarang_By_KodeAsync(string nama, bool? aktif, bool? deleted)
-        {
-            return Get_Hkelompokbarang_By_KodeAsync(nama, aktif, deleted, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Hkelompokbarang>> Get_Hkelompokbarang_By_KodeAsync(string nama, bool? aktif, bool? deleted, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Hkelompokbarang>> Get_Hkelompokbarang_By_KodeAsync(string? nama = null, bool? aktif = null, bool? deleted = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Hkelompokbarang?");
@@ -712,17 +658,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Hkelompokbarang> Post_HkelompokbarangAsync(SaveHkelompokbarangDto body)
-        {
-            return Post_HkelompokbarangAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Hkelompokbarang> Post_HkelompokbarangAsync(SaveHkelompokbarangDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Hkelompokbarang> Post_HkelompokbarangAsync(SaveHkelompokbarangDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Hkelompokbarang");
@@ -735,7 +674,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -790,17 +729,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Hkelompokbarang> Get_HkelompokbarangAsync(int kode)
-        {
-            return Get_HkelompokbarangAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Hkelompokbarang> Get_HkelompokbarangAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Hkelompokbarang> Get_HkelompokbarangAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -868,17 +800,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Hkelompokbarang> Put_HkelompokbarangAsync(int kode, SaveHkelompokbarangDto body)
-        {
-            return Put_HkelompokbarangAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Hkelompokbarang> Put_HkelompokbarangAsync(int kode, SaveHkelompokbarangDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Hkelompokbarang> Put_HkelompokbarangAsync(int kode, SaveHkelompokbarangDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -895,7 +820,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -950,17 +875,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Delete_HkelompokbarangAsync(int kode)
-        {
-            return Delete_HkelompokbarangAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Delete_HkelompokbarangAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Delete_HkelompokbarangAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -1022,17 +940,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<string> GetAsync()
-        {
-            return GetAsync(System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<string> GetAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<string> GetAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/");
@@ -1044,7 +955,7 @@ namespace DoranApp.Utils
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1096,17 +1007,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masteruser> Post_LoginAsync(LoginDto body)
-        {
-            return Post_LoginAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masteruser> Post_LoginAsync(LoginDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masteruser> Post_LoginAsync(LoginDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Login");
@@ -1119,7 +1023,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -1174,17 +1078,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LokasiKota>> Get_Lokasi_KotaAllAsync(string nama, bool? aktif)
-        {
-            return Get_Lokasi_KotaAllAsync(nama, aktif, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LokasiKota>> Get_Lokasi_KotaAllAsync(string nama, bool? aktif, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LokasiKota>> Get_Lokasi_KotaAllAsync(string? nama = null, bool? aktif = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/LokasiKota?");
@@ -1205,7 +1102,7 @@ namespace DoranApp.Utils
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1257,17 +1154,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LokasiKota> Post_Lokasi_KotaAsync(SaveLokasiKotaDto body)
-        {
-            return Post_Lokasi_KotaAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LokasiKota> Post_Lokasi_KotaAsync(SaveLokasiKotaDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<LokasiKota> Post_Lokasi_KotaAsync(SaveLokasiKotaDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/LokasiKota");
@@ -1280,10 +1170,10 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1335,17 +1225,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LokasiKota> Get_Lokasi_KotaAsync(int kode)
-        {
-            return Get_Lokasi_KotaAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LokasiKota> Get_Lokasi_KotaAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<LokasiKota> Get_Lokasi_KotaAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -1361,7 +1244,7 @@ namespace DoranApp.Utils
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1413,17 +1296,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LokasiKota> Put_Lokasi_KotaAsync(int kode, SaveLokasiKotaDto body)
-        {
-            return Put_Lokasi_KotaAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LokasiKota> Put_Lokasi_KotaAsync(int kode, SaveLokasiKotaDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<LokasiKota> Put_Lokasi_KotaAsync(int kode, SaveLokasiKotaDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -1440,10 +1316,10 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1495,17 +1371,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Delete_Lokasi_KotaAsync(int kode)
-        {
-            return Delete_Lokasi_KotaAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Delete_Lokasi_KotaAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Delete_Lokasi_KotaAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -1567,17 +1436,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LokasiProvinsi>> Get_Lokasi_ProvinsiAsync(string nama, bool? aktif)
-        {
-            return Get_Lokasi_ProvinsiAsync(nama, aktif, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LokasiProvinsi>> Get_Lokasi_ProvinsiAsync(string nama, bool? aktif, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LokasiProvinsi>> Get_Lokasi_ProvinsiAsync(string? nama = null, bool? aktif = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/LokasiProvinsi?");
@@ -1598,7 +1460,7 @@ namespace DoranApp.Utils
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1650,17 +1512,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LokasiProvinsi> Post_Lokasi_ProvinsiAsync(SaveLokasiProvinsiDto body)
-        {
-            return Post_Lokasi_ProvinsiAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LokasiProvinsi> Post_Lokasi_ProvinsiAsync(SaveLokasiProvinsiDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<LokasiProvinsi> Post_Lokasi_ProvinsiAsync(SaveLokasiProvinsiDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/LokasiProvinsi");
@@ -1673,10 +1528,10 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1728,17 +1583,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<object>> Get_Lokasi_Provinsi_With_KotaAsync(string nama, bool? aktif)
-        {
-            return Get_Lokasi_Provinsi_With_KotaAsync(nama, aktif, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<object>> Get_Lokasi_Provinsi_With_KotaAsync(string nama, bool? aktif, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<object>> Get_Lokasi_Provinsi_With_KotaAsync(string? nama = null, bool? aktif = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/LokasiProvinsi/withkota?");
@@ -1759,7 +1607,7 @@ namespace DoranApp.Utils
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1811,17 +1659,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LokasiProvinsi> Get_Lokasi_Provinsi_By_KodeAsync(int kode)
-        {
-            return Get_Lokasi_Provinsi_By_KodeAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LokasiProvinsi> Get_Lokasi_Provinsi_By_KodeAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<LokasiProvinsi> Get_Lokasi_Provinsi_By_KodeAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -1837,7 +1678,7 @@ namespace DoranApp.Utils
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1889,17 +1730,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<LokasiProvinsi> Put_Lokasi_ProvinsiAsync(int kode, SaveLokasiProvinsiDto body)
-        {
-            return Put_Lokasi_ProvinsiAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<LokasiProvinsi> Put_Lokasi_ProvinsiAsync(int kode, SaveLokasiProvinsiDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<LokasiProvinsi> Put_Lokasi_ProvinsiAsync(int kode, SaveLokasiProvinsiDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -1916,10 +1750,10 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -1971,17 +1805,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Delete_Lokasi_ProvinsiAsync(int kode)
-        {
-            return Delete_Lokasi_ProvinsiAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Delete_Lokasi_ProvinsiAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Delete_Lokasi_ProvinsiAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -2043,17 +1870,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MasterbarangOptionWithSnDto>> Get_Masterbarang_OptionsAsync(string brgNama, bool? brgAktif)
-        {
-            return Get_Masterbarang_OptionsAsync(brgNama, brgAktif, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MasterbarangOptionWithSnDto>> Get_Masterbarang_OptionsAsync(string brgNama, bool? brgAktif, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MasterbarangOptionWithSnDto>> Get_Masterbarang_OptionsAsync(string? brgNama = null, bool? brgAktif = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterbarang/options?");
@@ -2126,17 +1946,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Get_Masterbarang_NamaAsync(string brgNama, bool? brgAktif)
-        {
-            return Get_Masterbarang_NamaAsync(brgNama, brgAktif, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Get_Masterbarang_NamaAsync(string brgNama, bool? brgAktif, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Get_Masterbarang_NamaAsync(string? brgNama = null, bool? brgAktif = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterbarang/nama?");
@@ -2203,17 +2016,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterchannelsales>> Get_MasterchannelsalesAllAsync(string nama, string deleted)
-        {
-            return Get_MasterchannelsalesAllAsync(nama, deleted, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterchannelsales>> Get_MasterchannelsalesAllAsync(string nama, string deleted, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterchannelsales>> Get_MasterchannelsalesAllAsync(string? nama = null, string? deleted = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterchannelsales?");
@@ -2286,17 +2092,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masterchannelsales> Post_Sales_ChannelAsync(SaveMasterchannelsalesDto body)
-        {
-            return Post_Sales_ChannelAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masterchannelsales> Post_Sales_ChannelAsync(SaveMasterchannelsalesDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masterchannelsales> Post_Sales_ChannelAsync(SaveMasterchannelsalesDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterchannelsales");
@@ -2309,7 +2108,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -2364,17 +2163,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MasterchannelsalesOptionDto>> Get_Masterchannelsales_With_Tim_And_SalesAsync(string nama, string deleted)
-        {
-            return Get_Masterchannelsales_With_Tim_And_SalesAsync(nama, deleted, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MasterchannelsalesOptionDto>> Get_Masterchannelsales_With_Tim_And_SalesAsync(string nama, string deleted, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MasterchannelsalesOptionDto>> Get_Masterchannelsales_With_Tim_And_SalesAsync(string? nama = null, string? deleted = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterchannelsales/withtimandsales?");
@@ -2447,17 +2239,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masterchannelsales> Get_MasterchannelsalesAsync(System.Guid id)
-        {
-            return Get_MasterchannelsalesAsync(id, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masterchannelsales> Get_MasterchannelsalesAsync(System.Guid id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masterchannelsales> Get_MasterchannelsalesAsync(System.Guid id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2525,17 +2310,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Delete_Sales_ChannelAsync(int id)
-        {
-            return Delete_Sales_ChannelAsync(id, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Delete_Sales_ChannelAsync(int id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Delete_Sales_ChannelAsync(int id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -2597,17 +2375,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masterchannelsales> Put_Sales_ChannelAsync(int kode, SaveMasterchannelsalesDto body)
-        {
-            return Put_Sales_ChannelAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masterchannelsales> Put_Sales_ChannelAsync(int kode, SaveMasterchannelsalesDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masterchannelsales> Put_Sales_ChannelAsync(int kode, SaveMasterchannelsalesDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -2624,7 +2395,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -2679,17 +2450,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterdivisi>> Get_MasterdivisiAllAsync(string nama, bool? deleted)
-        {
-            return Get_MasterdivisiAllAsync(nama, deleted, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterdivisi>> Get_MasterdivisiAllAsync(string nama, bool? deleted, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterdivisi>> Get_MasterdivisiAllAsync(string? nama = null, bool? deleted = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterdivisi?");
@@ -2762,17 +2526,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masterdivisi> Post_MasterdivisiAsync(SaveMasterdivisiDto body)
-        {
-            return Post_MasterdivisiAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masterdivisi> Post_MasterdivisiAsync(SaveMasterdivisiDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masterdivisi> Post_MasterdivisiAsync(SaveMasterdivisiDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterdivisi");
@@ -2785,7 +2542,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -2840,17 +2597,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masterdivisi> Get_MasterdivisiAsync(int kode)
-        {
-            return Get_MasterdivisiAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masterdivisi> Get_MasterdivisiAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masterdivisi> Get_MasterdivisiAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -2918,17 +2668,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masterdivisi> Put_MasterdivisiAsync(int kode, SaveMasterdivisiDto body)
-        {
-            return Put_MasterdivisiAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masterdivisi> Put_MasterdivisiAsync(int kode, SaveMasterdivisiDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masterdivisi> Put_MasterdivisiAsync(int kode, SaveMasterdivisiDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -2945,7 +2688,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -3000,17 +2743,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Delete_MasterdivisiAsync(int kode)
-        {
-            return Delete_MasterdivisiAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Delete_MasterdivisiAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Delete_MasterdivisiAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -3072,17 +2808,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Mastergudang>> Get_Mastergudang_By_KodeAllAsync(string nama, bool? aktif, int? urut, bool? boletransit, bool? deleted)
-        {
-            return Get_Mastergudang_By_KodeAllAsync(nama, aktif, urut, boletransit, deleted, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Mastergudang>> Get_Mastergudang_By_KodeAllAsync(string nama, bool? aktif, int? urut, bool? boletransit, bool? deleted, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Mastergudang>> Get_Mastergudang_By_KodeAllAsync(string? nama = null, bool? aktif = null, int? urut = null, bool? boletransit = null, bool? deleted = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Mastergudang?");
@@ -3167,17 +2896,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Mastergudang> Post_MastergudangAsync(SaveMastergudangDto body)
-        {
-            return Post_MastergudangAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Mastergudang> Post_MastergudangAsync(SaveMastergudangDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Mastergudang> Post_MastergudangAsync(SaveMastergudangDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Mastergudang");
@@ -3190,7 +2912,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -3245,17 +2967,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MastergudangOptionDto>> Get_Mastergudang_OptionsAsync(string nama, bool? aktif, int? urut, bool? boletransit, bool? deleted)
-        {
-            return Get_Mastergudang_OptionsAsync(nama, aktif, urut, boletransit, deleted, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MastergudangOptionDto>> Get_Mastergudang_OptionsAsync(string nama, bool? aktif, int? urut, bool? boletransit, bool? deleted, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<MastergudangOptionDto>> Get_Mastergudang_OptionsAsync(string? nama = null, bool? aktif = null, int? urut = null, bool? boletransit = null, bool? deleted = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Mastergudang/options?");
@@ -3340,17 +3055,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Mastergudang> Get_Mastergudang_By_KodeAsync(int kode)
-        {
-            return Get_Mastergudang_By_KodeAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Mastergudang> Get_Mastergudang_By_KodeAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Mastergudang> Get_Mastergudang_By_KodeAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -3418,17 +3126,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Mastergudang> Put_MastergudangAsync(int kode, SaveMastergudangDto body)
-        {
-            return Put_MastergudangAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Mastergudang> Put_MastergudangAsync(int kode, SaveMastergudangDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Mastergudang> Put_MastergudangAsync(int kode, SaveMastergudangDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -3445,7 +3146,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -3500,17 +3201,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Delete_MastergudangAsync(int kode)
-        {
-            return Delete_MastergudangAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Delete_MastergudangAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Delete_MastergudangAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -3572,17 +3266,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Mastergudang> Post_Set_Aktif_Master_GudangAsync(int kode, SetAktifMastergudangDto body)
-        {
-            return Post_Set_Aktif_Master_GudangAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Mastergudang> Post_Set_Aktif_Master_GudangAsync(int kode, SetAktifMastergudangDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Mastergudang> Post_Set_Aktif_Master_GudangAsync(int kode, SetAktifMastergudangDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -3599,7 +3286,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -3654,17 +3341,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Mastergudang> Post_Set_Transit_Master_GudangAsync(int kode, SetTranstirMastergudangDto body)
-        {
-            return Post_Set_Transit_Master_GudangAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Mastergudang> Post_Set_Transit_Master_GudangAsync(int kode, SetTranstirMastergudangDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Mastergudang> Post_Set_Transit_Master_GudangAsync(int kode, SetTranstirMastergudangDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -3681,7 +3361,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -3736,17 +3416,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterjabatan>> Get_MasterjabatanAllAsync(string nama, bool? deleted)
-        {
-            return Get_MasterjabatanAllAsync(nama, deleted, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterjabatan>> Get_MasterjabatanAllAsync(string nama, bool? deleted, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterjabatan>> Get_MasterjabatanAllAsync(string? nama = null, bool? deleted = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterjabatan?");
@@ -3819,17 +3492,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masterjabatan> Post_MasterjabatanAsync(SaveMasterjabatanDto body)
-        {
-            return Post_MasterjabatanAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masterjabatan> Post_MasterjabatanAsync(SaveMasterjabatanDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masterjabatan> Post_MasterjabatanAsync(SaveMasterjabatanDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterjabatan");
@@ -3842,7 +3508,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -3897,17 +3563,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masterjabatan> Get_MasterjabatanAsync(int kode)
-        {
-            return Get_MasterjabatanAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masterjabatan> Get_MasterjabatanAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masterjabatan> Get_MasterjabatanAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -3975,17 +3634,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masterjabatan> Put_MasterjabatanAsync(int kode, SaveMasterjabatanDto body)
-        {
-            return Put_MasterjabatanAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masterjabatan> Put_MasterjabatanAsync(int kode, SaveMasterjabatanDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masterjabatan> Put_MasterjabatanAsync(int kode, SaveMasterjabatanDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -4002,7 +3654,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -4057,17 +3709,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Delete_MasterjabatanAsync(int kode)
-        {
-            return Delete_MasterjabatanAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Delete_MasterjabatanAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Delete_MasterjabatanAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -4129,17 +3774,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterpelanggan>> Get_MasterpelangganAsync(string nama, bool? aktif)
-        {
-            return Get_MasterpelangganAsync(nama, aktif, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterpelanggan>> Get_MasterpelangganAsync(string nama, bool? aktif, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterpelanggan>> Get_MasterpelangganAsync(string? nama = null, bool? aktif = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterpelanggan?");
@@ -4212,17 +3850,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Get_Masterpelanggan_NamaAsync(string nama, bool? aktif)
-        {
-            return Get_Masterpelanggan_NamaAsync(nama, aktif, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Get_Masterpelanggan_NamaAsync(string nama, bool? aktif, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Get_Masterpelanggan_NamaAsync(string? nama = null, bool? aktif = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterpelanggan/nama?");
@@ -4289,17 +3920,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterpengeluaran>> Get_Masterpengeluaran_By_KodeAsync(string nama, bool? aktif, bool? cargo)
-        {
-            return Get_Masterpengeluaran_By_KodeAsync(nama, aktif, cargo, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterpengeluaran>> Get_Masterpengeluaran_By_KodeAsync(string nama, bool? aktif, bool? cargo, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterpengeluaran>> Get_Masterpengeluaran_By_KodeAsync(string? nama = null, bool? aktif = null, bool? cargo = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterpengeluaran?");
@@ -4376,17 +4000,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masterpengeluaran> Post_MasterpengeluaranAsync(SaveMasterpengeluaranDto body)
-        {
-            return Post_MasterpengeluaranAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masterpengeluaran> Post_MasterpengeluaranAsync(SaveMasterpengeluaranDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masterpengeluaran> Post_MasterpengeluaranAsync(SaveMasterpengeluaranDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterpengeluaran");
@@ -4399,7 +4016,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -4454,17 +4071,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterpengeluaran>> Get_EkspedisiAsync()
-        {
-            return Get_EkspedisiAsync(System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterpengeluaran>> Get_EkspedisiAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterpengeluaran>> Get_EkspedisiAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterpengeluaran/ekspedisi");
@@ -4528,17 +4138,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masterpengeluaran> Get_MasterpengeluaranAsync(int kode)
-        {
-            return Get_MasterpengeluaranAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masterpengeluaran> Get_MasterpengeluaranAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masterpengeluaran> Get_MasterpengeluaranAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -4606,17 +4209,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masterpengeluaran> Put_MasterpengeluaranAsync(int kode, SaveMasterpengeluaranDto body)
-        {
-            return Put_MasterpengeluaranAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masterpengeluaran> Put_MasterpengeluaranAsync(int kode, SaveMasterpengeluaranDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masterpengeluaran> Put_MasterpengeluaranAsync(int kode, SaveMasterpengeluaranDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -4633,7 +4229,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -4688,17 +4284,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masterpengeluaran> Post_Set_Aktif_Master_Gudang2Async(int kode, SetAktifMasterpengeluaranDto body)
-        {
-            return Post_Set_Aktif_Master_Gudang2Async(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masterpengeluaran> Post_Set_Aktif_Master_Gudang2Async(int kode, SetAktifMasterpengeluaranDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masterpengeluaran> Post_Set_Aktif_Master_Gudang2Async(int kode, SetAktifMasterpengeluaranDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -4715,7 +4304,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -4770,17 +4359,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Mastertimsales>> Get_MastertimsalesAllAsync(string nama, bool? aktif, string kodechannel, string deleted, bool? withSales)
-        {
-            return Get_MastertimsalesAllAsync(nama, aktif, kodechannel, deleted, withSales, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Mastertimsales>> Get_MastertimsalesAllAsync(string nama, bool? aktif, string kodechannel, string deleted, bool? withSales, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Mastertimsales>> Get_MastertimsalesAllAsync(string? nama = null, bool? aktif = null, string? kodechannel = null, string? deleted = null, bool? withSales = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Mastertimsales?");
@@ -4865,17 +4447,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Mastertimsales> Post_Sales_TeamAsync(SaveMastertimsalesDto body)
-        {
-            return Post_Sales_TeamAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Mastertimsales> Post_Sales_TeamAsync(SaveMastertimsalesDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Mastertimsales> Post_Sales_TeamAsync(SaveMastertimsalesDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Mastertimsales");
@@ -4888,7 +4463,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -4943,17 +4518,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Mastertimsales> Get_MastertimsalesAsync(int kode)
-        {
-            return Get_MastertimsalesAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Mastertimsales> Get_MastertimsalesAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Mastertimsales> Get_MastertimsalesAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -5021,17 +4589,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Put_Sales_TeamAsync(int kode, SaveMastertimsalesDto body)
-        {
-            return Put_Sales_TeamAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Put_Sales_TeamAsync(int kode, SaveMastertimsalesDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Put_Sales_TeamAsync(int kode, SaveMastertimsalesDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -5048,7 +4609,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
 
@@ -5097,17 +4658,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Delete_Sales_TeamAsync(int kode)
-        {
-            return Delete_Sales_TeamAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Delete_Sales_TeamAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Delete_Sales_TeamAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -5169,17 +4723,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masteruser>> Get_UsersAsync(string username, string akses, bool? aktif, bool? deleted)
-        {
-            return Get_UsersAsync(username, akses, aktif, deleted, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masteruser>> Get_UsersAsync(string username, string akses, bool? aktif, bool? deleted, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masteruser>> Get_UsersAsync(string? username = null, string? akses = null, bool? aktif = null, bool? deleted = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masteruser?");
@@ -5260,17 +4807,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masteruser> Post_UserAsync(SaveMasteruserDto body)
-        {
-            return Post_UserAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masteruser> Post_UserAsync(SaveMasteruserDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masteruser> Post_UserAsync(SaveMasteruserDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masteruser");
@@ -5283,7 +4823,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -5338,17 +4878,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Masteruser> Get_UserAsync(System.Guid id)
-        {
-            return Get_UserAsync(id, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Masteruser> Get_UserAsync(System.Guid id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Masteruser> Get_UserAsync(System.Guid id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -5416,17 +4949,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Delete_UserAsync(System.Guid id)
-        {
-            return Delete_UserAsync(id, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Delete_UserAsync(System.Guid id, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Delete_UserAsync(System.Guid id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (id == null)
                 throw new System.ArgumentNullException("id");
@@ -5488,17 +5014,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Put_UserAsync(int kodeKu, UpdateMasteruserDto body)
-        {
-            return Put_UserAsync(kodeKu, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Put_UserAsync(int kodeKu, UpdateMasteruserDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Put_UserAsync(int kodeKu, UpdateMasteruserDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kodeKu == null)
                 throw new System.ArgumentNullException("kodeKu");
@@ -5515,7 +5034,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
 
@@ -5564,20 +5083,206 @@ namespace DoranApp.Utils
             }
         }
 
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<HorderResultDto>> Get_OrderAsync(int? kodeh, string namaPelanggan, string namaCust, int? kodesales, int? kodepelanggan, object levelOrder, bool? belumCekOl, bool? salesOl, bool? dicetak, string lunas, System.DateTime? minDate, System.DateTime? maxDate, int? page, int? pageSize)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<HorderResultDto>> Get_OrderAsync(int? page = null, int? pageSize = null, int? kodeh = null, string? namaPelanggan = null, string? namaCust = null, int? kodesales = null, int? kodepelanggan = null, LevelOrderEnum? levelOrder = null, bool? belumCekOl = null, bool? salesOl = null, bool? dicetak = null, int? lunas = null, System.DateTime? minDate = null, System.DateTime? maxDate = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
-            return Get_OrderAsync(kodeh, namaPelanggan, namaCust, kodesales, kodepelanggan, levelOrder, belumCekOl, salesOl, dicetak, lunas, minDate, maxDate, page, pageSize, System.Threading.CancellationToken.None);
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Order?");
+            if (page != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Page") + "=").Append(System.Uri.EscapeDataString(ConvertToString(page, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (pageSize != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("PageSize") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageSize, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodeh != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Kodeh") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodeh, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (namaPelanggan != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("NamaPelanggan") + "=").Append(System.Uri.EscapeDataString(ConvertToString(namaPelanggan, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (namaCust != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("NamaCust") + "=").Append(System.Uri.EscapeDataString(ConvertToString(namaCust, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodesales != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Kodesales") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodesales, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodepelanggan != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Kodepelanggan") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodepelanggan, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (levelOrder != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("LevelOrder") + "=").Append(System.Uri.EscapeDataString(ConvertToString(levelOrder, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (belumCekOl != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("BelumCekOl") + "=").Append(System.Uri.EscapeDataString(ConvertToString(belumCekOl, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (salesOl != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("SalesOl") + "=").Append(System.Uri.EscapeDataString(ConvertToString(salesOl, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (dicetak != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Dicetak") + "=").Append(System.Uri.EscapeDataString(ConvertToString(dicetak, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (lunas != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Lunas") + "=").Append(System.Uri.EscapeDataString(ConvertToString(lunas, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (minDate != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("MinDate") + "=").Append(System.Uri.EscapeDataString(minDate.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (maxDate != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("MaxDate") + "=").Append(System.Uri.EscapeDataString(maxDate.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<HorderResultDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<HorderResultDto>> Get_OrderAsync(int? kodeh, string namaPelanggan, string namaCust, int? kodesales, int? kodepelanggan, object levelOrder, bool? belumCekOl, bool? salesOl, bool? dicetak, string lunas, System.DateTime? minDate, System.DateTime? maxDate, int? page, int? pageSize, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Save_OrderAsync(SaveOrderDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Order?");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Order");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<HorderResult> Find_OrderAsync(bool? checkTransaksi = null, int? kodeh = null, string? namaPelanggan = null, string? namaCust = null, int? kodesales = null, int? kodepelanggan = null, LevelOrderEnum? levelOrder = null, bool? belumCekOl = null, bool? salesOl = null, bool? dicetak = null, int? lunas = null, System.DateTime? minDate = null, System.DateTime? maxDate = null, int? page = null, int? pageSize = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Order/find?");
+            if (checkTransaksi != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("CheckTransaksi") + "=").Append(System.Uri.EscapeDataString(ConvertToString(checkTransaksi, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
             if (kodeh != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("Kodeh") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodeh, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -5668,7 +5373,7 @@ namespace DoranApp.Utils
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<HorderResultDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<HorderResult>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -5695,95 +5400,13 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Save_OrderAsync(SaveOrderDto body)
-        {
-            return Save_OrderAsync(body, System.Threading.CancellationToken.None);
-        }
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Save_OrderAsync(SaveOrderDto body, System.Threading.CancellationToken cancellationToken)
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Order");
-
-            var client_ = _httpClient;
-            var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
-                    var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-
-                    PrepareRequest(client_, request_, urlBuilder_);
-
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-
-                    PrepareRequest(client_, request_, url_);
-
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    var disposeResponse_ = true;
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-
-                        ProcessResponse(client_, response_);
-
-                        var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
-                        }
-                    }
-                    finally
-                    {
-                        if (disposeResponse_)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (disposeClient_)
-                    client_.Dispose();
-            }
-        }
-
-        /// <summary>
-        /// Update Order by kode
-        /// </summary>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Update_OrderAsync(int kode, SaveOrderDto body)
-        {
-            return Update_OrderAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Update Order by kode
         /// </summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Update_OrderAsync(int kode, SaveOrderDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Update_OrderAsync(int kode, SaveOrderDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -5800,7 +5423,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
 
@@ -5849,23 +5472,13 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <summary>
-        /// Update header Order by kode
-        /// </summary>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Update_Order_HeaderAsync(int kode, SaveOrderHeaderDto body)
-        {
-            return Update_Order_HeaderAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// Update header Order by kode
         /// </summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Update_Order_HeaderAsync(int kode, SaveOrderHeaderDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Update_Order_HeaderAsync(int kode, SaveOrderHeaderDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -5882,7 +5495,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
 
@@ -5931,17 +5544,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Set_Penyiap_OrderAsync(int kode, SetPenyiapOrderDto body)
-        {
-            return Set_Penyiap_OrderAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Set_Penyiap_OrderAsync(int kode, SetPenyiapOrderDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Set_Penyiap_OrderAsync(int kode, SetPenyiapOrderDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -5958,7 +5564,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
 
@@ -6007,17 +5613,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Penyiaporder>> Get_PenyiaporderAllAsync(string nama, bool? aktif)
-        {
-            return Get_PenyiaporderAllAsync(nama, aktif, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Penyiaporder>> Get_PenyiaporderAllAsync(string nama, bool? aktif, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Penyiaporder>> Get_PenyiaporderAllAsync(string? nama = null, bool? aktif = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Penyiaporder?");
@@ -6038,7 +5637,7 @@ namespace DoranApp.Utils
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -6090,17 +5689,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Penyiaporder> Post_PenyiaporderAsync(SavePenyiaporderDto body)
-        {
-            return Post_PenyiaporderAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Penyiaporder> Post_PenyiaporderAsync(SavePenyiaporderDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Penyiaporder> Post_PenyiaporderAsync(SavePenyiaporderDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Penyiaporder");
@@ -6113,10 +5705,10 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -6168,17 +5760,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Penyiaporder> Get_PenyiaporderAsync(int kode)
-        {
-            return Get_PenyiaporderAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Penyiaporder> Get_PenyiaporderAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Penyiaporder> Get_PenyiaporderAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -6194,7 +5779,7 @@ namespace DoranApp.Utils
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -6246,17 +5831,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Penyiaporder> Put_PenyiaporderAsync(int kode, SavePenyiaporderDto body)
-        {
-            return Put_PenyiaporderAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Penyiaporder> Put_PenyiaporderAsync(int kode, SavePenyiaporderDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Penyiaporder> Put_PenyiaporderAsync(int kode, SavePenyiaporderDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -6273,10 +5851,10 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -6328,17 +5906,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Delete_PenyiaporderAsync(int kode)
-        {
-            return Delete_PenyiaporderAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Delete_PenyiaporderAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Delete_PenyiaporderAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -6400,17 +5971,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<SalesDto>> Get_SalesAsync(string nama, bool? aktif, int? kodetimsales, bool? manager, bool? deleted)
-        {
-            return Get_SalesAsync(nama, aktif, kodetimsales, manager, deleted, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<SalesDto>> Get_SalesAsync(string nama, bool? aktif, int? kodetimsales, bool? manager, bool? deleted, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<SalesDto>> Get_SalesAsync(string? nama = null, bool? aktif = null, int? kodetimsales = null, bool? manager = null, bool? deleted = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Sales?");
@@ -6495,17 +6059,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Sales> Post_SalesAsync(SaveSalesDto body)
-        {
-            return Post_SalesAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Sales> Post_SalesAsync(SaveSalesDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Sales> Post_SalesAsync(SaveSalesDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Sales");
@@ -6518,7 +6075,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -6573,17 +6130,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Get_Sales_NamaAsync(string nama, bool? aktif, int? kodetimsales, bool? manager, bool? deleted)
-        {
-            return Get_Sales_NamaAsync(nama, aktif, kodetimsales, manager, deleted, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Get_Sales_NamaAsync(string nama, bool? aktif, int? kodetimsales, bool? manager, bool? deleted, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Get_Sales_NamaAsync(string? nama = null, bool? aktif = null, int? kodetimsales = null, bool? manager = null, bool? deleted = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Sales/nama?");
@@ -6662,17 +6212,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<SalesDto> Get_Sales_By_KodeAsync(int kode)
-        {
-            return Get_Sales_By_KodeAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<SalesDto> Get_Sales_By_KodeAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<SalesDto> Get_Sales_By_KodeAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -6740,17 +6283,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Sales> Put_SalesAsync(int kode, SaveSalesDto body)
-        {
-            return Put_SalesAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Sales> Put_SalesAsync(int kode, SaveSalesDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Sales> Put_SalesAsync(int kode, SaveSalesDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -6767,7 +6303,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -6822,17 +6358,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Sales> Delete_SalesAsync(int kode)
-        {
-            return Delete_SalesAsync(kode, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Sales> Delete_SalesAsync(int kode, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Sales> Delete_SalesAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -6900,17 +6429,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Sethargalevel>> Get_SethargalevelAllAsync(string nama, float? acuanTambah, float? acuanPotong, int? modal, bool? online)
-        {
-            return Get_SethargalevelAllAsync(nama, acuanTambah, acuanPotong, modal, online, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Sethargalevel>> Get_SethargalevelAllAsync(string nama, float? acuanTambah, float? acuanPotong, int? modal, bool? online, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Sethargalevel>> Get_SethargalevelAllAsync(string? nama = null, float? acuanTambah = null, float? acuanPotong = null, int? modal = null, bool? online = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Sethargalevel?");
@@ -6943,7 +6465,7 @@ namespace DoranApp.Utils
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -6995,17 +6517,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Sethargalevel> Post_SethargalevelAsync(SaveSethargalevelDto body)
-        {
-            return Post_SethargalevelAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Sethargalevel> Post_SethargalevelAsync(SaveSethargalevelDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Sethargalevel> Post_SethargalevelAsync(SaveSethargalevelDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Sethargalevel");
@@ -7018,10 +6533,10 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -7073,17 +6588,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Sethargalevel> Get_SethargalevelAsync(int kodeh)
-        {
-            return Get_SethargalevelAsync(kodeh, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Sethargalevel> Get_SethargalevelAsync(int kodeh, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<Sethargalevel> Get_SethargalevelAsync(int kodeh, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kodeh == null)
                 throw new System.ArgumentNullException("kodeh");
@@ -7091,6 +6599,157 @@ namespace DoranApp.Utils
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Sethargalevel/{kodeh}");
             urlBuilder_.Replace("{kodeh}", System.Uri.EscapeDataString(ConvertToString(kodeh, System.Globalization.CultureInfo.InvariantCulture)));
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Sethargalevel>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<Sethargalevel> Put_SethargalevelAsync(int kode, SaveSethargalevelDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            if (kode == null)
+                throw new System.ArgumentNullException("kode");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Sethargalevel/{kode}");
+            urlBuilder_.Replace("{kode}", System.Uri.EscapeDataString(ConvertToString(kode, System.Globalization.CultureInfo.InvariantCulture)));
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(json_);
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("PUT");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Sethargalevel>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<GetMutasiResultDto>> Get_MutasiAsync(int? kodeBarang = null, int? kodegudang = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Stok/mutasi?");
+            if (kodeBarang != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("KodeBarang") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodeBarang, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodegudang != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Kodegudang") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodegudang, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
 
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -7124,7 +6783,7 @@ namespace DoranApp.Utils
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<Sethargalevel>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<GetMutasiResultDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -7151,105 +6810,13 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<Sethargalevel> Put_SethargalevelAsync(int kode, SaveSethargalevelDto body)
-        {
-            return Put_SethargalevelAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<Sethargalevel> Put_SethargalevelAsync(int kode, SaveSethargalevelDto body, System.Threading.CancellationToken cancellationToken)
-        {
-            if (kode == null)
-                throw new System.ArgumentNullException("kode");
-
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Sethargalevel/{kode}");
-            urlBuilder_.Replace("{kode}", System.Uri.EscapeDataString(ConvertToString(kode, System.Globalization.CultureInfo.InvariantCulture)));
-
-            var client_ = _httpClient;
-            var disposeClient_ = false;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
-                    var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("PUT");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
-
-                    PrepareRequest(client_, request_, urlBuilder_);
-
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-
-                    PrepareRequest(client_, request_, url_);
-
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    var disposeResponse_ = true;
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-
-                        ProcessResponse(client_, response_);
-
-                        var status_ = (int)response_.StatusCode;
-                        if (status_ == 200)
-                        {
-                            var objectResponse_ = await ReadObjectResponseAsync<Sethargalevel>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            return objectResponse_.Object;
-                        }
-                        else
-                        {
-                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
-                        }
-                    }
-                    finally
-                    {
-                        if (disposeResponse_)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-                if (disposeClient_)
-                    client_.Dispose();
-            }
-        }
-
-        /// <summary>
-        /// This POST handler is mandatory to handle all the sync process
-        /// </summary>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task PostAsync()
-        {
-            return PostAsync(System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// This POST handler is mandatory to handle all the sync process
         /// </summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task PostAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task PostAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Sync");
@@ -7308,23 +6875,13 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <summary>
-        /// This GET handler is optional. It allows you to see the configuration hosted on the server
-        /// </summary>
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Get2Async()
-        {
-            return Get2Async(System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
         /// This GET handler is optional. It allows you to see the configuration hosted on the server
         /// </summary>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Get2Async(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Get2Async(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Sync");
@@ -7382,17 +6939,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<HtransResultDto>> Get_TransaksiAsync(int? kodeh, int? kodegudang, string namaPelanggan, int? kodeSales, int? kodePelanggan, int? kodeKota, string lunas, string kodenota, int? kodeProvinsi, System.DateTime? minDate, System.DateTime? maxDate, int? limit, int? page, int? pageSize)
-        {
-            return Get_TransaksiAsync(kodeh, kodegudang, namaPelanggan, kodeSales, kodePelanggan, kodeKota, lunas, kodenota, kodeProvinsi, minDate, maxDate, limit, page, pageSize, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<HtransResultDto>> Get_TransaksiAsync(int? kodeh, int? kodegudang, string namaPelanggan, int? kodeSales, int? kodePelanggan, int? kodeKota, string lunas, string kodenota, int? kodeProvinsi, System.DateTime? minDate, System.DateTime? maxDate, int? limit, int? page, int? pageSize, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<HtransResultDto>> Get_TransaksiAsync(int? kodeh = null, int? kodegudang = null, string? namaPelanggan = null, int? kodeSales = null, int? kodePelanggan = null, int? kodeKota = null, string? lunas = null, string? kodenota = null, int? kodeProvinsi = null, System.DateTime? minDate = null, System.DateTime? maxDate = null, int? limit = null, int? page = null, int? pageSize = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Transaksi?");
@@ -7513,17 +7063,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Save_TransaksiAsync(SaveTransaksiDto body)
-        {
-            return Save_TransaksiAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Save_TransaksiAsync(SaveTransaksiDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Save_TransaksiAsync(SaveTransaksiDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Transaksi");
@@ -7536,7 +7079,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
 
@@ -7585,17 +7128,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Update_TransaksiAsync(int kode, SaveTransaksiDto body)
-        {
-            return Update_TransaksiAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Update_TransaksiAsync(int kode, SaveTransaksiDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Update_TransaksiAsync(int kode, SaveTransaksiDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -7612,7 +7148,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
 
@@ -7661,17 +7197,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransaksiByBarangResultDto>> GetAllAsync(object tipeGroup, int? kodegudang, string brgNama, string brgNama2, string brgNama3, string brgNama4, string brgNama5, int? kodeKategori, int? kodeBrand, bool? retur, int? kodeSales, int? kodeTimSales, int? kodeChannelSales, int? kodePelanggan, int? kodeKota, string lunas, string kodenota, int? kodeProvinsi, System.DateTime? minDate, System.DateTime? maxDate)
-        {
-            return GetAllAsync(tipeGroup, kodegudang, brgNama, brgNama2, brgNama3, brgNama4, brgNama5, kodeKategori, kodeBrand, retur, kodeSales, kodeTimSales, kodeChannelSales, kodePelanggan, kodeKota, lunas, kodenota, kodeProvinsi, minDate, maxDate, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransaksiByBarangResultDto>> GetAllAsync(object tipeGroup, int? kodegudang, string brgNama, string brgNama2, string brgNama3, string brgNama4, string brgNama5, int? kodeKategori, int? kodeBrand, bool? retur, int? kodeSales, int? kodeTimSales, int? kodeChannelSales, int? kodePelanggan, int? kodeKota, string lunas, string kodenota, int? kodeProvinsi, System.DateTime? minDate, System.DateTime? maxDate, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransaksiByBarangResultDto>> GetAllAsync(TransaksiByBarangTipeGroup? tipeGroup = null, int? kodegudang = null, string? brgNama = null, string? brgNama2 = null, string? brgNama3 = null, string? brgNama4 = null, string? brgNama5 = null, int? kodeKategori = null, int? kodeBrand = null, bool? retur = null, int? kodeSales = null, int? kodeTimSales = null, int? kodeChannelSales = null, int? kodePelanggan = null, int? kodeKota = null, string? lunas = null, string? kodenota = null, int? kodeProvinsi = null, System.DateTime? minDate = null, System.DateTime? maxDate = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/laporan/TransaksiByBarang?");
@@ -7764,7 +7293,7 @@ namespace DoranApp.Utils
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -7816,17 +7345,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransaksiBySalesResultDto>> GetAll2Async(object tipeGroup, object showMode, int? jurnalPenjualan, int? kodegudang, string brgNama, int? kodeKategori, int? kodeBrand, bool? retur, int? kodeSales, int? kodeTimSales, int? kodeChannelSales, int? kodePelanggan, int? kodeKota, string lunas, string kodenota, int? kodeProvinsi, System.DateTime? minDate, System.DateTime? maxDate)
-        {
-            return GetAll2Async(tipeGroup, showMode, jurnalPenjualan, kodegudang, brgNama, kodeKategori, kodeBrand, retur, kodeSales, kodeTimSales, kodeChannelSales, kodePelanggan, kodeKota, lunas, kodenota, kodeProvinsi, minDate, maxDate, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransaksiBySalesResultDto>> GetAll2Async(object tipeGroup, object showMode, int? jurnalPenjualan, int? kodegudang, string brgNama, int? kodeKategori, int? kodeBrand, bool? retur, int? kodeSales, int? kodeTimSales, int? kodeChannelSales, int? kodePelanggan, int? kodeKota, string lunas, string kodenota, int? kodeProvinsi, System.DateTime? minDate, System.DateTime? maxDate, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransaksiBySalesResultDto>> GetAll2Async(TransaksiBySalesTipeGroup? tipeGroup = null, TransaksiBySalesShowMode? showMode = null, int? jurnalPenjualan = null, int? kodegudang = null, string? brgNama = null, int? kodeKategori = null, int? kodeBrand = null, bool? retur = null, int? kodeSales = null, int? kodeTimSales = null, int? kodeChannelSales = null, int? kodePelanggan = null, int? kodeKota = null, string? lunas = null, string? kodenota = null, int? kodeProvinsi = null, System.DateTime? minDate = null, System.DateTime? maxDate = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/laporan/TransaksiBySales?");
@@ -7911,7 +7433,7 @@ namespace DoranApp.Utils
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -7963,17 +7485,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransaksiByTokoResultDto>> GetAll3Async(object tipeGroup, int? kodegudang, string brgNama, int? kodeKategori, int? kodeBrand, bool? retur, int? kodeSales, int? kodeTimSales, int? kodeChannelSales, int? kodePelanggan, int? kodeKota, string lunas, string kodenota, int? kodeProvinsi, System.DateTime? minDate, System.DateTime? maxDate)
-        {
-            return GetAll3Async(tipeGroup, kodegudang, brgNama, kodeKategori, kodeBrand, retur, kodeSales, kodeTimSales, kodeChannelSales, kodePelanggan, kodeKota, lunas, kodenota, kodeProvinsi, minDate, maxDate, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransaksiByTokoResultDto>> GetAll3Async(object tipeGroup, int? kodegudang, string brgNama, int? kodeKategori, int? kodeBrand, bool? retur, int? kodeSales, int? kodeTimSales, int? kodeChannelSales, int? kodePelanggan, int? kodeKota, string lunas, string kodenota, int? kodeProvinsi, System.DateTime? minDate, System.DateTime? maxDate, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransaksiByTokoResultDto>> GetAll3Async(TransaksiByTokoTipeGroup? tipeGroup = null, int? kodegudang = null, string? brgNama = null, int? kodeKategori = null, int? kodeBrand = null, bool? retur = null, int? kodeSales = null, int? kodeTimSales = null, int? kodeChannelSales = null, int? kodePelanggan = null, int? kodeKota = null, string? lunas = null, string? kodenota = null, int? kodeProvinsi = null, System.DateTime? minDate = null, System.DateTime? maxDate = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/laporan/TransaksiByToko?");
@@ -8050,7 +7565,7 @@ namespace DoranApp.Utils
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -8102,17 +7617,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<HtransitResultDto> Get_TransitAsync(int? kodeT, int? kodegudang, int? kodeGudangTujuan, string namaGudangTujuan, int? kodepenyiap, string historinya, System.DateTime? minDate, System.DateTime? maxDate, int? page, int? pageSize)
-        {
-            return Get_TransitAsync(kodeT, kodegudang, kodeGudangTujuan, namaGudangTujuan, kodepenyiap, historinya, minDate, maxDate, page, pageSize, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<HtransitResultDto> Get_TransitAsync(int? kodeT, int? kodegudang, int? kodeGudangTujuan, string namaGudangTujuan, int? kodepenyiap, string historinya, System.DateTime? minDate, System.DateTime? maxDate, int? page, int? pageSize, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<HtransitResultDto> Get_TransitAsync(int? kodeT = null, int? kodegudang = null, int? kodeGudangTujuan = null, string? namaGudangTujuan = null, int? kodepenyiap = null, string? historinya = null, System.DateTime? minDate = null, System.DateTime? maxDate = null, int? page = null, int? pageSize = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Transit?");
@@ -8217,17 +7725,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Save_TransitAsync(SaveHeaderTransitDto body)
-        {
-            return Save_TransitAsync(body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Save_TransitAsync(SaveHeaderTransitDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Save_TransitAsync(SaveHeaderTransitDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Transit");
@@ -8240,7 +7741,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
 
@@ -8289,17 +7790,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<HtransitResult> Get_Transit_By_KodetAsync(int kodet)
-        {
-            return Get_Transit_By_KodetAsync(kodet, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<HtransitResult> Get_Transit_By_KodetAsync(int kodet, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<HtransitResult> Get_Transit_By_KodetAsync(int kodet, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kodet == null)
                 throw new System.ArgumentNullException("kodet");
@@ -8367,17 +7861,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<HtransitResult> Insert_Detail_TransitAsync(int kodet, UpdateDetailByKodedDto body)
-        {
-            return Insert_Detail_TransitAsync(kodet, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<HtransitResult> Insert_Detail_TransitAsync(int kodet, UpdateDetailByKodedDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<HtransitResult> Insert_Detail_TransitAsync(int kodet, UpdateDetailByKodedDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kodet == null)
                 throw new System.ArgumentNullException("kodet");
@@ -8394,7 +7881,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -8449,17 +7936,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<HtransitResult> Update_TransitAsync(int kode, SaveHeaderTransitDto body)
-        {
-            return Update_TransitAsync(kode, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<HtransitResult> Update_TransitAsync(int kode, SaveHeaderTransitDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<HtransitResult> Update_TransitAsync(int kode, SaveHeaderTransitDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
                 throw new System.ArgumentNullException("kode");
@@ -8476,7 +7956,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -8531,17 +8011,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<HtransitResult> Delete_Detail_TransitAsync(int kodet, DeleteDetailByKodedDto body)
-        {
-            return Delete_Detail_TransitAsync(kodet, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<HtransitResult> Delete_Detail_TransitAsync(int kodet, DeleteDetailByKodedDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<HtransitResult> Delete_Detail_TransitAsync(int kodet, DeleteDetailByKodedDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kodet == null)
                 throw new System.ArgumentNullException("kodet");
@@ -8558,7 +8031,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("DELETE");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -8613,17 +8086,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task<HtransitResult> Update_Detail_TransitAsync(int kodet, int koded, UpdateDetailByKodedDto body)
-        {
-            return Update_Detail_TransitAsync(kodet, koded, body, System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task<HtransitResult> Update_Detail_TransitAsync(int kodet, int koded, UpdateDetailByKodedDto body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task<HtransitResult> Update_Detail_TransitAsync(int kodet, int koded, UpdateDetailByKodedDto? body = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kodet == null)
                 throw new System.ArgumentNullException("kodet");
@@ -8644,7 +8110,7 @@ namespace DoranApp.Utils
                 {
                     var json_ = Newtonsoft.Json.JsonConvert.SerializeObject(body, _settings.Value);
                     var content_ = new System.Net.Http.StringContent(json_);
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json-patch+json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("PUT");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
@@ -8699,17 +8165,10 @@ namespace DoranApp.Utils
             }
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task Connect_Web_SocketAsync()
-        {
-            return Connect_Web_SocketAsync(System.Threading.CancellationToken.None);
-        }
-
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task Connect_Web_SocketAsync(System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task Connect_Web_SocketAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/ws");
@@ -8786,7 +8245,7 @@ namespace DoranApp.Utils
         {
             if (response == null || response.Content == null)
             {
-                return new ObjectResponseResult<T>(default(T), string.Empty);
+                return new ObjectResponseResult<T>(default(T)!, string.Empty);
             }
 
             if (ReadResponseAsString)
@@ -8795,7 +8254,7 @@ namespace DoranApp.Utils
                 try
                 {
                     var typedBody = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(responseText, JsonSerializerSettings);
-                    return new ObjectResponseResult<T>(typedBody, responseText);
+                    return new ObjectResponseResult<T>(typedBody!, responseText);
                 }
                 catch (Newtonsoft.Json.JsonException exception)
                 {
@@ -8813,7 +8272,7 @@ namespace DoranApp.Utils
                     {
                         var serializer = Newtonsoft.Json.JsonSerializer.Create(JsonSerializerSettings);
                         var typedBody = serializer.Deserialize<T>(jsonTextReader);
-                        return new ObjectResponseResult<T>(typedBody, string.Empty);
+                        return new ObjectResponseResult<T>(typedBody!, string.Empty);
                     }
                 }
                 catch (Newtonsoft.Json.JsonException exception)
@@ -8824,7 +8283,7 @@ namespace DoranApp.Utils
             }
         }
 
-        private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
+        private string ConvertToString(object? value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value == null)
             {
@@ -8874,10 +8333,10 @@ namespace DoranApp.Utils
     public partial class CommonResultDto
     {
         [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        public int? Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
     }
 
@@ -8885,73 +8344,73 @@ namespace DoranApp.Utils
     public partial class DeleteDetailByKodedDto
     {
         [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<int> Koded { get; set; }
+        public System.Collections.Generic.ICollection<int>? Koded { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class DetailOrder
     {
-        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodebarang { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodebarang { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlah { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Harga { get; set; }
+        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Harga { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("keterangan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Keterangan { get; set; }
+        public string? Keterangan { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class DetailTransaksi
     {
-        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodebarang { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodebarang { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlah { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Harga { get; set; }
+        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Harga { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nmrsn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nmrsn { get; set; }
+        public string? Nmrsn { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Dkategoribarang
     {
-        [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Koded { get; set; }
+        [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Koded { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeh { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeh { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("munculdimasterbarangapps", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Munculdimasterbarangapps { get; set; }
+        [Newtonsoft.Json.JsonProperty("munculdimasterbarangapps", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Munculdimasterbarangapps { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("cnp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Cnp { get; set; }
+        [Newtonsoft.Json.JsonProperty("cnp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Cnp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Sn { get; set; }
+        [Newtonsoft.Json.JsonProperty("sn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Sn { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("perlusetharga", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Perlusetharga { get; set; }
+        [Newtonsoft.Json.JsonProperty("perlusetharga", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Perlusetharga { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterbarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Masterbarang> Masterbarang { get; set; }
+        public System.Collections.Generic.ICollection<Masterbarang>? Masterbarang { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("hkategoribarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Hkategoribarang Hkategoribarang { get; set; }
+        public Hkategoribarang? Hkategoribarang { get; set; } = default!;
 
     }
 
@@ -8959,308 +8418,349 @@ namespace DoranApp.Utils
     public partial class DkategoribarangOptionDto
     {
         [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Koded { get; set; }
+        public int? Koded { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeh { get; set; }
+        public int? Kodeh { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Dorder
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Id { get; set; }
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeh { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeh { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Koded { get; set; }
+        [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Koded { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodebarang { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodebarang { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlah { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("keterangan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Keterangan { get; set; }
+        public string? Keterangan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlahdikirim", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlahdikirim { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlahdikirim", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlahdikirim { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sisa", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Sisa { get; set; }
+        [Newtonsoft.Json.JsonProperty("sisa", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Sisa { get; set; } = default!;
 
         /// <summary>
         /// 0:belum. 1: kurang, 2: lunas. 3:cancel, 4:menyusul, 5:berespaksa
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("lunas", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Lunas { get; set; }
+        [Newtonsoft.Json.JsonProperty("lunas", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Lunas { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("keterangancancel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Keterangancancel { get; set; }
+        public string? Keterangancancel { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodehTrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodehTrans { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodehTrans", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodehTrans { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodedTrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodedTrans { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodedTrans", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodedTrans { get; set; } = default!;
 
         /// <summary>
         /// 0=belum, 1=disiapkan, 2=beres
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("disiapkan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Disiapkan { get; set; }
+        [Newtonsoft.Json.JsonProperty("disiapkan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Disiapkan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Harga { get; set; }
+        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Harga { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("komisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Komisi { get; set; }
+        [Newtonsoft.Json.JsonProperty("komisi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Komisi { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("horder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Horder Horder { get; set; }
+        public Horder? Horder { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterbarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Masterbarang Masterbarang { get; set; }
+        public Masterbarang? Masterbarang { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class DorderResult
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Id { get; set; }
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeh { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeh { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Koded { get; set; }
+        [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Koded { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodebarang { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodebarang { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlah { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Harga { get; set; }
+        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Harga { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("keterangan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Keterangan { get; set; }
+        public string? Keterangan { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterbarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public MasterbarangOptionDto Masterbarang { get; set; }
+        public MasterbarangOptionDto? Masterbarang { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Dtrans
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Id { get; set; }
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeh { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeh { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Koded { get; set; }
+        [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Koded { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodebarang { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodebarang { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlah { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Harga { get; set; }
+        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Harga { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("komisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Komisi { get; set; }
+        [Newtonsoft.Json.JsonProperty("komisi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Komisi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("untung", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Untung { get; set; }
+        [Newtonsoft.Json.JsonProperty("untung", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Untung { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("poinToko", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? PoinToko { get; set; }
+        [Newtonsoft.Json.JsonProperty("poinToko", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int PoinToko { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kuranginStok", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? KuranginStok { get; set; }
+        public bool? KuranginStok { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tukartipe", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Tukartipe { get; set; }
+        [Newtonsoft.Json.JsonProperty("tukartipe", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Tukartipe { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("hargaOk", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? HargaOk { get; set; }
+        [Newtonsoft.Json.JsonProperty("hargaOk", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int HargaOk { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nmrsn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nmrsn { get; set; }
+        public string? Nmrsn { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("htrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Htrans Htrans { get; set; }
+        public Htrans? Htrans { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterbarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Masterbarang Masterbarang { get; set; }
+        public Masterbarang? Masterbarang { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class DtransResult
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Id { get; set; }
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeh { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeh { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Koded { get; set; }
+        [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Koded { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodebarang { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodebarang { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlah { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Harga { get; set; }
+        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Harga { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("komisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Komisi { get; set; }
+        [Newtonsoft.Json.JsonProperty("komisi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Komisi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("untung", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Untung { get; set; }
+        [Newtonsoft.Json.JsonProperty("untung", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Untung { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("poinToko", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? PoinToko { get; set; }
+        [Newtonsoft.Json.JsonProperty("poinToko", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int PoinToko { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kuranginStok", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? KuranginStok { get; set; }
+        public bool? KuranginStok { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tukartipe", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Tukartipe { get; set; }
+        [Newtonsoft.Json.JsonProperty("tukartipe", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Tukartipe { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("hargaOk", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? HargaOk { get; set; }
+        [Newtonsoft.Json.JsonProperty("hargaOk", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int HargaOk { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nmrsn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nmrsn { get; set; }
+        public string? Nmrsn { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterbarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public MasterbarangOptionDto Masterbarang { get; set; }
+        public MasterbarangOptionDto? Masterbarang { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Dtransit
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Id { get; set; }
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodet", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodet { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodet", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodet { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Koded { get; set; }
+        [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Koded { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodebarang { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodebarang { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlah { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sudahdicek", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Sudahdicek { get; set; }
+        [Newtonsoft.Json.JsonProperty("sudahdicek", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Sudahdicek { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namapenerima", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Namapenerima { get; set; }
+        public string? Namapenerima { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nmrSn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NmrSn { get; set; }
+        public string? NmrSn { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("htransit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Htransit Htransit { get; set; }
+        public Htransit? Htransit { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterbarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Masterbarang Masterbarang { get; set; }
+        public Masterbarang? Masterbarang { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class DtransitResult
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Id { get; set; }
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodet", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodet { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodet", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodet { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Koded { get; set; }
+        [Newtonsoft.Json.JsonProperty("koded", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Koded { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodebarang { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodebarang { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlah { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sudahdicek", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Sudahdicek { get; set; }
+        [Newtonsoft.Json.JsonProperty("sudahdicek", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Sudahdicek { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namapenerima", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Namapenerima { get; set; }
+        public string? Namapenerima { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nmrSn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NmrSn { get; set; }
+        public string? NmrSn { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterbarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public MasterbarangOptionWithTipeDto Masterbarang { get; set; }
+        public MasterbarangOptionWithTipeDto? Masterbarang { get; set; } = default!;
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
+    public partial class GetMutasiResultDto
+    {
+        [Newtonsoft.Json.JsonProperty("tanggal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tanggal { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("keterangan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? Keterangan { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("oleh", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? Oleh { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Harga { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlah { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("saldo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Saldo { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("indexnya", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Indexnya { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("kodEnya", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodEnya { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("kodeSupplier", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodeSupplier { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("kodeBarang", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodeBarang { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("history", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? History { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("lunas", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string? Lunas { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class HargaByLevelResult
     {
-        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Harga { get; set; }
+        [Newtonsoft.Json.JsonProperty("harga", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Harga { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodebarang { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodebarang { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namabarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Namabarang { get; set; }
+        public string? Namabarang { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Hkategoribarang
     {
-        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeh { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeh { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("perlusetharga", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Perlusetharga { get; set; }
+        [Newtonsoft.Json.JsonProperty("perlusetharga", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Perlusetharga { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("cektahunan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Cektahunan { get; set; }
+        [Newtonsoft.Json.JsonProperty("cektahunan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Cektahunan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("hargakhusus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Hargakhusus { get; set; }
+        [Newtonsoft.Json.JsonProperty("hargakhusus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Hargakhusus { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("dkategoribarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Dkategoribarang> Dkategoribarang { get; set; }
+        public System.Collections.Generic.ICollection<Dkategoribarang>? Dkategoribarang { get; set; } = default!;
 
     }
 
@@ -9268,945 +8768,945 @@ namespace DoranApp.Utils
     public partial class HkategoribarangOptionDto
     {
         [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeh { get; set; }
+        public int? Kodeh { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("dkategoribarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<DkategoribarangOptionDto> Dkategoribarang { get; set; }
+        public System.Collections.Generic.ICollection<DkategoribarangOptionDto>? Dkategoribarang { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Hkelompokbarang
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Horder
     {
-        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeh { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeh { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglorder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tglorder { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglorder", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tglorder { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("keterangan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Keterangan { get; set; }
+        public string? Keterangan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("insertname", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Insertname { get; set; }
+        [Newtonsoft.Json.JsonProperty("insertname", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Insertname { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("inserttime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Inserttime { get; set; }
+        [Newtonsoft.Json.JsonProperty("inserttime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Inserttime { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("updatename", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Updatename { get; set; }
+        [Newtonsoft.Json.JsonProperty("updatename", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Updatename { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("updatetime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Updatetime { get; set; }
+        [Newtonsoft.Json.JsonProperty("updatetime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Updatetime { get; set; } = default!;
 
         /// <summary>
         /// 5=BelumdicekOL
         /// </summary>
         [Newtonsoft.Json.JsonProperty("historynya", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Historynya { get; set; }
+        public int? Historynya { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodepelanggan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodepelanggan { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodepelanggan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodepelanggan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodesales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodesales { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodesales", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodesales { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodepenyiap", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodepenyiap { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodepenyiap", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodepenyiap { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("dicetak", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Dicetak { get; set; }
+        [Newtonsoft.Json.JsonProperty("dicetak", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Dicetak { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("lunas", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Lunas { get; set; }
+        [Newtonsoft.Json.JsonProperty("lunas", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Lunas { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglcetak", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tglcetak { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglcetak", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tglcetak { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeexp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeexp { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeexp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeexp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kirimmelalui", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kirimmelalui { get; set; }
+        [Newtonsoft.Json.JsonProperty("kirimmelalui", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kirimmelalui { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlah { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("stokSales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? StokSales { get; set; }
+        [Newtonsoft.Json.JsonProperty("stokSales", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int StokSales { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ppn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Ppn { get; set; }
+        [Newtonsoft.Json.JsonProperty("ppn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Ppn { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tipetempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Tipetempo { get; set; }
+        public int? Tipetempo { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tgltempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tgltempo { get; set; }
+        [Newtonsoft.Json.JsonProperty("tgltempo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tgltempo { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("infopenting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Infopenting { get; set; }
+        public string? Infopenting { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("noSeriOnline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NoSeriOnline { get; set; }
+        public string? NoSeriOnline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("barcodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Barcodeonline { get; set; }
+        public string? Barcodeonline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namaCust", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NamaCust { get; set; }
+        public string? NamaCust { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nmrHp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NmrHp { get; set; }
+        public string? NmrHp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeonline { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeonline { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeorderapps", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeorderapps { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeorderapps", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeorderapps { get; set; } = default!;
 
         /// <summary>
         /// UNTUK UPDATE NMR HP
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("sudahupdatephone", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Sudahupdatephone { get; set; }
+        [Newtonsoft.Json.JsonProperty("sudahupdatephone", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Sudahupdatephone { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterpelanggan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Masterpelanggan Masterpelanggan { get; set; }
+        public Masterpelanggan? Masterpelanggan { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("dorder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Dorder> Dorder { get; set; }
+        public System.Collections.Generic.ICollection<Dorder>? Dorder { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masteruserInsert", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Masteruser MasteruserInsert { get; set; }
+        public Masteruser? MasteruserInsert { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masteruserUpdate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Masteruser MasteruserUpdate { get; set; }
+        public Masteruser? MasteruserUpdate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("sales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Sales Sales { get; set; }
+        public Sales? Sales { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("penyiaporder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Penyiaporder Penyiaporder { get; set; }
+        public Penyiaporder? Penyiaporder { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("ekspedisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Masterpengeluaran Ekspedisi { get; set; }
+        public Masterpengeluaran? Ekspedisi { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class HorderResult
     {
-        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeh { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeh", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeh { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglorder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tglorder { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglorder", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tglorder { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("keterangan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Keterangan { get; set; }
+        public string? Keterangan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("insertname", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Insertname { get; set; }
+        [Newtonsoft.Json.JsonProperty("insertname", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Insertname { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("inserttime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Inserttime { get; set; }
+        [Newtonsoft.Json.JsonProperty("inserttime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Inserttime { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("updatename", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Updatename { get; set; }
+        [Newtonsoft.Json.JsonProperty("updatename", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Updatename { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("updatetime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Updatetime { get; set; }
+        [Newtonsoft.Json.JsonProperty("updatetime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Updatetime { get; set; } = default!;
 
         /// <summary>
         /// 5=BelumdicekOL
         /// </summary>
         [Newtonsoft.Json.JsonProperty("historynya", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Historynya { get; set; }
+        public bool? Historynya { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodepelanggan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodepelanggan { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodepelanggan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodepelanggan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodesales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodesales { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodesales", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodesales { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodepenyiap", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodepenyiap { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodepenyiap", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodepenyiap { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("dicetak", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Dicetak { get; set; }
+        [Newtonsoft.Json.JsonProperty("dicetak", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Dicetak { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("lunas", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Lunas { get; set; }
+        [Newtonsoft.Json.JsonProperty("lunas", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Lunas { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglcetak", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tglcetak { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglcetak", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tglcetak { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeexp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeexp { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeexp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeexp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kirimmelalui", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kirimmelalui { get; set; }
+        [Newtonsoft.Json.JsonProperty("kirimmelalui", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kirimmelalui { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlah { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("stokSales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? StokSales { get; set; }
+        [Newtonsoft.Json.JsonProperty("stokSales", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int StokSales { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ppn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Ppn { get; set; }
+        [Newtonsoft.Json.JsonProperty("ppn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Ppn { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tipetempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Tipetempo { get; set; }
+        public int? Tipetempo { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tgltempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tgltempo { get; set; }
+        [Newtonsoft.Json.JsonProperty("tgltempo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tgltempo { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("infopenting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Infopenting { get; set; }
+        public string? Infopenting { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("noSeriOnline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NoSeriOnline { get; set; }
+        public string? NoSeriOnline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("barcodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Barcodeonline { get; set; }
+        public string? Barcodeonline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namaCust", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NamaCust { get; set; }
+        public string? NamaCust { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nmrHp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NmrHp { get; set; }
+        public string? NmrHp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeonline { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeonline { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeorderapps", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeorderapps { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeorderapps", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeorderapps { get; set; } = default!;
 
         /// <summary>
         /// UNTUK UPDATE NMR HP
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("sudahupdatephone", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Sudahupdatephone { get; set; }
+        [Newtonsoft.Json.JsonProperty("sudahupdatephone", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Sudahupdatephone { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("dorder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<DorderResult> Dorder { get; set; }
+        public System.Collections.Generic.ICollection<DorderResult>? Dorder { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("penyiaporder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CommonResultDto Penyiaporder { get; set; }
+        public CommonResultDto? Penyiaporder { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masteruserInsert", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public MasteruserOptionDto MasteruserInsert { get; set; }
+        public MasteruserOptionDto? MasteruserInsert { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masteruserUpdate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public MasteruserOptionDto MasteruserUpdate { get; set; }
+        public MasteruserOptionDto? MasteruserUpdate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterpelanggan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public MasterpelangganWithLokasiKotaOptionDto Masterpelanggan { get; set; }
+        public MasterpelangganWithLokasiKotaOptionDto? Masterpelanggan { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("sales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CommonResultDto Sales { get; set; }
+        public CommonResultDto? Sales { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("ekspedisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CommonResultDto Ekspedisi { get; set; }
+        public CommonResultDto? Ekspedisi { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class HorderResultDto
     {
-        [Newtonsoft.Json.JsonProperty("totalPage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? TotalPage { get; set; }
+        [Newtonsoft.Json.JsonProperty("totalPage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long TotalPage { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("totalRow", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? TotalRow { get; set; }
+        [Newtonsoft.Json.JsonProperty("totalRow", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long TotalRow { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("page", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Page { get; set; }
+        [Newtonsoft.Json.JsonProperty("page", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Page { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("pageSize", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? PageSize { get; set; }
+        [Newtonsoft.Json.JsonProperty("pageSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long PageSize { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HorderResult> Data { get; set; }
+        public System.Collections.Generic.ICollection<HorderResult>? Data { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Htrans
     {
-        [Newtonsoft.Json.JsonProperty("kodeH", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodeH { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeH", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodeH { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglTrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglTrans { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglTrans", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime TglTrans { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodePelanggan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodePelanggan { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodePelanggan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodePelanggan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Jumlah { get; set; } = default!;
 
         /// <summary>
         /// TOTAL DARI BRG2 YG BERUPA BIAYA NON JURNAL PENJUALAN
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("jumlahbarangbiaya", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlahbarangbiaya { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlahbarangbiaya", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlahbarangbiaya { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tambahanLainnya", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? TambahanLainnya { get; set; }
+        [Newtonsoft.Json.JsonProperty("tambahanLainnya", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int TambahanLainnya { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("diskon", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Diskon { get; set; }
+        [Newtonsoft.Json.JsonProperty("diskon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Diskon { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("dpp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Dpp { get; set; }
+        [Newtonsoft.Json.JsonProperty("dpp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Dpp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ppn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Ppn { get; set; }
+        [Newtonsoft.Json.JsonProperty("ppn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Ppn { get; set; } = default!;
 
         /// <summary>
         /// PPN 100% UNTUK SEMUA
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("ppnreal", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Ppnreal { get; set; }
+        [Newtonsoft.Json.JsonProperty("ppnreal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Ppnreal { get; set; } = default!;
 
         /// <summary>
         /// UNTUK SIMPAN CADANGAN PPN SEBELUM DILAKUKAN PERUBAHAN BESAR
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("cadanganppn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Cadanganppn { get; set; }
+        [Newtonsoft.Json.JsonProperty("cadanganppn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Cadanganppn { get; set; } = default!;
 
         /// <summary>
         /// 0=TIDAK_TERBIT. 1=TERBIT_FAKTUR_PPN
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("terbitfakturppn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Terbitfakturppn { get; set; }
+        [Newtonsoft.Json.JsonProperty("terbitfakturppn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Terbitfakturppn { get; set; } = default!;
 
         /// <summary>
         /// 1=AKAN MASUK JURNAL PENJUALAN. 0=TIDAK MASUK JURNAL PENJUALAN
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("akanDjJurnalkan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? AkanDjJurnalkan { get; set; }
+        [Newtonsoft.Json.JsonProperty("akanDjJurnalkan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int AkanDjJurnalkan { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("keterangan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Keterangan { get; set; }
+        public string? Keterangan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("insertName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? InsertName { get; set; }
+        [Newtonsoft.Json.JsonProperty("insertName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int InsertName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("insertTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? InsertTime { get; set; }
+        public System.DateTime? InsertTime { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("updateName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? UpdateName { get; set; }
+        [Newtonsoft.Json.JsonProperty("updateName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int UpdateName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("updateTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? UpdateTime { get; set; }
+        [Newtonsoft.Json.JsonProperty("updateTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime UpdateTime { get; set; } = default!;
 
         /// <summary>
         /// 3:belum,2:yanti,1:audit,0:jhonny
         /// </summary>
         [Newtonsoft.Json.JsonProperty("historyNya", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string HistoryNya { get; set; }
+        public string? HistoryNya { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlahKomisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? JumlahKomisi { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlahKomisi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int JumlahKomisi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeSales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodeSales { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeSales", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodeSales { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("untung", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Untung { get; set; }
+        [Newtonsoft.Json.JsonProperty("untung", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Untung { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("untungbelumpotOl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? UntungbelumpotOl { get; set; }
+        [Newtonsoft.Json.JsonProperty("untungbelumpotOl", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int UntungbelumpotOl { get; set; } = default!;
 
         /// <summary>
         /// 1 = lunas, 0 = belum lunas
         /// </summary>
         [Newtonsoft.Json.JsonProperty("lunas", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Lunas { get; set; }
+        public string? Lunas { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("jumlahOnString", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string JumlahOnString { get; set; }
+        public string? JumlahOnString { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("poinToko", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? PoinToko { get; set; }
+        [Newtonsoft.Json.JsonProperty("poinToko", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int PoinToko { get; set; } = default!;
 
         /// <summary>
         /// 1 = uda bagi, 0 = belum bagi
         /// </summary>
         [Newtonsoft.Json.JsonProperty("bagiKomisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BagiKomisi { get; set; }
+        public string? BagiKomisi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglBagiKomisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglBagiKomisi { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglBagiKomisi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime TglBagiKomisi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglLunas", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglLunas { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglLunas", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime TglLunas { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodegudang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodegudang { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodegudang", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodegudang { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("diCetak", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? DiCetak { get; set; }
+        [Newtonsoft.Json.JsonProperty("diCetak", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool DiCetak { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("salesPenagih", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? SalesPenagih { get; set; }
+        [Newtonsoft.Json.JsonProperty("salesPenagih", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int SalesPenagih { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("statusNota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? StatusNota { get; set; }
+        [Newtonsoft.Json.JsonProperty("statusNota", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool StatusNota { get; set; } = default!;
 
         /// <summary>
         /// 0=NORMAL. 2=RETUR. 1 TIDAK DIPAKE
         /// </summary>
         [Newtonsoft.Json.JsonProperty("retur", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Retur { get; set; }
+        public string? Retur { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("dikirim", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Dikirim { get; set; }
+        [Newtonsoft.Json.JsonProperty("dikirim", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Dikirim { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tgldikirim", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tgldikirim { get; set; }
+        [Newtonsoft.Json.JsonProperty("tgldikirim", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tgldikirim { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("adminkiriman", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Adminkiriman { get; set; }
+        [Newtonsoft.Json.JsonProperty("adminkiriman", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Adminkiriman { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglPpn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglPpn { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglPpn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime TglPpn { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("stoknota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Stoknota { get; set; }
+        [Newtonsoft.Json.JsonProperty("stoknota", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Stoknota { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumKoli", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? JumKoli { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumKoli", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int JumKoli { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("noSeriOnline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NoSeriOnline { get; set; }
+        public string? NoSeriOnline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("barcodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Barcodeonline { get; set; }
+        public string? Barcodeonline { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ppndiarsip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Ppndiarsip { get; set; }
+        [Newtonsoft.Json.JsonProperty("ppndiarsip", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Ppndiarsip { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglLaporPpn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglLaporPpn { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglLaporPpn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime TglLaporPpn { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tipetempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Tipetempo { get; set; }
+        public bool? Tipetempo { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tgltempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tgltempo { get; set; }
+        [Newtonsoft.Json.JsonProperty("tgltempo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tgltempo { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("infopenting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Infopenting { get; set; }
+        public string? Infopenting { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("notrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Notrans { get; set; }
+        [Newtonsoft.Json.JsonProperty("notrans", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Notrans { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("noretur", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Noretur { get; set; }
+        [Newtonsoft.Json.JsonProperty("noretur", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Noretur { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodenota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Kodenota { get; set; }
+        public string? Kodenota { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Kodeonline { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Kodeonline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namaCust", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NamaCust { get; set; }
+        public string? NamaCust { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nmrHp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NmrHp { get; set; }
+        public string? NmrHp { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("custOlkota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustOlkota { get; set; }
+        public string? CustOlkota { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("custOlprovinsi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustOlprovinsi { get; set; }
+        public string? CustOlprovinsi { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("custOlwilayah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustOlwilayah { get; set; }
+        public string? CustOlwilayah { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("custOlkodepos", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustOlkodepos { get; set; }
+        public string? CustOlkodepos { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("noOrder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? NoOrder { get; set; }
+        [Newtonsoft.Json.JsonProperty("noOrder", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int NoOrder { get; set; } = default!;
 
         /// <summary>
         /// Buat isi kapan dicek oleh tim finance
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("tglcek", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tglcek { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglcek", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tglcek { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodeorderapps", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeorderapps { get; set; }
+        public int? Kodeorderapps { get; set; } = default!;
 
         /// <summary>
         /// Penanda Bila Admin ada ganti harga
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("admingantiharga", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Admingantiharga { get; set; }
+        [Newtonsoft.Json.JsonProperty("admingantiharga", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Admingantiharga { get; set; } = default!;
 
         /// <summary>
         /// BUAT KEPERLUAN CROWN UPDATE STATUS TERKIRIM DI APPS DORAN.ID
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("sudahupdateorderapps", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Sudahupdateorderapps { get; set; }
+        [Newtonsoft.Json.JsonProperty("sudahupdateorderapps", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Sudahupdateorderapps { get; set; } = default!;
 
         /// <summary>
         /// UNTUK UPDATE NMR HP
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("sudahupdatephone", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Sudahupdatephone { get; set; }
+        [Newtonsoft.Json.JsonProperty("sudahupdatephone", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Sudahupdatephone { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("dtrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Dtrans> Dtrans { get; set; }
+        public System.Collections.Generic.ICollection<Dtrans>? Dtrans { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterpelanggan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Masterpelanggan Masterpelanggan { get; set; }
+        public Masterpelanggan? Masterpelanggan { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("mastergudang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Mastergudang Mastergudang { get; set; }
+        public Mastergudang? Mastergudang { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("sales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Sales Sales { get; set; }
+        public Sales? Sales { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class HtransResult
     {
-        [Newtonsoft.Json.JsonProperty("kodeH", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodeH { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeH", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodeH { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglTrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglTrans { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglTrans", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime TglTrans { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodePelanggan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodePelanggan { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodePelanggan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodePelanggan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Jumlah { get; set; } = default!;
 
         /// <summary>
         /// TOTAL DARI BRG2 YG BERUPA BIAYA NON JURNAL PENJUALAN
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("jumlahbarangbiaya", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlahbarangbiaya { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlahbarangbiaya", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlahbarangbiaya { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tambahanLainnya", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? TambahanLainnya { get; set; }
+        [Newtonsoft.Json.JsonProperty("tambahanLainnya", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int TambahanLainnya { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("diskon", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Diskon { get; set; }
+        [Newtonsoft.Json.JsonProperty("diskon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Diskon { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("dpp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Dpp { get; set; }
+        [Newtonsoft.Json.JsonProperty("dpp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Dpp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ppn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Ppn { get; set; }
+        [Newtonsoft.Json.JsonProperty("ppn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Ppn { get; set; } = default!;
 
         /// <summary>
         /// PPN 100% UNTUK SEMUA
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("ppnreal", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Ppnreal { get; set; }
+        [Newtonsoft.Json.JsonProperty("ppnreal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Ppnreal { get; set; } = default!;
 
         /// <summary>
         /// UNTUK SIMPAN CADANGAN PPN SEBELUM DILAKUKAN PERUBAHAN BESAR
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("cadanganppn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Cadanganppn { get; set; }
+        [Newtonsoft.Json.JsonProperty("cadanganppn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Cadanganppn { get; set; } = default!;
 
         /// <summary>
         /// 0=TIDAK_TERBIT. 1=TERBIT_FAKTUR_PPN
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("terbitfakturppn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Terbitfakturppn { get; set; }
+        [Newtonsoft.Json.JsonProperty("terbitfakturppn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Terbitfakturppn { get; set; } = default!;
 
         /// <summary>
         /// 1=AKAN MASUK JURNAL PENJUALAN. 0=TIDAK MASUK JURNAL PENJUALAN
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("akanDjJurnalkan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? AkanDjJurnalkan { get; set; }
+        [Newtonsoft.Json.JsonProperty("akanDjJurnalkan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int AkanDjJurnalkan { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("keterangan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Keterangan { get; set; }
+        public string? Keterangan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("insertName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? InsertName { get; set; }
+        [Newtonsoft.Json.JsonProperty("insertName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int InsertName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("insertTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? InsertTime { get; set; }
+        public System.DateTime? InsertTime { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("updateName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? UpdateName { get; set; }
+        [Newtonsoft.Json.JsonProperty("updateName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int UpdateName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("updateTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? UpdateTime { get; set; }
+        [Newtonsoft.Json.JsonProperty("updateTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime UpdateTime { get; set; } = default!;
 
         /// <summary>
         /// 3:belum,2:yanti,1:audit,0:jhonny
         /// </summary>
         [Newtonsoft.Json.JsonProperty("historyNya", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string HistoryNya { get; set; }
+        public string? HistoryNya { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlahKomisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? JumlahKomisi { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlahKomisi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int JumlahKomisi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeSales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodeSales { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeSales", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodeSales { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("untung", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Untung { get; set; }
+        [Newtonsoft.Json.JsonProperty("untung", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Untung { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("untungbelumpotOl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? UntungbelumpotOl { get; set; }
+        [Newtonsoft.Json.JsonProperty("untungbelumpotOl", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int UntungbelumpotOl { get; set; } = default!;
 
         /// <summary>
         /// 1 = lunas, 0 = belum lunas
         /// </summary>
         [Newtonsoft.Json.JsonProperty("lunas", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Lunas { get; set; }
+        public string? Lunas { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("jumlahOnString", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string JumlahOnString { get; set; }
+        public string? JumlahOnString { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("poinToko", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? PoinToko { get; set; }
+        [Newtonsoft.Json.JsonProperty("poinToko", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int PoinToko { get; set; } = default!;
 
         /// <summary>
         /// 1 = uda bagi, 0 = belum bagi
         /// </summary>
         [Newtonsoft.Json.JsonProperty("bagiKomisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BagiKomisi { get; set; }
+        public string? BagiKomisi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglBagiKomisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglBagiKomisi { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglBagiKomisi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime TglBagiKomisi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglLunas", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglLunas { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglLunas", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime TglLunas { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodegudang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodegudang { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodegudang", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodegudang { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("diCetak", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? DiCetak { get; set; }
+        [Newtonsoft.Json.JsonProperty("diCetak", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool DiCetak { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("salesPenagih", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? SalesPenagih { get; set; }
+        [Newtonsoft.Json.JsonProperty("salesPenagih", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int SalesPenagih { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("statusNota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? StatusNota { get; set; }
+        [Newtonsoft.Json.JsonProperty("statusNota", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool StatusNota { get; set; } = default!;
 
         /// <summary>
         /// 0=NORMAL. 2=RETUR. 1 TIDAK DIPAKE
         /// </summary>
         [Newtonsoft.Json.JsonProperty("retur", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Retur { get; set; }
+        public string? Retur { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("dikirim", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Dikirim { get; set; }
+        [Newtonsoft.Json.JsonProperty("dikirim", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Dikirim { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tgldikirim", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tgldikirim { get; set; }
+        [Newtonsoft.Json.JsonProperty("tgldikirim", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tgldikirim { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("adminkiriman", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Adminkiriman { get; set; }
+        [Newtonsoft.Json.JsonProperty("adminkiriman", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Adminkiriman { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglPpn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglPpn { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglPpn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime TglPpn { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("stoknota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Stoknota { get; set; }
+        [Newtonsoft.Json.JsonProperty("stoknota", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Stoknota { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumKoli", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? JumKoli { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumKoli", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int JumKoli { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("noSeriOnline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NoSeriOnline { get; set; }
+        public string? NoSeriOnline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("barcodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Barcodeonline { get; set; }
+        public string? Barcodeonline { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ppndiarsip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Ppndiarsip { get; set; }
+        [Newtonsoft.Json.JsonProperty("ppndiarsip", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Ppndiarsip { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglLaporPpn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglLaporPpn { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglLaporPpn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime TglLaporPpn { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tipetempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Tipetempo { get; set; }
+        [Newtonsoft.Json.JsonProperty("tipetempo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Tipetempo { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tgltempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tgltempo { get; set; }
+        [Newtonsoft.Json.JsonProperty("tgltempo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tgltempo { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("infopenting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Infopenting { get; set; }
+        public string? Infopenting { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("notrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Notrans { get; set; }
+        [Newtonsoft.Json.JsonProperty("notrans", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Notrans { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("noretur", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Noretur { get; set; }
+        [Newtonsoft.Json.JsonProperty("noretur", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Noretur { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodenota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Kodenota { get; set; }
+        public string? Kodenota { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Kodeonline { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Kodeonline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namaCust", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NamaCust { get; set; }
+        public string? NamaCust { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nmrHp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NmrHp { get; set; }
+        public string? NmrHp { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("custOlkota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustOlkota { get; set; }
+        public string? CustOlkota { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("custOlprovinsi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustOlprovinsi { get; set; }
+        public string? CustOlprovinsi { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("custOlwilayah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustOlwilayah { get; set; }
+        public string? CustOlwilayah { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("custOlkodepos", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CustOlkodepos { get; set; }
+        public string? CustOlkodepos { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("noOrder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? NoOrder { get; set; }
+        [Newtonsoft.Json.JsonProperty("noOrder", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int NoOrder { get; set; } = default!;
 
         /// <summary>
         /// Buat isi kapan dicek oleh tim finance
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("tglcek", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tglcek { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglcek", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tglcek { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodeorderapps", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeorderapps { get; set; }
+        public int? Kodeorderapps { get; set; } = default!;
 
         /// <summary>
         /// Penanda Bila Admin ada ganti harga
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("admingantiharga", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Admingantiharga { get; set; }
+        [Newtonsoft.Json.JsonProperty("admingantiharga", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Admingantiharga { get; set; } = default!;
 
         /// <summary>
         /// BUAT KEPERLUAN CROWN UPDATE STATUS TERKIRIM DI APPS DORAN.ID
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("sudahupdateorderapps", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Sudahupdateorderapps { get; set; }
+        [Newtonsoft.Json.JsonProperty("sudahupdateorderapps", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Sudahupdateorderapps { get; set; } = default!;
 
         /// <summary>
         /// UNTUK UPDATE NMR HP
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("sudahupdatephone", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Sudahupdatephone { get; set; }
+        [Newtonsoft.Json.JsonProperty("sudahupdatephone", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Sudahupdatephone { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("dtrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<DtransResult> Dtrans { get; set; }
+        public System.Collections.Generic.ICollection<DtransResult>? Dtrans { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterpelanggan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public MasterpelangganWithLokasiKotaOptionDto Masterpelanggan { get; set; }
+        public MasterpelangganWithLokasiKotaOptionDto? Masterpelanggan { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("mastergudang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CommonResultDto Mastergudang { get; set; }
+        public CommonResultDto? Mastergudang { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("sales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CommonResultDto Sales { get; set; }
+        public CommonResultDto? Sales { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class HtransResultDto
     {
-        [Newtonsoft.Json.JsonProperty("totalPage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? TotalPage { get; set; }
+        [Newtonsoft.Json.JsonProperty("totalPage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long TotalPage { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("totalRow", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? TotalRow { get; set; }
+        [Newtonsoft.Json.JsonProperty("totalRow", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long TotalRow { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("page", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Page { get; set; }
+        [Newtonsoft.Json.JsonProperty("page", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Page { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("pageSize", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? PageSize { get; set; }
+        [Newtonsoft.Json.JsonProperty("pageSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long PageSize { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HtransResult> Data { get; set; }
+        public System.Collections.Generic.ICollection<HtransResult>? Data { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Htransit
     {
-        [Newtonsoft.Json.JsonProperty("kodeT", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodeT { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeT", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodeT { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tglTrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglTrans { get; set; }
+        public System.DateTime? TglTrans { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodeGudangTujuan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodeGudangTujuan { get; set; }
+        public int? KodeGudangTujuan { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("keterangan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Keterangan { get; set; }
+        public string? Keterangan { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("insertName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? InsertName { get; set; }
+        public int? InsertName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("insertTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? InsertTime { get; set; }
+        public System.DateTime? InsertTime { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("updateName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? UpdateName { get; set; }
+        public int? UpdateName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("updateTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? UpdateTime { get; set; }
+        public System.DateTime? UpdateTime { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("historyNya", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string HistoryNya { get; set; }
+        public string? HistoryNya { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodegudang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodegudang { get; set; }
+        public int? Kodegudang { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodepenyiap", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodepenyiap { get; set; }
+        public int? Kodepenyiap { get; set; } = default!;
 
         /// <summary>
         /// 0=Belum,1=Sudah
         /// </summary>
         [Newtonsoft.Json.JsonProperty("export", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Export { get; set; }
+        public int? Export { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeonline { get; set; }
+        public int? Kodeonline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("dtransit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Dtransit> Dtransit { get; set; }
+        public System.Collections.Generic.ICollection<Dtransit>? Dtransit { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("penyiaporder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Penyiaporder Penyiaporder { get; set; }
+        public Penyiaporder? Penyiaporder { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masteruserInsert", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Masteruser MasteruserInsert { get; set; }
+        public Masteruser? MasteruserInsert { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masteruserUpdate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Masteruser MasteruserUpdate { get; set; }
+        public Masteruser? MasteruserUpdate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("mastergudang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Mastergudang Mastergudang { get; set; }
+        public Mastergudang? Mastergudang { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("mastergudangTujuan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Mastergudang MastergudangTujuan { get; set; }
+        public Mastergudang? MastergudangTujuan { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class HtransitResult
     {
-        [Newtonsoft.Json.JsonProperty("kodeT", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodeT { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeT", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodeT { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tglTrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglTrans { get; set; }
+        public System.DateTime? TglTrans { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodeGudangTujuan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodeGudangTujuan { get; set; }
+        public int? KodeGudangTujuan { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("keterangan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Keterangan { get; set; }
+        public string? Keterangan { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("insertName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? InsertName { get; set; }
+        public int? InsertName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("insertTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? InsertTime { get; set; }
+        public System.DateTime? InsertTime { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("updateName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? UpdateName { get; set; }
+        public int? UpdateName { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("updateTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? UpdateTime { get; set; }
+        public System.DateTime? UpdateTime { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("historyNya", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string HistoryNya { get; set; }
+        public string? HistoryNya { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodegudang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodegudang { get; set; }
+        public int? Kodegudang { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodepenyiap", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodepenyiap { get; set; }
+        public int? Kodepenyiap { get; set; } = default!;
 
         /// <summary>
         /// 0=Belum,1=Sudah
         /// </summary>
         [Newtonsoft.Json.JsonProperty("export", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Export { get; set; }
+        public int? Export { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeonline { get; set; }
+        public int? Kodeonline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("dtransit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<DtransitResult> Dtransit { get; set; }
+        public System.Collections.Generic.ICollection<DtransitResult>? Dtransit { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("penyiaporder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CommonResultDto Penyiaporder { get; set; }
+        public CommonResultDto? Penyiaporder { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masteruserInsert", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public MasteruserOptionDto MasteruserInsert { get; set; }
+        public MasteruserOptionDto? MasteruserInsert { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masteruserUpdate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public MasteruserOptionDto MasteruserUpdate { get; set; }
+        public MasteruserOptionDto? MasteruserUpdate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("mastergudang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CommonResultDto Mastergudang { get; set; }
+        public CommonResultDto? Mastergudang { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("mastergudangTujuan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CommonResultDto MastergudangTujuan { get; set; }
+        public CommonResultDto? MastergudangTujuan { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class HtransitResultDto
     {
-        [Newtonsoft.Json.JsonProperty("totalPage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? TotalPage { get; set; }
+        [Newtonsoft.Json.JsonProperty("totalPage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long TotalPage { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("totalRow", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? TotalRow { get; set; }
+        [Newtonsoft.Json.JsonProperty("totalRow", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long TotalRow { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("page", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Page { get; set; }
+        [Newtonsoft.Json.JsonProperty("page", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Page { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("pageSize", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? PageSize { get; set; }
+        [Newtonsoft.Json.JsonProperty("pageSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long PageSize { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("data", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<HtransitResult> Data { get; set; }
+        public System.Collections.Generic.ICollection<HtransitResult>? Data { get; set; } = default!;
 
     }
 
@@ -10224,166 +9724,166 @@ namespace DoranApp.Utils
     public partial class LoginDto
     {
         [Newtonsoft.Json.JsonProperty("username", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Username { get; set; }
+        public string? Username { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("password", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Password { get; set; }
+        public string? Password { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class LokasiKota
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("provinsi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Provinsi { get; set; }
+        [Newtonsoft.Json.JsonProperty("provinsi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Provinsi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeareapengiriman", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeareapengiriman { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeareapengiriman", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeareapengiriman { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodecoa4", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodecoa4 { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodecoa4", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodecoa4 { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("adaKertasOrder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? AdaKertasOrder { get; set; }
+        [Newtonsoft.Json.JsonProperty("adaKertasOrder", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int AdaKertasOrder { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("lokasiProvinsi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public LokasiProvinsi LokasiProvinsi { get; set; }
+        public LokasiProvinsi? LokasiProvinsi { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterpelanggans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Masterpelanggan> Masterpelanggans { get; set; }
+        public System.Collections.Generic.ICollection<Masterpelanggan>? Masterpelanggans { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class LokasiProvinsi
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("lokasiKota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<LokasiKota> LokasiKota { get; set; }
+        public System.Collections.Generic.ICollection<LokasiKota>? LokasiKota { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Masterbarang
     {
-        [Newtonsoft.Json.JsonProperty("brgKode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? BrgKode { get; set; }
+        [Newtonsoft.Json.JsonProperty("brgKode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int BrgKode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("brgNama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BrgNama { get; set; }
+        public string? BrgNama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("brgAktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? BrgAktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("brgAktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool BrgAktif { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("insertName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? InsertName { get; set; }
+        [Newtonsoft.Json.JsonProperty("insertName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool InsertName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("insertTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? InsertTime { get; set; }
+        [Newtonsoft.Json.JsonProperty("insertTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime InsertTime { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("updateName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? UpdateName { get; set; }
+        [Newtonsoft.Json.JsonProperty("updateName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool UpdateName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("updateTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? UpdateTime { get; set; }
+        [Newtonsoft.Json.JsonProperty("updateTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime UpdateTime { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("brgHabis", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? BrgHabis { get; set; }
+        [Newtonsoft.Json.JsonProperty("brgHabis", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int BrgHabis { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("modal", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Modal { get; set; }
+        [Newtonsoft.Json.JsonProperty("modal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Modal { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("hargatoko", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Hargatoko { get; set; }
+        [Newtonsoft.Json.JsonProperty("hargatoko", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Hargatoko { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("hargaSrp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? HargaSrp { get; set; }
+        [Newtonsoft.Json.JsonProperty("hargaSrp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int HargaSrp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("minStokHabis", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? MinStokHabis { get; set; }
+        [Newtonsoft.Json.JsonProperty("minStokHabis", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int MinStokHabis { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("maksstok", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Maksstok { get; set; }
+        [Newtonsoft.Json.JsonProperty("maksstok", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Maksstok { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("poinToko", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? PoinToko { get; set; }
+        [Newtonsoft.Json.JsonProperty("poinToko", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int PoinToko { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("supplierkode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Supplierkode { get; set; }
+        [Newtonsoft.Json.JsonProperty("supplierkode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Supplierkode { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tipebarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Tipebarang { get; set; }
+        [Newtonsoft.Json.JsonProperty("tipebarang", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Tipebarang { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("hargaol", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Hargaol { get; set; }
+        [Newtonsoft.Json.JsonProperty("hargaol", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Hargaol { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namaol", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Namaol { get; set; }
+        public string? Namaol { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("brgspesial", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Brgspesial { get; set; }
+        [Newtonsoft.Json.JsonProperty("brgspesial", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Brgspesial { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("komisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Komisi { get; set; }
+        [Newtonsoft.Json.JsonProperty("komisi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Komisi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kategoriBrg", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KategoriBrg { get; set; }
+        [Newtonsoft.Json.JsonProperty("kategoriBrg", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KategoriBrg { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("favorit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Favorit { get; set; }
+        [Newtonsoft.Json.JsonProperty("favorit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Favorit { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("groupbaranghabis", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Groupbaranghabis { get; set; }
+        [Newtonsoft.Json.JsonProperty("groupbaranghabis", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Groupbaranghabis { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("diskontinu", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Diskontinu { get; set; }
+        [Newtonsoft.Json.JsonProperty("diskontinu", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Diskontinu { get; set; } = default!;
 
         /// <summary>
         /// 0=tidakada,1=disiapkan,2=dikirim
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("statusKirimanCina", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? StatusKirimanCina { get; set; }
+        [Newtonsoft.Json.JsonProperty("statusKirimanCina", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int StatusKirimanCina { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("ketKirimanCina", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string KetKirimanCina { get; set; }
+        public string? KetKirimanCina { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("simpanmemostok", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Simpanmemostok { get; set; }
+        [Newtonsoft.Json.JsonProperty("simpanmemostok", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Simpanmemostok { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("setHarga", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? SetHarga { get; set; }
+        [Newtonsoft.Json.JsonProperty("setHarga", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int SetHarga { get; set; } = default!;
 
         /// <summary>
         /// Keperluan Apps PastiSukses untuk cek apakah brg ini perlu diorder toko atau belum. 1=Perlu. 0=TidakPerlu.
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("kpikelengkapantoko", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kpikelengkapantoko { get; set; }
+        [Newtonsoft.Json.JsonProperty("kpikelengkapantoko", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kpikelengkapantoko { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("dtrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Dtrans> Dtrans { get; set; }
+        public System.Collections.Generic.ICollection<Dtrans>? Dtrans { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("dorder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Dorder> Dorder { get; set; }
+        public System.Collections.Generic.ICollection<Dorder>? Dorder { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("dtransit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Dtransit> Dtransit { get; set; }
+        public System.Collections.Generic.ICollection<Dtransit>? Dtransit { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("dkategoribarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Dkategoribarang Dkategoribarang { get; set; }
+        public Dkategoribarang? Dkategoribarang { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("mastertipebarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Mastertipebarang Mastertipebarang { get; set; }
+        public Mastertipebarang? Mastertipebarang { get; set; } = default!;
 
     }
 
@@ -10391,10 +9891,10 @@ namespace DoranApp.Utils
     public partial class MasterbarangOptionDto
     {
         [Newtonsoft.Json.JsonProperty("brgKode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? BrgKode { get; set; }
+        public int? BrgKode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("brgNama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BrgNama { get; set; }
+        public string? BrgNama { get; set; } = default!;
 
     }
 
@@ -10402,13 +9902,13 @@ namespace DoranApp.Utils
     public partial class MasterbarangOptionWithSnDto
     {
         [Newtonsoft.Json.JsonProperty("brgKode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? BrgKode { get; set; }
+        public int? BrgKode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("brgNama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BrgNama { get; set; }
+        public string? BrgNama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Sn { get; set; }
+        [Newtonsoft.Json.JsonProperty("sn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Sn { get; set; } = default!;
 
     }
 
@@ -10416,27 +9916,27 @@ namespace DoranApp.Utils
     public partial class MasterbarangOptionWithTipeDto
     {
         [Newtonsoft.Json.JsonProperty("brgKode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? BrgKode { get; set; }
+        public int? BrgKode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("brgNama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BrgNama { get; set; }
+        public string? BrgNama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("mastertipebarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CommonResultDto Mastertipebarang { get; set; }
+        public CommonResultDto? Mastertipebarang { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Masterchannelsales
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("mastertimsales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Mastertimsales> Mastertimsales { get; set; }
+        public System.Collections.Generic.ICollection<Mastertimsales>? Mastertimsales { get; set; } = default!;
 
     }
 
@@ -10444,56 +9944,56 @@ namespace DoranApp.Utils
     public partial class MasterchannelsalesOptionDto
     {
         [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        public int? Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("mastertimsales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<MastertimsalesOptionDto> Mastertimsales { get; set; }
+        public System.Collections.Generic.ICollection<MastertimsalesOptionDto>? Mastertimsales { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Masterdivisi
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterpegawais", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Masterpegawai> Masterpegawais { get; set; }
+        public System.Collections.Generic.ICollection<Masterpegawai>? Masterpegawais { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Mastergudang
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("urut", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Urut { get; set; }
+        public int? Urut { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("boletransit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Boletransit { get; set; }
+        [Newtonsoft.Json.JsonProperty("boletransit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Boletransit { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("htrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Htrans> Htrans { get; set; }
+        public System.Collections.Generic.ICollection<Htrans>? Htrans { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("htransit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Htransit> Htransit { get; set; }
+        public System.Collections.Generic.ICollection<Htransit>? Htransit { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("htransitTujuan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Htransit> HtransitTujuan { get; set; }
+        public System.Collections.Generic.ICollection<Htransit>? HtransitTujuan { get; set; } = default!;
 
     }
 
@@ -10501,373 +10001,373 @@ namespace DoranApp.Utils
     public partial class MastergudangOptionDto
     {
         [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        public int? Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Masterjabatan
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterpegawais", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Masterpegawai> Masterpegawais { get; set; }
+        public System.Collections.Generic.ICollection<Masterpegawai>? Masterpegawais { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Masterpegawai
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodejabatan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodejabatan { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodejabatan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodejabatan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodedivisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodedivisi { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodedivisi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodedivisi { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("pass", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Pass { get; set; }
+        public string? Pass { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("ktp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Ktp { get; set; }
+        public string? Ktp { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("npwp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Npwp { get; set; }
+        public string? Npwp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tgllahir", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tgllahir { get; set; }
+        [Newtonsoft.Json.JsonProperty("tgllahir", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tgllahir { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tgljoin", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tgljoin { get; set; }
+        [Newtonsoft.Json.JsonProperty("tgljoin", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tgljoin { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Aktif { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("alamat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Alamat { get; set; }
+        public string? Alamat { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("telp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Telp { get; set; }
+        public string? Telp { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("jabatan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Jabatan { get; set; }
+        public string? Jabatan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("akses", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Akses { get; set; }
+        [Newtonsoft.Json.JsonProperty("akses", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Akses { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("pengiriman", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Pengiriman { get; set; }
+        [Newtonsoft.Json.JsonProperty("pengiriman", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Pengiriman { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("grupnilai", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Grupnilai { get; set; }
+        [Newtonsoft.Json.JsonProperty("grupnilai", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Grupnilai { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("rek", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Rek { get; set; }
+        public string? Rek { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("sidikjari", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Sidikjari { get; set; }
+        public string? Sidikjari { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodejamkerja", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodejamkerja { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodejamkerja", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodejamkerja { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Email { get; set; }
+        public string? Email { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("grupgaji", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Grupgaji { get; set; }
+        [Newtonsoft.Json.JsonProperty("grupgaji", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Grupgaji { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("bpjsbyperush", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Bpjsbyperush { get; set; }
+        [Newtonsoft.Json.JsonProperty("bpjsbyperush", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Bpjsbyperush { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("bpjsbysendiri", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Bpjsbysendiri { get; set; }
+        [Newtonsoft.Json.JsonProperty("bpjsbysendiri", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Bpjsbysendiri { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("bpjstk", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Bpjstk { get; set; }
+        [Newtonsoft.Json.JsonProperty("bpjstk", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Bpjstk { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeatasan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeatasan { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeatasan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeatasan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("laporan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Laporan { get; set; }
+        [Newtonsoft.Json.JsonProperty("laporan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Laporan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeAgama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodeAgama { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeAgama", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodeAgama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTime? CreatedAt { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("updatedAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTime? UpdatedAt { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("deletedAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? DeletedAt { get; set; }
+        public System.DateTime? DeletedAt { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterdivisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Masterdivisi Masterdivisi { get; set; }
+        public Masterdivisi? Masterdivisi { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterjabatan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Masterjabatan Masterjabatan { get; set; }
+        public Masterjabatan? Masterjabatan { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Masterpelanggan
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namaformal", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Namaformal { get; set; }
+        public string? Namaformal { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("lokasi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Lokasi { get; set; }
+        public string? Lokasi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodelevel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodelevel { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodelevel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodelevel { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("insertName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? InsertName { get; set; }
+        [Newtonsoft.Json.JsonProperty("insertName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int InsertName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("insertTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? InsertTime { get; set; }
+        [Newtonsoft.Json.JsonProperty("insertTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime InsertTime { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("updateName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? UpdateName { get; set; }
+        [Newtonsoft.Json.JsonProperty("updateName", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int UpdateName { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("updateTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? UpdateTime { get; set; }
+        [Newtonsoft.Json.JsonProperty("updateTime", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime UpdateTime { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kursKomisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KursKomisi { get; set; }
+        [Newtonsoft.Json.JsonProperty("kursKomisi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KursKomisi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("batasOmzet", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? BatasOmzet { get; set; }
+        [Newtonsoft.Json.JsonProperty("batasOmzet", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int BatasOmzet { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("panggilan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Panggilan { get; set; }
+        public string? Panggilan { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("targetAdmin", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? TargetAdmin { get; set; }
+        public bool? TargetAdmin { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglLahir", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglLahir { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglLahir", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime TglLahir { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Email { get; set; }
+        public string? Email { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namaPemilik", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NamaPemilik { get; set; }
+        public string? NamaPemilik { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kota { get; set; }
+        [Newtonsoft.Json.JsonProperty("kota", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kota { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("provinsi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Provinsi { get; set; }
+        [Newtonsoft.Json.JsonProperty("provinsi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Provinsi { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tokoalamatlengkap", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tokoalamatlengkap { get; set; }
+        public string? Tokoalamatlengkap { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tokoalamatkirim", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tokoalamatkirim { get; set; }
+        public string? Tokoalamatkirim { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tokoexp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Tokoexp { get; set; }
+        [Newtonsoft.Json.JsonProperty("tokoexp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Tokoexp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kirimmelalui", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kirimmelalui { get; set; }
+        [Newtonsoft.Json.JsonProperty("kirimmelalui", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kirimmelalui { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tokotelp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tokotelp { get; set; }
+        public string? Tokotelp { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tokohp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tokohp { get; set; }
+        public string? Tokohp { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tokopinbbm", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tokopinbbm { get; set; }
+        public string? Tokopinbbm { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jenisusaha", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Jenisusaha { get; set; }
+        [Newtonsoft.Json.JsonProperty("jenisusaha", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Jenisusaha { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tglberdiri", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tglberdiri { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglberdiri", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tglberdiri { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("statustempatusaha", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Statustempatusaha { get; set; }
+        [Newtonsoft.Json.JsonProperty("statustempatusaha", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Statustempatusaha { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sewa1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Sewa1 { get; set; }
+        [Newtonsoft.Json.JsonProperty("sewa1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Sewa1 { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sewa2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Sewa2 { get; set; }
+        [Newtonsoft.Json.JsonProperty("sewa2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Sewa2 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("pemilikalamat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Pemilikalamat { get; set; }
+        public string? Pemilikalamat { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("pemiliktelp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Pemiliktelp { get; set; }
+        public string? Pemiliktelp { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("pemilikhp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Pemilikhp { get; set; }
+        public string? Pemilikhp { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("pemilikpinbbm", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Pemilikpinbbm { get; set; }
+        public string? Pemilikpinbbm { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("cpnama1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cpnama1 { get; set; }
+        public string? Cpnama1 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("cpemail1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cpemail1 { get; set; }
+        public string? Cpemail1 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("cphp1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cphp1 { get; set; }
+        public string? Cphp1 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("cpjabatan1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cpjabatan1 { get; set; }
+        public string? Cpjabatan1 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("cpnama2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cpnama2 { get; set; }
+        public string? Cpnama2 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("cpemail2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cpemail2 { get; set; }
+        public string? Cpemail2 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("cphp2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cphp2 { get; set; }
+        public string? Cphp2 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("cpjabatan2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cpjabatan2 { get; set; }
+        public string? Cpjabatan2 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("cpnama3", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cpnama3 { get; set; }
+        public string? Cpnama3 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("cpemail3", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cpemail3 { get; set; }
+        public string? Cpemail3 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("cphp3", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cphp3 { get; set; }
+        public string? Cphp3 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("cpjabatan3", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cpjabatan3 { get; set; }
+        public string? Cpjabatan3 { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tipetrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Tipetrans { get; set; }
+        [Newtonsoft.Json.JsonProperty("tipetrans", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Tipetrans { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tipepembayaran", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Tipepembayaran { get; set; }
+        [Newtonsoft.Json.JsonProperty("tipepembayaran", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Tipepembayaran { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("lamakredit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Lamakredit { get; set; }
+        public string? Lamakredit { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlahlimit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlahlimit { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlahlimit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlahlimit { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("adminnama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Adminnama { get; set; }
+        public string? Adminnama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("adminhp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Adminhp { get; set; }
+        public string? Adminhp { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("adminpinbbm", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Adminpinbbm { get; set; }
+        public string? Adminpinbbm { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("caranagih", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Caranagih { get; set; }
+        public string? Caranagih { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("punyaform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Punyaform { get; set; }
+        [Newtonsoft.Json.JsonProperty("punyaform", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Punyaform { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("punyapinbbm", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Punyapinbbm { get; set; }
+        [Newtonsoft.Json.JsonProperty("punyapinbbm", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Punyapinbbm { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("showultah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Showultah { get; set; }
+        [Newtonsoft.Json.JsonProperty("showultah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Showultah { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeareapengiriman", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeareapengiriman { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeareapengiriman", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeareapengiriman { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("salespemilik", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Salespemilik { get; set; }
+        [Newtonsoft.Json.JsonProperty("salespemilik", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Salespemilik { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("npwp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Npwp { get; set; }
+        public string? Npwp { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("fototoko", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Fototoko { get; set; }
+        public string? Fototoko { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("fotoktp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Fotoktp { get; set; }
+        public string? Fotoktp { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("fotoform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Fotoform { get; set; }
+        public string? Fotoform { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodecoa4", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodecoa4 { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodecoa4", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodecoa4 { get; set; } = default!;
 
         /// <summary>
         /// 0=Masterpelanggan, 1=AKun Pelengkap buat jurnal
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("tipeakun", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Tipeakun { get; set; }
+        [Newtonsoft.Json.JsonProperty("tipeakun", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Tipeakun { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("urutpelanggan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Urutpelanggan { get; set; }
+        [Newtonsoft.Json.JsonProperty("urutpelanggan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Urutpelanggan { get; set; } = default!;
 
         /// <summary>
         /// 0=tidak,1=ppn
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("defaultPpn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? DefaultPpn { get; set; }
+        [Newtonsoft.Json.JsonProperty("defaultPpn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int DefaultPpn { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeleveltokopedia", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeleveltokopedia { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeleveltokopedia", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeleveltokopedia { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("linktoko", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Linktoko { get; set; }
+        public string? Linktoko { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodegroup", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodegroup { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodegroup", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodegroup { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("potongan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public float? Potongan { get; set; }
+        [Newtonsoft.Json.JsonProperty("potongan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public float Potongan { get; set; } = default!;
 
         /// <summary>
         /// UNTUK KODE LEVEL HARGA ONLINE
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("kodelevelharga", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodelevelharga { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodelevelharga", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodelevelharga { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodelevelhargaJete", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodelevelhargaJete { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodelevelhargaJete", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodelevelhargaJete { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("lokasiKota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public LokasiKota LokasiKota { get; set; }
+        public LokasiKota? LokasiKota { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("htrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Htrans> Htrans { get; set; }
+        public System.Collections.Generic.ICollection<Htrans>? Htrans { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("horder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Horder> Horder { get; set; }
+        public System.Collections.Generic.ICollection<Horder>? Horder { get; set; } = default!;
 
     }
 
@@ -10875,101 +10375,101 @@ namespace DoranApp.Utils
     public partial class MasterpelangganWithLokasiKotaOptionDto
     {
         [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        public int? Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("lokasiKota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public CommonResultDto LokasiKota { get; set; }
+        public CommonResultDto? LokasiKota { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Masterpengeluaran
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jenisKas", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? JenisKas { get; set; }
+        [Newtonsoft.Json.JsonProperty("jenisKas", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int JenisKas { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Sales { get; set; }
+        [Newtonsoft.Json.JsonProperty("sales", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Sales { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("cargo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Cargo { get; set; }
+        [Newtonsoft.Json.JsonProperty("cargo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Cargo { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeareapengiriman", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeareapengiriman { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeareapengiriman", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeareapengiriman { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("telpekspedisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Telpekspedisi { get; set; }
+        public string? Telpekspedisi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
         /// <summary>
         /// 0=UK, 1=Cicilan
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("jenisUk", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? JenisUk { get; set; }
+        [Newtonsoft.Json.JsonProperty("jenisUk", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int JenisUk { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("nomorCicilan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? NomorCicilan { get; set; }
+        [Newtonsoft.Json.JsonProperty("nomorCicilan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int NomorCicilan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodecoa4", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodecoa4 { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodecoa4", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodecoa4 { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("harusInputNoHp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? HarusInputNoHp { get; set; }
+        [Newtonsoft.Json.JsonProperty("harusInputNoHp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int HarusInputNoHp { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("adaBarcode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? AdaBarcode { get; set; }
+        public bool? AdaBarcode { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ollangusungCetak", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? OllangusungCetak { get; set; }
+        [Newtonsoft.Json.JsonProperty("ollangusungCetak", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int OllangusungCetak { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("horderEkspedisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Horder> HorderEkspedisi { get; set; }
+        public System.Collections.Generic.ICollection<Horder>? HorderEkspedisi { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Mastertimsales
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("targetjete", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Targetjete { get; set; }
+        [Newtonsoft.Json.JsonProperty("targetjete", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Targetjete { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("targetomzet", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Targetomzet { get; set; }
+        [Newtonsoft.Json.JsonProperty("targetomzet", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Targetomzet { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tampiltahunlalu", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Tampiltahunlalu { get; set; }
+        [Newtonsoft.Json.JsonProperty("tampiltahunlalu", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Tampiltahunlalu { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("syaratKomisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? SyaratKomisi { get; set; }
+        [Newtonsoft.Json.JsonProperty("syaratKomisi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool SyaratKomisi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodechannel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodechannel { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodechannel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodechannel { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterchannelsales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Masterchannelsales Masterchannelsales { get; set; }
+        public Masterchannelsales? Masterchannelsales { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("sales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Sales> Sales { get; set; }
+        public System.Collections.Generic.ICollection<Sales>? Sales { get; set; } = default!;
 
     }
 
@@ -10977,334 +10477,334 @@ namespace DoranApp.Utils
     public partial class MastertimsalesOptionDto
     {
         [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        public int? Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodechannel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodechannel { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodechannel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodechannel { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("sales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<SalesOptionDto> Sales { get; set; }
+        public System.Collections.Generic.ICollection<SalesOptionDto>? Sales { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Mastertipebarang
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("shownya", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Shownya { get; set; }
+        [Newtonsoft.Json.JsonProperty("shownya", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Shownya { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("urut", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Urut { get; set; }
+        [Newtonsoft.Json.JsonProperty("urut", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Urut { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masterbarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Masterbarang> Masterbarang { get; set; }
+        public System.Collections.Generic.ICollection<Masterbarang>? Masterbarang { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Masteruser
     {
-        [Newtonsoft.Json.JsonProperty("kodeku", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeku { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeku", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeku { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("usernameku", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Usernameku { get; set; }
+        public string? Usernameku { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("passwordku", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Passwordku { get; set; }
+        public string? Passwordku { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("akses", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Akses { get; set; }
+        public string? Akses { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("sidikjari", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Sidikjari { get; set; }
+        public string? Sidikjari { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        public bool? Aktif { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodesales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodesales { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodesales", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodesales { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("sales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Sales Sales { get; set; }
+        public Sales? Sales { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("horderUserinsert", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Horder> HorderUserinsert { get; set; }
+        public System.Collections.Generic.ICollection<Horder>? HorderUserinsert { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("horderUserupdate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Horder> HorderUserupdate { get; set; }
+        public System.Collections.Generic.ICollection<Horder>? HorderUserupdate { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("htransitUserinsert", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Htransit> HtransitUserinsert { get; set; }
+        public System.Collections.Generic.ICollection<Htransit>? HtransitUserinsert { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("htransitUserupdate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Htransit> HtransitUserupdate { get; set; }
+        public System.Collections.Generic.ICollection<Htransit>? HtransitUserupdate { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class MasteruserOptionDto
     {
-        [Newtonsoft.Json.JsonProperty("kodeku", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeku { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeku", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeku { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("usernameku", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Usernameku { get; set; }
+        public string? Usernameku { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Penyiaporder
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        public bool? Aktif { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("horder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Horder> Horder { get; set; }
+        public System.Collections.Generic.ICollection<Horder>? Horder { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("htransit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Htransit> Htransit { get; set; }
+        public System.Collections.Generic.ICollection<Htransit>? Htransit { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Sales
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("urutan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Urutan { get; set; }
+        [Newtonsoft.Json.JsonProperty("urutan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Urutan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tipe", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Tipe { get; set; }
+        [Newtonsoft.Json.JsonProperty("tipe", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Tipe { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namaPendamping", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NamaPendamping { get; set; }
+        public string? NamaPendamping { get; set; } = default!;
 
         /// <summary>
         /// 1 = Terima Email OMZET
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("jenis", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Jenis { get; set; }
+        [Newtonsoft.Json.JsonProperty("jenis", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Jenis { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Email { get; set; }
+        public string? Email { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("emailspv", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Emailspv { get; set; }
+        public string? Emailspv { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("t1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? T1 { get; set; }
+        [Newtonsoft.Json.JsonProperty("t1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int T1 { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("t2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? T2 { get; set; }
+        [Newtonsoft.Json.JsonProperty("t2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int T2 { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("t3", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? T3 { get; set; }
+        [Newtonsoft.Json.JsonProperty("t3", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int T3 { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("t4", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? T4 { get; set; }
+        [Newtonsoft.Json.JsonProperty("t4", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int T4 { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("t5", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? T5 { get; set; }
+        [Newtonsoft.Json.JsonProperty("t5", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int T5 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tim", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tim { get; set; }
+        public string? Tim { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("salesol", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Salesol { get; set; }
+        [Newtonsoft.Json.JsonProperty("salesol", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Salesol { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodepegawai", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodepegawai { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodepegawai", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodepegawai { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("manager", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Manager { get; set; }
+        [Newtonsoft.Json.JsonProperty("manager", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Manager { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodemanager", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodemanager { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodemanager", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodemanager { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("persenkomisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Persenkomisi { get; set; }
+        [Newtonsoft.Json.JsonProperty("persenkomisi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Persenkomisi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("persenbonus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Persenbonus { get; set; }
+        [Newtonsoft.Json.JsonProperty("persenbonus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Persenbonus { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("emailbos", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Emailbos { get; set; }
+        [Newtonsoft.Json.JsonProperty("emailbos", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Emailbos { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("syaratbonus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Syaratbonus { get; set; }
+        [Newtonsoft.Json.JsonProperty("syaratbonus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Syaratbonus { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodetimsales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodetimsales { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodetimsales", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodetimsales { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("bisalihatomzettahunantim", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Bisalihatomzettahunantim { get; set; }
+        [Newtonsoft.Json.JsonProperty("bisalihatomzettahunantim", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Bisalihatomzettahunantim { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("emailOmzetTerdahsyat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? EmailOmzetTerdahsyat { get; set; }
+        [Newtonsoft.Json.JsonProperty("emailOmzetTerdahsyat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EmailOmzetTerdahsyat { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("emailJeteterdahsyat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? EmailJeteterdahsyat { get; set; }
+        [Newtonsoft.Json.JsonProperty("emailJeteterdahsyat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EmailJeteterdahsyat { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("emailTargetTahunan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? EmailTargetTahunan { get; set; }
+        [Newtonsoft.Json.JsonProperty("emailTargetTahunan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EmailTargetTahunan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("emailresikiriman", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Emailresikiriman { get; set; }
+        [Newtonsoft.Json.JsonProperty("emailresikiriman", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Emailresikiriman { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("bonusJete", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? BonusJete { get; set; }
+        [Newtonsoft.Json.JsonProperty("bonusJete", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int BonusJete { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("salesManager", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Sales SalesManager { get; set; }
+        public Sales? SalesManager { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("masteruser", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Masteruser Masteruser { get; set; }
+        public Masteruser? Masteruser { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("mastertimsales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Mastertimsales Mastertimsales { get; set; }
+        public Mastertimsales? Mastertimsales { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("htrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Htrans> Htrans { get; set; }
+        public System.Collections.Generic.ICollection<Htrans>? Htrans { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("horder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<Horder> Horder { get; set; }
+        public System.Collections.Generic.ICollection<Horder>? Horder { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class SalesDto
     {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? Id { get; set; }
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid Id { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("urutan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Urutan { get; set; }
+        [Newtonsoft.Json.JsonProperty("urutan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Urutan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tipe", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Tipe { get; set; }
+        [Newtonsoft.Json.JsonProperty("tipe", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Tipe { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namaPendamping", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NamaPendamping { get; set; }
+        public string? NamaPendamping { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jenis", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Jenis { get; set; }
+        [Newtonsoft.Json.JsonProperty("jenis", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Jenis { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Email { get; set; }
+        public string? Email { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("emailspv", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Emailspv { get; set; }
+        public string? Emailspv { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("t1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? T1 { get; set; }
+        [Newtonsoft.Json.JsonProperty("t1", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int T1 { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("t2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? T2 { get; set; }
+        [Newtonsoft.Json.JsonProperty("t2", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int T2 { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("t3", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? T3 { get; set; }
+        [Newtonsoft.Json.JsonProperty("t3", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int T3 { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("t4", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? T4 { get; set; }
+        [Newtonsoft.Json.JsonProperty("t4", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int T4 { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("t5", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? T5 { get; set; }
+        [Newtonsoft.Json.JsonProperty("t5", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int T5 { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tim", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Tim { get; set; }
+        public string? Tim { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("salesol", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Salesol { get; set; }
+        [Newtonsoft.Json.JsonProperty("salesol", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Salesol { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodepegawai", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodepegawai { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodepegawai", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodepegawai { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("manager", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Manager { get; set; }
+        [Newtonsoft.Json.JsonProperty("manager", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Manager { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodemanager", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodemanager { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodemanager", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodemanager { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("persenkomisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Persenkomisi { get; set; }
+        [Newtonsoft.Json.JsonProperty("persenkomisi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Persenkomisi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("persenbonus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Persenbonus { get; set; }
+        [Newtonsoft.Json.JsonProperty("persenbonus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Persenbonus { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("emailbos", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Emailbos { get; set; }
+        [Newtonsoft.Json.JsonProperty("emailbos", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Emailbos { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("syaratbonus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Syaratbonus { get; set; }
+        [Newtonsoft.Json.JsonProperty("syaratbonus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Syaratbonus { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodetimsales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodetimsales { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodetimsales", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodetimsales { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("bisalihatomzettahunantim", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Bisalihatomzettahunantim { get; set; }
+        [Newtonsoft.Json.JsonProperty("bisalihatomzettahunantim", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Bisalihatomzettahunantim { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("emailOmzetTerdahsyat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? EmailOmzetTerdahsyat { get; set; }
+        [Newtonsoft.Json.JsonProperty("emailOmzetTerdahsyat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EmailOmzetTerdahsyat { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("emailJeteterdahsyat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? EmailJeteterdahsyat { get; set; }
+        [Newtonsoft.Json.JsonProperty("emailJeteterdahsyat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EmailJeteterdahsyat { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("emailTargetTahunan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? EmailTargetTahunan { get; set; }
+        [Newtonsoft.Json.JsonProperty("emailTargetTahunan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EmailTargetTahunan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("emailresikiriman", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Emailresikiriman { get; set; }
+        [Newtonsoft.Json.JsonProperty("emailresikiriman", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Emailresikiriman { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("bonusJete", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? BonusJete { get; set; }
+        [Newtonsoft.Json.JsonProperty("bonusJete", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int BonusJete { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("createdAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? CreatedAt { get; set; }
+        public System.DateTime? CreatedAt { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("updatedAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? UpdatedAt { get; set; }
+        public System.DateTime? UpdatedAt { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("deletedAt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? DeletedAt { get; set; }
+        public System.DateTime? DeletedAt { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namaManager", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NamaManager { get; set; }
+        public string? NamaManager { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namaTim", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NamaTim { get; set; }
+        public string? NamaTim { get; set; } = default!;
 
     }
 
@@ -11312,13 +10812,13 @@ namespace DoranApp.Utils
     public partial class SalesOptionDto
     {
         [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        public int? Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodetimsales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodetimsales { get; set; }
+        public int? Kodetimsales { get; set; } = default!;
 
     }
 
@@ -11326,22 +10826,22 @@ namespace DoranApp.Utils
     public partial class SaveHeaderTransitDto
     {
         [Newtonsoft.Json.JsonProperty("tglTrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglTrans { get; set; }
+        public System.DateTime? TglTrans { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodeGudangTujuan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodeGudangTujuan { get; set; }
+        public int? KodeGudangTujuan { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("keterangan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Keterangan { get; set; }
+        public string? Keterangan { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodegudang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodegudang { get; set; }
+        public int? Kodegudang { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodepenyiap", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodepenyiap { get; set; }
+        public int? Kodepenyiap { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeonline { get; set; }
+        public int? Kodeonline { get; set; } = default!;
 
     }
 
@@ -11352,19 +10852,19 @@ namespace DoranApp.Utils
         /// Nama hkategoribarang
         /// </summary>
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("perlusetharga", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Perlusetharga { get; set; }
+        [Newtonsoft.Json.JsonProperty("perlusetharga", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Perlusetharga { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("cektahunan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Cektahunan { get; set; }
+        [Newtonsoft.Json.JsonProperty("cektahunan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Cektahunan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("hargakhusus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Hargakhusus { get; set; }
+        [Newtonsoft.Json.JsonProperty("hargakhusus", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Hargakhusus { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
     }
 
@@ -11372,10 +10872,10 @@ namespace DoranApp.Utils
     public partial class SaveHkelompokbarangDto
     {
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        public bool? Aktif { get; set; } = default!;
 
     }
 
@@ -11386,7 +10886,7 @@ namespace DoranApp.Utils
         /// Nama hkategoribarang
         /// </summary>
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
     }
 
@@ -11397,7 +10897,7 @@ namespace DoranApp.Utils
         /// Nama hkategoribarang
         /// </summary>
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
     }
 
@@ -11405,10 +10905,10 @@ namespace DoranApp.Utils
     public partial class SaveMasterchannelsalesDto
     {
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
     }
 
@@ -11416,7 +10916,7 @@ namespace DoranApp.Utils
     public partial class SaveMasterdivisiDto
     {
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
     }
 
@@ -11424,16 +10924,16 @@ namespace DoranApp.Utils
     public partial class SaveMastergudangDto
     {
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        public bool? Aktif { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("urut", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Urut { get; set; }
+        public int? Urut { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("boletransit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Boletransit { get; set; }
+        public bool? Boletransit { get; set; } = default!;
 
     }
 
@@ -11441,7 +10941,7 @@ namespace DoranApp.Utils
     public partial class SaveMasterjabatanDto
     {
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
     }
 
@@ -11449,16 +10949,16 @@ namespace DoranApp.Utils
     public partial class SaveMasterpengeluaranDto
     {
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        public bool? Aktif { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("urut", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Urut { get; set; }
+        public int? Urut { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("boletransit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Boletransit { get; set; }
+        public bool? Boletransit { get; set; } = default!;
 
     }
 
@@ -11466,25 +10966,25 @@ namespace DoranApp.Utils
     public partial class SaveMastertimsalesDto
     {
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("targetjete", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Targetjete { get; set; }
+        [Newtonsoft.Json.JsonProperty("targetjete", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Targetjete { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("targetomzet", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Targetomzet { get; set; }
+        [Newtonsoft.Json.JsonProperty("targetomzet", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Targetomzet { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tampiltahunlalu", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Tampiltahunlalu { get; set; }
+        [Newtonsoft.Json.JsonProperty("tampiltahunlalu", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Tampiltahunlalu { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("syaratKomisi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? SyaratKomisi { get; set; }
+        [Newtonsoft.Json.JsonProperty("syaratKomisi", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool SyaratKomisi { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodechannel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodechannel { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodechannel", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodechannel { get; set; } = default!;
 
     }
 
@@ -11492,36 +10992,36 @@ namespace DoranApp.Utils
     public partial class SaveMasteruserDto
     {
         [Newtonsoft.Json.JsonProperty("usernameku", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Usernameku { get; set; }
+        public string? Usernameku { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("passwordku", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Passwordku { get; set; }
+        public string? Passwordku { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("akses", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Akses { get; set; }
+        public string? Akses { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class SaveOrderDto
     {
-        [Newtonsoft.Json.JsonProperty("tglorder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tglorder { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglorder", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tglorder { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("keterangan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Keterangan { get; set; }
+        public string? Keterangan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodepelanggan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodepelanggan { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodepelanggan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodepelanggan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodesales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodesales { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodesales", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodesales { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeexp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeexp { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeexp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeexp { get; set; } = default!;
 
         /// <summary>
         /// 0=Belum Diisi;
@@ -11529,61 +11029,61 @@ namespace DoranApp.Utils
         /// <br/>2=Udara;
         /// <br/>3=Laut;
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("kirimmelalui", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kirimmelalui { get; set; }
+        [Newtonsoft.Json.JsonProperty("kirimmelalui", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kirimmelalui { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ppn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Ppn { get; set; }
+        [Newtonsoft.Json.JsonProperty("ppn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Ppn { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tipetempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Tipetempo { get; set; }
+        public int? Tipetempo { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tgltempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tgltempo { get; set; }
+        [Newtonsoft.Json.JsonProperty("tgltempo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tgltempo { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("infopenting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Infopenting { get; set; }
+        public string? Infopenting { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("noSeriOnline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NoSeriOnline { get; set; }
+        public string? NoSeriOnline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("barcodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Barcodeonline { get; set; }
+        public string? Barcodeonline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namaCust", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NamaCust { get; set; }
+        public string? NamaCust { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nmrHp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NmrHp { get; set; }
+        public string? NmrHp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeonline { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeonline { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeorderapps", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeorderapps { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeorderapps", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeorderapps { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<DetailOrder> Details { get; set; }
+        public System.Collections.Generic.ICollection<DetailOrder>? Details { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class SaveOrderHeaderDto
     {
-        [Newtonsoft.Json.JsonProperty("tglorder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tglorder { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglorder", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tglorder { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("keterangan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Keterangan { get; set; }
+        public string? Keterangan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodepelanggan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodepelanggan { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodepelanggan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodepelanggan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodesales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodesales { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodesales", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodesales { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeexp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeexp { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeexp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeexp { get; set; } = default!;
 
         /// <summary>
         /// 0=Belum Diisi;
@@ -11591,38 +11091,38 @@ namespace DoranApp.Utils
         /// <br/>2=Udara;
         /// <br/>3=Laut;
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("kirimmelalui", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kirimmelalui { get; set; }
+        [Newtonsoft.Json.JsonProperty("kirimmelalui", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kirimmelalui { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ppn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Ppn { get; set; }
+        [Newtonsoft.Json.JsonProperty("ppn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Ppn { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tipetempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Tipetempo { get; set; }
+        public int? Tipetempo { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tgltempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tgltempo { get; set; }
+        [Newtonsoft.Json.JsonProperty("tgltempo", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime Tgltempo { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("infopenting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Infopenting { get; set; }
+        public string? Infopenting { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("noSeriOnline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NoSeriOnline { get; set; }
+        public string? NoSeriOnline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("barcodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Barcodeonline { get; set; }
+        public string? Barcodeonline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namaCust", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NamaCust { get; set; }
+        public string? NamaCust { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nmrHp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NmrHp { get; set; }
+        public string? NmrHp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeonline { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeonline { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeorderapps", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeorderapps { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeorderapps", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodeorderapps { get; set; } = default!;
 
     }
 
@@ -11633,10 +11133,10 @@ namespace DoranApp.Utils
         /// Nama hkategoribarang
         /// </summary>
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
     }
 
@@ -11644,55 +11144,55 @@ namespace DoranApp.Utils
     public partial class SaveSalesDto
     {
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("urutan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Urutan { get; set; }
+        [Newtonsoft.Json.JsonProperty("urutan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Urutan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tipe", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Tipe { get; set; }
+        [Newtonsoft.Json.JsonProperty("tipe", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Tipe { get; set; } = default!;
 
         /// <summary>
         /// 1 = Terima Email OMZET
         /// </summary>
-        [Newtonsoft.Json.JsonProperty("jenis", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Jenis { get; set; }
+        [Newtonsoft.Json.JsonProperty("jenis", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Jenis { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Email { get; set; }
+        public string? Email { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("salesol", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Salesol { get; set; }
+        [Newtonsoft.Json.JsonProperty("salesol", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Salesol { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("manager", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Manager { get; set; }
+        [Newtonsoft.Json.JsonProperty("manager", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Manager { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodemanager", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodemanager { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodemanager", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodemanager { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodetimsales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodetimsales { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodetimsales", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodetimsales { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("bisalihatomzettahunantim", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Bisalihatomzettahunantim { get; set; }
+        [Newtonsoft.Json.JsonProperty("bisalihatomzettahunantim", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Bisalihatomzettahunantim { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("emailOmzetTerdahsyat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? EmailOmzetTerdahsyat { get; set; }
+        [Newtonsoft.Json.JsonProperty("emailOmzetTerdahsyat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EmailOmzetTerdahsyat { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("emailJeteterdahsyat", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? EmailJeteterdahsyat { get; set; }
+        [Newtonsoft.Json.JsonProperty("emailJeteterdahsyat", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EmailJeteterdahsyat { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("emailTargetTahunan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? EmailTargetTahunan { get; set; }
+        [Newtonsoft.Json.JsonProperty("emailTargetTahunan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool EmailTargetTahunan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("emailresikiriman", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Emailresikiriman { get; set; }
+        [Newtonsoft.Json.JsonProperty("emailresikiriman", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Emailresikiriman { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("bonusJete", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? BonusJete { get; set; }
+        [Newtonsoft.Json.JsonProperty("bonusJete", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int BonusJete { get; set; } = default!;
 
     }
 
@@ -11703,174 +11203,177 @@ namespace DoranApp.Utils
         /// Nama hkategoribarang
         /// </summary>
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("acuanTambah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public float? AcuanTambah { get; set; }
+        [Newtonsoft.Json.JsonProperty("acuanTambah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public float AcuanTambah { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("acuanPotong", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public float? AcuanPotong { get; set; }
+        [Newtonsoft.Json.JsonProperty("acuanPotong", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public float AcuanPotong { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("modal", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Modal { get; set; }
+        [Newtonsoft.Json.JsonProperty("modal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Modal { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("online", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Online { get; set; }
+        [Newtonsoft.Json.JsonProperty("online", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Online { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("urutan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Urutan { get; set; }
+        [Newtonsoft.Json.JsonProperty("urutan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Urutan { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class SaveTransaksiDto
     {
-        [Newtonsoft.Json.JsonProperty("tglTrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TglTrans { get; set; }
+        [Newtonsoft.Json.JsonProperty("tglTrans", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime TglTrans { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodePelanggan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodePelanggan { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodePelanggan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodePelanggan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlah { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlahbarangbiaya", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlahbarangbiaya { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlahbarangbiaya", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlahbarangbiaya { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("tambahanLainnya", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? TambahanLainnya { get; set; }
+        [Newtonsoft.Json.JsonProperty("tambahanLainnya", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int TambahanLainnya { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("dpp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Dpp { get; set; }
+        [Newtonsoft.Json.JsonProperty("dpp", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Dpp { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("ppn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Ppn { get; set; }
+        [Newtonsoft.Json.JsonProperty("ppn", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Ppn { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("diskon", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Diskon { get; set; }
+        [Newtonsoft.Json.JsonProperty("diskon", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Diskon { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("keterangan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Keterangan { get; set; }
+        public string? Keterangan { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodeSales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? KodeSales { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodeSales", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int KodeSales { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("kodegudang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodegudang { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodegudang", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodegudang { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("salesPenagih", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? SalesPenagih { get; set; }
+        [Newtonsoft.Json.JsonProperty("salesPenagih", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int SalesPenagih { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("statusNota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? StatusNota { get; set; }
+        [Newtonsoft.Json.JsonProperty("statusNota", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool StatusNota { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("retur", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Retur { get; set; }
+        public string? Retur { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("stoknota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Stoknota { get; set; }
+        [Newtonsoft.Json.JsonProperty("stoknota", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Stoknota { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("noSeriOnline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NoSeriOnline { get; set; }
+        public string? NoSeriOnline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("barcodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Barcodeonline { get; set; }
+        public string? Barcodeonline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tipetempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Tipetempo { get; set; }
+        public int? Tipetempo { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("tgltempo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? Tgltempo { get; set; }
+        public System.DateTime? Tgltempo { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("infopenting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Infopenting { get; set; }
+        public string? Infopenting { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("kodeonline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodeonline { get; set; }
+        public int? Kodeonline { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("namaCust", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NamaCust { get; set; }
+        public string? NamaCust { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nmrHp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NmrHp { get; set; }
+        public string? NmrHp { get; set; } = default!;
+
+        [Newtonsoft.Json.JsonProperty("kodeOrder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? KodeOrder { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("details", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.ICollection<DetailTransaksi> Details { get; set; }
+        public System.Collections.Generic.ICollection<DetailTransaksi>? Details { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class SetAktifMastergudangDto
     {
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class SetAktifMasterpengeluaranDto
     {
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class SetPenyiapOrderDto
     {
-        [Newtonsoft.Json.JsonProperty("kodepenyiap", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodepenyiap { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodepenyiap", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodepenyiap { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class SetTranstirMastergudangDto
     {
-        [Newtonsoft.Json.JsonProperty("boletransit", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Boletransit { get; set; }
+        [Newtonsoft.Json.JsonProperty("boletransit", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Boletransit { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Sethargalevel
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("acuanTambah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public float? AcuanTambah { get; set; }
+        [Newtonsoft.Json.JsonProperty("acuanTambah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public float AcuanTambah { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("acuanPotong", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public float? AcuanPotong { get; set; }
+        [Newtonsoft.Json.JsonProperty("acuanPotong", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public float AcuanPotong { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("modal", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Modal { get; set; }
+        [Newtonsoft.Json.JsonProperty("modal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Modal { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("online", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Online { get; set; }
+        [Newtonsoft.Json.JsonProperty("online", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Online { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("urutan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Urutan { get; set; }
+        [Newtonsoft.Json.JsonProperty("urutan", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Urutan { get; set; } = default!;
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class TransaksiByBarangResultDto
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Jumlah { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sumTotal", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? SumTotal { get; set; }
+        [Newtonsoft.Json.JsonProperty("sumTotal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long SumTotal { get; set; } = default!;
 
     }
 
@@ -11889,17 +11392,17 @@ namespace DoranApp.Utils
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class TransaksiBySalesResultDto
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sumTotal", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? SumTotal { get; set; }
+        [Newtonsoft.Json.JsonProperty("sumTotal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long SumTotal { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("persen", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public float? Persen { get; set; }
+        [Newtonsoft.Json.JsonProperty("persen", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public float Persen { get; set; } = default!;
 
     }
 
@@ -11926,17 +11429,17 @@ namespace DoranApp.Utils
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class TransaksiByTokoResultDto
     {
-        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kode { get; set; }
+        [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kode { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Nama { get; set; }
+        public string? Nama { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long Jumlah { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("sumTotal", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? SumTotal { get; set; }
+        [Newtonsoft.Json.JsonProperty("sumTotal", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long SumTotal { get; set; } = default!;
 
     }
 
@@ -11953,14 +11456,14 @@ namespace DoranApp.Utils
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class UpdateDetailByKodedDto
     {
-        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Kodebarang { get; set; }
+        [Newtonsoft.Json.JsonProperty("kodebarang", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodebarang { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Jumlah { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("nmrSn", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string NmrSn { get; set; }
+        public string? NmrSn { get; set; } = default!;
 
     }
 
@@ -11968,16 +11471,16 @@ namespace DoranApp.Utils
     public partial class UpdateMasteruserDto
     {
         [Newtonsoft.Json.JsonProperty("usernameku", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Usernameku { get; set; }
+        public string? Usernameku { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("passwordku", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Passwordku { get; set; }
+        public string? Passwordku { get; set; } = default!;
 
         [Newtonsoft.Json.JsonProperty("akses", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Akses { get; set; }
+        public string? Akses { get; set; } = default!;
 
-        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Aktif { get; set; }
+        [Newtonsoft.Json.JsonProperty("aktif", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Aktif { get; set; } = default!;
 
     }
 
@@ -11988,11 +11491,11 @@ namespace DoranApp.Utils
     {
         public int StatusCode { get; private set; }
 
-        public string Response { get; private set; }
+        public string? Response { get; private set; }
 
         public System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> Headers { get; private set; }
 
-        public ApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Exception innerException)
+        public ApiException(string message, int statusCode, string? response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Exception? innerException)
             : base(message + "\n\nStatus: " + statusCode + "\nResponse: \n" + ((response == null) ? "(null)" : response.Substring(0, response.Length >= 512 ? 512 : response.Length)), innerException)
         {
             StatusCode = statusCode;
@@ -12011,7 +11514,7 @@ namespace DoranApp.Utils
     {
         public TResult Result { get; private set; }
 
-        public ApiException(string message, int statusCode, string response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result, System.Exception innerException)
+        public ApiException(string message, int statusCode, string? response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result, System.Exception? innerException)
             : base(message, statusCode, response, headers, innerException)
         {
             Result = result;

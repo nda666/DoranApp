@@ -112,8 +112,8 @@ public partial class TransitBarangControl : UserControl
 
     private void TransitBarangControl_Load(object sender, EventArgs e)
     {
-        dataGridView1.DoubleBuffered(true);
-        dataGridView2.DoubleBuffered(true);
+        dataGridView1.EnableDoubleBuffered(true);
+        dataGridView2.EnableDoubleBuffered(true);
         comboPageSize.SelectedIndex = 0;
         dataGridView1.DataSource = _TransitData.GetDataTable();
     }
@@ -203,7 +203,7 @@ public partial class TransitBarangControl : UserControl
                 dataGridView2.Rows[index].Cells["Koded"].Value = d.Koded;
                 dataGridView2.Rows[index].Cells["Kodet"].Value = d.Kodet;
                 dataGridView2.Rows[index].Cells["KodeBarang"].Value = d.Kodebarang;
-                Pcs += d.Jumlah ?? 0;
+                Pcs += d.Jumlah;
                 Varian++;
             }
 

@@ -53,12 +53,13 @@ namespace DoranApp.Utils
 
         private string FindError(HttpResponseMessage httpResponseMessage, dynamic response)
         {
-            ConsoleDump.Extensions.Dump(httpResponseMessage);
             var status = (Int32)httpResponseMessage.StatusCode;
             var error = httpResponseMessage.ReasonPhrase;
             if (!status.ToString().StartsWith("2"))
             {
                 JObject dynamicErrors = response;
+
+                ConsoleDump.Extensions.Dump(response);
 
                 if (dynamicErrors == null)
                 {
@@ -85,6 +86,11 @@ namespace DoranApp.Utils
                         if (response?.message != null)
                         {
                             throw new RestException(status, response.message);
+                        }
+
+                        if (response?.title != null)
+                        {
+                            throw new RestException(status, response.title);
                         }
 
                         throw new RestException(status, error);

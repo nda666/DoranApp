@@ -24,15 +24,22 @@ namespace DoranApp.DataGlobal
             }
 
             IsRun = true;
-            var rest = new Rest("mastergudang/options");
-            var response = await rest.Get(new
+            try
             {
-                Aktif = true,
-                Boletransit = true
-            });
+                var rest = new Rest("mastergudang/options");
+                var response = await rest.Get(new
+                {
+                    Aktif = true,
+                    Boletransit = true
+                });
+                var data = (List<CommonResultDto>)response.Response;
+                NotifyObservers(data);
+            }
+            catch (Exception ex)
+            {
+            }
+
             IsRun = false;
-            var data = (List<CommonResultDto>)response.Response;
-            NotifyObservers(data);
         }
 
         public static IDisposable Subscribe(Action<List<CommonResultDto>> onNext)

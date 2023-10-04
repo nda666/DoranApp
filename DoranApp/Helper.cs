@@ -27,5 +27,32 @@ namespace DoranApp
                     return "Cash";
             }
         }
+
+        public static int TipeTempoValueToIndex(int tipeTempo)
+        {
+            var subDay = -1;
+            switch (tipeTempo)
+            {
+                case 0:
+                    subDay = 0;
+                    break;
+                case 7:
+                    subDay = 1;
+                    break;
+                case 14:
+                    subDay = 2;
+                    break;
+                case 30:
+                    subDay = 3;
+                    break;
+                case 60:
+                    subDay = 4;
+                    break;
+                default:
+                    break;
+            }
+
+            return subDay;
+        }
     }
 }

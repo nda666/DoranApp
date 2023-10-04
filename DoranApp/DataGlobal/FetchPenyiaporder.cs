@@ -9,8 +9,8 @@ namespace DoranApp.DataGlobal
 {
     internal static class FetchPenyiaporder
     {
-        private static readonly BehaviorSubject<List<Penyiaporder>> subject =
-            new BehaviorSubject<List<Penyiaporder>>(new List<Penyiaporder>());
+        private static readonly BehaviorSubject<List<CommonResultDto>> subject =
+            new BehaviorSubject<List<CommonResultDto>>(new List<CommonResultDto>());
 
         private static bool IsRun = false;
 
@@ -22,14 +22,21 @@ namespace DoranApp.DataGlobal
             }
 
             IsRun = true;
-            var rest = new Rest("penyiaporder");
-            var response = await rest.Get();
+            try
+            {
+                var rest = new Rest("penyiaporder");
+                var response = await rest.Get();
+                var data = (List<CommonResultDto>)response.Response;
+                NotifyObservers(data);
+            }
+            catch (Exception ex)
+            {
+            }
+
             IsRun = false;
-            var data = (List<Penyiaporder>)response.Response;
-            NotifyObservers(data);
         }
 
-        public static IDisposable Subscribe(Action<List<Penyiaporder>> onNext)
+        public static IDisposable Subscribe(Action<List<CommonResultDto>> onNext)
         {
             return new CompositeDisposable(
                 subject.Subscribe(new MyObserver(onNext)),
@@ -37,16 +44,16 @@ namespace DoranApp.DataGlobal
             );
         }
 
-        private static void NotifyObservers(List<Penyiaporder> data)
+        private static void NotifyObservers(List<CommonResultDto> data)
         {
             subject.OnNext(data);
         }
 
-        private class MyObserver : IObserver<List<Penyiaporder>>
+        private class MyObserver : IObserver<List<CommonResultDto>>
         {
-            private readonly Action<List<Penyiaporder>> _onNext;
+            private readonly Action<List<CommonResultDto>> _onNext;
 
-            public MyObserver(Action<List<Penyiaporder>> onNext)
+            public MyObserver(Action<List<CommonResultDto>> onNext)
             {
                 _onNext = onNext;
             }
@@ -61,7 +68,7 @@ namespace DoranApp.DataGlobal
                 /* Implementation */
             }
 
-            public void OnNext(List<Penyiaporder> value)
+            public void OnNext(List<CommonResultDto> value)
             {
                 _onNext(value);
             }

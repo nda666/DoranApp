@@ -71,9 +71,9 @@ namespace DoranApp.View
                 }
             });
 
-            dataGridView1.DoubleBuffered(true);
-            dataGridView2.DoubleBuffered(true);
-            dataGridView3.DoubleBuffered(true);
+            dataGridView1.EnableDoubleBuffered(true);
+            dataGridView2.EnableDoubleBuffered(true);
+            dataGridView3.EnableDoubleBuffered(true);
             comboPageSize.SelectedIndex = 0;
             comboJenisEkspedisi.SelectedIndex = 0;
             comboTempo.SelectedIndex = 0;

@@ -69,7 +69,7 @@ namespace DoranApp.View
         private async void HKategoribarangForm_Load(object sender, EventArgs e)
         {
             await FetchData();
-            dataGridView1.DoubleBuffered(true);
+            dataGridView1.EnableDoubleBuffered(true);
             _dataTable = _hkategoribarangData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
             dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Descending);
@@ -150,10 +150,10 @@ namespace DoranApp.View
                 role.Kodeh.ToString() == dataGridView1.SelectedRows[0].Cells[0].Value.ToString()).First();
             textboxNama.Text = selected.Nama;
             textboxId.Text = selected.Kodeh.ToString();
-            checkboxActive.Checked = selected.Aktif ?? false;
-            checkboxCekTahunan.Checked = selected.Cektahunan ?? false;
-            checkBoxHargaKhusus.Checked = selected.Hargakhusus ?? false;
-            checkboxPerluSetHarga.Checked = selected.Perlusetharga ?? false;
+            checkboxActive.Checked = selected.Aktif;
+            checkboxCekTahunan.Checked = selected.Cektahunan;
+            checkBoxHargaKhusus.Checked = selected.Hargakhusus;
+            checkboxPerluSetHarga.Checked = selected.Perlusetharga;
             buttonDelete.Enabled = true;
         }
 

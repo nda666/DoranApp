@@ -22,11 +22,18 @@ namespace DoranApp.DataGlobal
             }
 
             IsRun = true;
-            var rest = new Rest("sales/options");
-            var response = await rest.Get();
+            try
+            {
+                var rest = new Rest("sales/options");
+                var response = await rest.Get();
+                var data = (List<SalesOptionDto>)response.Response;
+                NotifyObservers(data);
+            }
+            catch (Exception ex)
+            {
+            }
+
             IsRun = false;
-            var data = (List<SalesOptionDto>)response.Response;
-            NotifyObservers(data);
         }
 
         public static IDisposable Subscribe(Action<List<SalesOptionDto>> onNext)

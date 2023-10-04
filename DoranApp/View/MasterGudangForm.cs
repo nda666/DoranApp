@@ -40,7 +40,7 @@ namespace DoranApp.View
         private async void MasterGudangForm_Load(object sender, EventArgs e)
         {
             await FetchData();
-            dataGridView1.DoubleBuffered(true);
+            dataGridView1.EnableDoubleBuffered(true);
             _dataTable = _mastergudangData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
             dataGridView1.ClearSelection();
@@ -251,11 +251,11 @@ namespace DoranApp.View
 
                 if (isAktif == true)
                 {
-                    await _mastergudangData.SetActive(selected.Kode ?? 0, !selected.Aktif ?? false);
+                    await _mastergudangData.SetActive(selected.Kode, !selected.Aktif);
                 }
                 else
                 {
-                    await _mastergudangData.SetBolehTransit(selected.Kode ?? 0, !selected.Boletransit ?? false);
+                    await _mastergudangData.SetBolehTransit(selected.Kode, !selected.Boletransit);
                 }
             }
             catch (Exception ex)

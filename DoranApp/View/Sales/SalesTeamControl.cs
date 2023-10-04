@@ -118,7 +118,7 @@ namespace DoranApp.View
             comboFilterChannel.SelectedIndex = -1;
 
             await FetchData();
-            dataGridView1.DoubleBuffered(true);
+            dataGridView1.EnableDoubleBuffered(true);
             _dataTable = _salesTeamData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
 
@@ -201,9 +201,9 @@ namespace DoranApp.View
             textboxName.Text = selectedUser.Nama;
             textboxOmzetTarget.Text = selectedUser.Targetomzet.ToString();
             textboxJeteTarget.Text = selectedUser.Targetjete.ToString();
-            checkboxComissionTerms.Checked = selectedUser.SyaratKomisi ?? false;
-            checkboxShowLastYear.Checked = selectedUser.Tampiltahunlalu ?? false;
-            checkboxActive.Checked = selectedUser.Aktif ?? false;
+            checkboxComissionTerms.Checked = selectedUser.SyaratKomisi;
+            checkboxShowLastYear.Checked = selectedUser.Tampiltahunlalu;
+            checkboxActive.Checked = selectedUser.Aktif;
             comboSalesChannel.SelectedValue = selectedUser.Kodechannel;
 
             buttonDelete.Enabled = true;

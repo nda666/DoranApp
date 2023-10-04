@@ -40,7 +40,7 @@ namespace DoranApp.Data
 
         public async Task<TReturn> GetNameAndKodeOnly()
         {
-            Rest rest = new Rest($"{RelativeUrl()}/nama");
+            Rest rest = new Rest($"{RelativeUrl()}/options");
             return await rest.Get(new
             {
                 brgAktif = true

@@ -60,8 +60,8 @@ namespace DoranApp.View
             openForm.MinimizeBox = false;
             openForm.MaximizeBox = true;
             // Display the new form.
-            openForm.Show();
             openForm.WindowState = FormWindowState.Maximized;
+            openForm.Show();
             openForm.Activate();
             return openForm;
         }
@@ -198,7 +198,14 @@ namespace DoranApp.View
                     tp.Name = this.ActiveMdiChild.Text;
                     tp.Tag = this.ActiveMdiChild;
                     tp.Parent = tabForms;
+
+                    // Biar tab tidak auto select ke control tab,
+                    // supaya focus langsung ke form yang aktif
+                    tabForms.Enabled = false;
                     tabForms.SelectedTab = tp;
+                    ActiveMdiChild.Activate();
+                    tp.Focus();
+                    tabForms.Enabled = true;
 
                     this.ActiveMdiChild.Tag = tp;
                     this.ActiveMdiChild.FormClosed +=
@@ -223,7 +230,7 @@ namespace DoranApp.View
         {
             if ((tabForms.SelectedTab != null) &&
                 (tabForms.SelectedTab.Tag != null))
-                (tabForms.SelectedTab.Tag as Form).Select();
+                (tabForms.SelectedTab.Tag as Form).Activate();
         }
 
         private void _Container_Paint(object sender, PaintEventArgs e)

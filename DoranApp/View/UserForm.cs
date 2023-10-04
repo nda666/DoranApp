@@ -41,7 +41,7 @@ namespace DoranApp.View
             comboFilterRole.Text = "";
             comboFilterRole.SelectedIndex = -1;
 
-            dataGridView1.DoubleBuffered(true);
+            dataGridView1.EnableDoubleBuffered(true);
             _dataTable = _userData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
             dataGridView1.Sort(dataGridView1.Columns[0], ListSortDirection.Descending);

@@ -22,13 +22,19 @@ namespace DoranApp.DataGlobal
             }
 
             IsRun = true;
-            var rest = new Rest("masterbarang/options");
-            var response = await rest.Get(new
+            try
             {
-                BrgAktif = true
-            });
-            var data = (List<MasterbarangOptionWithSnDto>)response.Response;
-            NotifyObservers(data);
+                var rest = new Rest("masterbarang/options");
+                var response = await rest.Get(new
+                {
+                    BrgAktif = true
+                });
+                var data = (List<MasterbarangOptionWithSnDto>)response.Response;
+                NotifyObservers(data);
+            }
+            catch (Exception ex)
+            {
+            }
 
             IsRun = false;
         }

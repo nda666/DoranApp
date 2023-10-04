@@ -24,14 +24,21 @@ namespace DoranApp.DataGlobal
             }
 
             IsRun = true;
-            var rest = new Rest("hkategoribarang/with-dkategoribarang");
-            var response = await rest.Get(new
+            try
             {
-                Aktif = true
-            });
+                var rest = new Rest("hkategoribarang/with-dkategoribarang");
+                var response = await rest.Get(new
+                {
+                    Aktif = true
+                });
+                var data = (List<HkategoribarangOptionDto>)response.Response;
+                NotifyObservers(data);
+            }
+            catch (Exception ex)
+            {
+            }
+
             IsRun = false;
-            var data = (List<HkategoribarangOptionDto>)response.Response;
-            NotifyObservers(data);
         }
 
         public static IDisposable Subscribe(Action<List<HkategoribarangOptionDto>> onNext)
