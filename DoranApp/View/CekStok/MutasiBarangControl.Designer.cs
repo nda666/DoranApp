@@ -47,6 +47,7 @@ partial class MutasiBarangControl
         this.button3 = new System.Windows.Forms.Button();
         this.dataGridView1 = new System.Windows.Forms.DataGridView();
         this.label4 = new System.Windows.Forms.Label();
+        this.label5 = new System.Windows.Forms.Label();
         this.groupBox1.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
         this.SuspendLayout();
@@ -69,7 +70,7 @@ partial class MutasiBarangControl
         this.comboMasterbarang.FormattingEnabled = true;
         this.comboMasterbarang.Location = new System.Drawing.Point(155, 3);
         this.comboMasterbarang.Name = "comboMasterbarang";
-        this.comboMasterbarang.Size = new System.Drawing.Size(302, 21);
+        this.comboMasterbarang.Size = new System.Drawing.Size(308, 21);
         this.comboMasterbarang.TabIndex = 74;
         this.comboMasterbarang.Text = "Pilih Barang";
         this.comboMasterbarang.ValueMember = "BrgKode";
@@ -115,6 +116,7 @@ partial class MutasiBarangControl
         this.button1.TabIndex = 79;
         this.button1.Text = "Cek Stok [F3]";
         this.button1.UseVisualStyleBackColor = true;
+        this.button1.Click += new System.EventHandler(this.button1_Click);
         // 
         // button2
         // 
@@ -204,27 +206,46 @@ partial class MutasiBarangControl
         // 
         // dataGridView1
         // 
+        this.dataGridView1.AllowUserToAddRows = false;
+        this.dataGridView1.AllowUserToDeleteRows = false;
+        this.dataGridView1.AllowUserToResizeColumns = false;
+        this.dataGridView1.AllowUserToResizeRows = false;
         this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
         this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        this.dataGridView1.Location = new System.Drawing.Point(7, 73);
+        this.dataGridView1.Location = new System.Drawing.Point(7, 75);
         this.dataGridView1.Name = "dataGridView1";
-        this.dataGridView1.Size = new System.Drawing.Size(607, 86);
+        this.dataGridView1.ReadOnly = true;
+        this.dataGridView1.RowHeadersVisible = false;
+        this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+        this.dataGridView1.Size = new System.Drawing.Size(607, 84);
         this.dataGridView1.TabIndex = 86;
+        this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
         // 
         // label4
         // 
         this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.label4.Location = new System.Drawing.Point(240, 102);
         this.label4.Name = "label4";
-        this.label4.Size = new System.Drawing.Size(217, 21);
+        this.label4.Size = new System.Drawing.Size(223, 21);
         this.label4.TabIndex = 87;
         this.label4.Text = "Stok :";
         this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        // 
+        // label5
+        // 
+        this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.label5.Location = new System.Drawing.Point(17, 102);
+        this.label5.Name = "label5";
+        this.label5.Size = new System.Drawing.Size(217, 21);
+        this.label5.TabIndex = 88;
+        this.label5.Text = "Stok Gudang Atas + LT3 :";
+        this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // MutasiBarangControl
         // 
         this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+        this.Controls.Add(this.label5);
         this.Controls.Add(this.label4);
         this.Controls.Add(this.groupBox1);
         this.Controls.Add(this.button2);
@@ -242,6 +263,8 @@ partial class MutasiBarangControl
         ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
         this.ResumeLayout(false);
     }
+
+    private System.Windows.Forms.Label label5;
 
     private System.Windows.Forms.Button button4;
 

@@ -30,5 +30,11 @@ namespace DoranApp.Data
             _data = response.Response;
             _dataTable = _dataTableGen.CreateDataTable(_data);
         }
+
+        public async Task UpdateUserSession()
+        {
+            var response = await _CLient.Get_User_By_TokenAsync();
+            Session.SetUser(response);
+        }
     }
 }

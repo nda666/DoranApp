@@ -83,5 +83,11 @@ namespace DoranApp.Data
                 brgAktif = true
             });
         }
+
+        public async Task<Htrans> CancelOrder(int kodeh)
+        {
+            var response = await _CLient.Cancel_TransaksiAsync(kodeh);
+            return response;
+        }
     }
 }

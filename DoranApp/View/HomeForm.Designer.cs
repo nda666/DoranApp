@@ -38,6 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
@@ -47,12 +48,13 @@
             // 
             // button4
             // 
+            this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.Image = global::DoranApp.Properties.Resources.icons8_cash_register_48;
             this.button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button4.Location = new System.Drawing.Point(5, 72);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(195, 59);
+            this.button4.Size = new System.Drawing.Size(191, 59);
             this.button4.TabIndex = 3;
             this.button4.Text = "Transaksi Penjualan";
             this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -62,12 +64,13 @@
             // 
             // button2
             // 
+            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Image = global::DoranApp.Properties.Resources.icons8_create_order_48;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.Location = new System.Drawing.Point(5, 139);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(195, 59);
+            this.button2.Size = new System.Drawing.Size(191, 63);
             this.button2.TabIndex = 4;
             this.button2.Text = "Input Orderan";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -121,12 +124,13 @@
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.76415F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.23585F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 202F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 211F));
             this.tableLayoutPanel2.Controls.Add(this.label2, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.button2, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.button4, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.button1, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.button3, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.button5, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.button2, 0, 2);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(240, 63);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -145,19 +149,20 @@
             this.label2.Font = new System.Drawing.Font("Calibri", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(5, 2);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(401, 65);
+            this.label2.Size = new System.Drawing.Size(392, 65);
             this.label2.TabIndex = 5;
             this.label2.Text = "Hello {name}, Semangat Selalu !!!!";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // button1
             // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Image = global::DoranApp.Properties.Resources.icons8_truck_48;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(414, 72);
+            this.button1.Location = new System.Drawing.Point(405, 72);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(182, 59);
+            this.button1.Size = new System.Drawing.Size(206, 59);
             this.button1.TabIndex = 6;
             this.button1.Text = "Transit Gudang";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -167,18 +172,34 @@
             // 
             // button3
             // 
+            this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button3.Image = global::DoranApp.Properties.Resources.icons8_warehouse;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.Location = new System.Drawing.Point(209, 72);
+            this.button3.Location = new System.Drawing.Point(204, 72);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(182, 59);
+            this.button3.Size = new System.Drawing.Size(193, 59);
             this.button3.TabIndex = 7;
             this.button3.Text = "Cek Stok";
             this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button3.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
+            // button5
+            // 
+            this.button5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button5.Location = new System.Drawing.Point(204, 139);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(193, 63);
+            this.button5.TabIndex = 8;
+            this.button5.Text = "Cek Auth User";
+            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // timer1
             // 
@@ -220,6 +241,8 @@
             this.ResumeLayout(false);
         }
 
+        private System.Windows.Forms.Button button5;
+
         private System.Windows.Forms.Button button3;
 
         private System.Windows.Forms.Button button1;
@@ -230,7 +253,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Label label2;
+        public System.Windows.Forms.Label label2;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox1;

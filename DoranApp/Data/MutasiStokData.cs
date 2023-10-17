@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ConsoleDump;
 using DoranApp.Utils;
 
 namespace DoranApp.Data;
@@ -45,15 +46,24 @@ public class MutasiStokData : AbstractData<GetMutasiResultDto>
         return columnSettingsList;
     }
 
+    public async Task<GetStokResponseDto> GetStokByBarangAndGudang(int kodebarang, int kodegudang)
+    {
+        var response = await _CLient.Get_Stok_By_Barang_And_GudangAsync(kodebarang, kodegudang);
+        return response;
+    }
+
     protected override async Task RunRefresh()
     {
-        var client = new Client();
-        var response = await client.Get_MutasiAsync(_query.KodeBarang, _query.Kodegudang);
+        List<GetMutasiResultDto> response = await _CLient.Get_MutasiAsync(_query.KodeBarang, _query.Kodegudang);
         _data = null;
         _data = response;
         var data = new List<GetMutasiResultDto>();
+        var oldSaldo = 0;
         foreach (var x in response)
         {
+            oldSaldo += x.Jumlah;
+            x.Saldo = oldSaldo;
+            x.Saldo.Dump();
             data.Add(x);
         }
 

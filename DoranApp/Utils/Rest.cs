@@ -10,6 +10,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace DoranApp.Utils
 {
+    [Obsolete("Lebih baik jangan gunakan ini.Pakai \"DoranApp.Utils.Client\" hasil dari generate an NSwag")]
     internal class Rest
     {
         public Rest(string uri)
@@ -59,8 +60,6 @@ namespace DoranApp.Utils
             {
                 JObject dynamicErrors = response;
 
-                ConsoleDump.Extensions.Dump(response);
-
                 if (dynamicErrors == null)
                 {
                     throw new RestException(status, error);
@@ -85,15 +84,15 @@ namespace DoranApp.Utils
 
                         if (response?.message != null)
                         {
-                            throw new RestException(status, response.message);
+                            throw new RestException(status, response.message, response.errorType, response?.data);
                         }
 
                         if (response?.title != null)
                         {
-                            throw new RestException(status, response.title);
+                            throw new RestException(status, response.title, response.errorType, response?.data);
                         }
 
-                        throw new RestException(status, error);
+                        throw new RestException(status, error, response?.errorType, response?.data);
                 }
             }
 
@@ -130,7 +129,6 @@ namespace DoranApp.Utils
             }
             catch (Exception ex)
             {
-                ConsoleDump.Extensions.Dump(ex);
                 throw;
             }
         }
@@ -168,7 +166,6 @@ namespace DoranApp.Utils
             }
             catch (Exception ex)
             {
-                ConsoleDump.Extensions.Dump(ex);
                 throw;
             }
         }

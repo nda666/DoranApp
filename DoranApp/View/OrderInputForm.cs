@@ -4,9 +4,12 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ConsoleDump;
 using DoranApp.Data;
+using DoranApp.Exceptions;
 using DoranApp.Properties;
 using DoranApp.Utils;
+using DoranApp.View.UserForms;
 
 namespace DoranApp.View
 {
@@ -15,7 +18,8 @@ namespace DoranApp.View
         private List<Masterpengeluaran> _ekspedisiOption = new List<Masterpengeluaran>();
         private MasterbarangData _masterbarang = new MasterbarangData();
         private List<MasterbarangOptionDto> _masterbarangOptions = new List<MasterbarangOptionDto>();
-        private List<Mastergudang> _mastergudangOptions = new List<Mastergudang>();
+        private MastergudangData _MastergudangData = new MastergudangData();
+        private List<MastergudangOptionDto> _mastergudangOptions = new List<MastergudangOptionDto>();
         private MasterpelangganData _masterpelangganData = new MasterpelangganData();
         private List<CommonResultDto> _masterpelangganOptions = new List<CommonResultDto>();
         private MasterpengeluaranData _masterpengeluaranData = new MasterpengeluaranData();
@@ -25,9 +29,10 @@ namespace DoranApp.View
 
         private List<Penyiaporder> _PenyiaporderOptions = new List<Penyiaporder>();
         private SalesData _salesData = new SalesData();
-        private List<CommonResultDto> _salesOptions = new List<CommonResultDto>();
+        private List<SalesOptionDto> _salesOptions = new List<SalesOptionDto>();
         private SetlevelhargaData _setlevelhargaData = new SetlevelhargaData();
         private List<CommonResultDto> _setlevelhargaOptions = new List<CommonResultDto>();
+
         private bool EditHeaderOnly = false;
 
         public bool FetchOrderRun = false;
@@ -43,6 +48,16 @@ namespace DoranApp.View
         public OrderInputForm()
         {
             InitializeComponent();
+            var kagud = new[] { "kagud", "masterkagud" };
+            if (kagud.Contains(Session.GetUser().Akses.ToLower().Trim()))
+            {
+                splitContainer1.Panel1Collapsed = true;
+                buttonUbahAtas.Visible = false;
+                buttonUpdateFull.Visible = false;
+                buttonCekAndSetSiap.Visible = false;
+                btnBatalkanHeader.Visible = false;
+                groupBox8.Visible = false;
+            }
         }
 
         public long _laporanOrderPage
@@ -62,12 +77,12 @@ namespace DoranApp.View
 
         private void OrderInputForm_Load(object sender, EventArgs e)
         {
+            datePickerOrder.Select();
             var clientManager = new WebSocketClientManager();
             clientManager.Subscribe("order", eventData =>
             {
                 if (eventData != null)
                 {
-                    MessageBox.Show("123");
                 }
             });
 
@@ -77,14 +92,20 @@ namespace DoranApp.View
             comboPageSize.SelectedIndex = 0;
             comboJenisEkspedisi.SelectedIndex = 0;
             comboTempo.SelectedIndex = 0;
+
             FetchSales();
             FetchPelanggan();
             FetchLevelHarga();
             FetchEkspedisi();
+            FetchGudang();
             FetchPenyiapOrder();
             CreateDatagridview();
             dataGridView2.DataSource = _OrderData.GetDataTable();
-            dataGridView2.Columns[1].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dataGridView2.Columns[2].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dataGridView2.Columns[3].DefaultCellStyle.Format = "N0";
+            dataGridView2.Columns[6].DefaultCellStyle.Format = "N0";
+            dataGridView3.Columns[2].DefaultCellStyle.Format = "N0";
+            dataGridView3.Columns[3].DefaultCellStyle.Format = "N0";
             foreach (DataGridViewColumn col in dataGridView2.Columns)
             {
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
@@ -149,21 +170,35 @@ namespace DoranApp.View
             }
         }
 
+        public async Task FetchGudang()
+        {
+            try
+            {
+                _mastergudangOptions = await _MastergudangData.GetMastergudangOption();
+                comboFilterGudang.DataSource = _mastergudangOptions.ToList();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
         public async Task FetchSales()
         {
             try
             {
-                var data = await _salesData.GetNameAndKodeOnly();
-                _salesOptions = (List<CommonResultDto>)data.Response;
+                _salesOptions = await _salesData.GetNameAndKodeOnly();
+                comboSales.ValueMember = "Kode";
+                comboSales.DisplayMember = "Nama";
+                comboSales.DataSource = _salesOptions.ToList();
+
+                comboFilterSales.ValueMember = "Kode";
+                comboFilterSales.DisplayMember = "Nama";
+                comboFilterSales.DataSource = _salesOptions.ToList();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-
-            comboSales.ValueMember = "Kode";
-            comboSales.DisplayMember = "Nama";
-            comboSales.DataSource = _salesOptions;
         }
 
         private async Task FetchLevelHarga()
@@ -269,7 +304,7 @@ namespace DoranApp.View
         {
             FetchOrderRun = !FetchOrderRun;
             btnFilter.Enabled = !FetchOrderRun;
-            toolStrip1.Enabled = !FetchOrderRun;
+            miniToolStrip.Enabled = !FetchOrderRun;
             toolStripLabel2.Visible = FetchOrderRun;
         }
 
@@ -285,6 +320,7 @@ namespace DoranApp.View
             {
                 _OrderData.SetQuery(new
                 {
+                    Kodegudang = comboFilterGudang.SelectedValue?.ToString(),
                     NamaPelanggan = textBoxFilterNama.Text.Trim(),
                     Kodesales = comboFilterSales.SelectedValue?.ToString(),
                     Dicetak = Helper.GetSelectedRadioButtonTag(groupBoxDicetak),
@@ -305,11 +341,13 @@ namespace DoranApp.View
             _laporanOrderPage = paginationData.Page;
             LaporanOrderLastPage = paginationData.TotalPage;
             toolStripLabel1.Text = $"dari {paginationData.TotalPage.ToString()}";
+
             ToggleLoading();
         }
 
         private async void btnFilter_Click(object sender, EventArgs e)
         {
+            _laporanOrderPage = 1;
             await FetchOrder();
         }
 
@@ -334,27 +372,26 @@ namespace DoranApp.View
             dataGridView3.Rows.Clear();
             try
             {
-                var kodeh = (long)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
+                dataGridView2.SelectedRows[0].Cells["Kodeh"].Value.Dump();
+                var kodeh = (int)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
 
-                var horder = _OrderData.GetData().Where(x => x.kodeh == kodeh).FirstOrDefault();
+                var horder = _OrderData.GetData()?.Where(x => x.Kodeh == kodeh).FirstOrDefault();
                 if (horder == null)
                 {
                     return;
                 }
 
-                var dorder = new List<dynamic>();
-                foreach (var d in horder.dorder)
+                foreach (var d in horder.Dorder)
                 {
                     var index = dataGridView3.Rows.Add();
-                    dataGridView3.Rows[index].Cells["Pcs"].Value = d.jumlah;
-                    dataGridView3.Rows[index].Cells["NamaBarang"].Value = d.masterbarang?.brgNama;
-                    dataGridView3.Rows[index].Cells["Harga"].Value = d.harga;
-                    dataGridView3.Rows[index].Cells["Jumlah"].Value = d.jumlah;
-                    dataGridView3.Rows[index].Cells["Keterangan"].Value = d.keterangan;
+                    dataGridView3.Rows[index].Cells["Pcs"].Value = d.Jumlah;
+                    dataGridView3.Rows[index].Cells["NamaBarang"].Value = d.Masterbarang?.BrgNama;
+                    dataGridView3.Rows[index].Cells["Harga"].Value = d.Harga;
+                    dataGridView3.Rows[index].Cells["Jumlah"].Value = d.Jumlah;
+                    dataGridView3.Rows[index].Cells["Keterangan"].Value = d.Keterangan;
                 }
 
-                ConsoleDump.Extensions.Dump(comboSetPenyiap.SelectedValue, horder.kodepenyiap?.ToString());
-                comboSetPenyiap.SelectedValue = (sbyte)horder.kodepenyiap;
+                comboSetPenyiap.SelectedValue = (sbyte)horder.Kodepenyiap;
                 ButtonToggleHelper.EnableButtonsByTag(this, "enableOnSelect");
             }
             catch (Exception ex)
@@ -670,6 +707,56 @@ namespace DoranApp.View
 
         private void button9_Click(object sender, EventArgs e)
         {
+            if (comboSales.SelectedValue == null)
+            {
+                MessageBox.Show("Pilih sales terlebih dahulu");
+                comboSales.Select();
+                return;
+            }
+
+            var checkSales = _salesOptions.Where(e => e.Kode == Convert.ToInt32(comboSales.SelectedValue))
+                .FirstOrDefault();
+            checkSales.Dump();
+            if (checkSales == null)
+            {
+                MessageBox.Show("Pilih sales terlebih dahulu");
+                comboSales.Select();
+                return;
+            }
+
+            if (checkSales?.Salesol > 0 && textboxNamaCust.Text.Trim() == "")
+            {
+                MessageBox.Show("Tidak Bisa Input karena Nama Belum diisi");
+                textboxNamaCust.Focus();
+                return;
+            }
+
+            if (checkSales?.Salesol > 0 && textboxNmrHp.Text.Trim() == "")
+            {
+                MessageBox.Show("Tidak Bisa Input karena No HP Belum diisi");
+                textboxNmrHp.Focus();
+                return;
+            }
+
+            if (comboPelanggan.SelectedValue == null)
+            {
+                MessageBox.Show("Tidak Bisa Input karena Pelanggan belum diisi");
+                comboPelanggan.Select();
+                return;
+            }
+
+            var selectedPelanggan = Convert.ToInt32(comboPelanggan.SelectedValue);
+            if (comboEkspedisi.SelectedValue == null
+                && selectedPelanggan != 291 // JTCASH
+                && selectedPelanggan != 2944 //JTCASH DORAN GARMIN
+                && selectedPelanggan != 2945 //JTCASH DORAN GADGET
+               )
+            {
+                MessageBox.Show(" Tidak Bisa Input karena Ekspedisi Harus diisi");
+                comboEkspedisi.Select();
+                return;
+            }
+
             if (EditHeaderOnly)
             {
                 SaveHeader();
@@ -806,7 +893,7 @@ namespace DoranApp.View
             buttonBatalUbah.Visible = false;
         }
 
-        private async void buttonSetPenyiap_Click(object sender, EventArgs e)
+        private async Task SetPenyiap(bool isRetry = false, string passwordPaksa = null)
         {
             if (comboSetPenyiap.SelectedValue == null)
             {
@@ -819,22 +906,61 @@ namespace DoranApp.View
                 return;
             }
 
-            SaveRun = true;
-            var confirm = MessageBox.Show(Resources.AskSetPenyiapOrder, "Konfirmasi", MessageBoxButtons.YesNo,
-                MessageBoxIcon.Information);
-            if (confirm == DialogResult.No)
+            var kodeh = (int)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
+            var horder = _OrderData.GetData()?.Where(x => x.Kodeh == kodeh).FirstOrDefault();
+            if (horder == null)
             {
-                SaveRun = false;
                 return;
+            }
+
+            if (Convert.ToInt32(horder.Historynya) >= 4)
+            {
+                MessageBox.Show("Tidak bisa set penyiap karena Trans Online belum dicek");
+                return;
+            }
+
+            SaveRun = true;
+            if (!isRetry)
+            {
+                var confirm = MessageBox.Show(Resources.AskSetPenyiapOrder, "Konfirmasi", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information);
+                if (confirm == DialogResult.No)
+                {
+                    SaveRun = false;
+                    return;
+                }
             }
 
             try
             {
-                ConsoleDump.Extensions.Dump(comboSetPenyiap.SelectedValue?.ToString() ?? "NOPEE");
-                var kodeh = (long)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
                 var data = await _OrderData.SetPenyiapOrder(kodeh,
-                    Convert.ToInt32(comboSetPenyiap.SelectedValue?.ToString() ?? "0"));
+                    Convert.ToInt32(comboSetPenyiap.SelectedValue?.ToString() ?? "0"),
+                    passwordPaksa);
                 await FetchOrder();
+                SaveRun = false;
+            }
+            catch (RestException ex)
+            {
+                if (ex.ErrorType == "LIMIT_TRANSAKSI")
+                {
+                    var inputPaksa = new InputPaksaUserForm();
+                    inputPaksa.textboxMemo.Text = ex.Data?.limitMessage?.ToString();
+                    if (ex.Data?.isPasswordError)
+                    {
+                        MessageBox.Show("Password tidak valid", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    var inputPaksaResult = inputPaksa.ShowDialog();
+                    if (inputPaksaResult == DialogResult.OK)
+                    {
+                        SaveRun = false;
+                        SetPenyiap(true, inputPaksa.textBoxPassword.Text);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message, "Error");
+                }
             }
             catch (Exception ex)
             {
@@ -843,6 +969,11 @@ namespace DoranApp.View
             }
 
             SaveRun = false;
+        }
+
+        private async void buttonSetPenyiap_Click(object sender, EventArgs e)
+        {
+            SetPenyiap();
         }
 
         private void BaseUbah(bool withDetail = false)
@@ -856,40 +987,40 @@ namespace DoranApp.View
 
                 ResetForm();
                 var kodeh = (long)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
-                var horder = _OrderData.GetData().Where(x => x.kodeh == kodeh).FirstOrDefault();
+                var horder = _OrderData.GetData().Where(x => x.Kodeh == kodeh).FirstOrDefault();
                 if (horder == null)
                 {
                     return;
                 }
 
-                KodeEdit = (int)horder.kodeh;
+                KodeEdit = (int)horder.Kodeh;
                 EditHeaderOnly = !withDetail;
-                comboPelanggan.SelectedValue = (int)horder.kodepelanggan;
-                comboSales.SelectedValue = (int)horder.kodesales;
-                datePickerOrder.Value = horder.tglorder;
-                textboxNamaCust.Text = horder.namaCust;
-                textboxNmrHp.Text = horder.nmrHp;
-                textBoxBarcodeonline.Text = horder.barcodeonline;
-                textBoxNoSeriOnline.Text = horder.noSeriOnline;
-                textBoxKodeOrderApps.Text = horder.kodeorderapps?.ToString();
-                textBoxInfoPenting.Text = horder.infopenting;
-                comboTempo.SelectedValue = horder.tipetempo;
-                comboEkspedisi.SelectedValue = horder.kodeexp;
-                comboJenisEkspedisi.SelectedValue = horder.kirimmelalui;
+                comboPelanggan.SelectedValue = (int)horder.Kodepelanggan;
+                comboSales.SelectedValue = (int)horder.Kodesales;
+                datePickerOrder.Value = horder.Tglorder;
+                textboxNamaCust.Text = horder.NamaCust;
+                textboxNmrHp.Text = horder.NmrHp;
+                textBoxBarcodeonline.Text = horder.Barcodeonline;
+                textBoxNoSeriOnline.Text = horder.NoSeriOnline;
+                textBoxKodeOrderApps.Text = horder.Kodeorderapps.ToString();
+                textBoxInfoPenting.Text = horder.Infopenting;
+                comboTempo.SelectedValue = horder.Tipetempo;
+                comboEkspedisi.SelectedValue = horder.Kodeexp;
+                comboJenisEkspedisi.SelectedValue = horder.Kirimmelalui;
                 dataGridView1.Rows.Clear();
 
-                checkBoxPPN.Checked = horder.ppn > 0;
-                textBoxTotal.Text = Convert.ToString(horder.jumlah);
+                checkBoxPPN.Checked = horder.Ppn > 0;
+                textBoxTotal.Text = Convert.ToString(horder.Jumlah);
                 if (withDetail)
                 {
-                    foreach (var d in horder.dorder)
+                    foreach (var d in horder.Dorder)
                     {
                         DataGridViewRow row = (DataGridViewRow)dataGridView1.Rows[0].Clone();
-                        row.Cells[0].Value = (decimal)d.jumlah;
-                        row.Cells[1].Value = (int)d.kodebarang;
-                        row.Cells[2].Value = (decimal)d.harga;
-                        row.Cells[3].Value = d.harga * d.jumlah;
-                        row.Cells[4].Value = d.keterangan;
+                        row.Cells[0].Value = (decimal)d.Jumlah;
+                        row.Cells[1].Value = (int)d.Kodebarang;
+                        row.Cells[2].Value = (decimal)d.Harga;
+                        row.Cells[3].Value = d.Harga * d.Jumlah;
+                        row.Cells[4].Value = d.Keterangan;
                         dataGridView1.Rows.Add(row);
                     }
                 }
@@ -907,14 +1038,85 @@ namespace DoranApp.View
             BaseUbah();
         }
 
-        private void btnCetakTanpaKertas_Click(object sender, EventArgs e)
+        private void OrderInputForm_KeyDown(object sender, KeyEventArgs e)
         {
-            throw new System.NotImplementedException();
+            if (e.KeyCode == Keys.F2)
+            {
+                if (EditHeaderOnly)
+                {
+                    SaveHeader();
+                }
+                else
+                {
+                    SaveOrder();
+                }
+            }
         }
 
-        private void btnCetak_Click(object sender, EventArgs e)
+        private async void button1_Click_1(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            if (dataGridView2.SelectedRows.Count <= 0 || dataGridView2.Rows.Count <= 0 || FetchOrderRun)
+            {
+                return;
+            }
+
+            FetchOrderRun = true;
+            ButtonToggleHelper.DisableButtonsByTag(this, "enableOnSelect");
+            ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
+            LoadingButtonHelper.SetLoadingState(button1, true);
+            try
+            {
+                var kodeh = (int)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
+
+                var horder = _OrderData.GetData()?.Where(x => x.Kodeh == kodeh).FirstOrDefault();
+                if (horder == null)
+                {
+                    ButtonToggleHelper.EnableButtonsByTag(this, "enableOnSelect");
+                    ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
+                    LoadingButtonHelper.SetLoadingState(button1, false);
+                    FetchOrderRun = false;
+                    return;
+                }
+
+                var hargaNol = horder.Dorder.Where(e => e.Harga == 0).FirstOrDefault();
+
+
+                if (hargaNol != null)
+                {
+                    var confirmHargaNol = MessageBox.Show(
+                        "Ada Harga yang 0, Apakah tetap ingin memeriksa transaksi ini ?", "Konfirmasi",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (confirmHargaNol == DialogResult.No)
+                    {
+                        LoadingButtonHelper.SetLoadingState(button1, false);
+                        ButtonToggleHelper.EnableButtonsByTag(this, "enableOnSelect");
+                        ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
+                        FetchOrderRun = false;
+                        return;
+                    }
+                }
+
+                await _OrderData.TimOnlineCek(kodeh);
+                FetchOrderRun = false;
+                await FetchOrder();
+                if (dataGridView2.Rows.Count > 0)
+                {
+                    dataGridView2.Rows[0].Selected = true;
+                }
+            }
+            catch (ApiException ex)
+            {
+                Helper.ShowErrorMessageFromResponse(ex);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            FetchOrderRun = false;
+            ButtonToggleHelper.EnableButtonsByTag(this, "enableOnSelect");
+            ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
+            LoadingButtonHelper.SetLoadingState(button1, false);
         }
     }
 }

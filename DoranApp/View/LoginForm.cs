@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using DoranApp.Exceptions;
 using DoranApp.Utils;
 
 namespace DoranApp.View
@@ -36,32 +35,33 @@ namespace DoranApp.View
             Rest rest = new Rest("/login");
             try
             {
-                var response = await rest.Post(new
+                var client = new Client();
+                var response = await client.Post_LoginAsync(new LoginDto
                 {
-                    username = textBox1.Text,
-                    password = textBox2.Text
+                    Username = textBox1.Text,
+                    Password = textBox2.Text
                 });
+                Session.SetUser(response.Masteruser);
+                Properties.Settings.Default.AuthToken = $"BEARER {response.ApiToken}";
+                _homeForm.label2.Text = $"Hello {response.Masteruser.Usernameku}, Semangat Selalu!!";
 
-                var result = response.Response;
-
-                Properties.Settings.Default.AuthToken = $"BEARER {result.api_token}";
                 Console.WriteLine($"Auth TOken: {Properties.Settings.Default.AuthToken}");
-                this.Hide();
+                Hide();
                 if (_homeForm != null)
                 {
                     _homeForm.homeStart = true;
                 }
             }
-            catch (RestException error)
+            catch (ApiException error)
             {
-                if (error.ErrorCode == 401)
+                if (error.StatusCode == 401)
                 {
                     MessageBox.Show($"Username / password tidak cocok", $"Error", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show($"{error.ErrorCode} {error.StatusText}", "Error!", MessageBoxButtons.OK,
+                    MessageBox.Show($"{error.StatusCode} {error.Message}", "Error!", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
             }

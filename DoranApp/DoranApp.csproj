@@ -108,9 +108,6 @@
     <PackageReference Include="Microsoft.SqlServer.Types">
       <Version>160.1000.6</Version>
     </PackageReference>
-    <PackageReference Include="ObjectDumper">
-      <Version>1.0.0.12</Version>
-    </PackageReference>
     <PackageReference Include="RestSharp">
       <Version>110.2.0</Version>
     </PackageReference>
@@ -169,6 +166,7 @@
     <Compile Include="Components\NumericTextbox.Designer.cs">
       <DependentUpon>NumericTextbox.cs</DependentUpon>
     </Compile>
+      <Compile Include="Constants.cs"/>
     <Compile Include="DataGlobal\FetchBase.cs" />
     <Compile Include="DataGlobal\FetchMastergudangBoleTransitOption.cs"/>
     <Compile Include="DataGlobal\FetchPenyiaporder.cs"/>
@@ -215,6 +213,7 @@
     <Compile Include="Utils\ButtonToggleHelper.cs" />
       <Compile Include="Utils\ClientPartial.cs"/>
       <Compile Include="Utils\Client.cs"/>
+      <Compile Include="Utils\Session.cs"/>
     <Compile Include="Utils\DatatableGenerator.cs" />
     <Compile Include="Utils\FormHelper.cs" />
     <Compile Include="Utils\InternetAvailabilityService.cs" />
@@ -240,6 +239,12 @@
       <Compile Include="View\CekStok\MutasiBarangControl.Designer.cs">
           <DependentUpon>MutasiBarangControl.cs</DependentUpon>
       </Compile>
+      <Compile Include="View\Form1.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\Form1.Designer.cs">
+          <DependentUpon>Form1.cs</DependentUpon>
+      </Compile>
     <Compile Include="View\LaporanPenjualanBarangBySales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -264,6 +269,12 @@
     <Compile Include="View\LaporanTransaksiPenjualan.Designer.cs">
       <DependentUpon>LaporanTransaksiPenjualan.cs</DependentUpon>
     </Compile>
+      <Compile Include="View\UserForms\InputPaksaUserForm.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\UserForms\InputPaksaUserForm.Designer.cs">
+          <DependentUpon>InputPaksaUserForm.cs</DependentUpon>
+      </Compile>
     <Compile Include="View\OrderInputForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -415,6 +426,9 @@
       <EmbeddedResource Include="View\CekStok\MutasiBarangControl.resx">
           <DependentUpon>MutasiBarangControl.cs</DependentUpon>
       </EmbeddedResource>
+      <EmbeddedResource Include="View\Form1.resx">
+          <DependentUpon>Form1.cs</DependentUpon>
+      </EmbeddedResource>
     <EmbeddedResource Include="View\HKategoribarangForm.resx">
       <DependentUpon>HKategoribarangForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -452,6 +466,9 @@
     <EmbeddedResource Include="View\MasterGudangForm.resx">
       <DependentUpon>MasterGudangForm.cs</DependentUpon>
     </EmbeddedResource>
+      <EmbeddedResource Include="View\UserForms\InputPaksaUserForm.resx">
+          <DependentUpon>InputPaksaUserForm.cs</DependentUpon>
+      </EmbeddedResource>
     <EmbeddedResource Include="View\OrderInputForm.resx">
       <DependentUpon>OrderInputForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -568,6 +585,7 @@
       <None Include="Resources\icons8_loading.gif"/>
   </ItemGroup>
   <ItemGroup>
+      <Content Include="Resources\icons8_loading_circle.gif"/>
       <Content Include="Resources\icons8_truck_48.png"/>
       <Content Include="Resources\icons8_warehouse.png"/>
       <Content Include="Resources\icons8_warehouse1.png"/>

@@ -8,6 +8,7 @@ namespace DoranApp.Data
 {
     public abstract class AbstractData<T>
     {
+        protected Client _CLient;
         protected List<T> _data;
         protected DataTable _dataTable;
         protected DataTableGenerator _dataTableGen;
@@ -19,6 +20,7 @@ namespace DoranApp.Data
             _dataTableGen = new DataTableGenerator(ColumnSettings());
             _dataTable = _dataTableGen.CreateDataTable<T>(null);
             _isFetchComplete = false;
+            _CLient = new Client();
         }
 
         protected AbstractData(object query)
@@ -27,6 +29,7 @@ namespace DoranApp.Data
             _dataTableGen = new DataTableGenerator(ColumnSettings());
             _dataTable = _dataTableGen.CreateDataTable<T>(null);
             _isFetchComplete = false;
+            _CLient = new Client();
         }
 
         protected virtual string RelativeUrl()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DoranApp.Dtos;
 using DoranApp.Utils;
@@ -14,7 +15,7 @@ namespace DoranApp.Data
         LAUT = 3
     }
 
-    internal class OrderData : AbstractData<dynamic>
+    internal class OrderData : AbstractData<HorderResult>
     {
         protected PaginationResultDto _paginationData = new PaginationResultDto();
 
@@ -35,20 +36,21 @@ namespace DoranApp.Data
 
         protected override List<ColumnSettings> ColumnSettings()
         {
-            var columnSettingsList = new ColumnSettings<dynamic>
+            var columnSettingsList = new ColumnSettings<HorderResult>
             {
-                { "Tanggal", x => x.tglorder, typeof(DateTime) },
-                { "Nama", x => x.masterpelanggan?.nama + " - " + x.masterpelanggan?.lokasiKota?.nama },
-                { "Jumlah", x => x.jumlah },
-                { "Sales", x => x.sales?.nama },
-                { "Penyiap", x => x.penyiaporder?.nama },
-                { "PPN", x => x.ppn },
-                { "Ekspedisi", x => x.ekspedisi?.nama ?? "Belum Diisi" },
-                { "Info Penting", x => x.infopenting },
-                { "No Seri OL", x => x.noSeriOnline },
-                { "Oleh", x => x.masteruserInsert?.usernameku },
-                { "Keterangan", x => x.keterangan },
-                { "Kodeh", x => x.kodeh }
+                { "Gudang", x => x.Mastergudang?.Nama },
+                { "Tanggal", x => x.Tglorder, typeof(DateTime) },
+                { "Nama", x => x.Masterpelanggan?.Nama + " - " + x.Masterpelanggan?.LokasiKota?.Nama },
+                { "Jumlah", x => x.Jumlah },
+                { "Sales", x => x.Sales?.Nama },
+                { "Penyiap", x => x.Penyiaporder?.Nama },
+                { "PPN", x => x.Ppn },
+                { "Ekspedisi", x => x.Ekspedisi?.Nama ?? "Belum Diisi" },
+                { "Info Penting", x => x.Infopenting },
+                { "No Seri OL", x => x.NoSeriOnline },
+                { "Oleh", x => x.MasteruserInsert?.Usernameku },
+                { "Keterangan", x => x.Keterangan },
+                { "Kodeh", x => x.Kodeh }
             };
 
             return columnSettingsList;
@@ -57,18 +59,19 @@ namespace DoranApp.Data
         protected override async Task RunRefresh()
         {
             Rest rest = new Rest(RelativeUrl());
-            var response = await rest.Get(_query);
+            TReturn<HorderResultDto> response = await rest.Get<HorderResultDto>(_query);
+            ConsoleDump.Extensions.Dump(response);
             var data = new List<dynamic>();
-            var responseData = response.Response?.data;
+            var responseData = response.Response.Data.ToList();
 
             _data = null;
             _dynamicData = null;
             _dynamicData = responseData;
             _data = responseData;
-            _paginationData.Page = response.Response?.page;
-            _paginationData.PageSize = response.Response?.pageSize;
-            _paginationData.TotalRow = response.Response?.totalRow;
-            _paginationData.TotalPage = response.Response?.totalPage;
+            _paginationData.Page = response.Response.Page;
+            _paginationData.PageSize = response.Response.PageSize;
+            _paginationData.TotalRow = response.Response.TotalRow;
+            _paginationData.TotalPage = response.Response.TotalPage;
             foreach (var x in responseData)
             {
                 data.Add(x);
@@ -105,12 +108,13 @@ namespace DoranApp.Data
             }
         }
 
-        public async Task<dynamic> SetPenyiapOrder(long kode, int kodepenyiap)
+        public async Task<dynamic> SetPenyiapOrder(long kode, int kodepenyiap, string? passwordLimit)
         {
             Rest rest = new Rest($"{RelativeUrl()}/{kode}/set-penyiap");
             var response = await rest.Put(new
             {
-                kodepenyiap = kodepenyiap
+                kodepenyiap,
+                password = passwordLimit
             });
             return response.Response;
         }
@@ -129,6 +133,23 @@ namespace DoranApp.Data
             {
                 brgAktif = true
             });
+        }
+
+        public async Task<HorderResult> FindByNoSeriOnlineNotLunas(string noSeriOnline, sbyte? historynya = null)
+        {
+            var resp = await _CLient.Find_OrderAsync(noSeriOnline: noSeriOnline, historynya: historynya, lunas: 0);
+            return resp;
+        }
+
+        public async Task<HorderResult> FindByNoBarcodeOnlineNotLunas(string barcodeonline, sbyte? historynya = null)
+        {
+            var resp = await _CLient.Find_OrderAsync(barcodeonline: barcodeonline, historynya: historynya, lunas: 0);
+            return resp;
+        }
+
+        public async Task TimOnlineCek(int kodeh)
+        {
+            await _CLient.Tim_Online_CekAsync(kodeh);
         }
     }
 }

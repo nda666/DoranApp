@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DoranApp.Utils;
 
@@ -51,14 +52,10 @@ namespace DoranApp.Data
             _dataTable = _dataTableGen.CreateDataTable<SalesDto>(_data);
         }
 
-        public async Task<TReturn> GetNameAndKodeOnly()
+        public async Task<List<SalesOptionDto>> GetNameAndKodeOnly()
         {
-            Rest rest = new Rest($"{RelativeUrl()}/nama");
-
-            return await rest.Get(new
-            {
-                aktif = true
-            });
+            var res = await _CLient.Get_Sales_NamaAsync(aktif: true);
+            return res.ToList();
         }
     }
 }

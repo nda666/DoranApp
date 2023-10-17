@@ -1,9 +1,30 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Windows.Forms;
+using DoranApp.Utils;
+using Newtonsoft.Json;
 
 namespace DoranApp
 {
     public class Helper
     {
+        public static void ShowErrorMessageFromResponse(ApiException apiException)
+        {
+            try
+            {
+                dynamic resp = JsonConvert.DeserializeObject<ExpandoObject>(apiException.Response);
+                var hadMessage = ((IDictionary<string, object>)resp).ContainsKey("message");
+                MessageBox.Show(hadMessage ? resp.message : apiException.Message, "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(apiException.Message, "Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
         public static string GetSelectedRadioButtonTag(GroupBox groupBox)
         {
             foreach (Control control in groupBox.Controls)

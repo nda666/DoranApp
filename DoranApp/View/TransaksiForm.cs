@@ -16,6 +16,7 @@ namespace DoranApp.View
 {
     public partial class TransaksiForm : Form
     {
+        private decimal _biaya = 0;
         public long _laporanTransaksiLastPage = 0;
         private MasterbarangData _masterbarang = new MasterbarangData();
         private List<MasterbarangOptionWithSnDto> _masterbarangOptions = new List<MasterbarangOptionWithSnDto>();
@@ -25,7 +26,7 @@ namespace DoranApp.View
         private List<CommonResultDto> _masterpelangganOptions = new List<CommonResultDto>();
         private OrderData _OrderData = new OrderData();
         private SalesData _salesData = new SalesData();
-        private List<CommonResultDto> _salesOptions = new List<CommonResultDto>();
+        private List<SalesOptionDto> _salesOptions = new List<SalesOptionDto>();
         private SetlevelhargaData _setlevelhargaData = new SetlevelhargaData();
         private List<CommonResultDto> _setlevelhargaOptions = new List<CommonResultDto>();
 
@@ -40,6 +41,15 @@ namespace DoranApp.View
         public TransaksiForm()
         {
             InitializeComponent();
+            var kagud = new[] { "kagud", "masterkagud", "sales", "salesonline" };
+            if (kagud.Contains(Session.GetUser().Akses.ToLower().Trim()))
+            {
+                splitContainer1.Panel1Collapsed = true;
+                button12.Visible = false;
+                button13.Visible = false;
+                button14.Visible = false;
+                button15.Visible = false;
+            }
         }
 
         public long _laporanTransaksiPage
@@ -67,8 +77,7 @@ namespace DoranApp.View
         {
             try
             {
-                var data = await _salesData.GetNameAndKodeOnly();
-                _salesOptions = (List<CommonResultDto>)data.Response;
+                _salesOptions = await _salesData.GetNameAndKodeOnly();
             }
             catch (Exception ex)
             {
@@ -217,6 +226,7 @@ namespace DoranApp.View
             dataGridView3.Columns[3].DefaultCellStyle.Format = "N0";
 
             comboTempo.SelectedIndex = 1;
+
             FetchSales();
             FetchPelanggan();
             FetchGudang();
@@ -224,13 +234,6 @@ namespace DoranApp.View
             CreateDatagridview();
         }
 
-        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-        }
 
         private async void button3_Click(object sender, EventArgs e)
         {
@@ -261,7 +264,6 @@ namespace DoranApp.View
 
                         var checkMb = _masterbarangOptions.Find(e =>
                             e.BrgKode.HasValue && e.BrgKode.ToString() == row.Cells[1]?.Value.ToString());
-                        ConsoleDump.Extensions.Dump(checkMb, "123123123");
                         if (checkMb.Sn && (row.Cells[6]?.Value?.ToString().Trim() ?? "") == "")
                         {
                             MessageBox.Show($"Isi terlebih dahulu nomor SN: \"{checkMb.BrgNama}\"");
@@ -286,7 +288,8 @@ namespace DoranApp.View
                     return;
                 }
 
-                var confirm = MessageBox.Show("Simpan transaksi ini?", "Konfirmasi", MessageBoxButtons.YesNo,
+                var confirm = MessageBox.Show($"{(KodeEdit == null ? "Simpan" : "Ubah")} transaksi ini?", "Konfirmasi",
+                    MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
                 if (confirm == DialogResult.No)
                 {
@@ -315,7 +318,8 @@ namespace DoranApp.View
                     Dpp = (int)textBoxDpp.UnformattedValue,
                     Details = Details
                 });
-
+                fetchLaporanTransaksi();
+                ResetForm();
                 MessageBox.Show("Transaksi berhasil disimpan");
                 dataGridView1.Rows.Clear();
                 buttonBatalUbah.Visible = false;
@@ -339,6 +343,7 @@ namespace DoranApp.View
 
         private void CalculateSubtotal()
         {
+            decimal biaya = 0;
             decimal subtotal = 0;
 
             foreach (DataGridViewRow row in dataGridView1.Rows)
@@ -358,7 +363,21 @@ namespace DoranApp.View
                     decimal price = Convert.ToDecimal(row.Cells["harga"].Value);
                     decimal rowSubtotal = pcs * price;
                     row.Cells["jumlah"].Value = rowSubtotal;
-                    subtotal += rowSubtotal;
+                    if (row.Cells["item"].Value != null)
+                    {
+                        var brgKode = Convert.ToInt32(row.Cells["item"].Value);
+                        var mb = _masterbarangOptions
+                            .Where(e => e.BrgKode == brgKode)
+                            .FirstOrDefault();
+                        if (mb.JurnalBiaya)
+                        {
+                            biaya += rowSubtotal;
+                        }
+                        else
+                        {
+                            subtotal += rowSubtotal;
+                        }
+                    }
                 }
                 else
                 {
@@ -368,6 +387,9 @@ namespace DoranApp.View
             }
 
             _subtotal = subtotal;
+            _biaya = biaya;
+            textBoxBiaya.Text = _biaya.ToString();
+            CallculatePPN();
         }
 
         private void CalculateTotal()
@@ -425,17 +447,25 @@ namespace DoranApp.View
             UpdateTempo();
         }
 
-        private void checkBoxPPN_CheckedChanged(object sender, EventArgs e)
+        private void CallculatePPN()
         {
             textBoxPPN.Enabled = checkBoxPPN.Checked;
             decimal ppn = 0;
+            decimal dpp = 0;
             if (checkBoxPPN.Checked)
             {
-                ppn = _subtotal - (_subtotal / (decimal)1.11);
+                ppn = Math.Round(_subtotal - (_subtotal / (decimal)1.11));
+                dpp = Math.Round(_subtotal - ppn);
             }
 
             textBoxPPN.Text = ((int)ppn).ToString();
+            textBoxDpp.Text = ((int)dpp).ToString();
             CalculateTotal();
+        }
+
+        private void checkBoxPPN_CheckedChanged(object sender, EventArgs e)
+        {
+            CallculatePPN();
         }
 
 
@@ -498,6 +528,12 @@ namespace DoranApp.View
             fetchLaporanTransaksi();
         }
 
+        private dynamic GetSelectedHtrans()
+        {
+            var kodeh = (long)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
+            return _transaksiData.GetData().Where(x => x.kodeH == kodeh).FirstOrDefault();
+        }
+
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView2.SelectedRows.Count <= 0 && dataGridView2.Rows.Count <= 0)
@@ -506,8 +542,7 @@ namespace DoranApp.View
             }
 
             dataGridView3.Rows.Clear();
-            var kodeh = (long)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
-            var htrans = _transaksiData.GetData().Where(x => x.kodeH == kodeh).FirstOrDefault();
+            var htrans = GetSelectedHtrans();
             if (htrans == null)
             {
                 return;
@@ -843,37 +878,46 @@ namespace DoranApp.View
         {
         }
 
+        private void OrderToDatagridview(HorderResult order)
+        {
+            if (order == null)
+            {
+                MessageBox.Show("Order tidak ditemukan");
+                return;
+            }
+
+            datePickerTransaksi.Value = order.Tglorder;
+            comboSales.SelectedValue = order.Kodesales;
+            comboPelanggan.SelectedValue = order.Kodepelanggan;
+            textBoxInfoPenting.Text = order.Infopenting;
+            comboTempo.SelectedIndex = Helper.TipeTempoValueToIndex(order.Tipetempo ?? -1);
+            NoOrder = order.Kodeh;
+            dataGridView1.Rows.Clear();
+            if (order.Dorder != null)
+            {
+                foreach (var dorder in order.Dorder)
+                {
+                    var index = dataGridView1.Rows.Add();
+                    dataGridView1.Rows[index].Cells["pcs"].Value = dorder.Jumlah;
+                    dataGridView1.Rows[index].Cells["item"].Value = dorder.Kodebarang;
+                    dataGridView1.Rows[index].Cells["harga"].Value = dorder.Harga;
+                    dataGridView1.Rows[index].Cells["jumlah"].Value = dorder.Jumlah * dorder.Harga;
+                }
+            }
+
+            CalculateSubtotal();
+            CalculateTotal();
+            buttonBatalUbah.Visible = true;
+        }
+
         private async void button1_Click(object sender, EventArgs e)
         {
             button1.Enabled = false;
             try
             {
                 var order = await _OrderData.FindUnprocesedOrderByKodeh(Convert.ToInt32(textBoxNoSo.Text));
-                if (order != null)
-                {
-                    datePickerTransaksi.Value = order.Tglorder;
-                    comboSales.SelectedValue = order.Kodesales;
-                    comboPelanggan.SelectedValue = order.Kodepelanggan;
-                    textBoxInfoPenting.Text = order.Infopenting;
-                    comboTempo.SelectedIndex = Helper.TipeTempoValueToIndex(order.Tipetempo ?? -1);
-                    NoOrder = order.Kodeh;
-                    dataGridView1.Rows.Clear();
-                    if (order.Dorder != null)
-                    {
-                        foreach (var dorder in order.Dorder)
-                        {
-                            var index = dataGridView1.Rows.Add();
-                            dataGridView1.Rows[index].Cells["pcs"].Value = dorder.Jumlah;
-                            dataGridView1.Rows[index].Cells["item"].Value = dorder.Kodebarang;
-                            dataGridView1.Rows[index].Cells["harga"].Value = dorder.Harga;
-                            dataGridView1.Rows[index].Cells["jumlah"].Value = dorder.Jumlah * dorder.Harga;
-                        }
-                    }
 
-                    CalculateSubtotal();
-                    CalculateTotal();
-                    buttonBatalUbah.Visible = true;
-                }
+                OrderToDatagridview(order);
             }
             catch (ApiException ex)
             {
@@ -895,6 +939,117 @@ namespace DoranApp.View
             }
 
             button1.Enabled = true;
+        }
+
+        private async Task FindOrderByMethod(sbyte method)
+        {
+            try
+            {
+                ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
+                HorderResult? order = null;
+                switch (method)
+                {
+                    case 0:
+                        if (textBoxCariBySeriOnline.Text.Trim() == "")
+                        {
+                            ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
+                            return;
+                        }
+
+                        order = await _OrderData.FindByNoSeriOnlineNotLunas(textBoxCariBySeriOnline.Text);
+                        break;
+                    case 1:
+                        if (textBoxCariByBarcodeOnline.Text.Trim() == "")
+                        {
+                            ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
+                            return;
+                        }
+
+                        order = await _OrderData.FindByNoBarcodeOnlineNotLunas(textBoxCariByBarcodeOnline.Text);
+                        break;
+                    case 2:
+                        if (textBoxCariBy5DigitSeriOnline.Text.Trim().Length != 5)
+                        {
+                            MessageBox.Show("Harus berisi 5 karakter");
+                            ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
+                            return;
+                        }
+
+                        order = await _OrderData.FindByNoSeriOnlineNotLunas($"%{textBoxCariBy5DigitSeriOnline.Text}",
+                            2);
+                        break;
+                    case 3:
+                        if (textBoxCariBy5DigitBarcodeOnline.Text.Trim().Length != 5)
+                        {
+                            MessageBox.Show("Harus berisi 5 karakter");
+                            ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
+                            return;
+                        }
+
+                        order = await _OrderData.FindByNoBarcodeOnlineNotLunas(
+                            $"%{textBoxCariBy5DigitBarcodeOnline.Text}", 2);
+                        break;
+                }
+
+                if (order != null)
+                {
+                    OrderToDatagridview(order);
+                }
+                else
+                {
+                    MessageBox.Show("Orderan tidak ditemukan", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (ApiException ex)
+            {
+                Helper.ShowErrorMessageFromResponse(ex);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
+        }
+
+        private async void button8_Click(object sender, EventArgs e)
+        {
+            FindOrderByMethod(0);
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            FindOrderByMethod(1);
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            FindOrderByMethod(2);
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            FindOrderByMethod(3);
+        }
+
+        private async void button13_Click(object sender, EventArgs e)
+        {
+            ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
+            try
+            {
+                var kodeh = Convert.ToInt32(dataGridView2.SelectedRows[0].Cells["Kodeh"].Value);
+                var resp = await _transaksiData.CancelOrder(kodeh);
+            }
+            catch (ApiException ex)
+            {
+                Helper.ShowErrorMessageFromResponse(ex);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
         }
     }
 

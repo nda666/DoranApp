@@ -9,7 +9,7 @@ public static class LoadingButtonHelper
     public static void SetLoadingState(Button button, bool isLoading)
     {
         // Load the image from resources
-        Image originalImage = Properties.Resources.icons8_loading;
+        Image originalImage = Properties.Resources.icons8_loading_circle;
 
         // Resize the image to 18x18
         Image resizedImage = ResizeImage(originalImage, new Size(18, 18));

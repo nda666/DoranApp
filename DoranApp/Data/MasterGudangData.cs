@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DoranApp.Utils;
 
@@ -53,6 +54,12 @@ namespace DoranApp.Data
             Rest rest = new Rest($"{RelativeUrl()}/{kode}/transit");
             var response = await rest.Post(new { boletransit = transit });
             await RunRefresh();
+        }
+
+        public async Task<List<MastergudangOptionDto>> GetMastergudangOption()
+        {
+            var resp = await _CLient.Get_Mastergudang_OptionsAsync(aktif: true);
+            return resp.ToList();
         }
     }
 }
