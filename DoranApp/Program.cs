@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using DoranApp.View;
+using OfficeOpenXml;
 
 namespace DoranApp
 {
@@ -18,6 +19,7 @@ namespace DoranApp
             //Application.Run(new SyncDatabaseForm());
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("id-ID");
             System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("id-ID");
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         }
     }
 }

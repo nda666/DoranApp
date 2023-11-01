@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Windows.Forms;
+using DoranApp.Exceptions;
 using DoranApp.Utils;
 using Newtonsoft.Json;
 
@@ -9,6 +10,18 @@ namespace DoranApp
 {
     public class Helper
     {
+        public static void ShowErrorMessage(Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+        }
+
+        public static void ShowErrorMessageFromResponse(RestException apiException)
+        {
+            MessageBox.Show(apiException.Message, "Error", MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+        }
+
         public static void ShowErrorMessageFromResponse(ApiException apiException)
         {
             try
@@ -74,6 +87,36 @@ namespace DoranApp
             }
 
             return subDay;
+        }
+
+        public static string GetKeyLimitTagihan()
+        {
+            string sHasil = "";
+            Random random = new Random();
+
+            for (int i = 1; i <= 10; i++)
+            {
+                int hasil = random.Next(10) + 65;
+                char charNya = Convert.ToChar(hasil);
+                sHasil += charNya;
+            }
+
+            return sHasil;
+        }
+
+        public static string DekripKeyLimitTagihan(string asal)
+        {
+            string sHasil = "";
+
+            for (int i = 0; i < asal.Length; i++)
+            {
+                int hasil = (int)asal[i];
+                hasil += 5;
+                char charNya = (char)hasil;
+                sHasil += charNya;
+            }
+
+            return sHasil;
         }
     }
 }

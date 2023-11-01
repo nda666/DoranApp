@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DoranApp.LocalModel
+﻿namespace DoranApp.LocalModel
 {
     public class NotaTransaksiDetail
     {
@@ -12,6 +6,6 @@ namespace DoranApp.LocalModel
         public int jumlah { get; set; }
         public string brgNama { get; set; }
         public long harga { get; set; }
-        public long subTotal { get; set;}
+        public long subTotal { get; set; }
     }
 }

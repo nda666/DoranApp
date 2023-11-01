@@ -24,13 +24,16 @@ namespace DoranApp.DataGlobal
             IsRun = true;
             try
             {
-                var rest = new Rest("sales/options");
+                var rest = new Rest("sales/nama");
                 var response = await rest.Get();
                 var data = (List<SalesOptionDto>)response.Response;
                 NotifyObservers(data);
+                IsRun = false;
             }
             catch (Exception ex)
             {
+                IsRun = false;
+                throw;
             }
 
             IsRun = false;
@@ -40,10 +43,7 @@ namespace DoranApp.DataGlobal
         {
             return new CompositeDisposable(
                 subject.Subscribe(new MyObserver(onNext)),
-                Disposable.Create(() =>
-                {
-                    Console.WriteLine("Subscription Lokasi Provinsi Option has been disposed.");
-                })
+                Disposable.Create(() => { Console.WriteLine("Subscription Sales Option has been disposed."); })
             );
         }
 

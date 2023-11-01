@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ConsoleDump;
 using DoranApp.Data;
 using DoranApp.Utils;
 
@@ -40,6 +41,7 @@ namespace DoranApp.View.Pegawai
             }
             catch (Exception ex)
             {
+                ex.Dump();
                 MessageBox.Show(ex.Message);
             }
 
@@ -57,7 +59,6 @@ namespace DoranApp.View.Pegawai
             DataGridViewColumn column = dataGridView1.Columns[0];
             column.Width = 60;
             dataGridView1.ClearSelection();
-
 
             ResetForm();
         }

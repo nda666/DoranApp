@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DoranApp.Data;
+using DoranApp.Exceptions;
 using DoranApp.Utils;
 
 namespace DoranApp.View;
@@ -13,6 +14,8 @@ public partial class TransitBarangControl : UserControl
     public TransitData _TransitData = new TransitData();
 
     public long _TransitLastPage = 0;
+
+
     public bool AnyDataProcessRun = false;
     public Client client = new Client();
     public bool confirmSelectionChange = false;
@@ -22,7 +25,6 @@ public partial class TransitBarangControl : UserControl
     public int? KodeEdit = null;
 
     public int? KodeTEdit = null;
-
     public int previousSelectedRow;
     public int previousSelectedRow2;
     public dynamic TransitDataQuery = new { };
@@ -114,8 +116,21 @@ public partial class TransitBarangControl : UserControl
     {
         dataGridView1.EnableDoubleBuffered(true);
         dataGridView2.EnableDoubleBuffered(true);
+
         comboPageSize.SelectedIndex = 0;
         dataGridView1.DataSource = _TransitData.GetDataTable();
+
+        dataGridView1.Columns[0].Width = 70;
+        dataGridView1.Columns[2].Width = 150;
+        dataGridView1.Columns[4].Width = 70;
+        dataGridView1.Columns[3].Width = 70;
+        dataGridView1.Columns[6].Width = 200;
+        dataGridView1.Columns[7].Width = 60;
+        dataGridView1.Columns[7].Width = 60;
+        dataGridView1.Columns[8].Width = 60;
+        dataGridView1.Columns[9].Width = 50;
+        dataGridView1.Columns[10].Width = 120;
+        dataGridView1.Columns[11].Width = 120;
     }
 
     private void button4_Click(object sender, EventArgs e)
@@ -208,7 +223,7 @@ public partial class TransitBarangControl : UserControl
             }
 
             dataGridView2.ClearSelection();
-            labelVarian.Text = $"Varian : {Pcs.ToString()}";
+            labelVarian.Text = $"Varian : {Varian.ToString()}";
             labelPcs.Text = $"PCS : {Pcs.ToString()}";
             if (!dontUpdateChangeDgv)
             {
@@ -221,6 +236,14 @@ public partial class TransitBarangControl : UserControl
         }
     }
 
+    private void SetLoading(bool loading)
+    {
+        tabControl1.Enabled = !loading;
+        groupBox2.Enabled = !loading;
+        groupBox3.Enabled = !loading;
+        this.Cursor = loading ? Cursors.WaitCursor : Cursors.Default;
+    }
+
     private async void button1_Click(object sender, EventArgs e)
     {
         if (AnyDataProcessRun)
@@ -229,7 +252,7 @@ public partial class TransitBarangControl : UserControl
         }
 
         AnyDataProcessRun = true;
-        LoadingButtonHelper.SetLoadingState(buttonSimpan, true);
+        SetLoading(true);
         try
         {
             var res = await _TransitData.CreateOrUpdate(null, new
@@ -241,8 +264,12 @@ public partial class TransitBarangControl : UserControl
                 Keterangan = textBoxKeterangan.Text.Trim()
             });
 
-            GetTransit();
+            await GetTransit();
             MessageBox.Show("\"Header Transit\" berhasil disimpan", "Sukses", MessageBoxButtons.OK);
+        }
+        catch (RestException ex)
+        {
+            Helper.ShowErrorMessageFromResponse(ex);
         }
         catch (Exception ex)
         {
@@ -250,7 +277,7 @@ public partial class TransitBarangControl : UserControl
         }
 
         AnyDataProcessRun = false;
-        LoadingButtonHelper.SetLoadingState(buttonSimpan, false);
+        SetLoading(false);
     }
 
     private void button6_Click(object sender, EventArgs e)
@@ -352,12 +379,19 @@ public partial class TransitBarangControl : UserControl
     {
         if (IsEdit == true && dataGridView2.SelectedRows.Count > 0)
         {
-            var jumlah = dataGridView2.SelectedRows[0].Cells["Pcs"].Value?.ToString() ?? "";
-            var kodeBarang = (int)dataGridView2.SelectedRows[0].Cells["KodeBarang"].Value;
-            var SN = (string)dataGridView2.SelectedRows[0].Cells["SN"].Value;
-            comboBoxTambahMasterbarang.SelectedValue = kodeBarang;
-            textBoxSn.Text = SN;
-            textBoxJumlah.Text = jumlah;
+            try
+            {
+                var jumlah = dataGridView2.SelectedRows[0].Cells["Pcs"].Value?.ToString() ?? "";
+                var kodeBarang = (int)dataGridView2.SelectedRows[0].Cells["KodeBarang"].Value;
+                var SN = (string)dataGridView2.SelectedRows[0].Cells["SN"].Value;
+                comboBoxTambahMasterbarang.SelectedValue = kodeBarang;
+                textBoxSn.Text = SN;
+                textBoxJumlah.Text = jumlah;
+            }
+            catch (Exception ex)
+            {
+                Helper.ShowErrorMessage(ex);
+            }
         }
     }
 
@@ -368,9 +402,13 @@ public partial class TransitBarangControl : UserControl
             return;
         }
 
+        if (!IsEdit)
+        {
+            buttonHapus.Enabled = dataGridView2.SelectedRows.Count >= 1;
+            buttonUbah.Enabled = dataGridView2.SelectedRows.Count == 1;
+        }
+
         DatagridDetailOnUpdateChangeSelection();
-        buttonHapus.Enabled = dataGridView2.SelectedRows.Count >= 1;
-        buttonUbah.Enabled = dataGridView2.SelectedRows.Count == 1;
     }
 
     private void EnableGroupBoxDetailTambah(bool enable)
@@ -379,6 +417,8 @@ public partial class TransitBarangControl : UserControl
         confirmSelectionChange = enable;
         groupBoxTambahDetail.Enabled = enable;
         button1.Enabled = enable;
+        groupBox6.Enabled = !enable;
+        groupBox1.Enabled = !enable;
         if (enable)
         {
             button1.Text = "Selesai Tambah";
@@ -399,6 +439,8 @@ public partial class TransitBarangControl : UserControl
         confirmSelectionChange = enable;
         groupBoxTambahDetail.Enabled = enable;
         button1.Enabled = enable;
+        groupBox6.Enabled = !enable;
+        groupBox1.Enabled = !enable;
         if (enable)
         {
             button1.Text = "Selesai Ubah";
@@ -507,6 +549,7 @@ public partial class TransitBarangControl : UserControl
     private async void button7_Click(object sender, EventArgs e)
     {
         dontUpdateChangeDgv = true;
+        this.Enabled = false;
         if (button7.Text == "UPDATE")
         {
             await UpdateDetail();
@@ -516,6 +559,7 @@ public partial class TransitBarangControl : UserControl
             await InsertDetail();
         }
 
+        this.Enabled = true;
         dontUpdateChangeDgv = false;
     }
 
@@ -580,14 +624,9 @@ public partial class TransitBarangControl : UserControl
             var result = await client.Update_TransitAsync(kodet, new SaveHeaderTransitDto()
             {
                 TglTrans = datePickerTglTransit.Value,
-                Kodegudang =
-                    comboBoxMastergudang.SelectedValue != null ? (int)comboBoxMastergudang.SelectedValue : null,
-                KodeGudangTujuan = comboBoxMastergudangTujuan.SelectedValue != null
-                    ? (int)comboBoxMastergudangTujuan.SelectedValue
-                    : null,
-                Kodepenyiap = comboBoxPenyiapOrder.SelectedValue != null
-                    ? (int)comboBoxPenyiapOrder.SelectedValue
-                    : null,
+                Kodegudang = Convert.ToInt32(comboBoxMastergudang.SelectedValue),
+                KodeGudangTujuan = Convert.ToInt32(comboBoxMastergudangTujuan.SelectedValue),
+                Kodepenyiap = Convert.ToInt32(comboBoxPenyiapOrder.SelectedValue),
                 Keterangan = textBoxKeterangan.Text.Trim()
             });
             var indexData = _TransitData.GetData().FindIndex(x => x.KodeT == result.KodeT);
@@ -613,5 +652,10 @@ public partial class TransitBarangControl : UserControl
 
         dontUpdateChangeDgv = false;
         AnyDataProcessRun = false;
+    }
+
+    private void button8_Click(object sender, EventArgs e)
+    {
+        throw new System.NotImplementedException();
     }
 }

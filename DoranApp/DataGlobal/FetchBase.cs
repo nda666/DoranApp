@@ -1,18 +1,15 @@
-﻿using DoranApp.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
-using System.Text;
 using System.Threading.Tasks;
+using DoranApp.Utils;
 
 namespace DoranApp.DataGlobal
 {
-    internal abstract class FetchBase<T> 
+    internal abstract class FetchBase<T>
     {
-        protected BehaviorSubject<T> subject = new BehaviorSubject<T>(default(T));
         protected bool IsRun = false;
+        protected BehaviorSubject<T> subject = new BehaviorSubject<T>(default(T));
 
         protected abstract string RestUrl { get; }
 
@@ -38,10 +35,7 @@ namespace DoranApp.DataGlobal
         {
             return new CompositeDisposable(
                 subject.Subscribe(new MyObserver(onNext)),
-                Disposable.Create(() =>
-                {
-                    Console.WriteLine("Subscription has been disposed.");
-                })
+                Disposable.Create(() => { Console.WriteLine("Subscription has been disposed."); })
             );
         }
 
@@ -59,8 +53,15 @@ namespace DoranApp.DataGlobal
                 _onNext = onNext;
             }
 
-            public void OnCompleted() { /* Implementation */ }
-            public void OnError(Exception error) { /* Implementation */ }
+            public void OnCompleted()
+            {
+                /* Implementation */
+            }
+
+            public void OnError(Exception error)
+            {
+                /* Implementation */
+            }
 
             public void OnNext(T value)
             {

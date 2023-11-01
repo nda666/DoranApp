@@ -70,7 +70,7 @@ namespace DoranApp.Utils
                     case 422:
                         var errors = response.errors;
                         List<string> errorTexts = new List<string>();
-                        errorTexts.Add($"{error}:");
+                        // errorTexts.Add($"{error}:");
                         if (errors != null)
                         {
                             foreach (dynamic memberError in errors)
@@ -190,7 +190,7 @@ namespace DoranApp.Utils
         }
     }
 
-    internal class TReturn
+    public class TReturn
     {
         public dynamic HttpResponseMessage { get; set; }
         public dynamic Response { get; set; }

@@ -28,11 +28,21 @@ public partial class CekStokForm : Form
         FetchMasterbarangDisposable = FetchMasterbarangOptionWithSn.Subscribe(x =>
         {
             _MutasiBarangControl.comboMasterbarang.DataSource = x.ToList();
+            _HistoryBarangMasukControl.comboMasterbarang.DataSource = x.ToList();
         });
         await FetchMasterbarangOptionWithSn.Run();
     }
 
     public async void FetchMastergudang()
+    {
+        FetchMastergudangDisposable = FetchMastergudangOption.Subscribe(x =>
+        {
+            _MutasiBarangControl.comboMastergudang.DataSource = x.ToList();
+        });
+        await FetchMastergudangOption.Run();
+    }
+
+    public async void FetchSupplier()
     {
         FetchMastergudangDisposable = FetchMastergudangOption.Subscribe(x =>
         {

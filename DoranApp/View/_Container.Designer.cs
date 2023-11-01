@@ -48,6 +48,7 @@ namespace DoranApp.View
             this.penjualanByBarangToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.penjualanByTokoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.penjualanBySalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.syncDBManualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabForms = new System.Windows.Forms.TabControl();
             this.tessssssToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -58,7 +59,7 @@ namespace DoranApp.View
             // 
             this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.masterToolStripMenuItem, this.laporanToolStripMenuItem, this.salesToolStripMenuItem1 });
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.masterToolStripMenuItem, this.laporanToolStripMenuItem, this.salesToolStripMenuItem1, this.settingToolStripMenuItem });
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -176,6 +177,13 @@ namespace DoranApp.View
             this.penjualanBySalesToolStripMenuItem.Text = "Penjualan By Sales";
             this.penjualanBySalesToolStripMenuItem.Click += new System.EventHandler(this.penjualanBySalesToolStripMenuItem_Click);
             // 
+            // settingToolStripMenuItem
+            // 
+            this.settingToolStripMenuItem.Name = "settingToolStripMenuItem";
+            this.settingToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.settingToolStripMenuItem.Text = "Setting";
+            this.settingToolStripMenuItem.Click += new System.EventHandler(this.settingToolStripMenuItem_Click);
+            // 
             // syncDBManualToolStripMenuItem
             // 
             this.syncDBManualToolStripMenuItem.Name = "syncDBManualToolStripMenuItem";
@@ -221,6 +229,7 @@ namespace DoranApp.View
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "_Container";
+            this.ShowIcon = false;
             this.Text = "Doran App";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this._Container_FormClosed);
@@ -232,6 +241,8 @@ namespace DoranApp.View
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.ToolStripMenuItem settingToolStripMenuItem;
 
         private System.Windows.Forms.ToolStripMenuItem penyiapOrderToolStripMenuItem;
 

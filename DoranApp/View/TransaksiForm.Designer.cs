@@ -50,7 +50,7 @@
             this.comboPelanggan = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBoxCancelOrder = new System.Windows.Forms.CheckBox();
             this.textBoxInfoPenting = new System.Windows.Forms.TextBox();
             this.textBoxNoSo = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -126,6 +126,8 @@
             this.printPreviewControl1 = new System.Windows.Forms.PrintPreviewControl();
             this.printPreviewControl2 = new System.Windows.Forms.PrintPreviewControl();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.checkBoxShowAllItem = new System.Windows.Forms.CheckBox();
+            this.checkboxEnableSearch = new System.Windows.Forms.CheckBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -145,6 +147,13 @@
             this.label16 = new System.Windows.Forms.Label();
             this.textBoxCariBySeriOnline = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.buttonCopyKeyLimit = new System.Windows.Forms.Button();
+            this.textBoxGenerateKeyLimit = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.buttonGenerateKeyLimit = new System.Windows.Forms.Button();
+            this.textBoxGenerateToken = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -161,6 +170,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -186,7 +196,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(8, 182);
+            this.dataGridView1.Location = new System.Drawing.Point(8, 201);
             this.dataGridView1.Name = "dataGridView1";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -196,9 +206,12 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.Size = new System.Drawing.Size(660, 159);
+            this.dataGridView1.Size = new System.Drawing.Size(660, 140);
             this.dataGridView1.TabIndex = 9;
+            this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
+            this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             // 
             // checkBoxRetur
@@ -269,12 +282,15 @@
             // 
             // comboPelanggan
             // 
+            this.comboPelanggan.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.comboPelanggan.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboPelanggan.FormattingEnabled = true;
             this.comboPelanggan.Location = new System.Drawing.Point(127, 87);
             this.comboPelanggan.Name = "comboPelanggan";
-            this.comboPelanggan.Size = new System.Drawing.Size(252, 21);
+            this.comboPelanggan.Size = new System.Drawing.Size(419, 21);
             this.comboPelanggan.TabIndex = 5;
-            this.comboPelanggan.Text = "Nama Pelanggan";
+            this.comboPelanggan.SelectedIndexChanged += new System.EventHandler(this.comboPelanggan_SelectedIndexChanged);
+            this.comboPelanggan.Enter += new System.EventHandler(this.comboPelanggan_Enter);
             // 
             // label4
             // 
@@ -297,16 +313,16 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "INFO PENTING";
             // 
-            // checkBox2
+            // checkBoxCancelOrder
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(255, 65);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(88, 17);
-            this.checkBox2.TabIndex = 4;
-            this.checkBox2.Text = "Cancel Order";
-            this.checkBox2.UseVisualStyleBackColor = true;
-            this.checkBox2.Visible = false;
+            this.checkBoxCancelOrder.AutoSize = true;
+            this.checkBoxCancelOrder.Location = new System.Drawing.Point(255, 65);
+            this.checkBoxCancelOrder.Name = "checkBoxCancelOrder";
+            this.checkBoxCancelOrder.Size = new System.Drawing.Size(88, 17);
+            this.checkBoxCancelOrder.TabIndex = 4;
+            this.checkBoxCancelOrder.Text = "Cancel Order";
+            this.checkBoxCancelOrder.UseVisualStyleBackColor = true;
+            this.checkBoxCancelOrder.Visible = false;
             // 
             // textBoxInfoPenting
             // 
@@ -448,6 +464,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(660, 160);
             this.panel1.TabIndex = 25;
+            this.panel1.Tag = "groupbox";
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // buttonBatalUbah
@@ -656,6 +673,7 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(688, 75);
             this.panel2.TabIndex = 100;
+            this.panel2.Tag = "groupbox";
             // 
             // button15
             // 
@@ -773,9 +791,9 @@
             // 
             this.groupBox1.Controls.Add(this.dataGridView2);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(3, 33);
+            this.groupBox1.Location = new System.Drawing.Point(3, 11);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(682, 195);
+            this.groupBox1.Size = new System.Drawing.Size(682, 206);
             this.groupBox1.TabIndex = 101;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Laporan Transaksi Penjualan";
@@ -784,6 +802,7 @@
             // 
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
+            this.dataGridView2.AllowUserToResizeRows = false;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -815,7 +834,7 @@
             this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(676, 176);
+            this.dataGridView2.Size = new System.Drawing.Size(676, 187);
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView2_ColumnAdded);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
@@ -832,19 +851,20 @@
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(688, 433);
             this.tableLayoutPanel1.TabIndex = 1;
+            this.tableLayoutPanel1.Tag = "groupbox";
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.dataGridView3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 234);
+            this.groupBox2.Location = new System.Drawing.Point(3, 223);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(682, 196);
+            this.groupBox2.Size = new System.Drawing.Size(682, 207);
             this.groupBox2.TabIndex = 104;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Detail Transaksi Penjualan";
@@ -853,6 +873,7 @@
             // 
             this.dataGridView3.AllowUserToAddRows = false;
             this.dataGridView3.AllowUserToDeleteRows = false;
+            this.dataGridView3.AllowUserToResizeRows = false;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -885,7 +906,7 @@
             this.dataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView3.RowHeadersVisible = false;
             this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView3.Size = new System.Drawing.Size(676, 177);
+            this.dataGridView3.Size = new System.Drawing.Size(676, 188);
             this.dataGridView3.TabIndex = 1;
             // 
             // Pcs
@@ -938,6 +959,7 @@
             this.toolStrip1.Size = new System.Drawing.Size(688, 25);
             this.toolStrip1.TabIndex = 105;
             this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.Visible = false;
             // 
             // toolStripLabel3
             // 
@@ -949,7 +971,7 @@
             // 
             this.comboPageSize.AutoSize = false;
             this.comboPageSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboPageSize.Items.AddRange(new object[] { "50", "100", "200", "500", "1000" });
+            this.comboPageSize.Items.AddRange(new object[] { "300", "100", "200", "500", "1000" });
             this.comboPageSize.Name = "comboPageSize";
             this.comboPageSize.Size = new System.Drawing.Size(55, 23);
             this.comboPageSize.SelectedIndexChanged += new System.EventHandler(this.comboPageSize_SelectedIndexChanged);
@@ -1076,6 +1098,8 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.checkBoxShowAllItem);
+            this.splitContainer1.Panel1.Controls.Add(this.checkboxEnableSearch);
             this.splitContainer1.Panel1.Controls.Add(this.tabControl1);
             this.splitContainer1.Panel1.Controls.Add(this.dataGridView1);
             this.splitContainer1.Panel1.Controls.Add(this.panel1);
@@ -1087,6 +1111,31 @@
             this.splitContainer1.Size = new System.Drawing.Size(1370, 510);
             this.splitContainer1.SplitterDistance = 678;
             this.splitContainer1.TabIndex = 101;
+            this.splitContainer1.Tag = "";
+            // 
+            // checkBoxShowAllItem
+            // 
+            this.checkBoxShowAllItem.AutoSize = true;
+            this.checkBoxShowAllItem.Checked = true;
+            this.checkBoxShowAllItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxShowAllItem.Location = new System.Drawing.Point(172, 178);
+            this.checkBoxShowAllItem.Name = "checkBoxShowAllItem";
+            this.checkBoxShowAllItem.Size = new System.Drawing.Size(134, 17);
+            this.checkBoxShowAllItem.TabIndex = 101;
+            this.checkBoxShowAllItem.Text = "Tampilkan Semua Item";
+            this.checkBoxShowAllItem.UseVisualStyleBackColor = true;
+            this.checkBoxShowAllItem.Visible = false;
+            this.checkBoxShowAllItem.CheckedChanged += new System.EventHandler(this.checkBoxShowAllItem_CheckedChanged);
+            // 
+            // checkboxEnableSearch
+            // 
+            this.checkboxEnableSearch.AutoSize = true;
+            this.checkboxEnableSearch.Location = new System.Drawing.Point(12, 178);
+            this.checkboxEnableSearch.Name = "checkboxEnableSearch";
+            this.checkboxEnableSearch.Size = new System.Drawing.Size(153, 17);
+            this.checkboxEnableSearch.TabIndex = 100;
+            this.checkboxEnableSearch.Text = "Aktifkan Pencarian Produk";
+            this.checkboxEnableSearch.UseVisualStyleBackColor = true;
             // 
             // tabControl1
             // 
@@ -1108,7 +1157,7 @@
             this.tabPage1.Controls.Add(this.textBoxInfoPenting);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.comboGudang);
-            this.tabPage1.Controls.Add(this.checkBox2);
+            this.tabPage1.Controls.Add(this.checkBoxCancelOrder);
             this.tabPage1.Controls.Add(this.datePickerJatuhTempo);
             this.tabPage1.Controls.Add(this.button2);
             this.tabPage1.Controls.Add(this.label2);
@@ -1152,7 +1201,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(652, 211);
+            this.tabPage2.Size = new System.Drawing.Size(652, 147);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Cari Tambahan";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1166,6 +1215,7 @@
             this.button19.Tag = "actionButton";
             this.button19.Text = "Transaksi Baru";
             this.button19.UseVisualStyleBackColor = true;
+            this.button19.Visible = false;
             // 
             // comboBox2
             // 
@@ -1293,13 +1343,84 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.buttonCopyKeyLimit);
+            this.tabPage3.Controls.Add(this.textBoxGenerateKeyLimit);
+            this.tabPage3.Controls.Add(this.label21);
+            this.tabPage3.Controls.Add(this.buttonGenerateKeyLimit);
+            this.tabPage3.Controls.Add(this.textBoxGenerateToken);
+            this.tabPage3.Controls.Add(this.label20);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(652, 211);
+            this.tabPage3.Size = new System.Drawing.Size(652, 147);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Key";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // buttonCopyKeyLimit
+            // 
+            this.buttonCopyKeyLimit.Location = new System.Drawing.Point(305, 63);
+            this.buttonCopyKeyLimit.Name = "buttonCopyKeyLimit";
+            this.buttonCopyKeyLimit.Size = new System.Drawing.Size(60, 32);
+            this.buttonCopyKeyLimit.TabIndex = 30;
+            this.buttonCopyKeyLimit.Tag = "actionButton";
+            this.buttonCopyKeyLimit.Text = "Copy";
+            this.buttonCopyKeyLimit.UseVisualStyleBackColor = true;
+            this.buttonCopyKeyLimit.Click += new System.EventHandler(this.buttonCopyKeyLimit_Click);
+            // 
+            // textBoxGenerateKeyLimit
+            // 
+            this.textBoxGenerateKeyLimit.Location = new System.Drawing.Point(85, 70);
+            this.textBoxGenerateKeyLimit.Name = "textBoxGenerateKeyLimit";
+            this.textBoxGenerateKeyLimit.ReadOnly = true;
+            this.textBoxGenerateKeyLimit.Size = new System.Drawing.Size(214, 20);
+            this.textBoxGenerateKeyLimit.TabIndex = 28;
+            // 
+            // label21
+            // 
+            this.label21.Location = new System.Drawing.Point(11, 70);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(68, 20);
+            this.label21.TabIndex = 29;
+            this.label21.Text = "Key Limit :";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // buttonGenerateKeyLimit
+            // 
+            this.buttonGenerateKeyLimit.Location = new System.Drawing.Point(85, 32);
+            this.buttonGenerateKeyLimit.Name = "buttonGenerateKeyLimit";
+            this.buttonGenerateKeyLimit.Size = new System.Drawing.Size(214, 32);
+            this.buttonGenerateKeyLimit.TabIndex = 27;
+            this.buttonGenerateKeyLimit.Tag = "actionButton";
+            this.buttonGenerateKeyLimit.Text = "Proses";
+            this.buttonGenerateKeyLimit.UseVisualStyleBackColor = true;
+            this.buttonGenerateKeyLimit.Click += new System.EventHandler(this.button20_Click);
+            // 
+            // textBoxGenerateToken
+            // 
+            this.textBoxGenerateToken.Location = new System.Drawing.Point(85, 6);
+            this.textBoxGenerateToken.Name = "textBoxGenerateToken";
+            this.textBoxGenerateToken.Size = new System.Drawing.Size(214, 20);
+            this.textBoxGenerateToken.TabIndex = 9;
+            // 
+            // label20
+            // 
+            this.label20.Location = new System.Drawing.Point(11, 6);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(68, 20);
+            this.label20.TabIndex = 10;
+            this.label20.Text = "Token :";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // printPreviewDialog1
+            // 
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
             // 
             // TransaksiForm
             // 
@@ -1307,9 +1428,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1370, 510);
             this.Controls.Add(this.splitContainer1);
+            this.KeyPreview = true;
             this.Name = "TransaksiForm";
             this.Text = "Transaksi Penjualan";
             this.Load += new System.EventHandler(this.TransaksiForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TransaksiForm_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TransaksiForm_KeyPress);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TransaksiForm_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -1326,6 +1449,7 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
@@ -1334,8 +1458,26 @@
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button buttonCopyKeyLimit;
+
+        private System.Windows.Forms.TextBox textBoxGenerateKeyLimit;
+        private System.Windows.Forms.Label label21;
+
+        private System.Windows.Forms.Button buttonGenerateKeyLimit;
+
+        private System.Windows.Forms.TextBox textBoxGenerateToken;
+        private System.Windows.Forms.Label label20;
+
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+
+        private System.Windows.Forms.CheckBox checkBoxShowAllItem;
+
+        private System.Windows.Forms.CheckBox checkboxEnableSearch;
 
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
@@ -1382,7 +1524,7 @@
         private System.Windows.Forms.ComboBox comboPelanggan;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBoxCancelOrder;
         private System.Windows.Forms.TextBox textBoxInfoPenting;
         private System.Windows.Forms.TextBox textBoxNoSo;
         private System.Windows.Forms.Label label6;

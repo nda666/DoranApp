@@ -84,7 +84,7 @@ namespace DoranApp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://18.142.2.183:44376/api")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://182.253.116.121:44376/api")]
         public string BASE_API_URL {
             get {
                 return ((string)(this["BASE_API_URL"]));

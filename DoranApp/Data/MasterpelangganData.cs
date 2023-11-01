@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DoranApp.Utils;
 
@@ -36,6 +37,12 @@ namespace DoranApp.Data
             var response = await rest.Get(_query);
             _data = response.Response;
             _dataTable = _dataTableGen.CreateDataTable<Masterpelanggan>(_data);
+        }
+
+        public async Task<List<MasterpelangganNamaResultDto>> GetOptions()
+        {
+            var pelanggan = await _CLient.Get_Masterpelanggan_NamaAsync(aktif: true);
+            return pelanggan.ToList();
         }
 
         public async Task<TReturn> GetNameAndKodeOnly()

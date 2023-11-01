@@ -40,9 +40,9 @@ namespace DoranApp.Data
                 { "Keterangan", x => x.Keterangan },
                 { "KodeT", x => x.KodeT },
                 { "History", x => x.HistoryNya },
-                { "Export", x => x.Export },
+                { "Export", x => x.Export, typeof(Boolean) },
                 { "Kode Gudang", x => x.Kodegudang },
-                { "Kode Gudang Tujuan", x => x.KodeGudangTujuan }
+                { "Kode Gd Tujuan", x => x.KodeGudangTujuan }
             };
 
             return columnSettingsList;

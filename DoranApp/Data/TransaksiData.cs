@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DoranApp.Dtos;
 using DoranApp.Utils;
 
 namespace DoranApp.Data
 {
-    internal class TransaksiData : AbstractData<dynamic>
+    public class TransaksiData : AbstractData<dynamic>
     {
-        protected PaginationResultDto _paginationData = new PaginationResultDto();
+        // protected PaginationResultDto _paginationData = new PaginationResultDto();
 
         public TransaksiData() : base()
         {
@@ -47,15 +46,16 @@ namespace DoranApp.Data
             Rest rest = new Rest(RelativeUrl());
             var response = await rest.Get(_query);
             var data = new List<dynamic>();
-            var responseData = response.Response?.data;
+            // var responseData = response.Response?.data;
+            var responseData = response.Response;
             _data = null;
             _dynamicData = null;
             _dynamicData = responseData;
             _data = responseData;
-            _paginationData.Page = response.Response?.page;
-            _paginationData.PageSize = response.Response?.pageSize;
-            _paginationData.TotalRow = response.Response?.totalRow;
-            _paginationData.TotalPage = response.Response?.totalPage;
+            // _paginationData.Page = response.Response?.page;
+            // _paginationData.PageSize = response.Response?.pageSize;
+            // _paginationData.TotalRow = response.Response?.totalRow;
+            // _paginationData.TotalPage = response.Response?.totalPage;
             foreach (var x in responseData)
             {
                 data.Add(x);
@@ -70,10 +70,10 @@ namespace DoranApp.Data
             return _dynamicData;
         }
 
-        public PaginationResultDto GetPaginationData()
-        {
-            return _paginationData;
-        }
+        // public PaginationResultDto GetPaginationData()
+        // {
+        //     return _paginationData;
+        // }
 
         public async Task<TReturn> GetNameAndKodeOnly()
         {

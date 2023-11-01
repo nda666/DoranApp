@@ -43,7 +43,7 @@ namespace DoranApp.Data
             Rest rest = new Rest($"{RelativeUrl()}/options");
             return await rest.Get(new
             {
-                brgAktif = true
+                BrgAktif = true,
             });
         }
     }

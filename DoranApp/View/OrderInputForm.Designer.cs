@@ -85,7 +85,11 @@
             this.NamaBarang = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Harga = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Jumlah = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.KRM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BeresOrCancel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Keterangan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Koded = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
@@ -669,7 +673,7 @@
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.Pcs, this.NamaBarang, this.Harga, this.Jumlah, this.Keterangan });
+            this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.Pcs, this.NamaBarang, this.Harga, this.Jumlah, this.KRM, this.Status, this.BeresOrCancel, this.Keterangan, this.Koded });
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -722,12 +726,37 @@
             this.Jumlah.ReadOnly = true;
             this.Jumlah.Width = 50;
             // 
+            // KRM
+            // 
+            this.KRM.HeaderText = "KRM";
+            this.KRM.Name = "KRM";
+            this.KRM.ReadOnly = true;
+            // 
+            // Status
+            // 
+            this.Status.HeaderText = "Status";
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            // 
+            // BeresOrCancel
+            // 
+            this.BeresOrCancel.HeaderText = "Beres/Cancel";
+            this.BeresOrCancel.Name = "BeresOrCancel";
+            this.BeresOrCancel.ReadOnly = true;
+            // 
             // Keterangan
             // 
             this.Keterangan.HeaderText = "Keterangan";
             this.Keterangan.Name = "Keterangan";
             this.Keterangan.ReadOnly = true;
             this.Keterangan.Width = 200;
+            // 
+            // Koded
+            // 
+            this.Koded.HeaderText = "Koded";
+            this.Koded.Name = "Koded";
+            this.Koded.ReadOnly = true;
+            this.Koded.Visible = false;
             // 
             // groupBox1
             // 
@@ -909,6 +938,7 @@
             this.toolStripLabel2.Name = "toolStripLabel2";
             this.toolStripLabel2.Size = new System.Drawing.Size(116, 27);
             this.toolStripLabel2.Text = "Mohon tunggu ...";
+            this.toolStripLabel2.Visible = false;
             // 
             // panel2
             // 
@@ -926,7 +956,7 @@
             this.panel2.Controls.Add(this.groupBox6);
             this.panel2.Location = new System.Drawing.Point(1159, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(221, 702);
+            this.panel2.Size = new System.Drawing.Size(229, 702);
             this.panel2.TabIndex = 66;
             // 
             // groupBox8
@@ -939,11 +969,12 @@
             this.groupBox8.Controls.Add(this.btnPendingOrder);
             this.groupBox8.Controls.Add(this.btnLunasPaksa);
             this.groupBox8.Controls.Add(this.btnBatalkan);
-            this.groupBox8.Location = new System.Drawing.Point(4, 494);
+            this.groupBox8.Location = new System.Drawing.Point(5, 496);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(216, 147);
             this.groupBox8.TabIndex = 76;
             this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Detail";
             // 
             // label22
             // 
@@ -1008,6 +1039,7 @@
             this.btnPendingOrder.Tag = "enableOnSelect";
             this.btnPendingOrder.Text = "Pending Order";
             this.btnPendingOrder.UseVisualStyleBackColor = true;
+            this.btnPendingOrder.Click += new System.EventHandler(this.btnPendingOrder_Click);
             // 
             // btnLunasPaksa
             // 
@@ -1019,6 +1051,7 @@
             this.btnLunasPaksa.Tag = "enableOnSelect";
             this.btnLunasPaksa.Text = "Lunaskan Paksa";
             this.btnLunasPaksa.UseVisualStyleBackColor = true;
+            this.btnLunasPaksa.Click += new System.EventHandler(this.btnLunasPaksa_Click);
             // 
             // btnBatalkan
             // 
@@ -1030,6 +1063,7 @@
             this.btnBatalkan.Tag = "enableOnSelect";
             this.btnBatalkan.Text = "Batalkan";
             this.btnBatalkan.UseVisualStyleBackColor = true;
+            this.btnBatalkan.Click += new System.EventHandler(this.btnBatalkan_Click);
             // 
             // btnBatalkanHeader
             // 
@@ -1041,6 +1075,7 @@
             this.btnBatalkanHeader.Tag = "enableOnSelect";
             this.btnBatalkanHeader.Text = "Batalkan Header";
             this.btnBatalkanHeader.UseVisualStyleBackColor = true;
+            this.btnBatalkanHeader.Click += new System.EventHandler(this.btnBatalkanHeader_Click);
             // 
             // buttonCekAndSetSiap
             // 
@@ -1468,6 +1503,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OrderInputForm";
+            this.Text = "Input Orderan";
             this.Load += new System.EventHandler(this.OrderInputForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.OrderInputForm_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.OrderInputForm_KeyPress);
@@ -1504,6 +1540,12 @@
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn KRM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BeresOrCancel;
+
+        private System.Windows.Forms.DataGridViewTextBoxColumn Koded;
 
         private System.Windows.Forms.ComboBox comboFilterGudang;
         private System.Windows.Forms.Label label23;

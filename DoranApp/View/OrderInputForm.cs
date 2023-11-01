@@ -306,6 +306,19 @@ namespace DoranApp.View
             btnFilter.Enabled = !FetchOrderRun;
             miniToolStrip.Enabled = !FetchOrderRun;
             toolStripLabel2.Visible = FetchOrderRun;
+            dataGridView2.Enabled = !FetchOrderRun;
+            dataGridView3.Enabled = !FetchOrderRun;
+            this.Cursor = FetchOrderRun ? Cursors.WaitCursor : Cursors.Default;
+            if (FetchOrderRun)
+            {
+                ButtonToggleHelper.DisableButtonsByTag(this, "enableOnSelect");
+                ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
+            }
+            else
+            {
+                ButtonToggleHelper.EnableButtonsByTag(this, "enableOnSelect");
+                ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
+            }
         }
 
         private async Task FetchOrder()
@@ -331,6 +344,7 @@ namespace DoranApp.View
                     Page = _laporanOrderPage <= 0 ? 1 : _laporanOrderPage,
                 });
                 await _OrderData.Refresh();
+                dataGridView3.Rows.Clear();
             }
             catch (Exception ex)
             {
@@ -361,6 +375,13 @@ namespace DoranApp.View
             dataGridView2.ClearSelection();
         }
 
+        private string GetStatusLunas(int lunas)
+        {
+            return (lunas == 0) ? "Belum" :
+                (lunas == 1) ? "Kurang" :
+                (lunas == 2) ? "BERES" : "CANCEL";
+        }
+
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridView2.SelectedRows.Count <= 0 || dataGridView2.Rows.Count <= 0)
@@ -387,8 +408,11 @@ namespace DoranApp.View
                     dataGridView3.Rows[index].Cells["Pcs"].Value = d.Jumlah;
                     dataGridView3.Rows[index].Cells["NamaBarang"].Value = d.Masterbarang?.BrgNama;
                     dataGridView3.Rows[index].Cells["Harga"].Value = d.Harga;
-                    dataGridView3.Rows[index].Cells["Jumlah"].Value = d.Jumlah;
+                    dataGridView3.Rows[index].Cells["Krm"].Value = d.Jumlahdikirim;
+                    dataGridView3.Rows[index].Cells["Status"].Value = GetStatusLunas(d.Lunas);
+                    dataGridView3.Rows[index].Cells["BeresOrCancel"].Value = d.Keterangancancel;
                     dataGridView3.Rows[index].Cells["Keterangan"].Value = d.Keterangan;
+                    dataGridView3.Rows[index].Cells["Koded"].Value = d.Koded;
                 }
 
                 comboSetPenyiap.SelectedValue = (sbyte)horder.Kodepenyiap;
@@ -1117,6 +1141,109 @@ namespace DoranApp.View
             ButtonToggleHelper.EnableButtonsByTag(this, "enableOnSelect");
             ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
             LoadingButtonHelper.SetLoadingState(button1, false);
+        }
+
+        private HorderResult GetHorderFromDgv2()
+        {
+            try
+            {
+                var kodeh = (int)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
+                if (kodeh == null)
+                {
+                    return null;
+                }
+
+                return _OrderData.GetData()?.Where(x => x.Kodeh == kodeh).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        private DorderResult GetDorderFromDgv3(List<DorderResult> dorder)
+        {
+            try
+            {
+                var koded = (int)dataGridView3.SelectedRows[0].Cells["Koded"].Value;
+                if (koded == null)
+                {
+                    return null;
+                }
+
+                return dorder?.Where(x => x.Koded == koded)?.FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        private async Task RunCancelDetailOrder(sbyte kodeCancel, string confirmText, string sebabText = "")
+        {
+            var horder = GetHorderFromDgv2();
+            if (horder == null || FetchOrderRun)
+            {
+                return;
+            }
+
+            var dorder = GetDorderFromDgv3(horder?.Dorder?.ToList());
+            if (dorder == null || FetchOrderRun)
+            {
+                return;
+            }
+
+            var confirmForm = new CancelOrderConfirmationForm(_OrderData, horder.Kodeh, dorder.Koded, kodeCancel);
+            confirmForm.Text = "Konfirmasi Batalkan Orderan";
+            confirmForm.textBoxSebab.Text = sebabText;
+            var confirm = confirmForm.ShowDialog();
+            if (confirm == DialogResult.OK && dataGridView3.SelectedRows.Count > 0 && dataGridView3.Rows.Count > 0)
+            {
+            }
+        }
+
+        private async void btnBatalkan_Click(object sender, EventArgs e)
+        {
+            await RunCancelDetailOrder(3, "Konfirmasi Batalkan Orderan");
+        }
+
+        private async void btnLunasPaksa_Click(object sender, EventArgs e)
+        {
+            await RunCancelDetailOrder(5, "Konfirmasi Bereskan Orderan");
+        }
+
+        private async void btnPendingOrder_Click(object sender, EventArgs e)
+        {
+            await RunCancelDetailOrder(4, "Konfirmasi Anggap Sebagai Pending Order", "Tunggu Masuk");
+        }
+
+        private async void btnBatalkanHeader_Click(object sender, EventArgs e)
+        {
+            var kodeh = (int)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
+
+            var horder = _OrderData.GetData()?.Where(x => x.Kodeh == kodeh).FirstOrDefault();
+            if (horder == null || FetchOrderRun)
+            {
+                return;
+            }
+
+            var confirm = MessageBox.Show("Apakah anda yakin ingin membatalkan header ini?", "Konfirmasi",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirm == DialogResult.No)
+            {
+                return;
+            }
+
+            FetchOrderRun = true;
+            ButtonToggleHelper.DisableButtonsByTag(this, "enableOnSelect");
+            ButtonToggleHelper.DisableButtonsByTag(this, "actionButton");
+            LoadingButtonHelper.SetLoadingState(btnBatalkanHeader, true);
+            await _OrderData.CancelOrderHeader(horder.Kodeh);
+            FetchOrderRun = false;
+            await FetchOrder();
+            LoadingButtonHelper.SetLoadingState(btnBatalkanHeader, false);
+            ButtonToggleHelper.EnableButtonsByTag(this, "enableOnSelect");
+            ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
         }
     }
 }

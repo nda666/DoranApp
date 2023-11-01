@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using ZXing;
 using ZXing.Common;
 using ZXing.Rendering;
@@ -25,6 +21,7 @@ namespace DoranApp.Utils
                 return Convert.ToBase64String(byteImage);
             }
         }
+
         public static Bitmap GenerateBarcode(string content, BarcodeFormat format, int width, int height)
         {
             return RunGenerate(content, format, width, height);
@@ -44,8 +41,10 @@ namespace DoranApp.Utils
 
             PixelData pixelData = barcodeWriter.Write(content);
 
-            Bitmap barcodeBitmap = new Bitmap(pixelData.Width, pixelData.Height, System.Drawing.Imaging.PixelFormat.Format32bppRgb);
-            BitmapData bmpData = barcodeBitmap.LockBits(new Rectangle(0, 0, pixelData.Width, pixelData.Height), ImageLockMode.WriteOnly, barcodeBitmap.PixelFormat);
+            Bitmap barcodeBitmap = new Bitmap(pixelData.Width, pixelData.Height,
+                System.Drawing.Imaging.PixelFormat.Format32bppRgb);
+            BitmapData bmpData = barcodeBitmap.LockBits(new Rectangle(0, 0, pixelData.Width, pixelData.Height),
+                ImageLockMode.WriteOnly, barcodeBitmap.PixelFormat);
             IntPtr ptr = bmpData.Scan0;
             Marshal.Copy(pixelData.Pixels, 0, ptr, pixelData.Pixels.Length);
             barcodeBitmap.UnlockBits(bmpData);

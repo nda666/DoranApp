@@ -15,7 +15,7 @@ namespace DoranApp.Data
         LAUT = 3
     }
 
-    internal class OrderData : AbstractData<HorderResult>
+    public class OrderData : AbstractData<HorderResult>
     {
         protected PaginationResultDto _paginationData = new PaginationResultDto();
 
@@ -150,6 +150,23 @@ namespace DoranApp.Data
         public async Task TimOnlineCek(int kodeh)
         {
             await _CLient.Tim_Online_CekAsync(kodeh);
+        }
+
+        public async Task CancelOrderHeader(int kodeh)
+        {
+            try
+            {
+                await _CLient.Cancel_Order_HeaderAsync(kodeh);
+            }
+            catch (ApiException ex)
+            {
+                Helper.ShowErrorMessageFromResponse(ex);
+            }
+        }
+
+        public async Task CancelOrderDetail(int kodeh, CancelOrderDetailDto dto)
+        {
+            await _CLient.Cancel_Order_DetailAsync(kodeh, dto);
         }
     }
 }

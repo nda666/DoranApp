@@ -59,8 +59,7 @@
               : using a System.ComponentModel.TypeConverter
               : and then encoded with base64 encoding.
       -->
-    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
-                id="root"
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root"
                 xmlns="">
         <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
         <xsd:element name="root" msdata:IsDataSet="true">
@@ -123,4 +122,23 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
+    <assembly alias="System.Drawing"
+              name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+    <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing"
+          mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>
+            AAABAAEAEBAAAAAAIACOAgAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAAFz
+            UkdCAK7OHOkAAAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAAA7DAAAOwwHHb6hkAAACI0lEQVQ4T82Q3U+S
+            URzHn4tuqj+hq9ZcuJlrvVywmRflC9IazBWESYOpiDFJQUhcFKAII6c8GpIkai9LJzB1+USFbqaG6AjD
+            unmo1out0Rpra62ti/p2Gk9qm9772T47v3N2PhfnUNuKPcRc4v4N8og5xB3EreHl8/MU1pFPGnrqu8b9
+            +NtG1R3Mz0KZWcdd3Zwjx6VldV0R6AcS0PfHoSM2+Z/BOLgMA1Frbn85SOdY7vXkOnquUPUk2ZktOQTl
+            CuEQs4CJ2CuMRVNElsyvcT/+DuNLq5id9eL9CylGptzwR3wQ63RXuTRLuaxWOLnIYuHtV0TfZP5zhs1g
+            KdYHNqlGzdMVGJ6zUAUmMiTbm60JBSVnBSZPGPa7i2i9E1uzjdjij2H6YRtSSQ2q5pNoSLDQzC+jxGS1
+            cTlFHSqSlarp6ewfkLf//YN/1vbG8ehBO9IpOYIz1zE2dwOhJx7obWofl1PUCX7pyZYmF2zdAZg7h2Gl
+            R8kchJXsm68FwIxfBr5I8OODCL/SYqQTInjMhb1cTlGKg8dEtxUNuGS5icoaGtrmPnQNMKCHwnD6wogw
+            FqzMKaG9aMfwLT2i3tNoPVDs5XKKyucX552pbgydkjgybrcP56tcv5X1tskLRmewutERctrPjdapTJ9d
+            Hf1QqjrR7RQyFRW8w1y+TkGRQS6tdH0sE1u7uaM19h01SqRy16pAZFt/+xbs5tbN2MWt2waK+gNy3Twu
+            dxy7aQAAAABJRU5ErkJggg==
+        </value>
+    </data>
 </root>

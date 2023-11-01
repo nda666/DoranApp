@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Data.SQLite;
 using System.Drawing;
+using System.Net;
 using System.Windows.Forms;
+using AutoUpdaterDotNET;
 using DoranApp.View.Pegawai;
+using DoranApp.View.UserForms;
 using Dotmim.Sync;
 using Dotmim.Sync.Sqlite;
 using Dotmim.Sync.Web.Client;
@@ -138,8 +141,88 @@ namespace DoranApp.View
             _stopSync = true;
         }
 
+
+        private void AutoUpdaterOnCheckForUpdateEvent(UpdateInfoEventArgs args)
+        {
+            if (args.Error == null)
+            {
+                if (args.IsUpdateAvailable)
+                {
+                    DialogResult dialogResult;
+
+                    if (args.Mandatory.Value)
+                    {
+                        var updaterForm = new ApplicationUpdateForm(
+                            $@"Versi baru {args.CurrentVersion} tersedia. Anda menggunakan versi {args.InstalledVersion}. Ini adalah pembaruan yang diperlukan. Tekan Update untuk memulai pembaruan aplikasi.",
+                            true);
+                        dialogResult = updaterForm.ShowDialog();
+                    }
+                    else
+                    {
+                        var updaterForm = new ApplicationUpdateForm(
+                            $@"Ada versi baru {{args.CurrentVersion}} yang tersedia. Anda menggunakan versi {{args.InstalledVersion}}. Apakah Anda ingin memperbarui aplikasi sekarang?",
+                            false);
+                        dialogResult = updaterForm.ShowDialog();
+                    }
+
+                    // Uncomment the following line if you want to show standard update dialog instead.
+                    // AutoUpdater.ShowUpdateForm(args);
+
+                    if (dialogResult == DialogResult.Yes || dialogResult == DialogResult.OK)
+                    {
+                        try
+                        {
+                            if (AutoUpdater.DownloadUpdate(args))
+                            {
+                                Application.Exit();
+                            }
+                        }
+                        catch (Exception exception)
+                        {
+                            MessageBox.Show(exception.Message, exception.GetType().ToString(), MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                        }
+                    }
+                    else if (dialogResult == DialogResult.No)
+                    {
+                    }
+                    else
+                    {
+                        Application.Exit();
+                    }
+                }
+                else
+                {
+                    // MessageBox.Show(@"There is no update available please try again later.", @"No update available",
+                    //     MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                if (args.Error is WebException)
+                {
+                    MessageBox.Show(
+                        @"Ada masalah dalam mencapai server pembaruan. Harap periksa koneksi internet Anda dan coba lagi nanti.",
+                        @"Pengecekan Pembaruan Gagal", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show(args.Error.Message,
+                        args.Error.GetType().ToString(), MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            }
+        }
+
         private void _Container_Load(object sender, EventArgs e)
         {
+            AutoUpdater.Start(@"https://semangat.doran.id/updater-doranapp.xml");
+            AutoUpdater.ShowSkipButton = false;
+            AutoUpdater.UpdateMode = Mode.Forced;
+            AutoUpdater.TopMost = true;
+            AutoUpdater.Mandatory = true;
+            AutoUpdater.CheckForUpdateEvent += AutoUpdaterOnCheckForUpdateEvent;
+
             var internetAvailability = Utils.InternetAvailabilityService.CheckInternetAvailability();
             internetAvailability.Subscribe(isAvailable =>
             {
@@ -155,18 +238,25 @@ namespace DoranApp.View
             homeForm.WindowState = FormWindowState.Maximized;
             homeForm.Show();
 
-            if (string.IsNullOrEmpty(Properties.Settings.Default.AuthToken))
-            {
-                var login = new LoginForm(_homeForm);
+            // if (string.IsNullOrEmpty(Properties.Settings.Default.AuthToken))
+            // {
+            ShowLoginForm();
+            // }
+        }
 
-                DialogResult loginModal = login.ShowDialog();
-                login.MaximizeBox = true;
-                if (loginModal == DialogResult.None)
-                {
-                    this.Close();
-                }
+        private void ShowLoginForm()
+        {
+            var login = new LoginForm(_homeForm);
+            login.TopMost = true;
+            login.ShowIcon = false;
+            DialogResult loginModal = login.ShowDialog();
+
+            if (loginModal == DialogResult.None)
+            {
+                this.Close();
             }
         }
+
 
         private void syncToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -378,6 +468,17 @@ namespace DoranApp.View
         private void penyiapOrderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm<PenyiaporderForm>();
+        }
+
+        private void settingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var settingForm = new SettingForm();
+            settingForm.TopMost = true;
+            var result = settingForm.ShowDialog();
+            if (result == DialogResult.OK || result == DialogResult.Yes)
+            {
+                ShowLoginForm();
+            }
         }
 
         private delegate void SetStatusInternetCallback(string text);

@@ -124,9 +124,11 @@ partial class InputPaksaUserForm
         this.Controls.Add(this.button1);
         this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
         this.Name = "InputPaksaUserForm";
+        this.ShowInTaskbar = false;
         this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
         this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         this.Text = "Konfirmasi Penyetujuan INPUT PAKSA";
+        this.TopMost = true;
         this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InputPaksaUserForm_FormClosing);
         this.Load += new System.EventHandler(this.InputPaksaForm_Load);
         ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();

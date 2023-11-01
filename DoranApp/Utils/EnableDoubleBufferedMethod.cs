@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace DoranApp;
+namespace DoranApp.Utils;
 
 public static class EnableDoubleBufferedMethod
 {

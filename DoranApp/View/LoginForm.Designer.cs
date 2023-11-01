@@ -84,7 +84,6 @@ namespace DoranApp.View
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(180, 20);
             this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "JT";
             // 
             // textBox2
             // 
@@ -94,7 +93,6 @@ namespace DoranApp.View
             this.textBox2.PasswordChar = '•';
             this.textBox2.Size = new System.Drawing.Size(180, 20);
             this.textBox2.TabIndex = 2;
-            this.textBox2.Text = "bandung";
             // 
             // tableLayoutPanel1
             // 

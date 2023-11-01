@@ -19,9 +19,9 @@ namespace DoranApp.Utils
         {
             foreach (Control c in control.Controls)
             {
-                if (c is Button button && button.Tag?.ToString() == tag)
+                if (c.Tag == tag)
                 {
-                    button.Enabled = enabled;
+                    c.Enabled = enabled;
                 }
 
                 // Recursively process child controls if the current control has children

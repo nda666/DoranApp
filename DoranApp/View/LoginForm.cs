@@ -32,7 +32,6 @@ namespace DoranApp.View
 
         public async void login()
         {
-            Rest rest = new Rest("/login");
             try
             {
                 var client = new Client();
@@ -56,12 +55,12 @@ namespace DoranApp.View
             {
                 if (error.StatusCode == 401)
                 {
-                    MessageBox.Show($"Username / password tidak cocok", $"Error", MessageBoxButtons.OK,
+                    MessageBox.Show(this, $"Username / password tidak cocok", $"Error", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show($"{error.StatusCode} {error.Message}", "Error!", MessageBoxButtons.OK,
+                    MessageBox.Show(this, $"{error.StatusCode} {error.Message}", "Error!", MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
             }
@@ -95,6 +94,11 @@ namespace DoranApp.View
                 // Don't forget to release the icon handle
                 DestroyIcon(iconHandle);
             }
+
+#if DEBUG
+            textBox1.Text = "JT";
+            textBox2.Text = "a";
+#endif
         }
 
         [DllImport("user32.dll")]

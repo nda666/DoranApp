@@ -1,7 +1,6 @@
-﻿using DoranApp.Utils;
-using DoranApp.View.Pegawai;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using DoranApp.Utils;
 
 namespace DoranApp.View.Pegawai
 {

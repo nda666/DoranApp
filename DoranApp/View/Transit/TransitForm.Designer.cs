@@ -31,6 +31,7 @@ partial class TransitForm
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransitForm));
         this.tabControl1 = new System.Windows.Forms.TabControl();
         this.SuspendLayout();
         // 
@@ -42,6 +43,7 @@ partial class TransitForm
         this.tabControl1.SelectedIndex = 0;
         this.tabControl1.Size = new System.Drawing.Size(800, 450);
         this.tabControl1.TabIndex = 0;
+        this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
         // 
         // TransitForm
         // 
@@ -49,9 +51,10 @@ partial class TransitForm
         this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         this.ClientSize = new System.Drawing.Size(800, 450);
         this.Controls.Add(this.tabControl1);
+        // this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
         this.KeyPreview = true;
         this.Name = "TransitForm";
-        this.Text = "TransitForm";
+        this.Text = "Transit Gudang";
         this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TransitForm_FormClosing);
         this.Load += new System.EventHandler(this.TransitForm_Load);
         this.ResumeLayout(false);

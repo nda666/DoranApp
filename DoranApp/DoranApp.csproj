@@ -31,6 +31,9 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+      <SignAssembly>false</SignAssembly>
+      <AssemblyOriginatorKeyFile>signkey.snk</AssemblyOriginatorKeyFile>
+      <PublicSign>false</PublicSign>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,6 +53,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+      <DocumentationFile>
+      </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
@@ -57,13 +62,16 @@
   <PropertyGroup>
     <StartupObject>DoranApp.Program</StartupObject>
   </PropertyGroup>
+    <PropertyGroup>
+        <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="AgileObjects.AgileMapper">
-      <Version>1.8.1</Version>
-    </PackageReference>
     <PackageReference Include="AutoMapper">
       <Version>10.1.1</Version>
     </PackageReference>
+      <PackageReference Include="Autoupdater.NET.Official">
+          <Version>1.8.4</Version>
+      </PackageReference>
     <PackageReference Include="ConsoleDump">
       <Version>0.7.0</Version>
     </PackageReference>
@@ -79,44 +87,26 @@
     <PackageReference Include="Dotmim.Sync.Web.Client">
       <Version>0.9.8</Version>
     </PackageReference>
-    <PackageReference Include="Mapster">
-      <Version>7.3.0</Version>
+      <PackageReference Include="EPPlus">
+          <Version>7.0.0</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore">
-      <Version>3.1.32</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite">
-      <Version>3.1.32</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
-      <Version>3.1.32</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Http">
-      <Version>6.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Extensions.Logging">
-      <Version>6.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Report.Viewer">
-      <Version>11.0.0</Version>
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions">
+          <Version>7.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.Winforms">
       <Version>150.1586.0</Version>
     </PackageReference>
+      <PackageReference Include="Microsoft.ReportViewer.Common">
+          <Version>10.0.40219.1</Version>
+      </PackageReference>
+      <PackageReference Include="Microsoft.ReportViewer.WinForms">
+          <Version>10.0.40219.1</Version>
+      </PackageReference>
     <PackageReference Include="Microsoft.SqlServer.Types">
       <Version>160.1000.6</Version>
     </PackageReference>
-    <PackageReference Include="RestSharp">
-      <Version>110.2.0</Version>
-    </PackageReference>
-    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlcipher" Version="2.0.7" />
     <PackageReference Include="System.Data.SQLite">
       <Version>1.0.118</Version>
-    </PackageReference>
-    <PackageReference Include="System.Reactive">
-      <Version>5.0.0</Version>
     </PackageReference>
     <PackageReference Include="System.Threading.Tasks.Dataflow">
       <Version>6.0.0</Version>
@@ -129,6 +119,34 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+      <Reference Include="DevExpress.Charts.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.Data.Desktop.v22.2">
+          <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\DevExpress.Data.Desktop.v22.2\v4.0_22.2.3.0__b88d1754d700e49a\DevExpress.Data.Desktop.v22.2.dll</HintPath>
+      </Reference>
+      <Reference Include="DevExpress.Data.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.DataAccess.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.Drawing.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.Office.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.Pdf.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.Pdf.v22.2.Drawing, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.PivotGrid.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.Printing.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.RichEdit.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.RichEdit.v22.2.Export, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.Sparkline.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.Utils.v22.2">
+          <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\DevExpress.Utils.v22.2\v4.0_22.2.3.0__b88d1754d700e49a\DevExpress.Utils.v22.2.dll</HintPath>
+      </Reference>
+      <Reference Include="DevExpress.Xpo.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.XtraBars.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.XtraCharts.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.XtraEditors.v22.2">
+          <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\DevExpress.XtraEditors.v22.2\v4.0_22.2.3.0__b88d1754d700e49a\DevExpress.XtraEditors.v22.2.dll</HintPath>
+      </Reference>
+      <Reference Include="DevExpress.XtraLayout.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.XtraPrinting.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL"/>
+      <Reference Include="DevExpress.XtraReports.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
+      <Reference Include="DevExpress.XtraTreeList.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
     <Reference Include="System" />
       <Reference Include="System.Runtime.Serialization"/>
     <Reference Include="System.Web" />
@@ -160,6 +178,12 @@
     <Compile Include="Components\IsManagerComboBox.Designer.cs">
       <DependentUpon>IsManagerComboBox.cs</DependentUpon>
     </Compile>
+      <Compile Include="Components\MyDataGridView.cs">
+          <SubType>Component</SubType>
+      </Compile>
+      <Compile Include="Components\MyDataGridView.Designer.cs">
+          <DependentUpon>MyDataGridView.cs</DependentUpon>
+      </Compile>
     <Compile Include="Components\NumericTextbox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -168,11 +192,12 @@
     </Compile>
       <Compile Include="Constants.cs"/>
     <Compile Include="DataGlobal\FetchBase.cs" />
-    <Compile Include="DataGlobal\FetchMastergudangBoleTransitOption.cs"/>
-    <Compile Include="DataGlobal\FetchPenyiaporder.cs"/>
+      <Compile Include="DataGlobal\FetchMastergudangBoleTransitOption.cs"/>
+      <Compile Include="DataGlobal\FetchMastersupplier.cs"/>
+      <Compile Include="DataGlobal\FetchPenyiaporder.cs"/>
     <Compile Include="DataGlobal\FetchSalesOption.cs" />
     <Compile Include="DataGlobal\FetchChannelSalesOption.cs" />
-    <Compile Include="DataGlobal\FetchMasterbarangOptionWithSn.cs"/>
+      <Compile Include="DataGlobal\FetchMasterbarangOptionWithSn.cs"/>
       <Compile Include="DataGlobal\FetchSethargalevel.cs"/>
     <Compile Include="DataGlobal\FetchMastergudangOption.cs" />
     <Compile Include="DataGlobal\FetchHkategoribarangOption.cs" />
@@ -188,6 +213,7 @@
     <Compile Include="Data\MasterpengeluaranData.cs" />
       <Compile Include="Data\MutasiStokData.cs"/>
       <Compile Include="Data\PenyiaporderData.cs"/>
+      <Compile Include="Data\PermintaanSalesData.cs"/>
     <Compile Include="Data\SetlevelhargaData.cs" />
     <Compile Include="Data\LaporanTransaksiData.cs" />
     <Compile Include="Data\OrderData.cs" />
@@ -200,10 +226,9 @@
     <Compile Include="Data\MasterdivisiData.cs" />
     <Compile Include="Data\MasterchannelsalesData.cs" />
     <Compile Include="Data\SalesData.cs" />
-    <Compile Include="Data\TransitData.cs"/>
-      <Compile Include="EnableDoubleBufferedMethod.cs"/>
-    <Compile Include="Dtos\HtransitDto.cs"/>
-    <Compile Include="Dtos\PaginationDto.cs"/>
+      <Compile Include="Data\TransitData.cs"/>
+      <Compile Include="Dtos\HtransitDto.cs"/>
+      <Compile Include="Dtos\PaginationDto.cs"/>
     <Compile Include="Helper.cs" />
     <Compile Include="LocalModel\NotaTransaksiDetail.cs" />
     <Compile Include="Data\MastertimsalesData.cs" />
@@ -213,14 +238,14 @@
     <Compile Include="Utils\ButtonToggleHelper.cs" />
       <Compile Include="Utils\ClientPartial.cs"/>
       <Compile Include="Utils\Client.cs"/>
+      <Compile Include="Utils\EnableDoubleBufferedMethod.cs"/>
       <Compile Include="Utils\Session.cs"/>
     <Compile Include="Utils\DatatableGenerator.cs" />
     <Compile Include="Utils\FormHelper.cs" />
     <Compile Include="Utils\InternetAvailabilityService.cs" />
     <Compile Include="Utils\DirectPrint.cs" />
-    <Compile Include="Utils\LoadingButtonHelper.cs"/>
-    <Compile Include="Utils\RestV2.cs" />
-    <Compile Include="Utils\WebSocketClientManager.cs"/>
+      <Compile Include="Utils\LoadingButtonHelper.cs"/>
+      <Compile Include="Utils\WebSocketClientManager.cs"/>
       <Compile Include="View\CekStok\CekStokForm.cs">
           <SubType>Form</SubType>
       </Compile>
@@ -269,6 +294,18 @@
     <Compile Include="View\LaporanTransaksiPenjualan.Designer.cs">
       <DependentUpon>LaporanTransaksiPenjualan.cs</DependentUpon>
     </Compile>
+      <Compile Include="View\UserForms\ApplicationUpdateForm.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\UserForms\ApplicationUpdateForm.Designer.cs">
+          <DependentUpon>ApplicationUpdateForm.cs</DependentUpon>
+      </Compile>
+      <Compile Include="View\UserForms\CancelOrderConfirmationForm.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\UserForms\CancelOrderConfirmationForm.Designer.cs">
+          <DependentUpon>CancelOrderConfirmationForm.cs</DependentUpon>
+      </Compile>
       <Compile Include="View\UserForms\InputPaksaUserForm.cs">
           <SubType>Form</SubType>
       </Compile>
@@ -413,15 +450,31 @@
     <Compile Include="View\UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
+      <Compile Include="View\UserForms\LimitTransaksiConfirmationForm.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\UserForms\LimitTransaksiConfirmationForm.Designer.cs">
+          <DependentUpon>LimitTransaksiConfirmationForm.cs</DependentUpon>
+      </Compile>
+      <Compile Include="View\UserForms\ReportViewerForm.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\UserForms\ReportViewerForm.Designer.cs">
+          <DependentUpon>ReportViewerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\_Container.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\_Container.Designer.cs">
       <DependentUpon>_Container.cs</DependentUpon>
     </Compile>
+      <EmbeddedResource Include="Properties\licenses.licx"/>
     <EmbeddedResource Include="Report\NotaTransaksi.rdlc" />
       <EmbeddedResource Include="View\CekStok\CekStokForm.resx">
           <DependentUpon>CekStokForm.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="View\CekStok\HistoryBarangMasukControl.resx">
+          <DependentUpon>HistoryBarangMasukControl.cs</DependentUpon>
       </EmbeddedResource>
       <EmbeddedResource Include="View\CekStok\MutasiBarangControl.resx">
           <DependentUpon>MutasiBarangControl.cs</DependentUpon>
@@ -465,6 +518,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\MasterGudangForm.resx">
       <DependentUpon>MasterGudangForm.cs</DependentUpon>
+    </EmbeddedResource>
+      <EmbeddedResource Include="View\Transit\PermintaanSalesControl.resx">
+          <DependentUpon>PermintaanSalesControl.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="View\UserForms\ApplicationUpdateForm.resx">
+          <DependentUpon>ApplicationUpdateForm.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="View\UserForms\CancelOrderConfirmationForm.resx">
+          <DependentUpon>CancelOrderConfirmationForm.cs</DependentUpon>
     </EmbeddedResource>
       <EmbeddedResource Include="View\UserForms\InputPaksaUserForm.resx">
           <DependentUpon>InputPaksaUserForm.cs</DependentUpon>
@@ -517,6 +579,12 @@
     <EmbeddedResource Include="View\UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>
     </EmbeddedResource>
+      <EmbeddedResource Include="View\UserForms\LimitTransaksiConfirmationForm.resx">
+          <DependentUpon>LimitTransaksiConfirmationForm.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="View\UserForms\ReportViewerForm.resx">
+          <DependentUpon>ReportViewerForm.cs</DependentUpon>
+      </EmbeddedResource>
     <EmbeddedResource Include="View\_Container.resx">
       <DependentUpon>_Container.cs</DependentUpon>
     </EmbeddedResource>
@@ -531,6 +599,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+      <None Include="signkey.snk"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -541,6 +610,11 @@
       <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+      <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+          <Visible>False</Visible>
+          <ProductName>.NET Framework 3.5 SP1</ProductName>
+          <Install>false</Install>
+      </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
       <None Include="Resources\Logo_Doran_Gadget_a.png"/>
@@ -587,6 +661,8 @@
   <ItemGroup>
       <Content Include="Resources\icons8_loading_circle.gif"/>
       <Content Include="Resources\icons8_truck_48.png"/>
+      <Content Include="Resources\icons8_update.gif"/>
+      <Content Include="Resources\icons8_update1.gif"/>
       <Content Include="Resources\icons8_warehouse.png"/>
       <Content Include="Resources\icons8_warehouse1.png"/>
   </ItemGroup>

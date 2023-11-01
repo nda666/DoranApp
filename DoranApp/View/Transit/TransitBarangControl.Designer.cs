@@ -210,6 +210,7 @@ partial class TransitBarangControl
         this.button8.Tag = "FilterAction1";
         this.button8.Text = "Cetak";
         this.button8.UseVisualStyleBackColor = true;
+        this.button8.Click += new System.EventHandler(this.button8_Click);
         // 
         // buttonFilterNama
         // 
@@ -444,7 +445,7 @@ partial class TransitBarangControl
         this.label3.Name = "label3";
         this.label3.Size = new System.Drawing.Size(96, 21);
         this.label3.TabIndex = 80;
-        this.label3.Text = "Penyiap :";
+        this.label3.Text = "Keterangan :";
         this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // textBoxKeterangan
@@ -820,12 +821,12 @@ partial class TransitBarangControl
         this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
         this.groupBox2.Controls.Add(this.panel2);
         this.groupBox2.Controls.Add(this.dataGridView1);
-        this.groupBox2.Location = new System.Drawing.Point(394, 5);
+        this.groupBox2.Location = new System.Drawing.Point(393, 3);
         this.groupBox2.Name = "groupBox2";
-        this.groupBox2.Size = new System.Drawing.Size(636, 280);
+        this.groupBox2.Size = new System.Drawing.Size(683, 322);
         this.groupBox2.TabIndex = 1;
         this.groupBox2.TabStop = false;
-        this.groupBox2.Text = "groupBox2";
+        this.groupBox2.Text = "Laporan Transit";
         // 
         // panel2
         // 
@@ -833,7 +834,7 @@ partial class TransitBarangControl
         this.panel2.Controls.Add(this.toolStrip1);
         this.panel2.Location = new System.Drawing.Point(3, 16);
         this.panel2.Name = "panel2";
-        this.panel2.Size = new System.Drawing.Size(630, 25);
+        this.panel2.Size = new System.Drawing.Size(677, 25);
         this.panel2.TabIndex = 83;
         this.panel2.TabStop = true;
         // 
@@ -842,7 +843,7 @@ partial class TransitBarangControl
         this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.toolStripLabel3, this.comboPageSize, this.toolStripLabel4, this.toolStripSeparator4, this.toolStripButton1, this.toolStripButton2, this.toolStripSeparator1, this.toolStripTextBox1, this.toolStripLabel1, this.toolStripSeparator2, this.toolStripButton3, this.toolStripButton4, this.toolStripSeparator3, this.toolStripLabel5, this.toolStripLabel2 });
         this.toolStrip1.Location = new System.Drawing.Point(0, 0);
         this.toolStrip1.Name = "toolStrip1";
-        this.toolStrip1.Size = new System.Drawing.Size(630, 25);
+        this.toolStrip1.Size = new System.Drawing.Size(677, 25);
         this.toolStrip1.TabIndex = 106;
         this.toolStrip1.Text = "toolStrip1";
         // 
@@ -962,7 +963,7 @@ partial class TransitBarangControl
         this.dataGridView1.AllowUserToAddRows = false;
         this.dataGridView1.AllowUserToDeleteRows = false;
         this.dataGridView1.AllowUserToResizeRows = false;
-        this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+        this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
         dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
         dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
         dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -981,7 +982,7 @@ partial class TransitBarangControl
         dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
         this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
         this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-        this.dataGridView1.Location = new System.Drawing.Point(3, 47);
+        this.dataGridView1.Location = new System.Drawing.Point(3, 44);
         this.dataGridView1.Name = "dataGridView1";
         dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
         dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -993,7 +994,7 @@ partial class TransitBarangControl
         this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
         this.dataGridView1.RowHeadersVisible = false;
         this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-        this.dataGridView1.Size = new System.Drawing.Size(630, 230);
+        this.dataGridView1.Size = new System.Drawing.Size(641, 272);
         this.dataGridView1.TabIndex = 82;
         this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
         // 
@@ -1006,18 +1007,18 @@ partial class TransitBarangControl
         this.groupBox3.Controls.Add(this.labelVarian);
         this.groupBox3.Controls.Add(this.labelPcs);
         this.groupBox3.Controls.Add(this.dataGridView2);
-        this.groupBox3.Location = new System.Drawing.Point(394, 291);
+        this.groupBox3.Location = new System.Drawing.Point(394, 328);
         this.groupBox3.Name = "groupBox3";
-        this.groupBox3.Size = new System.Drawing.Size(636, 371);
+        this.groupBox3.Size = new System.Drawing.Size(640, 354);
         this.groupBox3.TabIndex = 2;
         this.groupBox3.TabStop = false;
-        this.groupBox3.Text = "groupBox3";
+        this.groupBox3.Text = "Detail Transit";
         // 
         // buttonHapus
         // 
         this.buttonHapus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
         this.buttonHapus.Enabled = false;
-        this.buttonHapus.Location = new System.Drawing.Point(546, 326);
+        this.buttonHapus.Location = new System.Drawing.Point(546, 309);
         this.buttonHapus.Name = "buttonHapus";
         this.buttonHapus.Size = new System.Drawing.Size(75, 34);
         this.buttonHapus.TabIndex = 92;
@@ -1030,7 +1031,7 @@ partial class TransitBarangControl
         // 
         this.buttonUbah.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
         this.buttonUbah.Enabled = false;
-        this.buttonUbah.Location = new System.Drawing.Point(465, 326);
+        this.buttonUbah.Location = new System.Drawing.Point(465, 309);
         this.buttonUbah.Name = "buttonUbah";
         this.buttonUbah.Size = new System.Drawing.Size(75, 34);
         this.buttonUbah.TabIndex = 91;
@@ -1043,7 +1044,7 @@ partial class TransitBarangControl
         // 
         this.buttonTambahData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
         this.buttonTambahData.Enabled = false;
-        this.buttonTambahData.Location = new System.Drawing.Point(332, 326);
+        this.buttonTambahData.Location = new System.Drawing.Point(332, 309);
         this.buttonTambahData.Name = "buttonTambahData";
         this.buttonTambahData.Size = new System.Drawing.Size(127, 34);
         this.buttonTambahData.TabIndex = 90;
@@ -1056,7 +1057,7 @@ partial class TransitBarangControl
         // 
         this.labelVarian.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
         this.labelVarian.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelVarian.Location = new System.Drawing.Point(169, 335);
+        this.labelVarian.Location = new System.Drawing.Point(169, 318);
         this.labelVarian.Name = "labelVarian";
         this.labelVarian.Size = new System.Drawing.Size(157, 23);
         this.labelVarian.TabIndex = 85;
@@ -1066,7 +1067,7 @@ partial class TransitBarangControl
         // 
         this.labelPcs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
         this.labelPcs.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.labelPcs.Location = new System.Drawing.Point(6, 335);
+        this.labelPcs.Location = new System.Drawing.Point(6, 318);
         this.labelPcs.Name = "labelPcs";
         this.labelPcs.Size = new System.Drawing.Size(157, 23);
         this.labelPcs.TabIndex = 84;
@@ -1097,7 +1098,7 @@ partial class TransitBarangControl
         dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
         this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle5;
         this.dataGridView2.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-        this.dataGridView2.Location = new System.Drawing.Point(6, 19);
+        this.dataGridView2.Location = new System.Drawing.Point(2, 19);
         this.dataGridView2.Name = "dataGridView2";
         dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
         dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
@@ -1109,7 +1110,7 @@ partial class TransitBarangControl
         this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
         this.dataGridView2.RowHeadersVisible = false;
         this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-        this.dataGridView2.Size = new System.Drawing.Size(615, 301);
+        this.dataGridView2.Size = new System.Drawing.Size(641, 284);
         this.dataGridView2.TabIndex = 83;
         this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
         // 
@@ -1179,7 +1180,7 @@ partial class TransitBarangControl
         this.Controls.Add(this.groupBox2);
         this.Controls.Add(this.tabControl1);
         this.Name = "TransitBarangControl";
-        this.Size = new System.Drawing.Size(1033, 675);
+        this.Size = new System.Drawing.Size(1037, 675);
         this.Load += new System.EventHandler(this.TransitBarangControl_Load);
         this.tabControl1.ResumeLayout(false);
         this.tabPage1.ResumeLayout(false);

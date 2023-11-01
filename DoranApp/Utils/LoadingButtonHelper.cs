@@ -9,7 +9,7 @@ public static class LoadingButtonHelper
     public static void SetLoadingState(Button button, bool isLoading)
     {
         // Load the image from resources
-        Image originalImage = Properties.Resources.icons8_loading_circle;
+        Image originalImage = Properties.Resources.icons8_loading;
 
         // Resize the image to 18x18
         Image resizedImage = ResizeImage(originalImage, new Size(18, 18));
@@ -18,7 +18,7 @@ public static class LoadingButtonHelper
         {
             // Set the resized image as button's background image
             button.Image = resizedImage;
-            button.ImageAlign = ContentAlignment.MiddleLeft;
+            // button.ImageAlign = ContentAlignment.MiddleLeft;
             button.TextImageRelation = TextImageRelation.ImageBeforeText;
             // Adjust button properties
             button.BackgroundImageLayout = ImageLayout.Center; // Center the image within the button
