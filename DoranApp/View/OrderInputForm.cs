@@ -15,6 +15,7 @@ namespace DoranApp.View
 {
     public partial class OrderInputForm : Form
     {
+        private Client _Client = new Client();
         private List<Masterpengeluaran> _ekspedisiOption = new List<Masterpengeluaran>();
         private MasterbarangData _masterbarang = new MasterbarangData();
         private List<MasterbarangOptionDto> _masterbarangOptions = new List<MasterbarangOptionDto>();
@@ -339,7 +340,8 @@ namespace DoranApp.View
                     Dicetak = Helper.GetSelectedRadioButtonTag(groupBoxDicetak),
                     LevelOrder = Helper.GetSelectedRadioButtonTag(groupFilterLevel),
                     SalesOl = Helper.GetSelectedRadioButtonTag(groupBoxFilterJenisTrans),
-                    NamaCust = textBoxFilterNamaCust.Text.Trim(),
+                    NamaCust = textBoxFilterNamaCust.Text,
+                    NoSeriOnline = textBoxFilterNoSeriOnline.Text,
                     PageSize = comboPageSize.SelectedItem?.ToString() ?? "50",
                     Page = _laporanOrderPage <= 0 ? 1 : _laporanOrderPage,
                 });
@@ -1244,6 +1246,26 @@ namespace DoranApp.View
             LoadingButtonHelper.SetLoadingState(btnBatalkanHeader, false);
             ButtonToggleHelper.EnableButtonsByTag(this, "enableOnSelect");
             ButtonToggleHelper.EnableButtonsByTag(this, "actionButton");
+        }
+
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            button2.Enabled = false;
+            try
+            {
+                await _Client.Set_Ada_OrderanAsync();
+                MessageBox.Show("Berhasil");
+            }
+            catch (ApiException ex)
+            {
+                Helper.ShowErrorMessageFromResponse(ex);
+            }
+            catch (Exception ex)
+            {
+                Helper.ShowErrorMessage(ex);
+            }
+
+            button2.Enabled = true;
         }
     }
 }

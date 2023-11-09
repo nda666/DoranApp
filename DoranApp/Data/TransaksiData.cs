@@ -28,12 +28,13 @@ namespace DoranApp.Data
         {
             var columnSettingsList = new ColumnSettings<dynamic>
             {
+                { "Gudang", x => x.mastergudang?.nama },
                 { "No Nota", x => x.kodenota },
                 { "Tanggal", x => x.tglTrans, typeof(DateTime) },
                 { "Nama", x => x.masterpelanggan?.nama + " - " + x.masterpelanggan?.lokasiKota?.nama },
                 { "Jumlah", x => x.jumlah },
-                { "Sales", x => x.kodeSales },
-                { "Tipe", x => x.tipetempo, typeof(sbyte) },
+                { "Sales", x => x.sales?.nama },
+                { "Tipe", x => x.tipetempo == 0 ? "CASH!!!" : "TEMPO" },
                 { "Keterangan", x => x.keterangan },
                 { "Kodeh", x => x.kodeH }
             };
@@ -74,6 +75,19 @@ namespace DoranApp.Data
         // {
         //     return _paginationData;
         // }
+
+        public async Task<HtransResult> GetByKodeh(int kodeh)
+        {
+            var res = await _CLient.Get_Transaksi_By_KodehAsync(kodeh);
+            return res;
+        }
+
+        public async Task<NotaTransaksiPpnResultDto> GetNotaPpn(int kodeh)
+        {
+            var res = await _CLient.Get_Nota_Transaksi_PpnAsync(kodeh);
+            return res;
+        }
+
 
         public async Task<TReturn> GetNameAndKodeOnly()
         {

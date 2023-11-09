@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Net;
 using System.Windows.Forms;
 using AutoUpdaterDotNET;
+using ConsoleDump;
 using DoranApp.View.Pegawai;
 using DoranApp.View.UserForms;
 using Dotmim.Sync;
@@ -44,7 +45,7 @@ namespace DoranApp.View
             }
         }
 
-        public T OpenForm<T>() where T : Form, new()
+        public async void OpenForm<T>() where T : Form, new()
         {
             foreach (Form form in Application.OpenForms)
             {
@@ -53,20 +54,29 @@ namespace DoranApp.View
                     form.WindowState = FormWindowState.Maximized;
                     tabForms.SelectedTab = tabForms.TabPages[form.Text];
                     form.Activate();
-                    return (T)form;
+                    // return (T)form;
                 }
             }
 
-            var openForm = new T();
-            // Set the Parent Form of the Child window.
-            openForm.MdiParent = this;
-            openForm.MinimizeBox = false;
-            openForm.MaximizeBox = true;
-            // Display the new form.
-            openForm.WindowState = FormWindowState.Maximized;
-            openForm.Show();
-            openForm.Activate();
-            return openForm;
+            try
+            {
+                var openForm = new T();
+                // Set the Parent Form of the Child window.
+                openForm.MdiParent = this;
+                openForm.MinimizeBox = false;
+                openForm.MaximizeBox = true;
+                // Display the new form.
+
+                openForm.WindowState = FormWindowState.Maximized;
+
+                openForm.Show();
+                openForm.Activate();
+                // return openForm;
+            }
+            catch (Exception ex)
+            {
+                ex.Dump();
+            }
         }
 
         private void SetInternetStatusText(string status)

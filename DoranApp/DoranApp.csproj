@@ -119,36 +119,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-      <Reference Include="DevExpress.Charts.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.Data.Desktop.v22.2">
-          <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\DevExpress.Data.Desktop.v22.2\v4.0_22.2.3.0__b88d1754d700e49a\DevExpress.Data.Desktop.v22.2.dll</HintPath>
-      </Reference>
-      <Reference Include="DevExpress.Data.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.DataAccess.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.Drawing.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.Office.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.Pdf.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.Pdf.v22.2.Drawing, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.PivotGrid.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.Printing.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.RichEdit.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.RichEdit.v22.2.Export, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.Sparkline.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.Utils.v22.2">
-          <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\DevExpress.Utils.v22.2\v4.0_22.2.3.0__b88d1754d700e49a\DevExpress.Utils.v22.2.dll</HintPath>
-      </Reference>
-      <Reference Include="DevExpress.Xpo.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.XtraBars.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.XtraCharts.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.XtraEditors.v22.2">
-          <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\DevExpress.XtraEditors.v22.2\v4.0_22.2.3.0__b88d1754d700e49a\DevExpress.XtraEditors.v22.2.dll</HintPath>
-      </Reference>
-      <Reference Include="DevExpress.XtraLayout.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.XtraPrinting.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL"/>
-      <Reference Include="DevExpress.XtraReports.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
-      <Reference Include="DevExpress.XtraTreeList.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a"/>
     <Reference Include="System" />
       <Reference Include="System.Runtime.Serialization"/>
+      <Reference Include="System.Speech"/>
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -230,6 +203,8 @@
       <Compile Include="Dtos\HtransitDto.cs"/>
       <Compile Include="Dtos\PaginationDto.cs"/>
     <Compile Include="Helper.cs" />
+      <Compile Include="LocalModel\NotaTransaksiOLDetail.cs"/>
+      <Compile Include="LocalModel\NotaTransaksiPpnDetail.cs"/>
     <Compile Include="LocalModel\NotaTransaksiDetail.cs" />
     <Compile Include="Data\MastertimsalesData.cs" />
     <Compile Include="Data\MasteruserData.cs" />
@@ -293,6 +268,12 @@
     </Compile>
     <Compile Include="View\LaporanTransaksiPenjualan.Designer.cs">
       <DependentUpon>LaporanTransaksiPenjualan.cs</DependentUpon>
+    </Compile>
+      <Compile Include="View\ReportViewerForm.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\ReportViewerForm.Designer.cs">
+          <DependentUpon>ReportViewerForm.cs</DependentUpon>
     </Compile>
       <Compile Include="View\UserForms\ApplicationUpdateForm.cs">
           <SubType>Form</SubType>
@@ -469,6 +450,8 @@
       <DependentUpon>_Container.cs</DependentUpon>
     </Compile>
       <EmbeddedResource Include="Properties\licenses.licx"/>
+      <EmbeddedResource Include="Report\NotaTransaksiOl.rdlc"/>
+      <EmbeddedResource Include="Report\NotaTransaksiPpn.rdlc"/>
     <EmbeddedResource Include="Report\NotaTransaksi.rdlc" />
       <EmbeddedResource Include="View\CekStok\CekStokForm.resx">
           <DependentUpon>CekStokForm.cs</DependentUpon>
@@ -519,6 +502,9 @@
     <EmbeddedResource Include="View\MasterGudangForm.resx">
       <DependentUpon>MasterGudangForm.cs</DependentUpon>
     </EmbeddedResource>
+      <EmbeddedResource Include="View\ReportViewerForm.resx">
+          <DependentUpon>ReportViewerForm.cs</DependentUpon>
+      </EmbeddedResource>
       <EmbeddedResource Include="View\Transit\PermintaanSalesControl.resx">
           <DependentUpon>PermintaanSalesControl.cs</DependentUpon>
       </EmbeddedResource>
@@ -589,6 +575,8 @@
       <DependentUpon>_Container.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="DoranApp.LocalModel.NotaTransaksiDetail.datasource" />
+      <None Include="DoranApp.LocalModel.NotaTransaksiOLDetail.datasource"/>
+      <None Include="DoranApp.LocalModel.NotaTransaksiPpnDetail.datasource"/>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

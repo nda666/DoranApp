@@ -1,4 +1,6 @@
-﻿namespace DoranApp.View
+﻿using DoranApp.Components;
+
+namespace DoranApp.View
 {
     
     partial class TransaksiForm
@@ -39,7 +41,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransaksiForm));
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new DoranApp.Components.MyDataGridView();
             this.checkBoxRetur = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.comboGudang = new System.Windows.Forms.ComboBox();
@@ -64,6 +66,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.datePickerJatuhTempo = new System.Windows.Forms.DateTimePicker();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label22 = new System.Windows.Forms.Label();
             this.buttonBatalUbah = new System.Windows.Forms.Button();
             this.textBoxDpp = new DoranApp.Components.CurrencyTextBox();
             this.textBoxDiskon = new DoranApp.Components.CurrencyTextBox();
@@ -87,8 +90,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.button15 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBoxPrintFoto = new System.Windows.Forms.CheckBox();
+            this.checkBoxModeNotaOl = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button13 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
@@ -196,7 +199,7 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridView1.Location = new System.Drawing.Point(8, 201);
+            this.dataGridView1.Location = new System.Drawing.Point(8, 182);
             this.dataGridView1.Name = "dataGridView1";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -206,13 +209,13 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView1.Size = new System.Drawing.Size(660, 140);
+            this.dataGridView1.Size = new System.Drawing.Size(660, 159);
             this.dataGridView1.TabIndex = 9;
             this.dataGridView1.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridView1_CellBeginEdit);
-            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
+            this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown_1);
             // 
             // checkBoxRetur
             // 
@@ -440,6 +443,7 @@
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel1.Controls.Add(this.label22);
             this.panel1.Controls.Add(this.buttonBatalUbah);
             this.panel1.Controls.Add(this.textBoxDpp);
             this.panel1.Controls.Add(this.textBoxDiskon);
@@ -467,11 +471,21 @@
             this.panel1.Tag = "groupbox";
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // label22
+            // 
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(564, 7);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(91, 72);
+            this.label22.TabIndex = 50;
+            this.label22.Text = "Tekan \"Enter\" untuk mengganti SN";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // buttonBatalUbah
             // 
-            this.buttonBatalUbah.Location = new System.Drawing.Point(575, 85);
+            this.buttonBatalUbah.Location = new System.Drawing.Point(484, 85);
             this.buttonBatalUbah.Name = "buttonBatalUbah";
-            this.buttonBatalUbah.Size = new System.Drawing.Size(85, 60);
+            this.buttonBatalUbah.Size = new System.Drawing.Size(74, 60);
             this.buttonBatalUbah.TabIndex = 49;
             this.buttonBatalUbah.Tag = "actionButton";
             this.buttonBatalUbah.Text = "Batal Ubah";
@@ -481,17 +495,17 @@
             // 
             // textBoxDpp
             // 
-            this.textBoxDpp.Location = new System.Drawing.Point(579, 7);
+            this.textBoxDpp.Location = new System.Drawing.Point(484, 7);
             this.textBoxDpp.Name = "textBoxDpp";
             this.textBoxDpp.ReadOnly = true;
-            this.textBoxDpp.Size = new System.Drawing.Size(81, 20);
+            this.textBoxDpp.Size = new System.Drawing.Size(74, 20);
             this.textBoxDpp.TabIndex = 47;
             this.textBoxDpp.Text = "0";
             this.textBoxDpp.Leave += new System.EventHandler(this.textBoxDpp_Leave_1);
             // 
             // textBoxDiskon
             // 
-            this.textBoxDiskon.Location = new System.Drawing.Point(419, 59);
+            this.textBoxDiskon.Location = new System.Drawing.Point(343, 57);
             this.textBoxDiskon.Name = "textBoxDiskon";
             this.textBoxDiskon.Size = new System.Drawing.Size(81, 20);
             this.textBoxDiskon.TabIndex = 46;
@@ -500,24 +514,24 @@
             // 
             // textBoxTotal
             // 
-            this.textBoxTotal.Location = new System.Drawing.Point(579, 59);
+            this.textBoxTotal.Location = new System.Drawing.Point(484, 59);
             this.textBoxTotal.Name = "textBoxTotal";
-            this.textBoxTotal.Size = new System.Drawing.Size(81, 20);
+            this.textBoxTotal.Size = new System.Drawing.Size(74, 20);
             this.textBoxTotal.TabIndex = 45;
             this.textBoxTotal.Text = "0";
             // 
             // textBoxPPN
             // 
-            this.textBoxPPN.Location = new System.Drawing.Point(579, 33);
+            this.textBoxPPN.Location = new System.Drawing.Point(484, 33);
             this.textBoxPPN.Name = "textBoxPPN";
             this.textBoxPPN.ReadOnly = true;
-            this.textBoxPPN.Size = new System.Drawing.Size(81, 20);
+            this.textBoxPPN.Size = new System.Drawing.Size(74, 20);
             this.textBoxPPN.TabIndex = 44;
             this.textBoxPPN.Text = "0";
             // 
             // textBoxBiaya
             // 
-            this.textBoxBiaya.Location = new System.Drawing.Point(419, 33);
+            this.textBoxBiaya.Location = new System.Drawing.Point(343, 31);
             this.textBoxBiaya.Name = "textBoxBiaya";
             this.textBoxBiaya.ReadOnly = true;
             this.textBoxBiaya.Size = new System.Drawing.Size(81, 20);
@@ -527,7 +541,7 @@
             // 
             // textBoxOngkir
             // 
-            this.textBoxOngkir.Location = new System.Drawing.Point(419, 7);
+            this.textBoxOngkir.Location = new System.Drawing.Point(343, 5);
             this.textBoxOngkir.Name = "textBoxOngkir";
             this.textBoxOngkir.Size = new System.Drawing.Size(81, 20);
             this.textBoxOngkir.TabIndex = 42;
@@ -536,7 +550,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(362, 120);
+            this.button11.Location = new System.Drawing.Point(339, 118);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(85, 27);
             this.button11.TabIndex = 41;
@@ -545,7 +559,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(362, 85);
+            this.button9.Location = new System.Drawing.Point(339, 83);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(85, 32);
             this.button9.TabIndex = 26;
@@ -568,13 +582,13 @@
             this.textBoxKeterangan.Location = new System.Drawing.Point(4, 69);
             this.textBoxKeterangan.Multiline = true;
             this.textBoxKeterangan.Name = "textBoxKeterangan";
-            this.textBoxKeterangan.Size = new System.Drawing.Size(336, 82);
+            this.textBoxKeterangan.Size = new System.Drawing.Size(273, 82);
             this.textBoxKeterangan.TabIndex = 26;
             // 
             // checkBoxPPN
             // 
             this.checkBoxPPN.AutoSize = true;
-            this.checkBoxPPN.Location = new System.Drawing.Point(525, 34);
+            this.checkBoxPPN.Location = new System.Drawing.Point(430, 34);
             this.checkBoxPPN.Name = "checkBoxPPN";
             this.checkBoxPPN.Size = new System.Drawing.Size(48, 17);
             this.checkBoxPPN.TabIndex = 38;
@@ -585,7 +599,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(528, 61);
+            this.label12.Location = new System.Drawing.Point(433, 61);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(45, 13);
             this.label12.TabIndex = 37;
@@ -594,7 +608,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(541, 8);
+            this.label14.Location = new System.Drawing.Point(446, 8);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(32, 13);
             this.label14.TabIndex = 33;
@@ -603,7 +617,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(370, 58);
+            this.label11.Location = new System.Drawing.Point(294, 56);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(43, 13);
             this.label11.TabIndex = 31;
@@ -612,7 +626,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(358, 32);
+            this.label10.Location = new System.Drawing.Point(282, 30);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(55, 13);
             this.label10.TabIndex = 29;
@@ -621,7 +635,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(359, 8);
+            this.label9.Location = new System.Drawing.Point(283, 6);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(54, 13);
             this.label9.TabIndex = 27;
@@ -659,8 +673,8 @@
             // 
             this.panel2.Controls.Add(this.button15);
             this.panel2.Controls.Add(this.button14);
-            this.panel2.Controls.Add(this.checkBox4);
-            this.panel2.Controls.Add(this.checkBox3);
+            this.panel2.Controls.Add(this.checkBoxPrintFoto);
+            this.panel2.Controls.Add(this.checkBoxModeNotaOl);
             this.panel2.Controls.Add(this.checkBox1);
             this.panel2.Controls.Add(this.button13);
             this.panel2.Controls.Add(this.button12);
@@ -695,27 +709,27 @@
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
-            // checkBox4
+            // checkBoxPrintFoto
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox4.Location = new System.Drawing.Point(343, 44);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(81, 17);
-            this.checkBox4.TabIndex = 106;
-            this.checkBox4.Text = "Print Foto";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBoxPrintFoto.AutoSize = true;
+            this.checkBoxPrintFoto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxPrintFoto.Location = new System.Drawing.Point(343, 44);
+            this.checkBoxPrintFoto.Name = "checkBoxPrintFoto";
+            this.checkBoxPrintFoto.Size = new System.Drawing.Size(81, 17);
+            this.checkBoxPrintFoto.TabIndex = 106;
+            this.checkBoxPrintFoto.Text = "Print Foto";
+            this.checkBoxPrintFoto.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // checkBoxModeNotaOl
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox3.Location = new System.Drawing.Point(217, 44);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(120, 17);
-            this.checkBox3.TabIndex = 105;
-            this.checkBox3.Text = "MODE NOTA OL";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBoxModeNotaOl.AutoSize = true;
+            this.checkBoxModeNotaOl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxModeNotaOl.Location = new System.Drawing.Point(217, 44);
+            this.checkBoxModeNotaOl.Name = "checkBoxModeNotaOl";
+            this.checkBoxModeNotaOl.Size = new System.Drawing.Size(120, 17);
+            this.checkBoxModeNotaOl.TabIndex = 105;
+            this.checkBoxModeNotaOl.Text = "MODE NOTA OL";
+            this.checkBoxModeNotaOl.UseVisualStyleBackColor = true;
             // 
             // checkBox1
             // 
@@ -793,7 +807,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 11);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(682, 206);
+            this.groupBox1.Size = new System.Drawing.Size(682, 211);
             this.groupBox1.TabIndex = 101;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Laporan Transaksi Penjualan";
@@ -834,7 +848,7 @@
             this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(676, 187);
+            this.dataGridView2.Size = new System.Drawing.Size(676, 192);
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.ColumnAdded += new System.Windows.Forms.DataGridViewColumnEventHandler(this.dataGridView2_ColumnAdded);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
@@ -847,14 +861,14 @@
             this.tableLayoutPanel1.Controls.Add(this.groupBox2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.toolStrip1, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 77);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 68);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(688, 433);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(688, 442);
             this.tableLayoutPanel1.TabIndex = 1;
             this.tableLayoutPanel1.Tag = "groupbox";
             // 
@@ -862,9 +876,9 @@
             // 
             this.groupBox2.Controls.Add(this.dataGridView3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 223);
+            this.groupBox2.Location = new System.Drawing.Point(3, 228);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(682, 207);
+            this.groupBox2.Size = new System.Drawing.Size(682, 211);
             this.groupBox2.TabIndex = 104;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Detail Transaksi Penjualan";
@@ -906,7 +920,7 @@
             this.dataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView3.RowHeadersVisible = false;
             this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView3.Size = new System.Drawing.Size(676, 188);
+            this.dataGridView3.Size = new System.Drawing.Size(676, 192);
             this.dataGridView3.TabIndex = 1;
             // 
             // Pcs
@@ -1136,6 +1150,7 @@
             this.checkboxEnableSearch.TabIndex = 100;
             this.checkboxEnableSearch.Text = "Aktifkan Pencarian Produk";
             this.checkboxEnableSearch.UseVisualStyleBackColor = true;
+            this.checkboxEnableSearch.Visible = false;
             // 
             // tabControl1
             // 
@@ -1463,6 +1478,8 @@
             this.ResumeLayout(false);
         }
 
+        private System.Windows.Forms.Label label22;
+
         private System.Windows.Forms.Button buttonCopyKeyLimit;
 
         private System.Windows.Forms.TextBox textBoxGenerateKeyLimit;
@@ -1513,7 +1530,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private DoranApp.Components.MyDataGridView dataGridView1;
         private System.Windows.Forms.CheckBox checkBoxRetur;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboGudang;
@@ -1560,8 +1577,8 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBoxPrintFoto;
+        private System.Windows.Forms.CheckBox checkBoxModeNotaOl;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button button13;
         private System.Windows.Forms.Button button12;

@@ -109,6 +109,7 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.label22 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -149,6 +150,8 @@
             this.textBoxFilterNama = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBoxFilterNoSeriOnline = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.textBoxFilterNamaCust = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.groupBoxFilterStatus = new System.Windows.Forms.GroupBox();
@@ -817,7 +820,7 @@
             this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(482, 275);
+            this.dataGridView2.Size = new System.Drawing.Size(494, 275);
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView2_DataBindingComplete);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
@@ -943,6 +946,7 @@
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.groupBox8);
             this.panel2.Controls.Add(this.btnBatalkanHeader);
             this.panel2.Controls.Add(this.buttonCekAndSetSiap);
@@ -959,6 +963,18 @@
             this.panel2.Size = new System.Drawing.Size(229, 702);
             this.panel2.TabIndex = 66;
             // 
+            // button2
+            // 
+            this.button2.Enabled = false;
+            this.button2.Location = new System.Drawing.Point(6, 403);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(214, 24);
+            this.button2.TabIndex = 77;
+            this.button2.Tag = "enableOnSelect";
+            this.button2.Text = "Bunyikan Lonceng";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // groupBox8
             // 
             this.groupBox8.Controls.Add(this.label22);
@@ -969,7 +985,7 @@
             this.groupBox8.Controls.Add(this.btnPendingOrder);
             this.groupBox8.Controls.Add(this.btnLunasPaksa);
             this.groupBox8.Controls.Add(this.btnBatalkan);
-            this.groupBox8.Location = new System.Drawing.Point(5, 496);
+            this.groupBox8.Location = new System.Drawing.Point(8, 527);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(216, 147);
             this.groupBox8.TabIndex = 76;
@@ -1068,7 +1084,7 @@
             // btnBatalkanHeader
             // 
             this.btnBatalkanHeader.Enabled = false;
-            this.btnBatalkanHeader.Location = new System.Drawing.Point(5, 465);
+            this.btnBatalkanHeader.Location = new System.Drawing.Point(6, 493);
             this.btnBatalkanHeader.Name = "btnBatalkanHeader";
             this.btnBatalkanHeader.Size = new System.Drawing.Size(214, 25);
             this.btnBatalkanHeader.TabIndex = 75;
@@ -1080,7 +1096,7 @@
             // buttonCekAndSetSiap
             // 
             this.buttonCekAndSetSiap.Enabled = false;
-            this.buttonCekAndSetSiap.Location = new System.Drawing.Point(5, 435);
+            this.buttonCekAndSetSiap.Location = new System.Drawing.Point(6, 463);
             this.buttonCekAndSetSiap.Name = "buttonCekAndSetSiap";
             this.buttonCekAndSetSiap.Size = new System.Drawing.Size(214, 24);
             this.buttonCekAndSetSiap.TabIndex = 74;
@@ -1091,7 +1107,7 @@
             // btnCetakTanpaKertas
             // 
             this.btnCetakTanpaKertas.Enabled = false;
-            this.btnCetakTanpaKertas.Location = new System.Drawing.Point(79, 405);
+            this.btnCetakTanpaKertas.Location = new System.Drawing.Point(80, 433);
             this.btnCetakTanpaKertas.Name = "btnCetakTanpaKertas";
             this.btnCetakTanpaKertas.Size = new System.Drawing.Size(140, 24);
             this.btnCetakTanpaKertas.TabIndex = 73;
@@ -1102,7 +1118,7 @@
             // btnCetak
             // 
             this.btnCetak.Enabled = false;
-            this.btnCetak.Location = new System.Drawing.Point(5, 405);
+            this.btnCetak.Location = new System.Drawing.Point(6, 433);
             this.btnCetak.Name = "btnCetak";
             this.btnCetak.Size = new System.Drawing.Size(71, 24);
             this.btnCetak.TabIndex = 72;
@@ -1406,6 +1422,8 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.textBoxFilterNoSeriOnline);
+            this.tabPage2.Controls.Add(this.label24);
             this.tabPage2.Controls.Add(this.textBoxFilterNamaCust);
             this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.groupBoxFilterStatus);
@@ -1417,6 +1435,23 @@
             this.tabPage2.Text = "Filter 2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // textBoxFilterNoSeriOnline
+            // 
+            this.textBoxFilterNoSeriOnline.Location = new System.Drawing.Point(89, 87);
+            this.textBoxFilterNoSeriOnline.Name = "textBoxFilterNoSeriOnline";
+            this.textBoxFilterNoSeriOnline.Size = new System.Drawing.Size(111, 20);
+            this.textBoxFilterNoSeriOnline.TabIndex = 63;
+            // 
+            // label24
+            // 
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(0, 87);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(83, 20);
+            this.label24.TabIndex = 62;
+            this.label24.Text = "No Seri OL :";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // textBoxFilterNamaCust
             // 
             this.textBoxFilterNamaCust.Location = new System.Drawing.Point(89, 61);
@@ -1427,11 +1462,11 @@
             // label17
             // 
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(7, 61);
+            this.label17.Location = new System.Drawing.Point(2, 61);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(76, 20);
+            this.label17.Size = new System.Drawing.Size(81, 20);
             this.label17.TabIndex = 60;
-            this.label17.Text = "Nama Cust";
+            this.label17.Text = "Nama Cust :";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // groupBoxFilterStatus
@@ -1540,6 +1575,11 @@
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button button2;
+
+        private System.Windows.Forms.TextBox textBoxFilterNoSeriOnline;
+        private System.Windows.Forms.Label label24;
 
         private System.Windows.Forms.DataGridViewTextBoxColumn KRM;
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;

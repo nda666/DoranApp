@@ -6,7 +6,6 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
-using ConsoleDump;
 using Microsoft.Reporting.WinForms;
 
 namespace DoranApp.Utils
@@ -15,6 +14,10 @@ namespace DoranApp.Utils
     {
         private int m_currentPageIndex;
         private List<Stream> m_streams;
+        private int? PaperHeight = null;
+        private string PaperSizeName;
+        private int PaperWidth;
+        private PrintDocument PrintDoc;
 
         public void Dispose()
         {
@@ -34,13 +37,22 @@ namespace DoranApp.Utils
             return stream;
         }
 
-        public DirectPrint Export(LocalReport report)
+        public DirectPrint Export(LocalReport report, string paperSizeName, int paperWidth, int? paperHeight = null)
         {
-            string deviceInfo = @"
+            PaperSizeName = paperSizeName;
+            PaperWidth = paperWidth;
+            PaperHeight = paperHeight;
+            var paperHeightString = "";
+            if (paperHeight != null)
+            {
+                paperHeightString = $"<PageHeight>{paperHeight}cm</PageHeight>";
+            }
+
+            string deviceInfo = @$"
                 <DeviceInfo>
                     <OutputFormat>EMF</OutputFormat>
-                    <PageWidth>21cm</PageWidth>
-                    <PageHeight>14cm</PageHeight>
+                    <PageWidth>{paperWidth}cm</PageWidth>
+                    {paperHeightString}
                     <MarginTop>0in</MarginTop>
                     <MarginLeft>0in</MarginLeft>
                     <MarginRight>0in</MarginRight>
@@ -65,20 +77,18 @@ namespace DoranApp.Utils
 
         private void PrintPage(object sender, PrintPageEventArgs ev)
         {
-            m_streams?.Dump();
             if (m_currentPageIndex >= m_streams.Count)
             {
                 ev.HasMorePages = false;
                 return;
             }
 
+            PrintDoc.OriginAtMargins = true;
             Metafile pageImage = new Metafile(m_streams[m_currentPageIndex]);
 
             Rectangle adjustedRect = new Rectangle(
-                ev.PageBounds.Left - (int)ev.PageSettings.HardMarginX,
-                ev.PageBounds.Top - (int)ev.PageSettings.HardMarginY,
-                ev.PageBounds.Width,
-                ev.PageBounds.Height);
+                ev.MarginBounds.Left, ev.MarginBounds.Top, ev.MarginBounds.Width, ev.MarginBounds.Height
+            );
 
             ev.Graphics.FillRectangle(Brushes.White, adjustedRect);
             ev.Graphics.DrawImage(pageImage, adjustedRect);
@@ -87,15 +97,14 @@ namespace DoranApp.Utils
             ev.HasMorePages = (m_currentPageIndex < m_streams.Count);
         }
 
-        public void ShowPreview(string paperSizeName, int? width = null, int? height = null)
+        public void ShowPreview()
         {
-            using (var printDoc = CreatePrintDocument(paperSizeName, width, height))
+            using (var printDoc = CreatePrintDocument())
             {
                 var printPreview = new PrintPreviewDialog();
                 m_currentPageIndex = 0;
                 printPreview.Document = printDoc;
                 m_currentPageIndex = 0;
-                printPreview.TopMost = true;
 
                 Screen screen = Screen.PrimaryScreen;
                 Rectangle screenBounds = screen.Bounds;
@@ -111,9 +120,9 @@ namespace DoranApp.Utils
             }
         }
 
-        public void Print(string paperSizeName, int? width = null, int? height = null)
+        public void Print()
         {
-            using (var printDoc = CreatePrintDocument(paperSizeName, width, height))
+            using (var printDoc = CreatePrintDocument())
             {
                 m_currentPageIndex = 0;
                 try
@@ -127,17 +136,17 @@ namespace DoranApp.Utils
             }
         }
 
-        protected PrintDocument CreatePrintDocument(string paperSizeName, int? width = null, int? height = null)
+        protected PrintDocument CreatePrintDocument()
         {
             if (m_streams == null || m_streams.Count == 0)
                 throw new Exception("Error: no stream to print.");
 
-            PrintDocument printDoc = new PrintDocument();
+            PrintDoc = new PrintDocument();
 
             PaperSize paperSize = null;
-            foreach (PaperSize size in printDoc.PrinterSettings.PaperSizes)
+            foreach (PaperSize size in PrintDoc.PrinterSettings.PaperSizes)
             {
-                if (size.PaperName.Equals(paperSizeName, StringComparison.OrdinalIgnoreCase))
+                if (size.PaperName.Equals(PaperSizeName, StringComparison.OrdinalIgnoreCase))
                 {
                     paperSize = size;
                     break;
@@ -146,11 +155,13 @@ namespace DoranApp.Utils
 
             if (paperSize != null)
             {
-                printDoc.DefaultPageSettings.PaperSize = paperSize;
+                PrintDoc.DefaultPageSettings.PaperSize = paperSize;
             }
-            else if (width != null && height != null)
+            else if (PaperWidth != null && PaperHeight != null)
             {
-                printDoc.DefaultPageSettings.PaperSize = new PaperSize("CustomSize", width.Value, height.Value);
+                var width = (int)(PaperWidth * 100 / 2.54);
+                var height = (int)(PaperHeight * 100 / 2.54);
+                PrintDoc.DefaultPageSettings.PaperSize = new PaperSize(PaperSizeName, width, height);
             }
             else
             {
@@ -158,16 +169,16 @@ namespace DoranApp.Utils
             }
 
             Margins margins = new Margins(0, 0, 0, 0);
-            printDoc.DefaultPageSettings.Margins = margins;
+            PrintDoc.DefaultPageSettings.Margins = margins;
 
-            if (!printDoc.PrinterSettings.IsValid)
+            if (!PrintDoc.PrinterSettings.IsValid)
             {
                 throw new Exception("Error: cannot find the default printer.");
             }
 
-            printDoc.EndPrint += new PrintEventHandler(OnEndPrint);
-            printDoc.PrintPage += new PrintPageEventHandler(PrintPage);
-            return printDoc;
+            PrintDoc.EndPrint += new PrintEventHandler(OnEndPrint);
+            PrintDoc.PrintPage += new PrintPageEventHandler(PrintPage);
+            return PrintDoc;
         }
     }
 }

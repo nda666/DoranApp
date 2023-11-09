@@ -23,6 +23,8 @@ namespace DoranApp.View
     public partial class TransaksiForm : Form
     {
         private decimal _biaya = 0;
+
+        private Client _CLient = new Client();
         public long _laporanTransaksiLastPage = 0;
         private MasterbarangData _masterbarang = new MasterbarangData();
         private List<MasterbarangOptionWithSnDto> _masterbarangOptions = new List<MasterbarangOptionWithSnDto>();
@@ -47,18 +49,31 @@ namespace DoranApp.View
 
         private int? NoOrder = null;
         private bool preventEventCheckBoxShowAllItem = false;
+        private bool PrintNotaPpnRun = false;
+
+        private bool PrintNotaRun = false;
+
+        protected bool SnCheckRun = false;
 
         public TransaksiForm()
         {
             InitializeComponent();
-            var kagud = new[] { "kagud", "masterkagud", "sales", "salesonline" };
-            if (kagud.Contains(Session.GetUser().Akses.ToLower().Trim()))
+            var allowed = new[]
+            {
+                "bos", "kagud", "masterkagud", "seketaris", "masteradmin", "masteradmin2",
+                "mastersuperadmin", "masteraudit", "supermasteraudit"
+            };
+
+            if (!allowed.Contains(Session.GetUser().Akses.ToLower().Trim()))
             {
                 splitContainer1.Panel1Collapsed = true;
                 button12.Visible = false;
                 button13.Visible = false;
                 button14.Visible = false;
                 button15.Visible = false;
+                checkBoxPrintFoto.Visible = false;
+                checkBoxModeNotaOl.Visible = false;
+                checkBox1.Visible = false;
             }
         }
 
@@ -220,13 +235,18 @@ namespace DoranApp.View
 
             dataGridView2.DataSource = null;
             dataGridView2.DataSource = _transaksiData.GetDataTable();
-            dataGridView2.Columns[1].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dataGridView2.Columns[2].DefaultCellStyle.Format = "dd/MM/yyyy";
+            dataGridView2.Columns[4].DefaultCellStyle.Format = "N0";
+
+            dataGridView2.Columns[2].Width = 70;
+            dataGridView2.Columns[3].Width = 150;
+            dataGridView2.Columns[7].Width = 150;
+            dataGridView2.Columns[6].Width = 50;
+            dataGridView2.Columns[8].Width = 70;
             foreach (DataGridViewColumn col in dataGridView2.Columns)
             {
                 col.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
-
-            dataGridView2.Columns[3].DefaultCellStyle.Format = "N0";
         }
 
         private async void TransaksiForm_Load(object sender, EventArgs e)
@@ -439,6 +459,7 @@ namespace DoranApp.View
             Type t = dataGridView1.GetType();
             FieldInfo viewSetter = t.GetField("latestEditingControl",
                 BindingFlags.Default | BindingFlags.NonPublic | BindingFlags.Instance);
+            if (viewSetter == null) return;
             viewSetter.SetValue(dataGridView1, null);
         }
 
@@ -923,22 +944,246 @@ namespace DoranApp.View
 
         private void button15_Click(object sender, EventArgs e)
         {
+            PrintNotaPpn();
         }
 
-        private void PrintNota()
+        private async void PrintNotaPpn()
         {
             if (dataGridView2.SelectedRows.Count <= 0 && dataGridView2.Rows.Count <= 0)
             {
                 return;
             }
 
-            var kodeh = (long)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
-            var htrans = _transaksiData.GetData().Where(x => x.kodeH == kodeh).FirstOrDefault();
-            if (htrans == null)
+            if (PrintNotaPpnRun)
             {
-                MessageBox.Show("Transaksi tidak ditemukan");
                 return;
             }
+
+            PrintNotaPpnRun = true;
+            var kodeh = (long)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
+            NotaTransaksiPpnResultDto htrans = null;
+
+            try
+            {
+                htrans = await _transaksiData.GetNotaPpn((int)kodeh);
+            }
+            catch (ApiException ex)
+            {
+                Helper.ShowErrorMessageFromResponse(ex);
+                PrintNotaPpnRun = false;
+                return;
+            }
+            catch (Exception ex)
+            {
+                Helper.ShowErrorMessage(ex);
+                PrintNotaPpnRun = false;
+                return;
+            }
+
+            try
+            {
+                ReportViewer reportViewer = new ReportViewer();
+                reportViewer.ProcessingMode = ProcessingMode.Local;
+                reportViewer.LocalReport.ReportEmbeddedResource =
+                    "DoranApp.Report.NotaTransaksiPpn.rdlc"; // Path to your RDLC file
+
+                var dt = new DataTable();
+                dt.Columns.Add("no");
+                dt.Columns.Add("jumlah");
+                dt.Columns.Add("kodeBrg");
+                dt.Columns.Add("brgNama");
+                dt.Columns.Add("harga");
+                dt.Columns.Add("subTotal");
+                var no = 1;
+                foreach (var dtrans in htrans.Detail)
+                {
+                    DataRow row = dt.NewRow();
+                    row["no"] = no;
+                    row["jumlah"] = dtrans.Pcs.ToString("N0");
+                    row["kodeBrg"] = dtrans.Kodebarang;
+                    row["brgNama"] = dtrans.Namabarang;
+                    row["harga"] = dtrans.Hargabelumppn.ToString("N0");
+                    row["subTotal"] = dtrans.Subtotalbelumppn.ToString("N0");
+                    dt.Rows.Add(row);
+                    no++;
+                }
+
+                // Set parameters (if any)
+                List<ReportParameter> parameters = new List<ReportParameter>();
+                parameters.Add(new ReportParameter("total", string.Format("{0:N0}", htrans.Jumlah)));
+                parameters.Add(new ReportParameter("lainnya", string.Format("{0:N0}", htrans.Tambahanlainnya)));
+
+                parameters.Add(new ReportParameter("tglTrans", htrans.Tanggal.ToString("dd/MM/yyyy")));
+                parameters.Add(new ReportParameter("kodenota", (string)htrans.Kodenota ?? ""));
+                var namaPelanggan = Regex.Replace(htrans.Nama ?? "", @"[\r\n\t]+", " ");
+                parameters.Add(new ReportParameter("namaPelanggan", namaPelanggan.Trim()));
+                parameters.Add(new ReportParameter("lokasiPelanggan", htrans.Lokasi));
+
+                parameters.Add(new ReportParameter("namaSales", (string)htrans.Namasales ?? ""));
+                parameters.Add(new ReportParameter("tipeTempo", htrans.Tipetempo));
+                parameters.Add(new ReportParameter("tglTempo", htrans.Tgltempo.ToString("dd/MM/yyyy")));
+                parameters.Add(new ReportParameter("kodenota", htrans.Kodenota ?? ""));
+                parameters.Add(new ReportParameter("oleh", htrans.Oleh ?? ""));
+
+                parameters.Add(new ReportParameter("ppn", string.Format("{0:N0}", htrans.Ppn)));
+                parameters.Add(new ReportParameter("dpp", string.Format("{0:N0}", htrans.Dpp)));
+                parameters.Add(new ReportParameter("diskon", string.Format("{0:N0}", htrans.Diskon)));
+                parameters.Add(new ReportParameter("grandTotal", string.Format("{0:N0}", htrans.Jumlah)));
+
+                reportViewer.LocalReport.SetParameters(parameters.ToArray());
+
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
+                // Refresh the report
+                reportViewer.RefreshReport();
+
+                var directPrint = new DirectPrint();
+
+                if (checkBoxPrintFoto.Checked)
+                {
+                    directPrint.Export(reportViewer.LocalReport, "CustomSize", 21, 29).ShowPreview();
+                }
+                else
+                {
+                    directPrint.Export(reportViewer.LocalReport, "CustomSize", 21, 29).Print();
+                }
+                //.Print("CustomSize", 970, 551);
+            }
+            catch (Exception ex)
+            {
+                ex.Dump();
+                MessageBox.Show(ex.Message);
+            }
+
+            PrintNotaPpnRun = false;
+        }
+
+        private async void PrintNotaOl(int kodeh)
+        {
+            if (dataGridView2.SelectedRows.Count <= 0 && dataGridView2.Rows.Count <= 0)
+            {
+                return;
+            }
+
+            if (PrintNotaRun)
+            {
+                return;
+            }
+
+            PrintNotaRun = true;
+
+            HtransResult htrans = null;
+
+            try
+            {
+                htrans = await _transaksiData.GetByKodeh((int)kodeh);
+                htrans.Dump();
+            }
+            catch (ApiException ex)
+            {
+                Helper.ShowErrorMessageFromResponse(ex);
+                PrintNotaRun = false;
+                return;
+            }
+            catch (Exception ex)
+            {
+                Helper.ShowErrorMessage(ex);
+                PrintNotaRun = false;
+                return;
+            }
+
+
+            try
+            {
+                ReportViewer reportViewer = new ReportViewer();
+                reportViewer.ProcessingMode = ProcessingMode.Local;
+                reportViewer.LocalReport.ReportEmbeddedResource =
+                    "DoranApp.Report.NotaTransaksiOl.rdlc"; // Path to your RDLC file
+
+                var dt = new DataTable();
+                dt.Columns.Add("jumlah");
+                dt.Columns.Add("brgNama");
+                dt.Columns.Add("harga");
+                dt.Columns.Add("subTotal");
+                foreach (var dtrans in htrans.Dtrans)
+                {
+                    DataRow row = dt.NewRow();
+                    row["jumlah"] = dtrans.Jumlah.ToString("N0");
+                    row["brgNama"] = dtrans.Masterbarang?.BrgNama;
+                    row["harga"] = dtrans.Harga.ToString("N0");
+                    row["subTotal"] = (dtrans.Harga * dtrans.Jumlah).ToString("N0");
+                    dt.Rows.Add(row);
+                }
+
+                // Set parameters (if any)
+                List<ReportParameter> parameters = new List<ReportParameter>();
+                parameters.Add(new ReportParameter("total", string.Format("{0:N0}", htrans.Jumlah)));
+                parameters.Add(new ReportParameter("tglTrans", htrans.TglTrans.ToString("dd/MM/yyyy")));
+                parameters.Add(new ReportParameter("kodenota", (string)htrans.Kodenota ?? ""));
+                var namaPelanggan = Regex.Replace(htrans.Masterpelanggan?.Nama?.ToString() ?? "", @"[\r\n\t]+", " ");
+                parameters.Add(new ReportParameter("namaPelanggan", namaPelanggan));
+                parameters.Add(new ReportParameter("namaCust", htrans.NamaCust));
+                parameters.Add(new ReportParameter("namaSales", (string)htrans.Sales?.Nama ?? ""));
+
+
+                reportViewer.LocalReport.SetParameters(parameters.ToArray());
+
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
+                // Refresh the report
+                reportViewer.RefreshReport();
+
+                var directPrint = new DirectPrint();
+                if (checkBoxPrintFoto.Checked)
+                {
+                    directPrint.Export(reportViewer.LocalReport, "CustomSize", 8, 10).ShowPreview();
+                }
+                else
+                {
+                    directPrint.Export(reportViewer.LocalReport, "CustomSize", 8, 10).Print();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Dump();
+                MessageBox.Show(ex.Message);
+            }
+
+            PrintNotaRun = false;
+        }
+
+        private async void PrintNota(int kodeh)
+        {
+            if (dataGridView2.SelectedRows.Count <= 0 && dataGridView2.Rows.Count <= 0)
+            {
+                return;
+            }
+
+            if (PrintNotaRun)
+            {
+                return;
+            }
+
+            PrintNotaRun = true;
+
+            HtransResult htrans = null;
+
+            try
+            {
+                htrans = await _transaksiData.GetByKodeh((int)kodeh);
+                htrans.Dump();
+            }
+            catch (ApiException ex)
+            {
+                Helper.ShowErrorMessageFromResponse(ex);
+                PrintNotaRun = false;
+                return;
+            }
+            catch (Exception ex)
+            {
+                Helper.ShowErrorMessage(ex);
+                PrintNotaRun = false;
+                return;
+            }
+
 
             try
             {
@@ -954,38 +1199,38 @@ namespace DoranApp.View
                 dt.Columns.Add("harga");
                 dt.Columns.Add("subTotal");
                 var no = 1;
-                foreach (var dtrans in htrans.dtrans)
+                foreach (var dtrans in htrans.Dtrans)
                 {
                     DataRow row = dt.NewRow();
                     row["no"] = no;
-                    row["jumlah"] = dtrans.jumlah.ToString("N0");
-                    row["brgNama"] = dtrans.masterbarang?.brgNama;
-                    row["harga"] = dtrans.harga.ToString("N0");
-                    row["subTotal"] = (dtrans.harga * dtrans.jumlah).ToString("N0");
+                    row["jumlah"] = dtrans.Jumlah.ToString("N0");
+                    row["brgNama"] = dtrans.Masterbarang?.BrgNama;
+                    row["harga"] = dtrans.Harga.ToString("N0");
+                    row["subTotal"] = (dtrans.Harga * dtrans.Jumlah).ToString("N0");
                     dt.Rows.Add(row);
                     no++;
                 }
 
                 // Set parameters (if any)
                 List<ReportParameter> parameters = new List<ReportParameter>();
-                parameters.Add(new ReportParameter("total", string.Format("{0:N0}", htrans.jumlah)));
-                parameters.Add(new ReportParameter("lainnya", string.Format("{0:N0}", htrans.tambahanLainnya)));
-                parameters.Add(new ReportParameter("ppn", string.Format("{0:N0}", htrans.ppn)));
-                parameters.Add(new ReportParameter("tglTrans", htrans.tglTrans?.ToString("dd/MM/yyyy")));
-                parameters.Add(new ReportParameter("kodenota", (string)htrans.kodenota ?? ""));
-                var namaPelanggan = Regex.Replace(htrans.masterpelanggan?.nama?.ToString() ?? "", @"[\r\n\t]+", " ");
+                parameters.Add(new ReportParameter("total", string.Format("{0:N0}", htrans.Jumlah)));
+                parameters.Add(new ReportParameter("lainnya", string.Format("{0:N0}", htrans.TambahanLainnya)));
+                parameters.Add(new ReportParameter("ppn", string.Format("{0:N0}", htrans.Ppn)));
+                parameters.Add(new ReportParameter("tglTrans", htrans.TglTrans.ToString("dd/MM/yyyy")));
+                parameters.Add(new ReportParameter("kodenota", (string)htrans.Kodenota ?? ""));
+                var namaPelanggan = Regex.Replace(htrans.Masterpelanggan?.Nama?.ToString() ?? "", @"[\r\n\t]+", " ");
                 parameters.Add(new ReportParameter("namaPelanggan", namaPelanggan));
-                ConsoleDump.Extensions.Dump(htrans.masterpelanggan?.nama?.ToString());
-                parameters.Add(new ReportParameter("namaSales", (string)htrans.sales?.nama ?? ""));
-                parameters.Add(new ReportParameter("tipeTempo", Helper.TipeTempoToString((sbyte)htrans.tipetempo)));
-                parameters.Add(new ReportParameter("tglTempo", htrans.tgltempo?.ToString("dd/MM/yyyy")));
-                parameters.Add(new ReportParameter("R", "0"));
-                parameters.Add(new ReportParameter("N", "0"));
+                ConsoleDump.Extensions.Dump(htrans.Masterpelanggan?.Nama?.ToString());
+                parameters.Add(new ReportParameter("namaSales", (string)htrans.Sales?.Nama ?? ""));
+                parameters.Add(new ReportParameter("tipeTempo", Helper.TipeTempoToString((sbyte)htrans.Tipetempo)));
+                parameters.Add(new ReportParameter("tglTempo", htrans.Tgltempo.ToString("dd/MM/yyyy")));
+                parameters.Add(new ReportParameter("R", "1"));
+                parameters.Add(new ReportParameter("N", "2"));
 
-                if (!String.IsNullOrWhiteSpace((string)htrans.kodenota))
+                if (!String.IsNullOrWhiteSpace((string)htrans.Kodenota))
                 {
                     var barcode64String =
-                        BarcodeGenerator.GenerateBase64Barcode((string)htrans.kodenota, ZXing.BarcodeFormat.CODE_128,
+                        BarcodeGenerator.GenerateBase64Barcode((string)htrans.Kodenota, ZXing.BarcodeFormat.CODE_128,
                             400, 40);
 
                     parameters.Add(new ReportParameter("barcodeImage", barcode64String));
@@ -997,12 +1242,17 @@ namespace DoranApp.View
                 // Refresh the report
                 reportViewer.RefreshReport();
 
-
                 var directPrint = new DirectPrint();
-                float widthInInches = 24 / 2.54f; // Convert 24 cm to inches
-                float heightInInches = 14 / 2.54f; // Convert 14 cm to inches
-                directPrint.Export(reportViewer.LocalReport)
-                    .ShowPreview("CustomSize", 970, 551);
+                if (checkBoxPrintFoto.Checked)
+                {
+                    directPrint.Export(reportViewer.LocalReport, "CustomSize", 21, 14)
+                        .ShowPreview();
+                }
+                else
+                {
+                    directPrint.Export(reportViewer.LocalReport, "CustomSize", 21, 14)
+                        .Print();
+                }
                 //.Print("CustomSize", 970, 551);
             }
             catch (Exception ex)
@@ -1010,11 +1260,33 @@ namespace DoranApp.View
                 ex.Dump();
                 MessageBox.Show(ex.Message);
             }
+
+            PrintNotaRun = false;
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            PrintNota();
+            if (dataGridView2.SelectedRows.Count != 1)
+            {
+                return;
+            }
+
+            var htrans = GetSelectedHtrans();
+            if (htrans == null)
+            {
+                MessageBox.Show("Transaksi tidak ditemukan");
+                return;
+            }
+
+            if (checkBoxModeNotaOl.Checked &&
+                htrans?.masterpelanggan?.lokasiKota?.lokasiProvinsi?.kode == Constants.KODE_PROV_ONLINE)
+            {
+                PrintNotaOl((int)htrans.kodeH);
+            }
+            else
+            {
+                PrintNota((int)htrans.kodeH);
+            }
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -1219,15 +1491,65 @@ namespace DoranApp.View
             }
         }
 
-        public void OnSnCheck(object sender, KeyEventArgs e)
+        public async void OnSnCheck(object sender, KeyEventArgs e)
         {
-            e.KeyCode.Dump();
-            e.SuppressKeyPress = true;
-            if (e.KeyCode == Keys.Enter && dataGridView1.CurrentRow != null)
+            if (e.KeyCode == Keys.Enter && dataGridView1.CurrentRow != null && !SnCheckRun)
             {
-                Console.WriteLine("123123");
-                MessageBox.Show(this, "123");
-                dataGridView1.Rows[dataGridView1.CurrentRow.Index - 1].Cells[0].Selected = true;
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                DataGridViewTextBoxEditingControl editingControl = sender as DataGridViewTextBoxEditingControl;
+                if (editingControl.Text.Trim() == "")
+                {
+                    dataGridView1.CurrentRow.Cells[1].Value = null;
+                    dataGridView1.CurrentRow.Cells[0].ReadOnly = false;
+                    dataGridView1.CurrentRow.Cells[1].ReadOnly = false;
+                    return;
+                }
+
+                SnCheckRun = true;
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (row.Cells[6].Value?.ToString() == editingControl.Text &&
+                        row.Index != dataGridView1.CurrentRow.Index && !row.IsNewRow)
+                    {
+                        MessageBox.Show($"SN Sudah terinput di transaksi ini");
+                        await Task.Delay(100);
+                        SnCheckRun = false;
+                        return;
+                    }
+                }
+
+                try
+                {
+                    var res = await _CLient.Get_Barangsn_By_SnAsync(editingControl.Text);
+                    if (res.Status == 1)
+                    {
+                        MessageBox.Show($"Status SN Sudah Terjual di KODEH {res.Kodehjual}");
+                        await Task.Delay(100);
+                        SnCheckRun = false;
+                        return;
+                    }
+
+
+                    dataGridView1.CurrentRow.Cells[0].Value = 1;
+                    dataGridView1.CurrentRow.Cells[1].Value = res.Kodebarang;
+                    dataGridView1.CurrentRow.Cells[0].ReadOnly = true;
+                    dataGridView1.CurrentRow.Cells[1].ReadOnly = true;
+                }
+                catch (ApiException ex)
+                {
+                    dataGridView1.CurrentRow.Cells[1].Value = null;
+                    dataGridView1.CurrentRow.Cells[0].ReadOnly = false;
+                    dataGridView1.CurrentRow.Cells[1].ReadOnly = false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+                await Task.Delay(100);
+                SnCheckRun = false;
             }
         }
 
@@ -1236,8 +1558,13 @@ namespace DoranApp.View
             if (e.Control is DataGridViewTextBoxEditingControl && dataGridView1.CurrentCell.ColumnIndex == 6)
             {
                 DataGridViewTextBoxEditingControl editingControl = e.Control as DataGridViewTextBoxEditingControl;
-                editingControl.KeyDown -= new KeyEventHandler(OnSnCheck);
-                editingControl.KeyDown += new KeyEventHandler(OnSnCheck);
+                if (editingControl != null)
+                {
+                    editingControl.AcceptsReturn = false;
+                    editingControl.KeyUp -= new KeyEventHandler(OnSnCheck);
+                    editingControl.KeyUp += new KeyEventHandler
+                        (OnSnCheck);
+                }
             }
 
             if (e.Control is DataGridViewComboBoxEditingControl)
@@ -1380,7 +1707,7 @@ namespace DoranApp.View
         {
             if (e.KeyCode == Keys.D1 && e.Control)
             {
-                PrintNota();
+                //button14.Click();
             }
 
             if (e.KeyCode == Keys.F3)
@@ -1391,30 +1718,30 @@ namespace DoranApp.View
 
         private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            if (dataGridView1.Rows.Count == 0)
-            {
-                return;
-            }
-
-            try
-            {
-                var checkMb = _masterbarangOptions.Find(x =>
-                    x.BrgKode.HasValue &&
-                    x.BrgKode.ToString() == dataGridView1.Rows[e.RowIndex].Cells[1]?.Value.ToString());
-                if (checkMb == null)
-                {
-                    e.Cancel = true;
-                    return;
-                }
-
-                if (e.ColumnIndex == 6)
-                {
-                    e.Cancel = !checkMb.Sn;
-                }
-            }
-            catch (Exception ex)
-            {
-            }
+            // if (dataGridView1.Rows.Count == 0)
+            // {
+            //     return;
+            // }
+            //
+            // try
+            // {
+            //     var checkMb = _masterbarangOptions.Find(x =>
+            //         x.BrgKode.HasValue &&
+            //         x.BrgKode.ToString() == dataGridView1.Rows[e.RowIndex].Cells[1]?.Value.ToString());
+            //     if (checkMb == null)
+            //     {
+            //         e.Cancel = true;
+            //         return;
+            //     }
+            //
+            //     if (e.ColumnIndex == 6)
+            //     {
+            //         e.Cancel = !checkMb.Sn;
+            //     }
+            // }
+            // catch (Exception ex)
+            // {
+            // }
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -1427,8 +1754,12 @@ namespace DoranApp.View
             Clipboard.SetText(textBoxGenerateKeyLimit.Text);
         }
 
-        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_KeyDown_1(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Enter)
+            {
+                MessageBox.Show("FORMRR");
+            }
         }
     }
 

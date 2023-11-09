@@ -66,7 +66,7 @@ namespace DoranApp.View
             }
             catch (Exception error)
             {
-                MessageBox.Show($"{error.Message}", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, $"{error.Message}", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -125,7 +125,7 @@ namespace DoranApp.View
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             SettingForm settingForm = new SettingForm();
-            settingForm.ShowDialog();
+            settingForm.ShowDialog(this);
         }
     }
 }
