@@ -38,6 +38,7 @@ public partial class CekStokForm : Form
         FetchMastergudangDisposable = FetchMastergudangOption.Subscribe(x =>
         {
             _MutasiBarangControl.comboMastergudang.DataSource = x.ToList();
+            _MutasiBarangControl.listBoxGudang.DataSource = x.ToList();
         });
         await FetchMastergudangOption.Run();
     }

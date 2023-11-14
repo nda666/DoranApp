@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ConsoleDump;
@@ -10,6 +12,7 @@ using DoranApp.Exceptions;
 using DoranApp.Properties;
 using DoranApp.Utils;
 using DoranApp.View.UserForms;
+using Microsoft.Reporting.WinForms;
 
 namespace DoranApp.View
 {
@@ -194,7 +197,11 @@ namespace DoranApp.View
 
                 comboFilterSales.ValueMember = "Kode";
                 comboFilterSales.DisplayMember = "Nama";
-                comboFilterSales.DataSource = _salesOptions.ToList();
+                comboFilterSales.DataSource = _salesOptions.ToList().Prepend(new SalesOptionDto
+                {
+                    Kode = null,
+                    Nama = "SEMUA"
+                }).ToList();
             }
             catch (Exception ex)
             {
@@ -1266,6 +1273,215 @@ namespace DoranApp.View
             }
 
             button2.Enabled = true;
+        }
+
+        private async Task<PrintOrderResultDto?> GetPrintData()
+        {
+            if (dataGridView2.SelectedRows.Count <= 0 || dataGridView2.Rows.Count <= 0 || FetchOrderRun)
+            {
+                return null;
+            }
+
+            var kodeh = (int)dataGridView2.SelectedRows[0].Cells["Kodeh"].Value;
+            try
+            {
+                return await _Client.Print_OrderanAsync(kodeh);
+            }
+            catch (ApiException ex)
+            {
+                Helper.ShowErrorMessageFromResponse(ex);
+            }
+            catch (Exception ex)
+            {
+                Helper.ShowErrorMessage(ex);
+            }
+
+            return null;
+        }
+
+        private async Task PrintData(bool file)
+        {
+            var printData = await GetPrintData();
+            if (printData == null)
+            {
+                return;
+            }
+
+            printData.Dump();
+            if (printData.PrintOl == 1)
+            {
+                PrintNotaOl(printData, file);
+            }
+            else
+            {
+                PrintNota(printData, file);
+            }
+        }
+
+        private void PrintNotaOl(PrintOrderResultDto printData, bool file)
+        {
+            var horderPrint = printData.Horder;
+            try
+            {
+                ReportViewer reportViewer = new ReportViewer();
+                reportViewer.ProcessingMode = ProcessingMode.Local;
+                reportViewer.LocalReport.ReportEmbeddedResource =
+                    "DoranApp.Report.NotaOrderanOl.rdlc"; // Path to your RDLC file
+
+                var dt = new DataTable();
+                dt.Columns.Add("pcs");
+                dt.Columns.Add("nama");
+                dt.Columns.Add("keterangan");
+                foreach (var d in printData.Dorder)
+                {
+                    DataRow row = dt.NewRow();
+                    row["pcs"] = d.Pcs;
+                    row["nama"] = d.NamaBarang;
+                    row["keterangan"] = d.KeteranganBrg;
+                    dt.Rows.Add(row);
+                }
+
+                // Set parameters (if any)
+                List<ReportParameter> parameters = new List<ReportParameter>();
+                parameters.Add(new ReportParameter("tanggal", horderPrint.Tanggal));
+                parameters.Add(new ReportParameter("kodeh", horderPrint.KodeH.ToString()));
+
+                var namaPelanggan = Regex.Replace(horderPrint.Nama ?? "", @"[\r\n\t]+", " ");
+                parameters.Add(new ReportParameter("namaPelanggan", namaPelanggan));
+                parameters.Add(new ReportParameter("namaSales", horderPrint.NamaSales ?? ""));
+                parameters.Add(new ReportParameter("infoPenting", horderPrint.InfoPenting ?? ""));
+                parameters.Add(new ReportParameter("penyiapOrder", horderPrint.PenyiapOrder ?? ""));
+                parameters.Add(new ReportParameter("tanggalInput", horderPrint.TanggalInput ?? ""));
+                parameters.Add(new ReportParameter("tanggalCetak", horderPrint.TanggalCetak ?? ""));
+                parameters.Add(new ReportParameter("keterangan", horderPrint.Keterangan ?? ""));
+                parameters.Add(new ReportParameter("namaExp", horderPrint.NamaExp ?? ""));
+                parameters.Add(new ReportParameter("melalui", horderPrint.Melalui ?? ""));
+                parameters.Add(new ReportParameter("NR", printData.TotalBarangLabel ?? ""));
+
+                reportViewer.LocalReport.SetParameters(parameters.ToArray());
+
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
+                // Refresh the report
+                reportViewer.RefreshReport();
+
+                var directPrint = new DirectPrint();
+                if (file)
+                {
+                    directPrint.Export(reportViewer.LocalReport, "CustomSize", 8, 11).ShowPreview();
+                }
+                else
+                {
+                    directPrint.Export(reportViewer.LocalReport, "CustomSize", 8, 11).Print();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Dump();
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void PrintNota(PrintOrderResultDto printData, bool file)
+        {
+            var horderPrint = printData.Horder;
+            try
+            {
+                ReportViewer reportViewer = new ReportViewer();
+                reportViewer.ProcessingMode = ProcessingMode.Local;
+                reportViewer.LocalReport.ReportEmbeddedResource =
+                    "DoranApp.Report.NotaOrderan.rdlc"; // Path to your RDLC file
+
+                var dt = new DataTable();
+                dt.Columns.Add("pcs");
+                dt.Columns.Add("nama");
+                dt.Columns.Add("keterangan");
+                foreach (var d in printData.Dorder)
+                {
+                    DataRow row = dt.NewRow();
+                    row["pcs"] = d.Pcs;
+                    row["nama"] = d.NamaBarang;
+                    row["keterangan"] = d.KeteranganBrg;
+                    dt.Rows.Add(row);
+                }
+
+                // Set parameters (if any)
+                List<ReportParameter> parameters = new List<ReportParameter>();
+                parameters.Add(new ReportParameter("tanggal", horderPrint.Tanggal));
+                parameters.Add(new ReportParameter("kodeh", horderPrint.KodeH.ToString()));
+
+                var namaPelanggan = Regex.Replace(horderPrint.Nama ?? "", @"[\r\n\t]+", " ");
+                parameters.Add(new ReportParameter("namaPelanggan", namaPelanggan));
+                parameters.Add(new ReportParameter("namaSales", horderPrint.NamaSales ?? ""));
+                parameters.Add(new ReportParameter("infoPenting", horderPrint.InfoPenting ?? ""));
+                parameters.Add(new ReportParameter("penyiapOrder", horderPrint.PenyiapOrder ?? ""));
+                parameters.Add(new ReportParameter("tanggalInput", horderPrint.TanggalInput ?? ""));
+                parameters.Add(new ReportParameter("tanggalCetak", horderPrint.TanggalCetak ?? ""));
+                parameters.Add(new ReportParameter("keterangan", horderPrint.Keterangan ?? ""));
+                parameters.Add(new ReportParameter("namaExp", horderPrint.NamaExp ?? ""));
+                parameters.Add(new ReportParameter("melalui", horderPrint.Melalui ?? ""));
+                parameters.Add(new ReportParameter("NR", printData.JumlahKirimanLabel ?? ""));
+
+
+                reportViewer.LocalReport.SetParameters(parameters.ToArray());
+
+                reportViewer.LocalReport.DataSources.Add(new ReportDataSource("DataSet1", dt));
+                // Refresh the report
+                reportViewer.RefreshReport();
+
+                var directPrint = new DirectPrint();
+                if (file)
+                {
+                    directPrint.Export(reportViewer.LocalReport, "CustomSize", 21, 14).ShowPreview();
+                }
+                else
+                {
+                    directPrint.Export(reportViewer.LocalReport, "CustomSize", 21, 14).Print();
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.Dump();
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async void btnCetak_Click(object sender, EventArgs e)
+        {
+            PrintData(false);
+        }
+
+        private void btnCetakTanpaKertas_Click(object sender, EventArgs e)
+        {
+            PrintData(true);
+        }
+
+        private async void btnInfoDetail_Click(object sender, EventArgs e)
+        {
+            var horder = GetHorderFromDgv2();
+            if (horder == null || FetchOrderRun)
+            {
+                return;
+            }
+
+            var dorder = GetDorderFromDgv3(horder?.Dorder?.ToList());
+            if (dorder == null || FetchOrderRun)
+            {
+                return;
+            }
+
+            try
+            {
+                var res = await _Client.Info_OrderanAsync(horder.Kodeh, dorder.Koded);
+                MessageBox.Show(res);
+            }
+            catch (ApiException ex)
+            {
+                Helper.ShowErrorMessageFromResponse(ex);
+            }
+            catch (Exception ex)
+            {
+                Helper.ShowErrorMessage(ex);
+            }
         }
     }
 }

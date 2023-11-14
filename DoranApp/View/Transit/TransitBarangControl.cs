@@ -653,9 +653,4 @@ public partial class TransitBarangControl : UserControl
         dontUpdateChangeDgv = false;
         AnyDataProcessRun = false;
     }
-
-    private void button8_Click(object sender, EventArgs e)
-    {
-        throw new System.NotImplementedException();
-    }
 }

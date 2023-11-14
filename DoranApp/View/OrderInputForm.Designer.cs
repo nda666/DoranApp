@@ -820,7 +820,7 @@
             this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(494, 275);
+            this.dataGridView2.Size = new System.Drawing.Size(482, 275);
             this.dataGridView2.TabIndex = 0;
             this.dataGridView2.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.dataGridView2_DataBindingComplete);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
@@ -965,13 +965,13 @@
             // 
             // button2
             // 
-            this.button2.Enabled = false;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(6, 403);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(214, 24);
             this.button2.TabIndex = 77;
-            this.button2.Tag = "enableOnSelect";
-            this.button2.Text = "Bunyikan Lonceng";
+            this.button2.Tag = "";
+            this.button2.Text = "BUNYIKAN LONCENGNYA";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -1044,6 +1044,7 @@
             this.btnInfoDetail.Tag = "enableOnSelect";
             this.btnInfoDetail.Text = "Info Detail";
             this.btnInfoDetail.UseVisualStyleBackColor = true;
+            this.btnInfoDetail.Click += new System.EventHandler(this.btnInfoDetail_Click);
             // 
             // btnPendingOrder
             // 
@@ -1114,6 +1115,7 @@
             this.btnCetakTanpaKertas.Tag = "enableOnSelect";
             this.btnCetakTanpaKertas.Text = "Cetak Tanpa Kertas";
             this.btnCetakTanpaKertas.UseVisualStyleBackColor = true;
+            this.btnCetakTanpaKertas.Click += new System.EventHandler(this.btnCetakTanpaKertas_Click);
             // 
             // btnCetak
             // 
@@ -1125,6 +1127,7 @@
             this.btnCetak.Tag = "enableOnSelect";
             this.btnCetak.Text = "Cetak";
             this.btnCetak.UseVisualStyleBackColor = true;
+            this.btnCetak.Click += new System.EventHandler(this.btnCetak_Click);
             // 
             // buttonSetPenyiap
             // 
@@ -1363,12 +1366,10 @@
             // radioDicetakBelum
             // 
             this.radioDicetakBelum.AutoSize = true;
-            this.radioDicetakBelum.Checked = true;
             this.radioDicetakBelum.Location = new System.Drawing.Point(70, 20);
             this.radioDicetakBelum.Name = "radioDicetakBelum";
             this.radioDicetakBelum.Size = new System.Drawing.Size(54, 17);
             this.radioDicetakBelum.TabIndex = 1;
-            this.radioDicetakBelum.TabStop = true;
             this.radioDicetakBelum.Tag = "false";
             this.radioDicetakBelum.Text = "Belum";
             this.radioDicetakBelum.UseVisualStyleBackColor = true;
@@ -1376,10 +1377,12 @@
             // radioDicetakSemua
             // 
             this.radioDicetakSemua.AutoSize = true;
+            this.radioDicetakSemua.Checked = true;
             this.radioDicetakSemua.Location = new System.Drawing.Point(6, 19);
             this.radioDicetakSemua.Name = "radioDicetakSemua";
             this.radioDicetakSemua.Size = new System.Drawing.Size(58, 17);
             this.radioDicetakSemua.TabIndex = 0;
+            this.radioDicetakSemua.TabStop = true;
             this.radioDicetakSemua.Text = "Semua";
             this.radioDicetakSemua.UseVisualStyleBackColor = true;
             // 

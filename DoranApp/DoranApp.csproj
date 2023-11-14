@@ -203,6 +203,7 @@
       <Compile Include="Dtos\HtransitDto.cs"/>
       <Compile Include="Dtos\PaginationDto.cs"/>
     <Compile Include="Helper.cs" />
+      <Compile Include="LocalModel\NotaOrderanDetail.cs"/>
       <Compile Include="LocalModel\NotaTransaksiOLDetail.cs"/>
       <Compile Include="LocalModel\NotaTransaksiPpnDetail.cs"/>
     <Compile Include="LocalModel\NotaTransaksiDetail.cs" />
@@ -226,6 +227,12 @@
       </Compile>
       <Compile Include="View\CekStok\CekStokForm.Designer.cs">
           <DependentUpon>CekStokForm.cs</DependentUpon>
+      </Compile>
+      <Compile Include="View\CekStok\CetakStokForm.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\CekStok\CetakStokForm.Designer.cs">
+          <DependentUpon>CetakStokForm.cs</DependentUpon>
       </Compile>
       <Compile Include="View\CekStok\HistoryBarangMasukControl.cs">
           <SubType>UserControl</SubType>
@@ -450,11 +457,16 @@
       <DependentUpon>_Container.cs</DependentUpon>
     </Compile>
       <EmbeddedResource Include="Properties\licenses.licx"/>
+      <EmbeddedResource Include="Report\NotaOrderanOl.rdlc"/>
+      <EmbeddedResource Include="Report\NotaOrderan.rdlc"/>
       <EmbeddedResource Include="Report\NotaTransaksiOl.rdlc"/>
       <EmbeddedResource Include="Report\NotaTransaksiPpn.rdlc"/>
     <EmbeddedResource Include="Report\NotaTransaksi.rdlc" />
       <EmbeddedResource Include="View\CekStok\CekStokForm.resx">
           <DependentUpon>CekStokForm.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="View\CekStok\CetakStokForm.resx">
+          <DependentUpon>CetakStokForm.cs</DependentUpon>
       </EmbeddedResource>
       <EmbeddedResource Include="View\CekStok\HistoryBarangMasukControl.resx">
           <DependentUpon>HistoryBarangMasukControl.cs</DependentUpon>
@@ -574,6 +586,7 @@
     <EmbeddedResource Include="View\_Container.resx">
       <DependentUpon>_Container.cs</DependentUpon>
     </EmbeddedResource>
+      <None Include="DoranApp.LocalModel.NotaOrderanDetail.datasource"/>
     <None Include="DoranApp.LocalModel.NotaTransaksiDetail.datasource" />
       <None Include="DoranApp.LocalModel.NotaTransaksiOLDetail.datasource"/>
       <None Include="DoranApp.LocalModel.NotaTransaksiPpnDetail.datasource"/>
