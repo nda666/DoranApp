@@ -210,7 +210,6 @@ partial class TransitBarangControl
         this.button8.Tag = "FilterAction1";
         this.button8.Text = "Cetak";
         this.button8.UseVisualStyleBackColor = true;
-        this.button8.Click += new System.EventHandler(this.button8_Click);
         // 
         // buttonFilterNama
         // 

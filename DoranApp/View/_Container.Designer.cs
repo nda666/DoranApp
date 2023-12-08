@@ -227,6 +227,7 @@ namespace DoranApp.View
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.IsMdiContainer = true;
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "_Container";
             this.ShowIcon = false;
@@ -236,6 +237,7 @@ namespace DoranApp.View
             this.Load += new System.EventHandler(this._Container_Load);
             this.MdiChildActivate += new System.EventHandler(this._Container_MdiChildActivate);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this._Container_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this._Container_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

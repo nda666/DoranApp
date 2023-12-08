@@ -12,12 +12,7 @@ public partial class Client
             httpClient.DefaultRequestHeaders.Add("Authorization", Properties.Settings.Default.AuthToken);
         }
 
-        var url = Properties.Settings.Default.BASE_API_URL.EndsWith("/api")
-            ? Properties.Settings.Default.BASE_API_URL.Substring(
-                0,
-                Properties.Settings.Default.BASE_API_URL.Length - 4
-            )
-            : Properties.Settings.Default.BASE_API_URL;
+        var url = "http://" + Properties.Settings.Default.BASE_API_URL + ":44376";
         BaseUrl = url;
         _httpClient = httpClient;
         _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(CreateSerializerSettings, true);

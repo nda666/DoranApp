@@ -167,6 +167,7 @@
     <Compile Include="DataGlobal\FetchBase.cs" />
       <Compile Include="DataGlobal\FetchMastergudangBoleTransitOption.cs"/>
       <Compile Include="DataGlobal\FetchMastersupplier.cs"/>
+      <Compile Include="DataGlobal\FetchMasteruserOption.cs"/>
       <Compile Include="DataGlobal\FetchPenyiaporder.cs"/>
     <Compile Include="DataGlobal\FetchSalesOption.cs" />
     <Compile Include="DataGlobal\FetchChannelSalesOption.cs" />
@@ -252,6 +253,12 @@
       <Compile Include="View\Form1.Designer.cs">
           <DependentUpon>Form1.cs</DependentUpon>
       </Compile>
+      <Compile Include="View\LaporanInputOrderForm.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\LaporanInputOrderForm.Designer.cs">
+          <DependentUpon>LaporanInputOrderForm.cs</DependentUpon>
+      </Compile>
     <Compile Include="View\LaporanPenjualanBarangBySales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -270,11 +277,17 @@
     <Compile Include="View\LaporanPenjualanBarangByBarang.Designer.cs">
       <DependentUpon>LaporanPenjualanBarangByBarang.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\LaporanTransaksiPenjualan.cs">
+      <Compile Include="View\LaporanTransaksiPenjualan\ByTokoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\LaporanTransaksiPenjualan.Designer.cs">
-      <DependentUpon>LaporanTransaksiPenjualan.cs</DependentUpon>
+      <Compile Include="View\LaporanTransaksiPenjualan\ByTokoForm.Designer.cs">
+          <DependentUpon>ByTokoForm.cs</DependentUpon>
+      </Compile>
+      <Compile Include="View\LaporanTransaksiPenjualan\LaporanTransaksiPenjualanForm.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\LaporanTransaksiPenjualan\LaporanTransaksiPenjualanForm.Designer.cs">
+          <DependentUpon>LaporanTransaksiPenjualanForm.cs</DependentUpon>
     </Compile>
       <Compile Include="View\ReportViewerForm.cs">
           <SubType>Form</SubType>
@@ -493,6 +506,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+      <EmbeddedResource Include="View\LaporanInputOrderForm.resx">
+          <DependentUpon>LaporanInputOrderForm.cs</DependentUpon>
+      </EmbeddedResource>
     <EmbeddedResource Include="View\LaporanPenjualanBarangBySales.resx">
       <DependentUpon>LaporanPenjualanBarangBySales.cs</DependentUpon>
     </EmbeddedResource>
@@ -502,8 +518,8 @@
     <EmbeddedResource Include="View\LaporanPenjualanBarangByBarang.resx">
       <DependentUpon>LaporanPenjualanBarangByBarang.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\LaporanTransaksiPenjualan.resx">
-      <DependentUpon>LaporanTransaksiPenjualan.cs</DependentUpon>
+      <EmbeddedResource Include="View\LaporanTransaksiPenjualan\LaporanTransaksiPenjualanForm.resx">
+          <DependentUpon>LaporanTransaksiPenjualanForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -666,6 +682,9 @@
       <Content Include="Resources\icons8_update1.gif"/>
       <Content Include="Resources\icons8_warehouse.png"/>
       <Content Include="Resources\icons8_warehouse1.png"/>
+  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="View\LaporanInputOrder\"/>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

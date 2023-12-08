@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ConsoleDump;
 using DoranApp.Data;
 using DoranApp.DataGlobal;
 using DoranApp.Utils;
 
-namespace DoranApp.View
+namespace DoranApp.View.LaporanTransaksiPenjualanForm
 {
-    public partial class LaporanTransaksiPenjualan : Form
+    public partial class LaporanTransaksiPenjualanForm : Form
     {
         public long _laporanTransaksiLastPage = 0;
-
         private List<CommonResultDto> _lokasiKota = new List<CommonResultDto>();
         private IDisposable _LokasiKotaSubscribe;
         private MasterbarangData _masterbarang = new MasterbarangData();
@@ -27,9 +27,108 @@ namespace DoranApp.View
 
         private LaporanTransaksiData _transaksiData = new LaporanTransaksiData();
 
-        public LaporanTransaksiPenjualan()
+        private Dictionary<string, IDisposable> DisposableList = new Dictionary<string, IDisposable>();
+
+        public LaporanTransaksiPenjualanForm()
         {
             InitializeComponent();
+            var UTAMA_Akses = Session.GetUser().Akses;
+            if (Session.GetUser().Akses?.ToLower() == "mastersuperadmin")
+            {
+                BTN_UpdateTransaksi.Visible = true;
+                CBO_GantiHarga.Visible = true;
+                CBO_GantiHarga.Enabled = false;
+                CBO_GantiHarga.Checked = true;
+            }
+
+            if (UTAMA_Akses?.ToLower() == "supermasteraudit")
+            {
+                BTN_UpdateTransaksi.Visible = true;
+                CBO_GantiHarga.Visible = true;
+                CBO_GantiHarga.Enabled = true;
+                CBO_GantiHarga.Checked = false;
+            }
+
+            if (UTAMA_Akses?.ToLower() == "bos" || UTAMA_Akses?.ToLower() == "auditor" ||
+                UTAMA_Akses?.ToLower() == "supermasteraudit" || UTAMA_Akses?.ToLower() == "kepalaakuntan")
+            {
+                BTN_Jurnal.Visible = true;
+                BTN_Valid.Visible = true;
+                groupRadioValid.Visible = true;
+                CBO_SemuaValid.Visible = true;
+
+                // TODO: harus di set nama di C# nya, karena ini dari delphi #3
+                // TAB_PPN.Enabled = true;
+                // BTN_HapusPPN.Enabled = true;
+                // PANEL_Auditor.Enabled = true;
+                // PANEL_Auditor.Visible = true;
+                // GROUP_PPNManual.Visible = true;
+
+                if (UTAMA_Akses?.ToLower() == "kepalaakuntan")
+                {
+                    // TAB_PPN.Enabled = true;
+                }
+            }
+
+            if (UTAMA_Akses?.ToLower() == "bos" || UTAMA_Akses?.ToLower() == "masteraudit" ||
+                UTAMA_Akses?.ToLower() == "supermasteraudit" || UTAMA_Akses?.ToLower() == "managerbusiness" ||
+                UTAMA_Akses?.ToLower() == "pm" || UTAMA_Akses?.ToLower() == "masteraudit")
+            {
+                // PANEL_SN.Visible = true;
+            }
+
+            if (UTAMA_Akses?.ToLower() == "kepalaakuntan")
+            {
+                // TAB_PPN.Enabled = true;
+            }
+
+            if (UTAMA_Akses?.ToLower() == "bos" || UTAMA_Akses?.ToLower() == "masteraudit" ||
+                UTAMA_Akses?.ToLower() == "supermasteraudit")
+            {
+                // CBO_KomisiMinus.Visible = true;
+            }
+
+            if (UTAMA_Akses?.ToLower() == "bos" || UTAMA_Akses?.ToLower() == "masteradmin" ||
+                UTAMA_Akses?.ToLower() == "masteradmin2" || UTAMA_Akses?.ToLower() == "mastersuperadmin" ||
+                UTAMA_Akses?.ToLower() == "seketaris" || UTAMA_Akses?.ToLower() == "masteraudit" ||
+                UTAMA_Akses?.ToLower() == "supermasteraudit")
+            {
+                // Group_JatuhTempo.Enabled = true;
+                // BTN_Angsuran.Enabled = true;
+                // BTN_SetLunas1.Enabled = true;
+                // TAB_StokanNota.Enabled = true;
+                // PANEL_Finance.Enabled = true;
+                // PANEL_Finance.Visible = true;
+            }
+
+            if (UTAMA_Akses?.ToLower() == "kepalaakuntan")
+            {
+                // BTN_Angsuran.Enabled = true;
+            }
+
+            if (UTAMA_Akses?.ToLower() == "bos" || UTAMA_Akses?.ToLower() == "masteradmin" ||
+                UTAMA_Akses?.ToLower() == "masteradmin2" || UTAMA_Akses?.ToLower() == "mastersuperadmin" ||
+                UTAMA_Akses?.ToLower() == "masteraudit" || UTAMA_Akses?.ToLower() == "supermasteraudit" ||
+                UTAMA_Akses?.ToLower() == "seketaris" || UTAMA_Akses?.ToLower() == "kepalaakuntan")
+            {
+                // GROUP_MasterAdmin.Visible = true;
+            }
+
+            if (UTAMA_Akses?.ToLower() == "bos")
+            {
+                // TAB_CetakForm.Enabled = true;
+                // TAB_BagiKomisi.Enabled = true;
+                // Group_Komisi.Enabled = true;
+                // BTN_HapusPPN.Enabled = true;
+                // Group_Footer.Visible = true;
+                // TE_Komisi1.Visible = true;
+                // TE_Komisi2.Visible = true;
+                // LBL_Komisi.Visible = true;
+                // LBL_KomisiStrip.Visible = true;
+                CBO_Bos.Visible = true;
+                // BTN_HapusTTMassal.Enabled = true;
+                // GROUP_AdminGantiHarga.Visible = true;
+            }
         }
 
         public long _laporanTransaksiPage
@@ -192,6 +291,46 @@ namespace DoranApp.View
             button11.Enabled = true;
         }
 
+        private dynamic GetLaporanTransaksiSearchQuery()
+        {
+            return new
+            {
+                page = _laporanTransaksiPage <= 0 ? 1 : _laporanTransaksiPage,
+                pageSize = comboPageSize.SelectedItem?.ToString() ?? "50",
+                //Filter 1
+                minDate = datePickerFilterMin.Value,
+                maxDate = datePickerFilterMax.Value,
+                kodeSales = comboFilterSales.SelectedValue?.ToString(),
+                KodePelanggan = comboFilterPelanggan.SelectedValue?.ToString(),
+                kodeKota = comboFilterKota.SelectedValue?.ToString(),
+                kodeProvinsi = comboFilterProvinsi.SelectedValue?.ToString(),
+                Kodenota = textBoxFilterKodenota.Text.Trim(),
+                kodeh = textBoxFilterKodeh.Text.Trim(),
+                lunas = GetFilterLunas(),
+
+                // Filter 2 
+                InsertName = comboFilterAdmin.SelectedValue?.ToString(),
+                Keterangan = textboxFilterKeterangan.Text,
+                NamaPelanggan = textBoxNamaPelanggan.Text,
+                KodeGudang = comboFilterGudang.SelectedValue?.ToString(),
+                HargaMin = textboxFilterHargaMin.Text != "" ? textboxFilterHargaMin.UnformattedValue.ToString() : null,
+                HargaMax = textboxFilterHargaMax.Text != "" ? textboxFilterHargaMax.UnformattedValue.ToString() : null,
+                HargaTidakNol = checkBoxHargaTidakNol.Checked,
+                NoSeriOnline = textboxFilterNoSeriOnline.Text,
+                Barcodeonline = textboxFilterBarcode.Text,
+
+                // Filter 3
+                NamaBarang = textboxFilterNamabarang.Text,
+                Jumlah = textboxFilterHargaMax.Text != "" ? textboxJumlahTrans.UnformattedValue.ToString() : null,
+                NotaTitip = checkFilterTitipNota.Checked,
+                Admingantiharga = checkboxFilterAdminGantiHarga.Checked,
+
+                // Filter Jurnal Penjualan
+                AkanDjJurnalkan = Helper.GetSelectedRadioButtonTag(groupBoxRadioJurnalPenjualan),
+                Valid = Helper.GetSelectedRadioButtonTag(groupRadioValid)
+            };
+        }
+
         private async Task fetchLaporanTransaksi()
         {
             GC.Collect();
@@ -200,20 +339,7 @@ namespace DoranApp.View
             button1.Enabled = false;
             try
             {
-                _transaksiData.SetQuery(new
-                {
-                    page = _laporanTransaksiPage <= 0 ? 1 : _laporanTransaksiPage,
-                    pageSize = comboPageSize.SelectedItem?.ToString() ?? "50",
-                    minDate = datePickerFilterMin.Value,
-                    maxDate = datePickerFilterMax.Value,
-                    kodeSales = comboFilterSales.SelectedValue?.ToString(),
-                    KodePelanggan = comboFilterPelanggan.SelectedValue?.ToString(),
-                    kodeKota = comboFilterKota.SelectedValue?.ToString(),
-                    kodeProvinsi = comboFilterProvinsi.SelectedValue?.ToString(),
-                    Kodenota = textBoxFilterKodenota.Text.Trim(),
-                    kodeh = textBoxFilterKodeh.Text.Trim(),
-                    lunas = GetFilterLunas()
-                });
+                _transaksiData.SetQuery(GetLaporanTransaksiSearchQuery());
                 await _transaksiData.Refresh();
             }
             catch (Exception ex)
@@ -228,6 +354,24 @@ namespace DoranApp.View
             toolStrip1.Enabled = true;
             button1.Enabled = true;
             toolStripLabel2.Visible = false;
+
+            var totalData = _transaksiData.GetTotalData();
+
+            labelTotalTrans.Text = paginationData.TotalRow.ToString("N0");
+            labelTotalOmzet.Text = totalData.Total.ToString("N0");
+            labelTotalKomisi.Text = totalData.Komisi.ToString("N0");
+            labelTotalDppFull.Text = totalData.DppFull.ToString("N0");
+            labelTotalUntung.Text = totalData.Untung.ToString("N0");
+            labelTotalUntungBelPotOL.Text = totalData.UntungbelumpotOl.ToString("N0");
+            labelTotalPpnFull.Text = totalData.Ppn.ToString("N0");
+            labelTotalTambahan.Text = totalData.TambahanLainnya.ToString("N0");
+            labelTotalBiaya.Text = totalData.Jumlahbarangbiaya.ToString("N0");
+            labelTotalDiskon.Text = totalData.Diskon.ToString("N0");
+
+            labelTotalPpn.Text = totalData.Ppn.ToString("N0");
+            labelTotalDpp.Text = totalData.Dpp.ToString("N0");
+            labelTotalOmzetPpn.Text = totalData.TotalOmzetPPN.ToString("N0");
+            totalData?.Dump();
         }
 
         private string? GetFilterLunas()
@@ -245,6 +389,32 @@ namespace DoranApp.View
             return null;
         }
 
+        private async Task SubscribeUser()
+        {
+            DisposableList["userSubs"] = FetchMasteruserOption.Subscribe(data =>
+            {
+                comboFilterAdmin.DataSource = data.ToList().Prepend(new MasteruserOptionDto
+                {
+                    Kodeku = null,
+                    Usernameku = "Semua Admin"
+                }).ToList();
+            });
+            await FetchMasteruserOption.Run();
+        }
+
+        private async Task SubscribeGudang()
+        {
+            DisposableList["gudangSubs"] = FetchMastergudangOption.Subscribe(data =>
+            {
+                comboFilterGudang.DataSource = data.ToList().Prepend(new MastergudangOptionDto
+                {
+                    Kode = null,
+                    Nama = "Semua Gudang"
+                }).ToList();
+            });
+            await FetchMastergudangOption.Run();
+        }
+
         private async Task SubscribeLokasiKota()
         {
             comboFilterKota.ValueMember = "Kode";
@@ -252,7 +422,7 @@ namespace DoranApp.View
             // Subscribe directly without creating a new LocationObserver
 
 
-            _LokasiKotaSubscribe = FetchLokasiKota.Subscribe(data =>
+            DisposableList["lokasiKotaSubs"] = FetchLokasiKota.Subscribe(data =>
             {
                 _lokasiKota = data.Select(e => new CommonResultDto()
                 {
@@ -292,7 +462,8 @@ namespace DoranApp.View
             FetchPelanggan();
             FetchMasterbarang();
             SubscribeLokasiKota();
-            //FetchGudang();
+            SubscribeUser();
+            SubscribeGudang();
             //FetchLevelHarga();
             //CreateDatagridview();
         }
@@ -316,7 +487,11 @@ namespace DoranApp.View
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            _laporanTransaksiPage++;
+            if (_laporanTransaksiPage + 1 <= _laporanTransaksiLastPage)
+            {
+                _laporanTransaksiPage++;
+            }
+
             fetchLaporanTransaksi();
         }
 
@@ -373,6 +548,11 @@ namespace DoranApp.View
             if (dataGridView1.DataSource != null)
             {
                 dataGridView1.DataSource = null;
+            }
+
+            foreach (var disposable in DisposableList)
+            {
+                disposable.Value.Dispose();
             }
 
             dataGridView1.Dispose();
@@ -435,6 +615,96 @@ namespace DoranApp.View
                 {
                     fetchLaporanTransaksi();
                 }
+            }
+        }
+
+        private void dataGridView1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                var hti = dataGridView1.HitTest(e.X, e.Y);
+                if (hti.RowIndex >= 0)
+                {
+                    dataGridView1.ClearSelection();
+                    dataGridView1.Rows[hti.RowIndex].Selected = true;
+
+                    contextMenuStrip1.Show(Cursor.Position); // Show the context menu at mouse cursor position
+                }
+            }
+        }
+
+        private void CopyCellData(string cellName)
+        {
+            if (dataGridView1.SelectedRows.Count != 1)
+            {
+                return;
+            }
+
+            var text = dataGridView1.SelectedRows[0].Cells[cellName].Value?.ToString();
+            if (!String.IsNullOrEmpty(text))
+            {
+                Clipboard.SetText(text);
+            }
+        }
+
+        private void copyNoNotaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyCellData("No Nota");
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            CopyCellData("No Nota");
+        }
+
+        private void copyNoSeriOLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyCellData("Seri OL");
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            CopyCellData("Seri OL");
+        }
+
+        private void copyBarcodeOLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyCellData("Barcode OL");
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            CopyCellData("Barcode OL");
+        }
+
+        private void copyKodehToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CopyCellData("Kodeh");
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            CopyCellData("Kodeh");
+        }
+
+        private async void LaporanTransaksiPenjualan_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F3)
+            {
+                _laporanTransaksiPage = 1;
+                await fetchLaporanTransaksi();
+            }
+        }
+
+        private async void BTN_TotalOmzetPenjualan_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await _transaksiData.GetLaporanTransaksiPenjualanGroupToko(GetLaporanTransaksiSearchQuery());
+            }
+            catch (Exception ex)
+            {
+                ex.Dump();
             }
         }
     }

@@ -18,7 +18,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="BASE_API_URL" Type="System.String" Scope="User">
-        <Value Profile="(Default)">http://182.253.116.121:44376/api</Value>
+        <Value Profile="(Default)">182.253.116.121</Value>
     </Setting>
   </Settings>
 </SettingsFile>

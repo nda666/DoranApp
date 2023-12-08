@@ -452,7 +452,7 @@ namespace DoranApp.View
 
         private void laporanTransaksiPenjualanToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm<LaporanTransaksiPenjualan>();
+            OpenForm<LaporanTransaksiPenjualan.LaporanTransaksiPenjualanForm>();
         }
 
         private void penjualanByBarangToolStripMenuItem_Click(object sender, EventArgs e)
@@ -488,6 +488,14 @@ namespace DoranApp.View
             if (result == DialogResult.OK || result == DialogResult.Yes)
             {
                 ShowLoginForm();
+            }
+        }
+
+        private void _Container_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape && this.ActiveMdiChild != null && !(this.ActiveMdiChild is HomeForm))
+            {
+                this.ActiveMdiChild.Close();
             }
         }
 

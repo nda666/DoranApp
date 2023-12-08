@@ -1,6 +1,6 @@
-﻿namespace DoranApp.View
+﻿namespace DoranApp.View.LaporanTransaksiPenjualan
 {
-    partial class LaporanTransaksiPenjualan
+    partial class LaporanTransaksiPenjualanForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LaporanTransaksiPenjualan));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LaporanTransaksiPenjualanForm));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button11 = new System.Windows.Forms.Button();
@@ -60,46 +66,43 @@
             this.datePickerFilterMax = new System.Windows.Forms.DateTimePicker();
             this.datePickerFilterMin = new System.Windows.Forms.DateTimePicker();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textboxFilterBarcode = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textboxFilterNoSeriOnline = new System.Windows.Forms.TextBox();
+            this.checkBoxHargaTidakNol = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textboxFilterKeterangan = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.comboBox12 = new System.Windows.Forms.ComboBox();
+            this.comboFilterAdmin = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.comboBox10 = new System.Windows.Forms.ComboBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.numericTextbox2 = new DoranApp.Components.NumericTextbox(this.components);
-            this.numericTextbox1 = new DoranApp.Components.NumericTextbox(this.components);
+            this.comboFilterGudang = new System.Windows.Forms.ComboBox();
+            this.textBoxNamaPelanggan = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkboxFilterAdminGantiHarga = new System.Windows.Forms.CheckBox();
             this.label19 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkFilterTitipNota = new System.Windows.Forms.CheckBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textboxFilterNamabarang = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.numericTextbox3 = new DoranApp.Components.NumericTextbox(this.components);
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.button10 = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.CBO_SemuaValid = new System.Windows.Forms.CheckBox();
+            this.BTN_Valid = new System.Windows.Forms.Button();
+            this.groupRadioValid = new System.Windows.Forms.GroupBox();
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
             this.radioButton6 = new System.Windows.Forms.RadioButton();
-            this.button9 = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.BTN_Jurnal = new System.Windows.Forms.Button();
+            this.groupBoxRadioJurnalPenjualan = new System.Windows.Forms.GroupBox();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
@@ -108,7 +111,50 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.labelTotalOmzetPpn = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.labelTotalPpn = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.labelTotalDpp = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.BTN_TopProvinsi = new System.Windows.Forms.Button();
+            this.BTN_TotalOmzetPenjualan = new System.Windows.Forms.Button();
+            this.BTN_TopKota = new System.Windows.Forms.Button();
+            this.CBO_KomisiMinus = new System.Windows.Forms.CheckBox();
+            this.CBO_Bos = new System.Windows.Forms.CheckBox();
+            this.CBO_TanpaLogfile = new System.Windows.Forms.CheckBox();
+            this.CBO_GantiHarga = new System.Windows.Forms.CheckBox();
+            this.BTN_UpdateTransaksi = new System.Windows.Forms.Button();
+            this.Group_Bos = new System.Windows.Forms.GroupBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.labelTotalUntungBelPotOL = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.labelTotalUntung = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.labelTotalKomisi = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.labelTotalDiskon = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.labelTotalBiaya = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.labelTotalTambahan = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.labelTotalPpnFull = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.labelTotalDppFull = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.labelTotalTrans = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.labelTotalOmzet = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
@@ -136,6 +182,14 @@
             this.Jumlah = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KurangiStok = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.copyNoNotaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyNoSeriOLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyBarcodeOLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyKodehToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textboxFilterHargaMax = new DoranApp.Components.CurrencyTextBox();
+            this.textboxFilterHargaMin = new DoranApp.Components.CurrencyTextBox();
+            this.textboxJumlahTrans = new DoranApp.Components.CurrencyTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -144,14 +198,18 @@
             this.groupBox2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.groupRadioValid.SuspendLayout();
+            this.groupBoxRadioJurnalPenjualan.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage6.SuspendLayout();
+            this.tabPage9.SuspendLayout();
+            this.Group_Bos.SuspendLayout();
             this.tabControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -443,22 +501,22 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.textBox6);
+            this.tabPage2.Controls.Add(this.textboxFilterBarcode);
             this.tabPage2.Controls.Add(this.label15);
-            this.tabPage2.Controls.Add(this.textBox5);
-            this.tabPage2.Controls.Add(this.checkBox1);
+            this.tabPage2.Controls.Add(this.textboxFilterNoSeriOnline);
+            this.tabPage2.Controls.Add(this.checkBoxHargaTidakNol);
             this.tabPage2.Controls.Add(this.label13);
             this.tabPage2.Controls.Add(this.label14);
             this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.textBox3);
+            this.tabPage2.Controls.Add(this.textboxFilterKeterangan);
             this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.label10);
-            this.tabPage2.Controls.Add(this.comboBox12);
+            this.tabPage2.Controls.Add(this.comboFilterAdmin);
             this.tabPage2.Controls.Add(this.label17);
-            this.tabPage2.Controls.Add(this.comboBox10);
-            this.tabPage2.Controls.Add(this.textBox4);
-            this.tabPage2.Controls.Add(this.numericTextbox2);
-            this.tabPage2.Controls.Add(this.numericTextbox1);
+            this.tabPage2.Controls.Add(this.comboFilterGudang);
+            this.tabPage2.Controls.Add(this.textBoxNamaPelanggan);
+            this.tabPage2.Controls.Add(this.textboxFilterHargaMax);
+            this.tabPage2.Controls.Add(this.textboxFilterHargaMin);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -467,12 +525,12 @@
             this.tabPage2.Text = "Filter 2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // textBox6
+            // textboxFilterBarcode
             // 
-            this.textBox6.Location = new System.Drawing.Point(108, 162);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(266, 20);
-            this.textBox6.TabIndex = 61;
+            this.textboxFilterBarcode.Location = new System.Drawing.Point(108, 162);
+            this.textboxFilterBarcode.Name = "textboxFilterBarcode";
+            this.textboxFilterBarcode.Size = new System.Drawing.Size(266, 20);
+            this.textboxFilterBarcode.TabIndex = 61;
             // 
             // label15
             // 
@@ -484,21 +542,21 @@
             this.label15.Text = "Barcode :";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // textBox5
+            // textboxFilterNoSeriOnline
             // 
-            this.textBox5.Location = new System.Drawing.Point(108, 136);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(266, 20);
-            this.textBox5.TabIndex = 59;
+            this.textboxFilterNoSeriOnline.Location = new System.Drawing.Point(108, 136);
+            this.textboxFilterNoSeriOnline.Name = "textboxFilterNoSeriOnline";
+            this.textboxFilterNoSeriOnline.Size = new System.Drawing.Size(266, 20);
+            this.textboxFilterNoSeriOnline.TabIndex = 59;
             // 
-            // checkBox1
+            // checkBoxHargaTidakNol
             // 
-            this.checkBox1.Location = new System.Drawing.Point(280, 110);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(94, 20);
-            this.checkBox1.TabIndex = 57;
-            this.checkBox1.Text = "Harga Tidak 0";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBoxHargaTidakNol.Location = new System.Drawing.Point(280, 110);
+            this.checkBoxHargaTidakNol.Name = "checkBoxHargaTidakNol";
+            this.checkBoxHargaTidakNol.Size = new System.Drawing.Size(94, 20);
+            this.checkBoxHargaTidakNol.TabIndex = 57;
+            this.checkBoxHargaTidakNol.Text = "Harga Tidak 0";
+            this.checkBoxHargaTidakNol.UseVisualStyleBackColor = true;
             // 
             // label13
             // 
@@ -530,12 +588,12 @@
             this.label12.Text = "Gudang :";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // textBox3
+            // textboxFilterKeterangan
             // 
-            this.textBox3.Location = new System.Drawing.Point(108, 31);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(266, 20);
-            this.textBox3.TabIndex = 52;
+            this.textboxFilterKeterangan.Location = new System.Drawing.Point(108, 31);
+            this.textboxFilterKeterangan.Name = "textboxFilterKeterangan";
+            this.textboxFilterKeterangan.Size = new System.Drawing.Size(266, 20);
+            this.textboxFilterKeterangan.TabIndex = 52;
             // 
             // label11
             // 
@@ -557,14 +615,18 @@
             this.label10.Text = "Keterangan :";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // comboBox12
+            // comboFilterAdmin
             // 
-            this.comboBox12.FormattingEnabled = true;
-            this.comboBox12.Location = new System.Drawing.Point(108, 6);
-            this.comboBox12.Name = "comboBox12";
-            this.comboBox12.Size = new System.Drawing.Size(266, 21);
-            this.comboBox12.TabIndex = 48;
-            this.comboBox12.Text = "Semua Pelanggan";
+            this.comboFilterAdmin.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboFilterAdmin.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboFilterAdmin.DisplayMember = "Usernameku";
+            this.comboFilterAdmin.FormattingEnabled = true;
+            this.comboFilterAdmin.Location = new System.Drawing.Point(108, 6);
+            this.comboFilterAdmin.Name = "comboFilterAdmin";
+            this.comboFilterAdmin.Size = new System.Drawing.Size(266, 21);
+            this.comboFilterAdmin.TabIndex = 48;
+            this.comboFilterAdmin.Text = "Semua Pelanggan";
+            this.comboFilterAdmin.ValueMember = "KodeKu";
             // 
             // label17
             // 
@@ -576,45 +638,35 @@
             this.label17.Text = "Admin :";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // comboBox10
+            // comboFilterGudang
             // 
-            this.comboBox10.FormattingEnabled = true;
-            this.comboBox10.Location = new System.Drawing.Point(108, 83);
-            this.comboBox10.Name = "comboBox10";
-            this.comboBox10.Size = new System.Drawing.Size(266, 21);
-            this.comboBox10.TabIndex = 38;
-            this.comboBox10.Text = "Semua Barang";
+            this.comboFilterGudang.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboFilterGudang.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboFilterGudang.DisplayMember = "Nama";
+            this.comboFilterGudang.FormattingEnabled = true;
+            this.comboFilterGudang.Location = new System.Drawing.Point(108, 83);
+            this.comboFilterGudang.Name = "comboFilterGudang";
+            this.comboFilterGudang.Size = new System.Drawing.Size(266, 21);
+            this.comboFilterGudang.TabIndex = 38;
+            this.comboFilterGudang.Text = "Semua Barang";
+            this.comboFilterGudang.ValueMember = "Kode";
             // 
-            // textBox4
+            // textBoxNamaPelanggan
             // 
-            this.textBox4.Location = new System.Drawing.Point(108, 57);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(266, 20);
-            this.textBox4.TabIndex = 34;
-            // 
-            // numericTextbox2
-            // 
-            this.numericTextbox2.Location = new System.Drawing.Point(194, 110);
-            this.numericTextbox2.Name = "numericTextbox2";
-            this.numericTextbox2.Size = new System.Drawing.Size(80, 20);
-            this.numericTextbox2.TabIndex = 56;
-            // 
-            // numericTextbox1
-            // 
-            this.numericTextbox1.Location = new System.Drawing.Point(108, 110);
-            this.numericTextbox1.Name = "numericTextbox1";
-            this.numericTextbox1.Size = new System.Drawing.Size(80, 20);
-            this.numericTextbox1.TabIndex = 55;
+            this.textBoxNamaPelanggan.Location = new System.Drawing.Point(108, 57);
+            this.textBoxNamaPelanggan.Name = "textBoxNamaPelanggan";
+            this.textBoxNamaPelanggan.Size = new System.Drawing.Size(266, 20);
+            this.textBoxNamaPelanggan.TabIndex = 34;
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.groupBox2);
             this.tabPage3.Controls.Add(this.label19);
-            this.tabPage3.Controls.Add(this.checkBox2);
+            this.tabPage3.Controls.Add(this.checkFilterTitipNota);
             this.tabPage3.Controls.Add(this.label18);
-            this.tabPage3.Controls.Add(this.textBox7);
+            this.tabPage3.Controls.Add(this.textboxFilterNamabarang);
             this.tabPage3.Controls.Add(this.label2);
-            this.tabPage3.Controls.Add(this.numericTextbox3);
+            this.tabPage3.Controls.Add(this.textboxJumlahTrans);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -626,7 +678,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.checkBox3);
+            this.groupBox2.Controls.Add(this.checkboxFilterAdminGantiHarga);
             this.groupBox2.Location = new System.Drawing.Point(231, 6);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(147, 100);
@@ -643,14 +695,14 @@
             this.button4.Text = "Periksa";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // checkboxFilterAdminGantiHarga
             // 
-            this.checkBox3.Location = new System.Drawing.Point(21, 29);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(120, 18);
-            this.checkBox3.TabIndex = 60;
-            this.checkBox3.Text = "Admin Ganti Harga";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkboxFilterAdminGantiHarga.Location = new System.Drawing.Point(21, 29);
+            this.checkboxFilterAdminGantiHarga.Name = "checkboxFilterAdminGantiHarga";
+            this.checkboxFilterAdminGantiHarga.Size = new System.Drawing.Size(120, 18);
+            this.checkboxFilterAdminGantiHarga.TabIndex = 60;
+            this.checkboxFilterAdminGantiHarga.Text = "Admin Ganti Harga";
+            this.checkboxFilterAdminGantiHarga.UseVisualStyleBackColor = true;
             // 
             // label19
             // 
@@ -662,15 +714,15 @@
             this.label19.Text = "Titip :";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // checkBox2
+            // checkFilterTitipNota
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(109, 59);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(96, 17);
-            this.checkBox2.TabIndex = 56;
-            this.checkBox2.Text = "Nota Dititipkan";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkFilterTitipNota.AutoSize = true;
+            this.checkFilterTitipNota.Location = new System.Drawing.Point(109, 59);
+            this.checkFilterTitipNota.Name = "checkFilterTitipNota";
+            this.checkFilterTitipNota.Size = new System.Drawing.Size(96, 17);
+            this.checkFilterTitipNota.TabIndex = 56;
+            this.checkFilterTitipNota.Text = "Nota Dititipkan";
+            this.checkFilterTitipNota.UseVisualStyleBackColor = true;
             // 
             // label18
             // 
@@ -682,12 +734,12 @@
             this.label18.Text = "Jumlah Trans :";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // textBox7
+            // textboxFilterNamabarang
             // 
-            this.textBox7.Location = new System.Drawing.Point(108, 6);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(117, 20);
-            this.textBox7.TabIndex = 53;
+            this.textboxFilterNamabarang.Location = new System.Drawing.Point(108, 6);
+            this.textboxFilterNamabarang.Name = "textboxFilterNamabarang";
+            this.textboxFilterNamabarang.Size = new System.Drawing.Size(117, 20);
+            this.textboxFilterNamabarang.TabIndex = 53;
             // 
             // label2
             // 
@@ -698,13 +750,6 @@
             this.label2.TabIndex = 51;
             this.label2.Text = "Nama Barang :";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // numericTextbox3
-            // 
-            this.numericTextbox3.Location = new System.Drawing.Point(109, 33);
-            this.numericTextbox3.Name = "numericTextbox3";
-            this.numericTextbox3.Size = new System.Drawing.Size(116, 20);
-            this.numericTextbox3.TabIndex = 58;
             // 
             // tabPage4
             // 
@@ -728,6 +773,7 @@
             this.button8.TabIndex = 8;
             this.button8.Text = "Copy Kodeh";
             this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button7
             // 
@@ -737,6 +783,7 @@
             this.button7.TabIndex = 7;
             this.button7.Text = "Copy Barcode OL";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
@@ -746,6 +793,7 @@
             this.button6.TabIndex = 6;
             this.button6.Text = "Copy No Seri OL";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button5
             // 
@@ -755,14 +803,15 @@
             this.button5.TabIndex = 5;
             this.button5.Text = "Copy No Nota";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.checkBox4);
-            this.tabPage5.Controls.Add(this.button10);
-            this.tabPage5.Controls.Add(this.groupBox4);
-            this.tabPage5.Controls.Add(this.button9);
-            this.tabPage5.Controls.Add(this.groupBox3);
+            this.tabPage5.Controls.Add(this.CBO_SemuaValid);
+            this.tabPage5.Controls.Add(this.BTN_Valid);
+            this.tabPage5.Controls.Add(this.groupRadioValid);
+            this.tabPage5.Controls.Add(this.BTN_Jurnal);
+            this.tabPage5.Controls.Add(this.groupBoxRadioJurnalPenjualan);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -771,36 +820,37 @@
             this.tabPage5.Text = "Jurnal Penjualan";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // CBO_SemuaValid
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(157, 150);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(91, 17);
-            this.checkBox4.TabIndex = 56;
-            this.checkBox4.Text = "Untuk Semua";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.CBO_SemuaValid.AutoSize = true;
+            this.CBO_SemuaValid.Location = new System.Drawing.Point(157, 150);
+            this.CBO_SemuaValid.Name = "CBO_SemuaValid";
+            this.CBO_SemuaValid.Size = new System.Drawing.Size(91, 17);
+            this.CBO_SemuaValid.TabIndex = 56;
+            this.CBO_SemuaValid.Text = "Untuk Semua";
+            this.CBO_SemuaValid.UseVisualStyleBackColor = true;
             // 
-            // button10
+            // BTN_Valid
             // 
-            this.button10.Location = new System.Drawing.Point(6, 150);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(134, 30);
-            this.button10.TabIndex = 55;
-            this.button10.Text = "Valid / Tidak";
-            this.button10.UseVisualStyleBackColor = true;
+            this.BTN_Valid.Location = new System.Drawing.Point(6, 150);
+            this.BTN_Valid.Name = "BTN_Valid";
+            this.BTN_Valid.Size = new System.Drawing.Size(134, 30);
+            this.BTN_Valid.TabIndex = 55;
+            this.BTN_Valid.Text = "Valid / Tidak";
+            this.BTN_Valid.UseVisualStyleBackColor = true;
+            this.BTN_Valid.Visible = false;
             // 
-            // groupBox4
+            // groupRadioValid
             // 
-            this.groupBox4.Controls.Add(this.radioButton4);
-            this.groupBox4.Controls.Add(this.radioButton5);
-            this.groupBox4.Controls.Add(this.radioButton6);
-            this.groupBox4.Location = new System.Drawing.Point(6, 96);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(204, 48);
-            this.groupBox4.TabIndex = 54;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Valid";
+            this.groupRadioValid.Controls.Add(this.radioButton4);
+            this.groupRadioValid.Controls.Add(this.radioButton5);
+            this.groupRadioValid.Controls.Add(this.radioButton6);
+            this.groupRadioValid.Location = new System.Drawing.Point(6, 96);
+            this.groupRadioValid.Name = "groupRadioValid";
+            this.groupRadioValid.Size = new System.Drawing.Size(204, 48);
+            this.groupRadioValid.TabIndex = 54;
+            this.groupRadioValid.TabStop = false;
+            this.groupRadioValid.Text = "Valid";
             // 
             // radioButton4
             // 
@@ -808,6 +858,7 @@
             this.radioButton4.Name = "radioButton4";
             this.radioButton4.Size = new System.Drawing.Size(58, 17);
             this.radioButton4.TabIndex = 2;
+            this.radioButton4.Tag = "0";
             this.radioButton4.Text = "Tidak";
             this.radioButton4.UseVisualStyleBackColor = true;
             // 
@@ -819,6 +870,7 @@
             this.radioButton5.Size = new System.Drawing.Size(51, 17);
             this.radioButton5.TabIndex = 1;
             this.radioButton5.TabStop = true;
+            this.radioButton5.Tag = "1";
             this.radioButton5.Text = "Ya";
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
@@ -831,26 +883,26 @@
             this.radioButton6.Text = "Semua";
             this.radioButton6.UseVisualStyleBackColor = true;
             // 
-            // button9
+            // BTN_Jurnal
             // 
-            this.button9.Location = new System.Drawing.Point(6, 60);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(204, 30);
-            this.button9.TabIndex = 53;
-            this.button9.Text = "Masuk Jurnal Penjualan / Tidak";
-            this.button9.UseVisualStyleBackColor = true;
+            this.BTN_Jurnal.Location = new System.Drawing.Point(6, 60);
+            this.BTN_Jurnal.Name = "BTN_Jurnal";
+            this.BTN_Jurnal.Size = new System.Drawing.Size(204, 30);
+            this.BTN_Jurnal.TabIndex = 53;
+            this.BTN_Jurnal.Text = "Masuk Jurnal Penjualan / Tidak";
+            this.BTN_Jurnal.UseVisualStyleBackColor = true;
             // 
-            // groupBox3
+            // groupBoxRadioJurnalPenjualan
             // 
-            this.groupBox3.Controls.Add(this.radioButton2);
-            this.groupBox3.Controls.Add(this.radioButton1);
-            this.groupBox3.Controls.Add(this.radioButton3);
-            this.groupBox3.Location = new System.Drawing.Point(6, 6);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(204, 48);
-            this.groupBox3.TabIndex = 52;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Jurnal Penjualan";
+            this.groupBoxRadioJurnalPenjualan.Controls.Add(this.radioButton2);
+            this.groupBoxRadioJurnalPenjualan.Controls.Add(this.radioButton1);
+            this.groupBoxRadioJurnalPenjualan.Controls.Add(this.radioButton3);
+            this.groupBoxRadioJurnalPenjualan.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxRadioJurnalPenjualan.Name = "groupBoxRadioJurnalPenjualan";
+            this.groupBoxRadioJurnalPenjualan.Size = new System.Drawing.Size(204, 48);
+            this.groupBoxRadioJurnalPenjualan.TabIndex = 52;
+            this.groupBoxRadioJurnalPenjualan.TabStop = false;
+            this.groupBoxRadioJurnalPenjualan.Text = "Jurnal Penjualan";
             // 
             // radioButton2
             // 
@@ -858,6 +910,7 @@
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(58, 17);
             this.radioButton2.TabIndex = 2;
+            this.radioButton2.Tag = "0";
             this.radioButton2.Text = "Tidak";
             this.radioButton2.UseVisualStyleBackColor = true;
             // 
@@ -869,6 +922,7 @@
             this.radioButton1.Size = new System.Drawing.Size(51, 17);
             this.radioButton1.TabIndex = 1;
             this.radioButton1.TabStop = true;
+            this.radioButton1.Tag = "1";
             this.radioButton1.Text = "Ya";
             this.radioButton1.UseVisualStyleBackColor = true;
             // 
@@ -924,23 +978,443 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.labelTotalOmzetPpn);
+            this.tabPage6.Controls.Add(this.label30);
+            this.tabPage6.Controls.Add(this.labelTotalPpn);
+            this.tabPage6.Controls.Add(this.label26);
+            this.tabPage6.Controls.Add(this.labelTotalDpp);
+            this.tabPage6.Controls.Add(this.label22);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(396, 283);
+            this.tabPage6.Size = new System.Drawing.Size(396, 297);
             this.tabPage6.TabIndex = 4;
             this.tabPage6.Text = "tabPage6";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // labelTotalOmzetPpn
+            // 
+            this.labelTotalOmzetPpn.Location = new System.Drawing.Point(111, 148);
+            this.labelTotalOmzetPpn.Name = "labelTotalOmzetPpn";
+            this.labelTotalOmzetPpn.Size = new System.Drawing.Size(100, 23);
+            this.labelTotalOmzetPpn.TabIndex = 17;
+            this.labelTotalOmzetPpn.Text = "0000000";
+            // 
+            // label30
+            // 
+            this.label30.Location = new System.Drawing.Point(5, 148);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(100, 23);
+            this.label30.TabIndex = 16;
+            this.label30.Text = "Tot Omzet :";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelTotalPpn
+            // 
+            this.labelTotalPpn.Location = new System.Drawing.Point(111, 125);
+            this.labelTotalPpn.Name = "labelTotalPpn";
+            this.labelTotalPpn.Size = new System.Drawing.Size(100, 23);
+            this.labelTotalPpn.TabIndex = 15;
+            this.labelTotalPpn.Text = "0000000";
+            // 
+            // label26
+            // 
+            this.label26.Location = new System.Drawing.Point(5, 125);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(100, 23);
+            this.label26.TabIndex = 14;
+            this.label26.Text = "Tot PPN :";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelTotalDpp
+            // 
+            this.labelTotalDpp.Location = new System.Drawing.Point(111, 102);
+            this.labelTotalDpp.Name = "labelTotalDpp";
+            this.labelTotalDpp.Size = new System.Drawing.Size(100, 23);
+            this.labelTotalDpp.TabIndex = 13;
+            this.labelTotalDpp.Text = "0000000";
+            // 
+            // label22
+            // 
+            this.label22.Location = new System.Drawing.Point(5, 102);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(100, 23);
+            this.label22.TabIndex = 12;
+            this.label22.Text = "Tot DPP :";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
             // tabPage9
             // 
+            this.tabPage9.Controls.Add(this.BTN_TopProvinsi);
+            this.tabPage9.Controls.Add(this.BTN_TotalOmzetPenjualan);
+            this.tabPage9.Controls.Add(this.BTN_TopKota);
+            this.tabPage9.Controls.Add(this.CBO_KomisiMinus);
+            this.tabPage9.Controls.Add(this.CBO_Bos);
+            this.tabPage9.Controls.Add(this.CBO_TanpaLogfile);
+            this.tabPage9.Controls.Add(this.CBO_GantiHarga);
+            this.tabPage9.Controls.Add(this.BTN_UpdateTransaksi);
+            this.tabPage9.Controls.Add(this.Group_Bos);
+            this.tabPage9.Controls.Add(this.labelTotalDiskon);
+            this.tabPage9.Controls.Add(this.label33);
+            this.tabPage9.Controls.Add(this.labelTotalBiaya);
+            this.tabPage9.Controls.Add(this.label31);
+            this.tabPage9.Controls.Add(this.labelTotalTambahan);
+            this.tabPage9.Controls.Add(this.label29);
+            this.tabPage9.Controls.Add(this.labelTotalPpnFull);
+            this.tabPage9.Controls.Add(this.label27);
+            this.tabPage9.Controls.Add(this.labelTotalDppFull);
+            this.tabPage9.Controls.Add(this.label25);
+            this.tabPage9.Controls.Add(this.labelTotalTrans);
+            this.tabPage9.Controls.Add(this.label23);
+            this.tabPage9.Controls.Add(this.labelTotalOmzet);
+            this.tabPage9.Controls.Add(this.label20);
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(396, 283);
+            this.tabPage9.Size = new System.Drawing.Size(396, 297);
             this.tabPage9.TabIndex = 3;
-            this.tabPage9.Text = "Copy Data";
+            this.tabPage9.Text = "laporan Transaksi";
             this.tabPage9.UseVisualStyleBackColor = true;
+            // 
+            // BTN_TopProvinsi
+            // 
+            this.BTN_TopProvinsi.Location = new System.Drawing.Point(334, 136);
+            this.BTN_TopProvinsi.Name = "BTN_TopProvinsi";
+            this.BTN_TopProvinsi.Size = new System.Drawing.Size(56, 30);
+            this.BTN_TopProvinsi.TabIndex = 22;
+            this.BTN_TopProvinsi.Text = "By Prov";
+            this.BTN_TopProvinsi.UseVisualStyleBackColor = true;
+            // 
+            // BTN_TotalOmzetPenjualan
+            // 
+            this.BTN_TotalOmzetPenjualan.Location = new System.Drawing.Point(210, 136);
+            this.BTN_TotalOmzetPenjualan.Name = "BTN_TotalOmzetPenjualan";
+            this.BTN_TotalOmzetPenjualan.Size = new System.Drawing.Size(56, 30);
+            this.BTN_TotalOmzetPenjualan.TabIndex = 21;
+            this.BTN_TotalOmzetPenjualan.Text = "By Toko";
+            this.BTN_TotalOmzetPenjualan.UseVisualStyleBackColor = true;
+            this.BTN_TotalOmzetPenjualan.Click += new System.EventHandler(this.BTN_TotalOmzetPenjualan_Click);
+            // 
+            // BTN_TopKota
+            // 
+            this.BTN_TopKota.Location = new System.Drawing.Point(272, 136);
+            this.BTN_TopKota.Name = "BTN_TopKota";
+            this.BTN_TopKota.Size = new System.Drawing.Size(56, 30);
+            this.BTN_TopKota.TabIndex = 20;
+            this.BTN_TopKota.Text = "By Kota";
+            this.BTN_TopKota.UseVisualStyleBackColor = true;
+            // 
+            // CBO_KomisiMinus
+            // 
+            this.CBO_KomisiMinus.AutoSize = true;
+            this.CBO_KomisiMinus.Location = new System.Drawing.Point(302, 113);
+            this.CBO_KomisiMinus.Name = "CBO_KomisiMinus";
+            this.CBO_KomisiMinus.Size = new System.Drawing.Size(87, 17);
+            this.CBO_KomisiMinus.TabIndex = 19;
+            this.CBO_KomisiMinus.Text = "Komisi Minus";
+            this.CBO_KomisiMinus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.CBO_KomisiMinus.UseVisualStyleBackColor = true;
+            // 
+            // CBO_Bos
+            // 
+            this.CBO_Bos.AutoSize = true;
+            this.CBO_Bos.Location = new System.Drawing.Point(345, 90);
+            this.CBO_Bos.Name = "CBO_Bos";
+            this.CBO_Bos.Size = new System.Drawing.Size(44, 17);
+            this.CBO_Bos.TabIndex = 18;
+            this.CBO_Bos.Text = "Bos";
+            this.CBO_Bos.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.CBO_Bos.UseVisualStyleBackColor = true;
+            // 
+            // CBO_TanpaLogfile
+            // 
+            this.CBO_TanpaLogfile.AutoSize = true;
+            this.CBO_TanpaLogfile.Location = new System.Drawing.Point(292, 67);
+            this.CBO_TanpaLogfile.Name = "CBO_TanpaLogfile";
+            this.CBO_TanpaLogfile.Size = new System.Drawing.Size(97, 17);
+            this.CBO_TanpaLogfile.TabIndex = 17;
+            this.CBO_TanpaLogfile.Text = "Tanpa Log File";
+            this.CBO_TanpaLogfile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.CBO_TanpaLogfile.UseVisualStyleBackColor = true;
+            // 
+            // CBO_GantiHarga
+            // 
+            this.CBO_GantiHarga.AutoSize = true;
+            this.CBO_GantiHarga.Location = new System.Drawing.Point(272, 44);
+            this.CBO_GantiHarga.Name = "CBO_GantiHarga";
+            this.CBO_GantiHarga.Size = new System.Drawing.Size(117, 17);
+            this.CBO_GantiHarga.TabIndex = 16;
+            this.CBO_GantiHarga.Text = "Hanya Ganti Harga";
+            this.CBO_GantiHarga.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.CBO_GantiHarga.UseVisualStyleBackColor = true;
+            // 
+            // BTN_UpdateTransaksi
+            // 
+            this.BTN_UpdateTransaksi.Location = new System.Drawing.Point(297, 6);
+            this.BTN_UpdateTransaksi.Name = "BTN_UpdateTransaksi";
+            this.BTN_UpdateTransaksi.Size = new System.Drawing.Size(93, 30);
+            this.BTN_UpdateTransaksi.TabIndex = 15;
+            this.BTN_UpdateTransaksi.Text = "Update Trans";
+            this.BTN_UpdateTransaksi.UseVisualStyleBackColor = true;
+            // 
+            // Group_Bos
+            // 
+            this.Group_Bos.Controls.Add(this.label45);
+            this.Group_Bos.Controls.Add(this.textBox2);
+            this.Group_Bos.Controls.Add(this.textBox1);
+            this.Group_Bos.Controls.Add(this.label44);
+            this.Group_Bos.Controls.Add(this.labelTotalUntungBelPotOL);
+            this.Group_Bos.Controls.Add(this.label42);
+            this.Group_Bos.Controls.Add(this.label40);
+            this.Group_Bos.Controls.Add(this.label41);
+            this.Group_Bos.Controls.Add(this.label38);
+            this.Group_Bos.Controls.Add(this.label39);
+            this.Group_Bos.Controls.Add(this.labelTotalUntung);
+            this.Group_Bos.Controls.Add(this.label37);
+            this.Group_Bos.Controls.Add(this.labelTotalKomisi);
+            this.Group_Bos.Controls.Add(this.label35);
+            this.Group_Bos.Location = new System.Drawing.Point(9, 167);
+            this.Group_Bos.Name = "Group_Bos";
+            this.Group_Bos.Size = new System.Drawing.Size(381, 124);
+            this.Group_Bos.TabIndex = 14;
+            this.Group_Bos.TabStop = false;
+            this.Group_Bos.Text = "Bos";
+            // 
+            // label45
+            // 
+            this.label45.Location = new System.Drawing.Point(183, 82);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(10, 23);
+            this.label45.TabIndex = 28;
+            this.label45.Text = "-";
+            this.label45.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(199, 85);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(72, 20);
+            this.textBox2.TabIndex = 27;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(105, 85);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(72, 20);
+            this.textBox1.TabIndex = 26;
+            // 
+            // label44
+            // 
+            this.label44.Location = new System.Drawing.Point(6, 85);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(93, 23);
+            this.label44.TabIndex = 25;
+            this.label44.Text = "Komisi :";
+            this.label44.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelTotalUntungBelPotOL
+            // 
+            this.labelTotalUntungBelPotOL.Location = new System.Drawing.Point(127, 62);
+            this.labelTotalUntungBelPotOL.Name = "labelTotalUntungBelPotOL";
+            this.labelTotalUntungBelPotOL.Size = new System.Drawing.Size(100, 23);
+            this.labelTotalUntungBelPotOL.TabIndex = 24;
+            this.labelTotalUntungBelPotOL.Text = "0000000";
+            // 
+            // label42
+            // 
+            this.label42.Location = new System.Drawing.Point(6, 62);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(115, 23);
+            this.label42.TabIndex = 23;
+            this.label42.Text = "Total I BLM POT OL :";
+            this.label42.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label40
+            // 
+            this.label40.Location = new System.Drawing.Point(269, 39);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(100, 23);
+            this.label40.TabIndex = 22;
+            this.label40.Text = "0000000";
+            // 
+            // label41
+            // 
+            this.label41.Location = new System.Drawing.Point(199, 39);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(64, 23);
+            this.label41.TabIndex = 21;
+            this.label41.Text = "% Kom :";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label38
+            // 
+            this.label38.Location = new System.Drawing.Point(269, 16);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(100, 23);
+            this.label38.TabIndex = 20;
+            this.label38.Text = "0000000";
+            // 
+            // label39
+            // 
+            this.label39.Location = new System.Drawing.Point(199, 16);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(64, 23);
+            this.label39.TabIndex = 19;
+            this.label39.Text = "% Index :";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelTotalUntung
+            // 
+            this.labelTotalUntung.Location = new System.Drawing.Point(112, 39);
+            this.labelTotalUntung.Name = "labelTotalUntung";
+            this.labelTotalUntung.Size = new System.Drawing.Size(100, 23);
+            this.labelTotalUntung.TabIndex = 18;
+            this.labelTotalUntung.Text = "0000000";
+            // 
+            // label37
+            // 
+            this.label37.Location = new System.Drawing.Point(6, 39);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(100, 23);
+            this.label37.TabIndex = 17;
+            this.label37.Text = "Total Index :";
+            this.label37.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelTotalKomisi
+            // 
+            this.labelTotalKomisi.Location = new System.Drawing.Point(112, 16);
+            this.labelTotalKomisi.Name = "labelTotalKomisi";
+            this.labelTotalKomisi.Size = new System.Drawing.Size(100, 23);
+            this.labelTotalKomisi.TabIndex = 16;
+            this.labelTotalKomisi.Text = "0000000";
+            // 
+            // label35
+            // 
+            this.label35.Location = new System.Drawing.Point(6, 16);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(100, 23);
+            this.label35.TabIndex = 15;
+            this.label35.Text = "Total Komisi :";
+            this.label35.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelTotalDiskon
+            // 
+            this.labelTotalDiskon.Location = new System.Drawing.Point(109, 141);
+            this.labelTotalDiskon.Name = "labelTotalDiskon";
+            this.labelTotalDiskon.Size = new System.Drawing.Size(100, 23);
+            this.labelTotalDiskon.TabIndex = 13;
+            this.labelTotalDiskon.Text = "0000000";
+            // 
+            // label33
+            // 
+            this.label33.Location = new System.Drawing.Point(3, 141);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(100, 23);
+            this.label33.TabIndex = 12;
+            this.label33.Text = "Diskon :";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelTotalBiaya
+            // 
+            this.labelTotalBiaya.Location = new System.Drawing.Point(109, 118);
+            this.labelTotalBiaya.Name = "labelTotalBiaya";
+            this.labelTotalBiaya.Size = new System.Drawing.Size(100, 23);
+            this.labelTotalBiaya.TabIndex = 11;
+            this.labelTotalBiaya.Text = "0000000";
+            // 
+            // label31
+            // 
+            this.label31.Location = new System.Drawing.Point(3, 118);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(100, 23);
+            this.label31.TabIndex = 10;
+            this.label31.Text = "Barang Biaya :";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelTotalTambahan
+            // 
+            this.labelTotalTambahan.Location = new System.Drawing.Point(109, 95);
+            this.labelTotalTambahan.Name = "labelTotalTambahan";
+            this.labelTotalTambahan.Size = new System.Drawing.Size(100, 23);
+            this.labelTotalTambahan.TabIndex = 9;
+            this.labelTotalTambahan.Text = "0000000";
+            // 
+            // label29
+            // 
+            this.label29.Location = new System.Drawing.Point(3, 95);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(100, 23);
+            this.label29.TabIndex = 8;
+            this.label29.Text = "Total Tambahan";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelTotalPpnFull
+            // 
+            this.labelTotalPpnFull.Location = new System.Drawing.Point(109, 72);
+            this.labelTotalPpnFull.Name = "labelTotalPpnFull";
+            this.labelTotalPpnFull.Size = new System.Drawing.Size(100, 23);
+            this.labelTotalPpnFull.TabIndex = 7;
+            this.labelTotalPpnFull.Text = "0000000";
+            // 
+            // label27
+            // 
+            this.label27.Location = new System.Drawing.Point(3, 72);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(100, 23);
+            this.label27.TabIndex = 6;
+            this.label27.Text = "Total PPN :";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelTotalDppFull
+            // 
+            this.labelTotalDppFull.Location = new System.Drawing.Point(109, 49);
+            this.labelTotalDppFull.Name = "labelTotalDppFull";
+            this.labelTotalDppFull.Size = new System.Drawing.Size(100, 23);
+            this.labelTotalDppFull.TabIndex = 5;
+            this.labelTotalDppFull.Text = "0000000";
+            // 
+            // label25
+            // 
+            this.label25.Location = new System.Drawing.Point(3, 49);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(100, 23);
+            this.label25.TabIndex = 4;
+            this.label25.Text = "Total DPP :";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelTotalTrans
+            // 
+            this.labelTotalTrans.Location = new System.Drawing.Point(109, 26);
+            this.labelTotalTrans.Name = "labelTotalTrans";
+            this.labelTotalTrans.Size = new System.Drawing.Size(100, 23);
+            this.labelTotalTrans.TabIndex = 3;
+            this.labelTotalTrans.Text = "0000000";
+            // 
+            // label23
+            // 
+            this.label23.Location = new System.Drawing.Point(3, 26);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(100, 23);
+            this.label23.TabIndex = 2;
+            this.label23.Text = "Total Transaksi :";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // labelTotalOmzet
+            // 
+            this.labelTotalOmzet.Location = new System.Drawing.Point(109, 3);
+            this.labelTotalOmzet.Name = "labelTotalOmzet";
+            this.labelTotalOmzet.Size = new System.Drawing.Size(100, 23);
+            this.labelTotalOmzet.TabIndex = 1;
+            this.labelTotalOmzet.Text = "0000000";
+            // 
+            // label20
+            // 
+            this.label20.Location = new System.Drawing.Point(3, 3);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(100, 23);
+            this.label20.TabIndex = 0;
+            this.label20.Text = "Total Omzet :";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // tabControl2
             // 
@@ -949,7 +1423,7 @@
             this.tabControl2.Location = new System.Drawing.Point(3, 272);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(404, 309);
+            this.tabControl2.Size = new System.Drawing.Size(404, 323);
             this.tabControl2.TabIndex = 0;
             // 
             // dataGridView1
@@ -960,17 +1434,42 @@
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridView1.Location = new System.Drawing.Point(414, 40);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(707, 234);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dataGridView1_Scroll);
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged_1);
+            this.dataGridView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseDown);
             // 
             // toolStrip1
             // 
@@ -999,7 +1498,7 @@
             // toolStripLabel3
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(67, 22);
+            this.toolStripLabel3.Size = new System.Drawing.Size(65, 22);
             this.toolStripLabel3.Text = "Tampil per:";
             // 
             // comboPageSize
@@ -1013,13 +1512,13 @@
             "500",
             "1000"});
             this.comboPageSize.Name = "comboPageSize";
-            this.comboPageSize.Size = new System.Drawing.Size(55, 22);
+            this.comboPageSize.Size = new System.Drawing.Size(55, 23);
             this.comboPageSize.SelectedIndexChanged += new System.EventHandler(this.comboPageSize_SelectedIndexChanged);
             // 
             // toolStripLabel4
             // 
             this.toolStripLabel4.Name = "toolStripLabel4";
-            this.toolStripLabel4.Size = new System.Drawing.Size(32, 22);
+            this.toolStripLabel4.Size = new System.Drawing.Size(30, 22);
             this.toolStripLabel4.Text = "data";
             // 
             // toolStripSeparator4
@@ -1066,7 +1565,7 @@
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(46, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(44, 22);
             this.toolStripLabel1.Text = "dari {0}";
             this.toolStripLabel1.ToolTipText = "Total number of items";
             // 
@@ -1102,16 +1601,16 @@
             // 
             // toolStripLabel5
             // 
-            this.toolStripLabel5.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripLabel5.Name = "toolStripLabel5";
-            this.toolStripLabel5.Size = new System.Drawing.Size(204, 22);
+            this.toolStripLabel5.Size = new System.Drawing.Size(207, 22);
             this.toolStripLabel5.Text = "Tekan \"E\" untuk next dan \"Q\" untuk prev";
             // 
             // toolStripLabel2
             // 
             this.toolStripLabel2.Image = global::DoranApp.Properties.Resources.icons8_loading;
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(115, 22);
+            this.toolStripLabel2.Size = new System.Drawing.Size(116, 22);
             this.toolStripLabel2.Text = "Mohon tunggu ...";
             this.toolStripLabel2.Visible = false;
             // 
@@ -1133,6 +1632,14 @@
             this.dataGridView2.AllowUserToResizeRows = false;
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Pcs,
@@ -1141,18 +1648,34 @@
             this.Jumlah,
             this.SN,
             this.KurangiStok});
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView2.Location = new System.Drawing.Point(414, 280);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(707, 231);
+            this.dataGridView2.Size = new System.Drawing.Size(707, 311);
             this.dataGridView2.TabIndex = 5;
             // 
             // Pcs
             // 
-            dataGridViewCellStyle1.Format = "N0";
-            this.Pcs.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Format = "N0";
+            this.Pcs.DefaultCellStyle = dataGridViewCellStyle5;
             this.Pcs.HeaderText = "Pcs";
             this.Pcs.Name = "Pcs";
             this.Pcs.ReadOnly = true;
@@ -1165,16 +1688,16 @@
             // 
             // Harga
             // 
-            dataGridViewCellStyle2.Format = "N0";
-            this.Harga.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Format = "N0";
+            this.Harga.DefaultCellStyle = dataGridViewCellStyle6;
             this.Harga.HeaderText = "Harga";
             this.Harga.Name = "Harga";
             this.Harga.ReadOnly = true;
             // 
             // Jumlah
             // 
-            dataGridViewCellStyle3.Format = "N0";
-            this.Jumlah.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Format = "N0";
+            this.Jumlah.DefaultCellStyle = dataGridViewCellStyle7;
             this.Jumlah.HeaderText = "Jumlah";
             this.Jumlah.Name = "Jumlah";
             this.Jumlah.ReadOnly = true;
@@ -1190,6 +1713,65 @@
             this.KurangiStok.HeaderText = "Kurangi Stok";
             this.KurangiStok.Name = "KurangiStok";
             this.KurangiStok.ReadOnly = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyNoNotaToolStripMenuItem,
+            this.copyNoSeriOLToolStripMenuItem,
+            this.copyBarcodeOLToolStripMenuItem,
+            this.copyKodehToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(167, 92);
+            // 
+            // copyNoNotaToolStripMenuItem
+            // 
+            this.copyNoNotaToolStripMenuItem.Name = "copyNoNotaToolStripMenuItem";
+            this.copyNoNotaToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.copyNoNotaToolStripMenuItem.Text = "Copy No Nota";
+            this.copyNoNotaToolStripMenuItem.Click += new System.EventHandler(this.copyNoNotaToolStripMenuItem_Click);
+            // 
+            // copyNoSeriOLToolStripMenuItem
+            // 
+            this.copyNoSeriOLToolStripMenuItem.Name = "copyNoSeriOLToolStripMenuItem";
+            this.copyNoSeriOLToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.copyNoSeriOLToolStripMenuItem.Text = "Copy No Seri OL";
+            this.copyNoSeriOLToolStripMenuItem.Click += new System.EventHandler(this.copyNoSeriOLToolStripMenuItem_Click);
+            // 
+            // copyBarcodeOLToolStripMenuItem
+            // 
+            this.copyBarcodeOLToolStripMenuItem.Name = "copyBarcodeOLToolStripMenuItem";
+            this.copyBarcodeOLToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.copyBarcodeOLToolStripMenuItem.Text = "Copy Barcode OL";
+            this.copyBarcodeOLToolStripMenuItem.Click += new System.EventHandler(this.copyBarcodeOLToolStripMenuItem_Click);
+            // 
+            // copyKodehToolStripMenuItem
+            // 
+            this.copyKodehToolStripMenuItem.Name = "copyKodehToolStripMenuItem";
+            this.copyKodehToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.copyKodehToolStripMenuItem.Text = "Copy Kodeh";
+            this.copyKodehToolStripMenuItem.Click += new System.EventHandler(this.copyKodehToolStripMenuItem_Click);
+            // 
+            // textboxFilterHargaMax
+            // 
+            this.textboxFilterHargaMax.Location = new System.Drawing.Point(194, 110);
+            this.textboxFilterHargaMax.Name = "textboxFilterHargaMax";
+            this.textboxFilterHargaMax.Size = new System.Drawing.Size(80, 20);
+            this.textboxFilterHargaMax.TabIndex = 56;
+            // 
+            // textboxFilterHargaMin
+            // 
+            this.textboxFilterHargaMin.Location = new System.Drawing.Point(108, 110);
+            this.textboxFilterHargaMin.Name = "textboxFilterHargaMin";
+            this.textboxFilterHargaMin.Size = new System.Drawing.Size(80, 20);
+            this.textboxFilterHargaMin.TabIndex = 55;
+            // 
+            // textboxJumlahTrans
+            // 
+            this.textboxJumlahTrans.Location = new System.Drawing.Point(109, 33);
+            this.textboxJumlahTrans.Name = "textboxJumlahTrans";
+            this.textboxJumlahTrans.Size = new System.Drawing.Size(116, 20);
+            this.textboxJumlahTrans.TabIndex = 58;
             // 
             // LaporanTransaksiPenjualan
             // 
@@ -1209,6 +1791,7 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LaporanTransaksiPenjualan_FormClosing);
             this.Load += new System.EventHandler(this.LaporanTransaksiPenjualan_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LaporanTransaksiPenjualan_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LaporanTransaksiPenjualan_KeyPress);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.LaporanTransaksiPenjualan_KeyUp);
             this.tabControl1.ResumeLayout(false);
@@ -1224,9 +1807,14 @@
             this.tabPage4.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
+            this.groupRadioValid.ResumeLayout(false);
+            this.groupBoxRadioJurnalPenjualan.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.tabPage6.ResumeLayout(false);
+            this.tabPage9.ResumeLayout(false);
+            this.tabPage9.PerformLayout();
+            this.Group_Bos.ResumeLayout(false);
+            this.Group_Bos.PerformLayout();
             this.tabControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
@@ -1234,9 +1822,87 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
+
+        private System.Windows.Forms.Label labelTotalDpp;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label labelTotalPpn;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label labelTotalOmzetPpn;
+        private System.Windows.Forms.Label label30;
+
+        private System.Windows.Forms.CheckBox CBO_Bos;
+
+        private System.Windows.Forms.CheckBox CBO_KomisiMinus;
+
+        private System.Windows.Forms.Button BTN_TopProvinsi;
+
+        private System.Windows.Forms.Button BTN_TopKota;
+        private System.Windows.Forms.Button BTN_TotalOmzetPenjualan;
+
+        private System.Windows.Forms.CheckBox checkBox4;
+
+        private System.Windows.Forms.CheckBox checkBox3;
+
+        private System.Windows.Forms.CheckBox CBO_GantiHarga;
+        private System.Windows.Forms.CheckBox CBO_TanpaLogfile;
+
+        private System.Windows.Forms.Button BTN_UpdateTransaksi;
+
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label45;
+
+        private System.Windows.Forms.Label label44;
+
+        private System.Windows.Forms.Label labelTotalUntungBelPotOL;
+
+        private System.Windows.Forms.Label label42;
+
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label41;
+
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label39;
+
+        private System.Windows.Forms.Label labelTotalUntung;
+        private System.Windows.Forms.Label label37;
+
+        private System.Windows.Forms.Label labelTotalKomisi;
+        private System.Windows.Forms.Label label35;
+
+        private System.Windows.Forms.GroupBox Group_Bos;
+
+        private System.Windows.Forms.Label labelTotalTambahan;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label labelTotalBiaya;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label labelTotalDiskon;
+        private System.Windows.Forms.Label label33;
+
+        private System.Windows.Forms.Label labelTotalDppFull;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label labelTotalPpnFull;
+        private System.Windows.Forms.Label label27;
+
+        private System.Windows.Forms.Label labelTotalTrans;
+        private System.Windows.Forms.Label label23;
+
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label labelTotalOmzet;
+
+        private System.Windows.Forms.ToolStripMenuItem copyKodehToolStripMenuItem;
+
+        private System.Windows.Forms.ToolStripMenuItem copyBarcodeOLToolStripMenuItem;
+
+        private System.Windows.Forms.ToolStripMenuItem copyNoSeriOLToolStripMenuItem;
+
+        private System.Windows.Forms.ToolStripMenuItem copyNoNotaToolStripMenuItem;
+
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
 
         #endregion
 
@@ -1261,22 +1927,22 @@
         private System.Windows.Forms.ComboBox comboFilterMastertimsales;
         private System.Windows.Forms.ComboBox comboFilterSales;
         private System.Windows.Forms.ComboBox comboFilterBarang;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textboxFilterBarcode;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.TextBox textboxFilterNoSeriOnline;
+        private System.Windows.Forms.CheckBox checkBoxHargaTidakNol;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
-        private Components.NumericTextbox numericTextbox2;
-        private Components.NumericTextbox numericTextbox1;
+        private DoranApp.Components.CurrencyTextBox textboxFilterHargaMax;
+        private DoranApp.Components.CurrencyTextBox textboxFilterHargaMin;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox textboxFilterKeterangan;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox comboBox12;
+        private System.Windows.Forms.ComboBox comboFilterAdmin;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.ComboBox comboBox10;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.ComboBox comboFilterGudang;
+        private System.Windows.Forms.TextBox textBoxNamaPelanggan;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
@@ -1291,25 +1957,25 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private Components.NumericTextbox numericTextbox3;
+        private System.Windows.Forms.CheckBox checkboxFilterAdminGantiHarga;
+        private DoranApp.Components.CurrencyTextBox textboxJumlahTrans;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkFilterTitipNota;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textboxFilterNamabarang;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.CheckBox CBO_SemuaValid;
+        private System.Windows.Forms.Button BTN_Valid;
+        private System.Windows.Forms.GroupBox groupRadioValid;
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.RadioButton radioButton6;
-        private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button BTN_Jurnal;
+        private System.Windows.Forms.GroupBox groupBoxRadioJurnalPenjualan;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton3;

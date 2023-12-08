@@ -22,7 +22,7 @@ namespace DoranApp.Utils
                 header.Add("Authorization", Properties.Settings.Default.AuthToken);
             }
 
-            Client = new RestClient(DoranApp.Properties.Settings.Default.BASE_API_URL,
+            Client = new RestClient("http://" + Properties.Settings.Default.BASE_API_URL + ":44376/api",
                 header
                 , new Config().SetJsonSerializerSettings(
                     new JsonSerializerSettings
@@ -56,6 +56,7 @@ namespace DoranApp.Utils
         {
             var status = (Int32)httpResponseMessage.StatusCode;
             var error = httpResponseMessage.ReasonPhrase;
+
             if (!status.ToString().StartsWith("2"))
             {
                 JObject dynamicErrors = response;

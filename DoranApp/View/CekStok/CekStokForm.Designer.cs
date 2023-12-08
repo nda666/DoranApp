@@ -51,7 +51,7 @@ partial class CekStokForm
         this.Controls.Add(this.tabControl1);
         this.KeyPreview = true;
         this.Name = "CekStokForm";
-        this.Text = "CekStokForm";
+        this.Text = "Barang Masuk";
         this.Load += new System.EventHandler(this.CekStokForm_Load);
         this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CekStokForm_KeyDown);
         this.ResumeLayout(false);

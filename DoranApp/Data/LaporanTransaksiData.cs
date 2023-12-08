@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ConsoleDump;
 using DoranApp.Dtos;
 using DoranApp.Utils;
 
@@ -9,6 +10,7 @@ namespace DoranApp.Data
     internal class LaporanTransaksiData : AbstractData<dynamic>
     {
         protected PaginationResultDto _paginationData = new PaginationResultDto();
+        protected HtransTotalDto _total = new HtransTotalDto();
 
         public LaporanTransaksiData() : base()
         {
@@ -22,7 +24,7 @@ namespace DoranApp.Data
 
         protected override string RelativeUrl()
         {
-            return "transaksi";
+            return "laporan/transaksipenjualan";
         }
 
         private string TipeTempo(int day)
@@ -84,6 +86,22 @@ namespace DoranApp.Data
             var responseData = response.Response?.data;
             _dynamicData = responseData;
             _data = responseData;
+            ConsoleDump.Extensions.Dump(_dynamicData);
+
+            _total.Total = response.Response?.total?.total ?? 0;
+            _total.Komisi = response.Response?.total?.komisi ?? 0;
+            _total.Untung = response.Response?.total?.untung ?? 0;
+            _total.UntungbelumpotOl = response.Response?.total?.untungbelumpotOl ?? 0;
+            _total.PpnFull = response.Response?.total?.ppnFull ?? 0;
+            _total.Ppn = response.Response?.total?.ppn ?? 0;
+            _total.DppFull = response.Response?.total?.dppFull ?? 0;
+            _total.Dpp = response.Response?.total?.dpp ?? 0;
+            _total.Jumlahbarangbiaya = response.Response?.total?.jumlahbarangbiaya ?? 0;
+            _total.Diskon = response.Response?.total?.diskon ?? 0;
+            _total.TotalOmzetPPN = response.Response?.total?.totalOmzetPPN ?? 0;
+            _total.TambahanLainnya = response.Response?.total?.tambahanLainnya ?? 0;
+
+
             _paginationData.Page = response.Response?.page;
             _paginationData.PageSize = response.Response?.pageSize;
             _paginationData.TotalRow = response.Response?.totalRow;
@@ -96,6 +114,16 @@ namespace DoranApp.Data
             _dataTable = _dataTableGen.CreateDataTable<dynamic>(data);
         }
 
+        public async Task<List<GetLaporanTransaksiPenjualanGroupTokoDto>> GetLaporanTransaksiPenjualanGroupToko(
+            dynamic query)
+        {
+            Rest rest = new Rest(RelativeUrl() + "/group-by-toko");
+            TReturn<List<GetLaporanTransaksiPenjualanGroupTokoDto>> response =
+                await rest.Get<List<GetLaporanTransaksiPenjualanGroupTokoDto>>(query);
+            response.Response.Dump("OPPP");
+            return response.Response;
+        }
+
         public dynamic GetDynamicData()
         {
             return _dynamicData;
@@ -104,6 +132,11 @@ namespace DoranApp.Data
         public PaginationResultDto GetPaginationData()
         {
             return _paginationData;
+        }
+
+        public HtransTotalDto GetTotalData()
+        {
+            return _total;
         }
     }
 }
