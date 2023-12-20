@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ConsoleDump;
 using DoranApp.Dtos;
 using DoranApp.Utils;
 
@@ -120,7 +119,24 @@ namespace DoranApp.Data
             Rest rest = new Rest(RelativeUrl() + "/group-by-toko");
             TReturn<List<GetLaporanTransaksiPenjualanGroupTokoDto>> response =
                 await rest.Get<List<GetLaporanTransaksiPenjualanGroupTokoDto>>(query);
-            response.Response.Dump("OPPP");
+            return response.Response;
+        }
+
+        public async Task<List<LaporanTransaksiPenjualanGroupKotaDto>> GetLaporanTransaksiPenjualanGroupKota(
+            dynamic query)
+        {
+            Rest rest = new Rest(RelativeUrl() + "/group-by-kota");
+            TReturn<List<LaporanTransaksiPenjualanGroupKotaDto>> response =
+                await rest.Get<List<LaporanTransaksiPenjualanGroupKotaDto>>(query);
+            return response.Response;
+        }
+
+        public async Task<List<LaporanTransaksiPenjualanGroupProvinsiDto>> GetLaporanTransaksiPenjualanGroupProvinsi(
+            dynamic query)
+        {
+            Rest rest = new Rest(RelativeUrl() + "/group-by-provinsi");
+            TReturn<List<LaporanTransaksiPenjualanGroupProvinsiDto>> response =
+                await rest.Get<List<LaporanTransaksiPenjualanGroupProvinsiDto>>(query);
             return response.Response;
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Dynamic;
 using System.Windows.Forms;
 using DoranApp.Exceptions;
@@ -117,6 +118,21 @@ namespace DoranApp
             }
 
             return sHasil;
+        }
+
+        public static void CreateDatagridviewRowNumber(DataGridView dgv, Font font, DataGridViewRowPostPaintEventArgs e)
+        {
+            string rowNumber = (e.RowIndex + 1).ToString();
+
+            // Mengambil ukuran teks nomor urut
+            SizeF size = e.Graphics.MeasureString(rowNumber, font);
+
+            // Mendapatkan koordinat X dan Y untuk menampilkan nomor urut di row header
+            float x = (float)(e.RowBounds.Location.X + dgv.RowHeadersWidth - size.Width - 5);
+            float y = (float)(e.RowBounds.Location.Y + (e.RowBounds.Height - size.Height) / 2);
+
+            // Menggambar nomor urut di row header
+            e.Graphics.DrawString(rowNumber, font, Brushes.Black, x, y);
         }
     }
 }

@@ -80,6 +80,8 @@
             this.label17 = new System.Windows.Forms.Label();
             this.comboFilterGudang = new System.Windows.Forms.ComboBox();
             this.textBoxNamaPelanggan = new System.Windows.Forms.TextBox();
+            this.textboxFilterHargaMax = new DoranApp.Components.CurrencyTextBox();
+            this.textboxFilterHargaMin = new DoranApp.Components.CurrencyTextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
@@ -89,6 +91,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.textboxFilterNamabarang = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.textboxJumlahTrans = new DoranApp.Components.CurrencyTextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -187,9 +190,6 @@
             this.copyNoSeriOLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyBarcodeOLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyKodehToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textboxFilterHargaMax = new DoranApp.Components.CurrencyTextBox();
-            this.textboxFilterHargaMin = new DoranApp.Components.CurrencyTextBox();
-            this.textboxJumlahTrans = new DoranApp.Components.CurrencyTextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -658,6 +658,20 @@
             this.textBoxNamaPelanggan.Size = new System.Drawing.Size(266, 20);
             this.textBoxNamaPelanggan.TabIndex = 34;
             // 
+            // textboxFilterHargaMax
+            // 
+            this.textboxFilterHargaMax.Location = new System.Drawing.Point(194, 110);
+            this.textboxFilterHargaMax.Name = "textboxFilterHargaMax";
+            this.textboxFilterHargaMax.Size = new System.Drawing.Size(80, 20);
+            this.textboxFilterHargaMax.TabIndex = 56;
+            // 
+            // textboxFilterHargaMin
+            // 
+            this.textboxFilterHargaMin.Location = new System.Drawing.Point(108, 110);
+            this.textboxFilterHargaMin.Name = "textboxFilterHargaMin";
+            this.textboxFilterHargaMin.Size = new System.Drawing.Size(80, 20);
+            this.textboxFilterHargaMin.TabIndex = 55;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.groupBox2);
@@ -750,6 +764,13 @@
             this.label2.TabIndex = 51;
             this.label2.Text = "Nama Barang :";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // textboxJumlahTrans
+            // 
+            this.textboxJumlahTrans.Location = new System.Drawing.Point(109, 33);
+            this.textboxJumlahTrans.Name = "textboxJumlahTrans";
+            this.textboxJumlahTrans.Size = new System.Drawing.Size(116, 20);
+            this.textboxJumlahTrans.TabIndex = 58;
             // 
             // tabPage4
             // 
@@ -1084,6 +1105,7 @@
             this.BTN_TopProvinsi.TabIndex = 22;
             this.BTN_TopProvinsi.Text = "By Prov";
             this.BTN_TopProvinsi.UseVisualStyleBackColor = true;
+            this.BTN_TopProvinsi.Click += new System.EventHandler(this.BTN_TopProvinsi_Click);
             // 
             // BTN_TotalOmzetPenjualan
             // 
@@ -1103,6 +1125,7 @@
             this.BTN_TopKota.TabIndex = 20;
             this.BTN_TopKota.Text = "By Kota";
             this.BTN_TopKota.UseVisualStyleBackColor = true;
+            this.BTN_TopKota.Click += new System.EventHandler(this.BTN_TopKota_Click);
             // 
             // CBO_KomisiMinus
             // 
@@ -1432,8 +1455,7 @@
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeColumns = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1473,22 +1495,7 @@
             // 
             // toolStrip1
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripLabel3,
-            this.comboPageSize,
-            this.toolStripLabel4,
-            this.toolStripSeparator4,
-            this.toolStripButton1,
-            this.toolStripButton2,
-            this.toolStripSeparator1,
-            this.toolStripTextBox1,
-            this.toolStripLabel1,
-            this.toolStripSeparator2,
-            this.toolStripButton3,
-            this.toolStripButton4,
-            this.toolStripSeparator3,
-            this.toolStripLabel5,
-            this.toolStripLabel2});
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.toolStripLabel3, this.comboPageSize, this.toolStripLabel4, this.toolStripSeparator4, this.toolStripButton1, this.toolStripButton2, this.toolStripSeparator1, this.toolStripTextBox1, this.toolStripLabel1, this.toolStripSeparator2, this.toolStripButton3, this.toolStripButton4, this.toolStripSeparator3, this.toolStripLabel5, this.toolStripLabel2 });
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(706, 25);
@@ -1505,12 +1512,7 @@
             // 
             this.comboPageSize.AutoSize = false;
             this.comboPageSize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboPageSize.Items.AddRange(new object[] {
-            "50",
-            "100",
-            "200",
-            "500",
-            "1000"});
+            this.comboPageSize.Items.AddRange(new object[] { "50", "100", "200", "500", "1000" });
             this.comboPageSize.Name = "comboPageSize";
             this.comboPageSize.Size = new System.Drawing.Size(55, 23);
             this.comboPageSize.SelectedIndexChanged += new System.EventHandler(this.comboPageSize_SelectedIndexChanged);
@@ -1555,7 +1557,6 @@
             // 
             this.toolStripTextBox1.AccessibleName = "Position";
             this.toolStripTextBox1.AutoSize = false;
-            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Size = new System.Drawing.Size(50, 23);
             this.toolStripTextBox1.Text = "0";
@@ -1616,8 +1617,7 @@
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.Controls.Add(this.toolStrip1);
             this.panel2.Location = new System.Drawing.Point(414, 12);
             this.panel2.Name = "panel2";
@@ -1630,8 +1630,7 @@
             this.dataGridView2.AllowUserToAddRows = false;
             this.dataGridView2.AllowUserToDeleteRows = false;
             this.dataGridView2.AllowUserToResizeRows = false;
-            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1641,13 +1640,7 @@
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Pcs,
-            this.NamaBarang,
-            this.Harga,
-            this.Jumlah,
-            this.SN,
-            this.KurangiStok});
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { this.Pcs, this.NamaBarang, this.Harga, this.Jumlah, this.SN, this.KurangiStok });
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1716,11 +1709,7 @@
             // 
             // contextMenuStrip1
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyNoNotaToolStripMenuItem,
-            this.copyNoSeriOLToolStripMenuItem,
-            this.copyBarcodeOLToolStripMenuItem,
-            this.copyKodehToolStripMenuItem});
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { this.copyNoNotaToolStripMenuItem, this.copyNoSeriOLToolStripMenuItem, this.copyBarcodeOLToolStripMenuItem, this.copyKodehToolStripMenuItem });
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(167, 92);
             // 
@@ -1752,28 +1741,7 @@
             this.copyKodehToolStripMenuItem.Text = "Copy Kodeh";
             this.copyKodehToolStripMenuItem.Click += new System.EventHandler(this.copyKodehToolStripMenuItem_Click);
             // 
-            // textboxFilterHargaMax
-            // 
-            this.textboxFilterHargaMax.Location = new System.Drawing.Point(194, 110);
-            this.textboxFilterHargaMax.Name = "textboxFilterHargaMax";
-            this.textboxFilterHargaMax.Size = new System.Drawing.Size(80, 20);
-            this.textboxFilterHargaMax.TabIndex = 56;
-            // 
-            // textboxFilterHargaMin
-            // 
-            this.textboxFilterHargaMin.Location = new System.Drawing.Point(108, 110);
-            this.textboxFilterHargaMin.Name = "textboxFilterHargaMin";
-            this.textboxFilterHargaMin.Size = new System.Drawing.Size(80, 20);
-            this.textboxFilterHargaMin.TabIndex = 55;
-            // 
-            // textboxJumlahTrans
-            // 
-            this.textboxJumlahTrans.Location = new System.Drawing.Point(109, 33);
-            this.textboxJumlahTrans.Name = "textboxJumlahTrans";
-            this.textboxJumlahTrans.Size = new System.Drawing.Size(116, 20);
-            this.textboxJumlahTrans.TabIndex = 58;
-            // 
-            // LaporanTransaksiPenjualan
+            // LaporanTransaksiPenjualanForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1786,7 +1754,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "LaporanTransaksiPenjualan";
+            this.Name = "LaporanTransaksiPenjualanForm";
             this.Text = "Laporan Transaksi Penjualan";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LaporanTransaksiPenjualan_FormClosing);
@@ -1824,7 +1792,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
-
         }
 
         private System.Windows.Forms.Label labelTotalDpp;

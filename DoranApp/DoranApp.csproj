@@ -215,6 +215,7 @@
     <Compile Include="Utils\ButtonToggleHelper.cs" />
       <Compile Include="Utils\ClientPartial.cs"/>
       <Compile Include="Utils\Client.cs"/>
+      <Compile Include="Utils\EmailClient.cs"/>
       <Compile Include="Utils\EnableDoubleBufferedMethod.cs"/>
       <Compile Include="Utils\Session.cs"/>
     <Compile Include="Utils\DatatableGenerator.cs" />
@@ -276,6 +277,18 @@
     </Compile>
     <Compile Include="View\LaporanPenjualanBarangByBarang.Designer.cs">
       <DependentUpon>LaporanPenjualanBarangByBarang.cs</DependentUpon>
+    </Compile>
+      <Compile Include="View\LaporanTransaksiPenjualan\ByKotaForm.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\LaporanTransaksiPenjualan\ByKotaForm.Designer.cs">
+          <DependentUpon>ByKotaForm.cs</DependentUpon>
+      </Compile>
+      <Compile Include="View\LaporanTransaksiPenjualan\ByProvinsiForm.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\LaporanTransaksiPenjualan\ByProvinsiForm.Designer.cs">
+          <DependentUpon>ByProvinsiForm.cs</DependentUpon>
     </Compile>
       <Compile Include="View\LaporanTransaksiPenjualan\ByTokoForm.cs">
       <SubType>Form</SubType>
@@ -517,6 +530,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\LaporanPenjualanBarangByBarang.resx">
       <DependentUpon>LaporanPenjualanBarangByBarang.cs</DependentUpon>
+    </EmbeddedResource>
+      <EmbeddedResource Include="View\LaporanTransaksiPenjualan\ByKotaForm.resx">
+          <DependentUpon>ByKotaForm.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="View\LaporanTransaksiPenjualan\ByProvinsiForm.resx">
+          <DependentUpon>ByProvinsiForm.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="View\LaporanTransaksiPenjualan\ByTokoForm.resx">
+          <DependentUpon>ByTokoForm.cs</DependentUpon>
     </EmbeddedResource>
       <EmbeddedResource Include="View\LaporanTransaksiPenjualan\LaporanTransaksiPenjualanForm.resx">
           <DependentUpon>LaporanTransaksiPenjualanForm.cs</DependentUpon>

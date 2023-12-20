@@ -8,13 +8,12 @@ using DoranApp.Data;
 using DoranApp.DataGlobal;
 using DoranApp.Utils;
 
-namespace DoranApp.View.LaporanTransaksiPenjualanForm
+namespace DoranApp.View.LaporanTransaksiPenjualan
 {
     public partial class LaporanTransaksiPenjualanForm : Form
     {
         public long _laporanTransaksiLastPage = 0;
         private List<CommonResultDto> _lokasiKota = new List<CommonResultDto>();
-        private IDisposable _LokasiKotaSubscribe;
         private MasterbarangData _masterbarang = new MasterbarangData();
         private List<MasterbarangOptionDto> _masterbarangOptions = new List<MasterbarangOptionDto>();
         private MastergudangData _mastergudangData = new MastergudangData();
@@ -696,15 +695,58 @@ namespace DoranApp.View.LaporanTransaksiPenjualanForm
             }
         }
 
+        public async Task<List<GetLaporanTransaksiPenjualanGroupTokoDto>> GetLaporanTransaksiPenjualanGroupToko()
+        {
+            List<GetLaporanTransaksiPenjualanGroupTokoDto> data =
+                await _transaksiData.GetLaporanTransaksiPenjualanGroupToko(GetLaporanTransaksiSearchQuery());
+            return data;
+        }
+
         private async void BTN_TotalOmzetPenjualan_Click(object sender, EventArgs e)
         {
             try
             {
-                await _transaksiData.GetLaporanTransaksiPenjualanGroupToko(GetLaporanTransaksiSearchQuery());
+                List<GetLaporanTransaksiPenjualanGroupTokoDto> data = await GetLaporanTransaksiPenjualanGroupToko();
+                var dialog = new ByTokoForm(data, datePickerFilterMin.Value, datePickerFilterMax.Value,
+                    GetLaporanTransaksiPenjualanGroupToko);
+                dialog.ShowDialog();
             }
             catch (Exception ex)
             {
-                ex.Dump();
+                ex?.Dump();
+                Helper.ShowErrorMessage(ex);
+            }
+        }
+
+        private async void BTN_TopKota_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<LaporanTransaksiPenjualanGroupKotaDto> data =
+                    await _transaksiData.GetLaporanTransaksiPenjualanGroupKota(GetLaporanTransaksiSearchQuery());
+                var dialog = new ByKotaForm(data);
+                dialog.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ex?.Dump();
+                Helper.ShowErrorMessage(ex);
+            }
+        }
+
+        private async void BTN_TopProvinsi_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<LaporanTransaksiPenjualanGroupProvinsiDto> data =
+                    await _transaksiData.GetLaporanTransaksiPenjualanGroupProvinsi(GetLaporanTransaksiSearchQuery());
+                var dialog = new ByProvinsiForm(data);
+                dialog.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                ex?.Dump();
+                Helper.ShowErrorMessage(ex);
             }
         }
     }

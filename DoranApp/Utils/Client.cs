@@ -4272,6 +4272,138 @@ namespace DoranApp.Utils
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task Blok_MasterpelangganAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            if (kode == null)
+                throw new System.ArgumentNullException("kode");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterpelanggan/{kode}/blok");
+            urlBuilder_.Replace("{kode}", System.Uri.EscapeDataString(ConvertToString(kode, System.Globalization.CultureInfo.InvariantCulture)));
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task Un_Blok_MasterpelangganAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            if (kode == null)
+                throw new System.ArgumentNullException("kode");
+
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Masterpelanggan/{kode}/unblock");
+            urlBuilder_.Replace("{kode}", System.Uri.EscapeDataString(ConvertToString(kode, System.Globalization.CultureInfo.InvariantCulture)));
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Masterpengeluaran>> Get_Masterpengeluaran_By_KodeAsync(string nama = null, bool? aktif = null, bool? cargo = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
@@ -7953,6 +8085,73 @@ namespace DoranApp.Utils
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<Sales>> Get_Sales_That_Had_EmailAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/Sales/had-email");
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<Sales>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<SalesDto> Get_Sales_By_KodeAsync(int kode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             if (kode == null)
@@ -9581,6 +9780,86 @@ namespace DoranApp.Utils
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<OmzetBelumLunasBySalesDto>> Omzet_Belum_Lunas_By_SalesAsync(System.DateTime? dateMin = null, System.DateTime? dateMax = null, System.Collections.Generic.IEnumerable<int> kodeSales = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/belum-lunas?");
+            if (dateMin != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("DateMin") + "=").Append(System.Uri.EscapeDataString(dateMin.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (dateMax != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("DateMax") + "=").Append(System.Uri.EscapeDataString(dateMax.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodeSales != null)
+            {
+                foreach (var item_ in kodeSales) { urlBuilder_.Append(System.Uri.EscapeDataString("KodeSales") + "=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
+            }
+            urlBuilder_.Length--;
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("text/plain"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<OmzetBelumLunasBySalesDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
         public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<TransaksiByTokoResultDto>> GetAll3Async(TransaksiByTokoTipeGroup? tipeGroup = null, int? kodegudang = null, string brgNama = null, int? kodeKategori = null, int? kodeBrand = null, bool? retur = null, int? kodeSales = null, int? kodeTimSales = null, int? kodeChannelSales = null, int? kodePelanggan = null, int? kodeKota = null, string lunas = null, string kodenota = null, int? kodeProvinsi = null, System.DateTime? minDate = null, System.DateTime? maxDate = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             var urlBuilder_ = new System.Text.StringBuilder();
@@ -9868,6 +10147,374 @@ namespace DoranApp.Utils
                         if (status_ == 200)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<HtransResultDto>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LaporanTransaksiPenjualanGroupKotaDto>> Get_Laporan_Transaksi_Penjuala_Group_KotaAsync(int? kodeh = null, int? kodegudang = null, string namaPelanggan = null, int? kodeSales = null, int? kodePelanggan = null, int? kodeKota = null, string lunas = null, string kodenota = null, int? kodeProvinsi = null, System.DateTime? minDate = null, System.DateTime? maxDate = null, int? insertName = null, string keterangan = null, string namaBarang = null, int? hargaMin = null, int? hargaMax = null, bool? hargaTidakNol = null, string noSeriOnline = null, string barcodeonline = null, bool? sudahJatuhTempo = null, int? jumlah = null, int? tipeTempo = null, bool? notaTitip = null, bool? admingantiharga = null, int? akanDjJurnalkan = null, int? valid = null, int? limit = null, int? page = null, int? pageSize = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/laporan/TransaksiPenjualan/group-by-kota?");
+            if (kodeh != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Kodeh") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodeh, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodegudang != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Kodegudang") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodegudang, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (namaPelanggan != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("NamaPelanggan") + "=").Append(System.Uri.EscapeDataString(ConvertToString(namaPelanggan, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodeSales != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("KodeSales") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodeSales, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodePelanggan != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("KodePelanggan") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodePelanggan, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodeKota != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("KodeKota") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodeKota, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (lunas != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Lunas") + "=").Append(System.Uri.EscapeDataString(ConvertToString(lunas, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodenota != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Kodenota") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodenota, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodeProvinsi != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("KodeProvinsi") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodeProvinsi, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (minDate != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("MinDate") + "=").Append(System.Uri.EscapeDataString(minDate.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (maxDate != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("MaxDate") + "=").Append(System.Uri.EscapeDataString(maxDate.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (insertName != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("InsertName") + "=").Append(System.Uri.EscapeDataString(ConvertToString(insertName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (keterangan != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Keterangan") + "=").Append(System.Uri.EscapeDataString(ConvertToString(keterangan, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (namaBarang != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("NamaBarang") + "=").Append(System.Uri.EscapeDataString(ConvertToString(namaBarang, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (hargaMin != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("HargaMin") + "=").Append(System.Uri.EscapeDataString(ConvertToString(hargaMin, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (hargaMax != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("HargaMax") + "=").Append(System.Uri.EscapeDataString(ConvertToString(hargaMax, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (hargaTidakNol != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("HargaTidakNol") + "=").Append(System.Uri.EscapeDataString(ConvertToString(hargaTidakNol, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (noSeriOnline != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("NoSeriOnline") + "=").Append(System.Uri.EscapeDataString(ConvertToString(noSeriOnline, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (barcodeonline != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Barcodeonline") + "=").Append(System.Uri.EscapeDataString(ConvertToString(barcodeonline, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (sudahJatuhTempo != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("SudahJatuhTempo") + "=").Append(System.Uri.EscapeDataString(ConvertToString(sudahJatuhTempo, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (jumlah != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Jumlah") + "=").Append(System.Uri.EscapeDataString(ConvertToString(jumlah, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (tipeTempo != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("TipeTempo") + "=").Append(System.Uri.EscapeDataString(ConvertToString(tipeTempo, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (notaTitip != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("NotaTitip") + "=").Append(System.Uri.EscapeDataString(ConvertToString(notaTitip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (admingantiharga != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Admingantiharga") + "=").Append(System.Uri.EscapeDataString(ConvertToString(admingantiharga, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (akanDjJurnalkan != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("AkanDjJurnalkan") + "=").Append(System.Uri.EscapeDataString(ConvertToString(akanDjJurnalkan, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (valid != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Valid") + "=").Append(System.Uri.EscapeDataString(ConvertToString(valid, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (limit != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Limit") + "=").Append(System.Uri.EscapeDataString(ConvertToString(limit, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (page != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Page") + "=").Append(System.Uri.EscapeDataString(ConvertToString(page, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (pageSize != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("PageSize") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageSize, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<LaporanTransaksiPenjualanGroupKotaDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new ApiException("The HTTP status code of the response was not expected (" + status_ + ").", status_, responseData_, headers_, null);
+                        }
+                    }
+                    finally
+                    {
+                        if (disposeResponse_)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+                if (disposeClient_)
+                    client_.Dispose();
+            }
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public virtual async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<LaporanTransaksiPenjualanGroupProvinsiDto>> Get_Laporan_Transaksi_Penjuala_Group_ProvinsiAsync(int? kodeh = null, int? kodegudang = null, string namaPelanggan = null, int? kodeSales = null, int? kodePelanggan = null, int? kodeKota = null, string lunas = null, string kodenota = null, int? kodeProvinsi = null, System.DateTime? minDate = null, System.DateTime? maxDate = null, int? insertName = null, string keterangan = null, string namaBarang = null, int? hargaMin = null, int? hargaMax = null, bool? hargaTidakNol = null, string noSeriOnline = null, string barcodeonline = null, bool? sudahJatuhTempo = null, int? jumlah = null, int? tipeTempo = null, bool? notaTitip = null, bool? admingantiharga = null, int? akanDjJurnalkan = null, int? valid = null, int? limit = null, int? page = null, int? pageSize = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/api/laporan/TransaksiPenjualan/group-by-provinsi?");
+            if (kodeh != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Kodeh") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodeh, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodegudang != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Kodegudang") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodegudang, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (namaPelanggan != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("NamaPelanggan") + "=").Append(System.Uri.EscapeDataString(ConvertToString(namaPelanggan, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodeSales != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("KodeSales") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodeSales, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodePelanggan != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("KodePelanggan") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodePelanggan, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodeKota != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("KodeKota") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodeKota, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (lunas != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Lunas") + "=").Append(System.Uri.EscapeDataString(ConvertToString(lunas, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodenota != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Kodenota") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodenota, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (kodeProvinsi != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("KodeProvinsi") + "=").Append(System.Uri.EscapeDataString(ConvertToString(kodeProvinsi, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (minDate != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("MinDate") + "=").Append(System.Uri.EscapeDataString(minDate.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (maxDate != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("MaxDate") + "=").Append(System.Uri.EscapeDataString(maxDate.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (insertName != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("InsertName") + "=").Append(System.Uri.EscapeDataString(ConvertToString(insertName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (keterangan != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Keterangan") + "=").Append(System.Uri.EscapeDataString(ConvertToString(keterangan, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (namaBarang != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("NamaBarang") + "=").Append(System.Uri.EscapeDataString(ConvertToString(namaBarang, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (hargaMin != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("HargaMin") + "=").Append(System.Uri.EscapeDataString(ConvertToString(hargaMin, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (hargaMax != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("HargaMax") + "=").Append(System.Uri.EscapeDataString(ConvertToString(hargaMax, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (hargaTidakNol != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("HargaTidakNol") + "=").Append(System.Uri.EscapeDataString(ConvertToString(hargaTidakNol, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (noSeriOnline != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("NoSeriOnline") + "=").Append(System.Uri.EscapeDataString(ConvertToString(noSeriOnline, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (barcodeonline != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Barcodeonline") + "=").Append(System.Uri.EscapeDataString(ConvertToString(barcodeonline, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (sudahJatuhTempo != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("SudahJatuhTempo") + "=").Append(System.Uri.EscapeDataString(ConvertToString(sudahJatuhTempo, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (jumlah != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Jumlah") + "=").Append(System.Uri.EscapeDataString(ConvertToString(jumlah, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (tipeTempo != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("TipeTempo") + "=").Append(System.Uri.EscapeDataString(ConvertToString(tipeTempo, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (notaTitip != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("NotaTitip") + "=").Append(System.Uri.EscapeDataString(ConvertToString(notaTitip, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (admingantiharga != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Admingantiharga") + "=").Append(System.Uri.EscapeDataString(ConvertToString(admingantiharga, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (akanDjJurnalkan != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("AkanDjJurnalkan") + "=").Append(System.Uri.EscapeDataString(ConvertToString(akanDjJurnalkan, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (valid != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Valid") + "=").Append(System.Uri.EscapeDataString(ConvertToString(valid, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (limit != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Limit") + "=").Append(System.Uri.EscapeDataString(ConvertToString(limit, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (page != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("Page") + "=").Append(System.Uri.EscapeDataString(ConvertToString(page, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (pageSize != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("PageSize") + "=").Append(System.Uri.EscapeDataString(ConvertToString(pageSize, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
+
+            var client_ = _httpClient;
+            var disposeClient_ = false;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    var disposeResponse_ = true;
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = (int)response_.StatusCode;
+                        if (status_ == 200)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<LaporanTransaksiPenjualanGroupProvinsiDto>>(response_, headers_, cancellationToken).ConfigureAwait(false);
                             if (objectResponse_.Object == null)
                             {
                                 throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
@@ -11263,6 +11910,9 @@ namespace DoranApp.Utils
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class GetLaporanTransaksiPenjualanGroupTokoDto
     {
+        [Newtonsoft.Json.JsonProperty("nomornya", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Nomornya { get; set; }
+
         [Newtonsoft.Json.JsonProperty("salesPemilik", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int SalesPemilik { get; set; }
 
@@ -11272,8 +11922,14 @@ namespace DoranApp.Utils
         [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Nama { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double Jumlah { get; set; }
+        [Newtonsoft.Json.JsonProperty("namaSales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string NamaSales { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("namaKota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string NamaKota { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("jumlahNya", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double JumlahNya { get; set; }
 
         [Newtonsoft.Json.JsonProperty("persenUntung", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double PersenUntung { get; set; }
@@ -12449,6 +13105,28 @@ namespace DoranApp.Utils
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
+    public partial class LaporanTransaksiPenjualanGroupKotaDto
+    {
+        [Newtonsoft.Json.JsonProperty("namaKota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string NamaKota { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Jumlah { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
+    public partial class LaporanTransaksiPenjualanGroupProvinsiDto
+    {
+        [Newtonsoft.Json.JsonProperty("namaProvinsi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string NamaProvinsi { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("jumlah", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double Jumlah { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public enum LevelOrderEnum
     {
 
@@ -13145,6 +13823,9 @@ namespace DoranApp.Utils
         [Newtonsoft.Json.JsonProperty("lokasiKota", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public LokasiKota LokasiKota { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("sales", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Sales Sales { get; set; }
+
         [Newtonsoft.Json.JsonProperty("htrans", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<Htrans> Htrans { get; set; }
 
@@ -13485,6 +14166,20 @@ namespace DoranApp.Utils
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
+    public partial class OmzetBelumLunasBySalesDto
+    {
+        [Newtonsoft.Json.JsonProperty("nama", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Nama { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("jumlahNya", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double JumlahNya { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("kodesales", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Kodesales { get; set; }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Penyiaporder
     {
         [Newtonsoft.Json.JsonProperty("kode", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -13807,6 +14502,9 @@ namespace DoranApp.Utils
 
         [Newtonsoft.Json.JsonProperty("horder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.ICollection<Horder> Horder { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("masterpelanggan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.ICollection<Masterpelanggan> Masterpelanggan { get; set; }
 
     }
 
