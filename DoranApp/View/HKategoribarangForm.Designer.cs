@@ -257,16 +257,6 @@
             this.comboFilterActive.DisplayMember = "Value";
             this.comboFilterActive.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboFilterActive.FormattingEnabled = true;
-            this.comboFilterActive.Items.AddRange(new object[] {
-            ((object)(resources.GetObject("comboFilterActive.Items"))),
-            ((object)(resources.GetObject("comboFilterActive.Items1"))),
-            ((object)(resources.GetObject("comboFilterActive.Items2"))),
-            ((object)(resources.GetObject("comboFilterActive.Items3"))),
-            ((object)(resources.GetObject("comboFilterActive.Items4"))),
-            ((object)(resources.GetObject("comboFilterActive.Items5"))),
-            ((object)(resources.GetObject("comboFilterActive.Items6"))),
-            ((object)(resources.GetObject("comboFilterActive.Items7"))),
-            ((object)(resources.GetObject("comboFilterActive.Items8")))});
             this.comboFilterActive.Location = new System.Drawing.Point(81, 42);
             this.comboFilterActive.Name = "comboFilterActive";
             this.comboFilterActive.Size = new System.Drawing.Size(121, 21);

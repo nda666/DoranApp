@@ -114,6 +114,24 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.label24 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button14 = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.radioButton10 = new System.Windows.Forms.RadioButton();
+            this.radioButton11 = new System.Windows.Forms.RadioButton();
+            this.radioButton12 = new System.Windows.Forms.RadioButton();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.radioButton7 = new System.Windows.Forms.RadioButton();
+            this.radioButton8 = new System.Windows.Forms.RadioButton();
+            this.radioButton9 = new System.Windows.Forms.RadioButton();
             this.labelTotalOmzetPpn = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.labelTotalPpn = new System.Windows.Forms.Label();
@@ -202,6 +220,9 @@
             this.groupBoxRadioJurnalPenjualan.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.tabPage9.SuspendLayout();
             this.Group_Bos.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -999,6 +1020,15 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.label24);
+            this.tabPage6.Controls.Add(this.dateTimePicker1);
+            this.tabPage6.Controls.Add(this.groupBox5);
+            this.tabPage6.Controls.Add(this.button13);
+            this.tabPage6.Controls.Add(this.button12);
+            this.tabPage6.Controls.Add(this.button10);
+            this.tabPage6.Controls.Add(this.button9);
+            this.tabPage6.Controls.Add(this.groupBox4);
+            this.tabPage6.Controls.Add(this.groupBox3);
             this.tabPage6.Controls.Add(this.labelTotalOmzetPpn);
             this.tabPage6.Controls.Add(this.label30);
             this.tabPage6.Controls.Add(this.labelTotalPpn);
@@ -1010,12 +1040,190 @@
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage6.Size = new System.Drawing.Size(396, 297);
             this.tabPage6.TabIndex = 4;
-            this.tabPage6.Text = "tabPage6";
+            this.tabPage6.Text = "PPN";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(3, 213);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(99, 21);
+            this.label24.TabIndex = 64;
+            this.label24.Text = "Tgl Trans. [F1] :";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(109, 213);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(97, 20);
+            this.dateTimePicker1.TabIndex = 63;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.button14);
+            this.groupBox5.Controls.Add(this.label21);
+            this.groupBox5.Controls.Add(this.textBox3);
+            this.groupBox5.Location = new System.Drawing.Point(184, 120);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(200, 87);
+            this.groupBox5.TabIndex = 62;
+            this.groupBox5.TabStop = false;
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(54, 43);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(140, 30);
+            this.button14.TabIndex = 63;
+            this.button14.Text = "Set PPN Manual";
+            this.button14.UseVisualStyleBackColor = true;
+            // 
+            // label21
+            // 
+            this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(6, 16);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(41, 21);
+            this.label21.TabIndex = 56;
+            this.label21.Text = "PPN :";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(53, 17);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(141, 20);
+            this.textBox3.TabIndex = 55;
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(182, 84);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(90, 30);
+            this.button13.TabIndex = 61;
+            this.button13.Text = "Hapus PPN";
+            this.button13.UseVisualStyleBackColor = true;
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(135, 48);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(195, 30);
+            this.button12.TabIndex = 60;
+            this.button12.Text = "Cetak Daftar Transaksi PPN";
+            this.button12.UseVisualStyleBackColor = true;
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(6, 84);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(170, 30);
+            this.button10.TabIndex = 59;
+            this.button10.Text = "Tambahkan PPN 11%";
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(6, 48);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(123, 30);
+            this.button9.TabIndex = 4;
+            this.button9.Text = "CETAK NOTA PPN";
+            this.button9.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.radioButton10);
+            this.groupBox4.Controls.Add(this.radioButton11);
+            this.groupBox4.Controls.Add(this.radioButton12);
+            this.groupBox4.Location = new System.Drawing.Point(182, 6);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(208, 42);
+            this.groupBox4.TabIndex = 58;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Status Pelaporan PPN";
+            // 
+            // radioButton10
+            // 
+            this.radioButton10.Location = new System.Drawing.Point(139, 19);
+            this.radioButton10.Name = "radioButton10";
+            this.radioButton10.Size = new System.Drawing.Size(63, 17);
+            this.radioButton10.TabIndex = 2;
+            this.radioButton10.Tag = "0";
+            this.radioButton10.Text = "Belum";
+            this.radioButton10.UseVisualStyleBackColor = true;
+            // 
+            // radioButton11
+            // 
+            this.radioButton11.Location = new System.Drawing.Point(70, 19);
+            this.radioButton11.Name = "radioButton11";
+            this.radioButton11.Size = new System.Drawing.Size(63, 17);
+            this.radioButton11.TabIndex = 1;
+            this.radioButton11.Tag = "1";
+            this.radioButton11.Text = "Sudah";
+            this.radioButton11.UseVisualStyleBackColor = true;
+            // 
+            // radioButton12
+            // 
+            this.radioButton12.Checked = true;
+            this.radioButton12.Location = new System.Drawing.Point(6, 19);
+            this.radioButton12.Name = "radioButton12";
+            this.radioButton12.Size = new System.Drawing.Size(58, 17);
+            this.radioButton12.TabIndex = 0;
+            this.radioButton12.TabStop = true;
+            this.radioButton12.Text = "Semua";
+            this.radioButton12.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.radioButton7);
+            this.groupBox3.Controls.Add(this.radioButton8);
+            this.groupBox3.Controls.Add(this.radioButton9);
+            this.groupBox3.Location = new System.Drawing.Point(6, 6);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(170, 42);
+            this.groupBox3.TabIndex = 57;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "PPN";
+            // 
+            // radioButton7
+            // 
+            this.radioButton7.Location = new System.Drawing.Point(117, 19);
+            this.radioButton7.Name = "radioButton7";
+            this.radioButton7.Size = new System.Drawing.Size(53, 17);
+            this.radioButton7.TabIndex = 2;
+            this.radioButton7.Tag = "0";
+            this.radioButton7.Text = "Tidak";
+            this.radioButton7.UseVisualStyleBackColor = true;
+            // 
+            // radioButton8
+            // 
+            this.radioButton8.Location = new System.Drawing.Point(70, 19);
+            this.radioButton8.Name = "radioButton8";
+            this.radioButton8.Size = new System.Drawing.Size(41, 17);
+            this.radioButton8.TabIndex = 1;
+            this.radioButton8.Tag = "1";
+            this.radioButton8.Text = "Ya";
+            this.radioButton8.UseVisualStyleBackColor = true;
+            // 
+            // radioButton9
+            // 
+            this.radioButton9.Checked = true;
+            this.radioButton9.Location = new System.Drawing.Point(6, 19);
+            this.radioButton9.Name = "radioButton9";
+            this.radioButton9.Size = new System.Drawing.Size(58, 17);
+            this.radioButton9.TabIndex = 0;
+            this.radioButton9.TabStop = true;
+            this.radioButton9.Text = "Semua";
+            this.radioButton9.UseVisualStyleBackColor = true;
             // 
             // labelTotalOmzetPpn
             // 
-            this.labelTotalOmzetPpn.Location = new System.Drawing.Point(111, 148);
+            this.labelTotalOmzetPpn.Location = new System.Drawing.Point(106, 173);
             this.labelTotalOmzetPpn.Name = "labelTotalOmzetPpn";
             this.labelTotalOmzetPpn.Size = new System.Drawing.Size(100, 23);
             this.labelTotalOmzetPpn.TabIndex = 17;
@@ -1023,7 +1231,7 @@
             // 
             // label30
             // 
-            this.label30.Location = new System.Drawing.Point(5, 148);
+            this.label30.Location = new System.Drawing.Point(0, 173);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(100, 23);
             this.label30.TabIndex = 16;
@@ -1032,7 +1240,7 @@
             // 
             // labelTotalPpn
             // 
-            this.labelTotalPpn.Location = new System.Drawing.Point(111, 125);
+            this.labelTotalPpn.Location = new System.Drawing.Point(106, 150);
             this.labelTotalPpn.Name = "labelTotalPpn";
             this.labelTotalPpn.Size = new System.Drawing.Size(100, 23);
             this.labelTotalPpn.TabIndex = 15;
@@ -1040,7 +1248,7 @@
             // 
             // label26
             // 
-            this.label26.Location = new System.Drawing.Point(5, 125);
+            this.label26.Location = new System.Drawing.Point(0, 150);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(100, 23);
             this.label26.TabIndex = 14;
@@ -1049,7 +1257,7 @@
             // 
             // labelTotalDpp
             // 
-            this.labelTotalDpp.Location = new System.Drawing.Point(111, 102);
+            this.labelTotalDpp.Location = new System.Drawing.Point(106, 127);
             this.labelTotalDpp.Name = "labelTotalDpp";
             this.labelTotalDpp.Size = new System.Drawing.Size(100, 23);
             this.labelTotalDpp.TabIndex = 13;
@@ -1057,7 +1265,7 @@
             // 
             // label22
             // 
-            this.label22.Location = new System.Drawing.Point(5, 102);
+            this.label22.Location = new System.Drawing.Point(0, 127);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(100, 23);
             this.label22.TabIndex = 12;
@@ -1779,6 +1987,10 @@
             this.groupBoxRadioJurnalPenjualan.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.tabPage6.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.tabPage9.ResumeLayout(false);
             this.tabPage9.PerformLayout();
             this.Group_Bos.ResumeLayout(false);
@@ -1793,6 +2005,34 @@
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+
+        private System.Windows.Forms.Button button14;
+
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox textBox3;
+
+        private System.Windows.Forms.GroupBox groupBox5;
+
+        private System.Windows.Forms.Button button13;
+
+        private System.Windows.Forms.Button button12;
+
+        private System.Windows.Forms.Button button10;
+
+        private System.Windows.Forms.Button button9;
+
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton radioButton10;
+        private System.Windows.Forms.RadioButton radioButton11;
+        private System.Windows.Forms.RadioButton radioButton12;
+
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton radioButton7;
+        private System.Windows.Forms.RadioButton radioButton8;
+        private System.Windows.Forms.RadioButton radioButton9;
 
         private System.Windows.Forms.Label labelTotalDpp;
         private System.Windows.Forms.Label label22;

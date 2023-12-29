@@ -52,6 +52,7 @@ partial class CekStokForm
         this.KeyPreview = true;
         this.Name = "CekStokForm";
         this.Text = "Barang Masuk";
+        this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
         this.Load += new System.EventHandler(this.CekStokForm_Load);
         this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CekStokForm_KeyDown);
         this.ResumeLayout(false);

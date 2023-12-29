@@ -38,7 +38,7 @@ public partial class TransitForm : Form
                     BrgKode = null,
                     Sn = false,
                     BrgNama = "SEMUA BARANG",
-                    JurnalBiaya = false
+                    JurnalBiaya = 0
                 }).ToList();
         });
         await FetchMasterbarangOptionWithSn.Run();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Net;
@@ -45,6 +46,13 @@ namespace DoranApp.View
             }
         }
 
+        public void OpenDialog<T>() where T : Form, new()
+        {
+            var x = new T();
+            x.StartPosition = FormStartPosition.CenterScreen;
+            x.ShowDialog();
+        }
+
         public async void OpenForm<T>() where T : Form, new()
         {
             foreach (Form form in Application.OpenForms)
@@ -54,9 +62,14 @@ namespace DoranApp.View
                     form.WindowState = FormWindowState.Maximized;
                     tabForms.SelectedTab = tabForms.TabPages[form.Text];
                     form.Activate();
-                    // return (T)form;
+                    return;
+                }
+                else if (form.GetType() != typeof(_Container))
+                {
+                    form.WindowState = FormWindowState.Minimized;
                 }
             }
+
 
             try
             {
@@ -69,8 +82,9 @@ namespace DoranApp.View
 
                 openForm.WindowState = FormWindowState.Maximized;
 
-                openForm.Show();
                 openForm.Activate();
+
+                openForm.Show();
                 // return openForm;
             }
             catch (Exception ex)
@@ -324,6 +338,26 @@ namespace DoranApp.View
             {
                 tabPage.Dispose();
             }
+
+            Form lastForm = null;
+            List<string> xxx = new List<string>();
+            var index = -1;
+            foreach (Form frm in this.MdiChildren)
+            {
+                if (frm.Tag != (sender as Form).Tag)
+                {
+                    lastForm = frm;
+                    index++;
+                }
+            }
+
+            if (index > -1)
+            {
+                tabForms.SelectedIndex = index;
+                if ((tabForms.SelectedTab != null) &&
+                    (tabForms.SelectedTab.Tag != null))
+                    (tabForms.SelectedTab.Tag as Form).Activate();
+            }
         }
 
         private void tabForms_SelectedIndexChanged(object sender, EventArgs e)
@@ -497,6 +531,16 @@ namespace DoranApp.View
             {
                 this.ActiveMdiChild.Close();
             }
+        }
+
+        private void provinsiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenDialog<LokasiprovinsiForm>();
+        }
+
+        private void kotaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenDialog<LokasikotaForm>();
         }
 
         private delegate void SetStatusInternetCallback(string text);

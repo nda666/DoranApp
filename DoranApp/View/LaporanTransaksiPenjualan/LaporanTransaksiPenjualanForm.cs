@@ -704,49 +704,69 @@ namespace DoranApp.View.LaporanTransaksiPenjualan
 
         private async void BTN_TotalOmzetPenjualan_Click(object sender, EventArgs e)
         {
+            var oldText = BTN_TotalOmzetPenjualan.Text;
             try
             {
+                BTN_TotalOmzetPenjualan.Enabled = false;
+                BTN_TotalOmzetPenjualan.Text = "Loading";
                 List<GetLaporanTransaksiPenjualanGroupTokoDto> data = await GetLaporanTransaksiPenjualanGroupToko();
                 var dialog = new ByTokoForm(data, datePickerFilterMin.Value, datePickerFilterMax.Value,
                     GetLaporanTransaksiPenjualanGroupToko);
+                BTN_TotalOmzetPenjualan.Enabled = true;
+                BTN_TotalOmzetPenjualan.Text = oldText;
                 dialog.ShowDialog();
             }
             catch (Exception ex)
             {
                 ex?.Dump();
                 Helper.ShowErrorMessage(ex);
+                BTN_TotalOmzetPenjualan.Enabled = true;
             }
         }
 
         private async void BTN_TopKota_Click(object sender, EventArgs e)
         {
+            var oldText = BTN_TopKota.Text;
             try
             {
+                BTN_TopKota.Text = "Loading";
+                BTN_TopKota.Enabled = false;
                 List<LaporanTransaksiPenjualanGroupKotaDto> data =
                     await _transaksiData.GetLaporanTransaksiPenjualanGroupKota(GetLaporanTransaksiSearchQuery());
                 var dialog = new ByKotaForm(data);
+                BTN_TopKota.Text = oldText;
+                BTN_TopKota.Enabled = true;
                 dialog.ShowDialog();
             }
             catch (Exception ex)
             {
                 ex?.Dump();
                 Helper.ShowErrorMessage(ex);
+                BTN_TopKota.Enabled = true;
+                BTN_TopKota.Text = oldText;
             }
         }
 
         private async void BTN_TopProvinsi_Click(object sender, EventArgs e)
         {
+            var oldText = BTN_TopProvinsi.Text;
             try
             {
+                BTN_TopProvinsi.Text = "Loading";
+                BTN_TopProvinsi.Enabled = false;
                 List<LaporanTransaksiPenjualanGroupProvinsiDto> data =
                     await _transaksiData.GetLaporanTransaksiPenjualanGroupProvinsi(GetLaporanTransaksiSearchQuery());
                 var dialog = new ByProvinsiForm(data);
+                BTN_TopProvinsi.Enabled = true;
+                BTN_TopProvinsi.Text = oldText;
                 dialog.ShowDialog();
             }
             catch (Exception ex)
             {
                 ex?.Dump();
                 Helper.ShowErrorMessage(ex);
+                BTN_TopProvinsi.Enabled = true;
+                BTN_TopProvinsi.Text = oldText;
             }
         }
     }

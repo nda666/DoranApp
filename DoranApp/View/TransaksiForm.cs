@@ -95,8 +95,16 @@ namespace DoranApp.View
 
         public async Task FetchMasterbarang()
         {
-            var data = await _masterbarang.GetNameAndKodeOnly();
-            _masterbarangOptions = (List<MasterbarangOptionWithSnDto>)data.Response;
+            try
+            {
+                var data = await _masterbarang.GetNameAndKodeOnly();
+                _masterbarangOptions = (List<MasterbarangOptionWithSnDto>)data.Response;
+            }
+            catch (RestException ex)
+            {
+                MessageBox.Show("Data barang gagal di load: " + ex.Message, "ERROR", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         public async Task FetchSales()
@@ -215,6 +223,12 @@ namespace DoranApp.View
             dataGridView1.Columns.Add("ord", "ORD");
             dataGridView1.Columns.Add("sisa", "Sisa");
             dataGridView1.Columns.Add("sn", "SN");
+            dataGridView1.Columns.Add("validSn", "Valid SN");
+            bool isDebug = false;
+#if DEBUG
+            isDebug = true;
+#endif
+            dataGridView1.Columns["validSn"].Visible = isDebug;
 
             dataGridView1.Columns["pcs"].Width = 40;
             dataGridView1.Columns["item"].Width = 240;
@@ -366,7 +380,16 @@ namespace DoranApp.View
 
                         var checkMb = _masterbarangOptions.Find(e =>
                             e.BrgKode.HasValue && e.BrgKode.ToString() == row.Cells[1]?.Value.ToString());
-                        if (checkMb.Sn && (row.Cells[6]?.Value?.ToString().Trim() ?? "") == "")
+
+                        if (checkMb.Sn && (row.Cells[7]?.Value?.ToString().Trim() ?? "") == "")
+                        {
+                            MessageBox.Show($"Isi terlebih dahulu nomor SN: \"{checkMb.BrgNama}\"");
+                            dataGridView1.CurrentCell = row.Cells[6];
+                            dataGridView1.BeginEdit(true);
+                            return;
+                        }
+
+                        if (checkMb.Sn && (row.Cells[7]?.Value?.ToString().Trim() ?? "") == "")
                         {
                             MessageBox.Show($"Isi terlebih dahulu nomor SN: \"{checkMb.BrgNama}\"");
                             dataGridView1.CurrentCell = row.Cells[6];
@@ -387,7 +410,7 @@ namespace DoranApp.View
                             Kodebarang = Convert.ToInt32(row.Cells[1]?.Value),
                             Jumlah = Convert.ToInt32(row.Cells[0]?.Value),
                             Harga = Convert.ToInt32(row.Cells[2]?.Value),
-                            Nmrsn = row.Cells[6]?.Value?.ToString() ?? "",
+                            Nmrsn = row.Cells[7]?.Value?.ToString() ?? "",
                         });
                     }
                 }
@@ -491,7 +514,7 @@ namespace DoranApp.View
                         var mb = _masterbarangOptions
                             .Where(e => e.BrgKode == brgKode)
                             .FirstOrDefault();
-                        if (mb.JurnalBiaya)
+                        if (mb.JurnalBiaya != 0)
                         {
                             biaya += rowSubtotal;
                         }
@@ -1522,10 +1545,11 @@ namespace DoranApp.View
 
                 try
                 {
-                    var res = await _CLient.Get_Barangsn_By_SnAsync(editingControl.Text);
+                    var res = await _CLient.Find_Barangsn_By_SnAsync(editingControl.Text);
                     if (res.Status == 1)
                     {
                         MessageBox.Show($"Status SN Sudah Terjual di KODEH {res.Kodehjual}");
+                        dataGridView1.CurrentRow.Cells[7].Value = "";
                         await Task.Delay(100);
                         SnCheckRun = false;
                         return;
@@ -1534,11 +1558,14 @@ namespace DoranApp.View
 
                     dataGridView1.CurrentRow.Cells[0].Value = 1;
                     dataGridView1.CurrentRow.Cells[1].Value = res.Kodebarang;
+                    dataGridView1.CurrentRow.Cells[7].Value = editingControl.Text;
                     dataGridView1.CurrentRow.Cells[0].ReadOnly = true;
                     dataGridView1.CurrentRow.Cells[1].ReadOnly = true;
                 }
                 catch (ApiException ex)
                 {
+                    Helper.ShowErrorMessageFromResponse(ex);
+                    dataGridView1.CurrentRow.Cells[7].Value = "";
                     dataGridView1.CurrentRow.Cells[1].Value = null;
                     dataGridView1.CurrentRow.Cells[0].ReadOnly = false;
                     dataGridView1.CurrentRow.Cells[1].ReadOnly = false;
@@ -1752,14 +1779,6 @@ namespace DoranApp.View
         private void buttonCopyKeyLimit_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(textBoxGenerateKeyLimit.Text);
-        }
-
-        private void dataGridView1_KeyDown_1(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                MessageBox.Show("FORMRR");
-            }
         }
     }
 

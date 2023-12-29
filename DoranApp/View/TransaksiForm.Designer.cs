@@ -215,7 +215,6 @@ namespace DoranApp.View
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dataGridView1_EditingControlShowing);
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
-            this.dataGridView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView1_KeyDown_1);
             // 
             // checkBoxRetur
             // 
@@ -1239,6 +1238,7 @@ namespace DoranApp.View
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(66, 21);
             this.comboBox2.TabIndex = 29;
+            this.comboBox2.Visible = false;
             // 
             // comboBox1
             // 
@@ -1247,6 +1247,7 @@ namespace DoranApp.View
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(48, 21);
             this.comboBox1.TabIndex = 28;
+            this.comboBox1.Visible = false;
             // 
             // button17
             // 

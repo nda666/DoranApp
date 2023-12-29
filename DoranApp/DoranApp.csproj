@@ -184,7 +184,9 @@
     <Compile Include="Data\Laporan\LaporanTransaksiBySalesData.cs" />
     <Compile Include="Data\Laporan\LaporanTransaksiByTokoData.cs" />
     <Compile Include="Data\Laporan\LaporanTransaksiByBarangData.cs" />
+      <Compile Include="Data\LokasikotaData.cs"/>
     <Compile Include="Data\MasterpengeluaranData.cs" />
+      <Compile Include="Data\LokasiprovinsiData.cs"/>
       <Compile Include="Data\MutasiStokData.cs"/>
       <Compile Include="Data\PenyiaporderData.cs"/>
       <Compile Include="Data\PermintaanSalesData.cs"/>
@@ -302,6 +304,18 @@
       <Compile Include="View\LaporanTransaksiPenjualan\LaporanTransaksiPenjualanForm.Designer.cs">
           <DependentUpon>LaporanTransaksiPenjualanForm.cs</DependentUpon>
     </Compile>
+      <Compile Include="View\LokasikotaForm.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\LokasikotaForm.Designer.cs">
+          <DependentUpon>LokasikotaForm.cs</DependentUpon>
+      </Compile>
+      <Compile Include="View\LokasiprovinsiForm.cs">
+          <SubType>Form</SubType>
+      </Compile>
+      <Compile Include="View\LokasiprovinsiForm.Designer.cs">
+          <DependentUpon>LokasiprovinsiForm.cs</DependentUpon>
+      </Compile>
       <Compile Include="View\ReportViewerForm.cs">
           <SubType>Form</SubType>
       </Compile>
@@ -549,8 +563,14 @@
     <EmbeddedResource Include="View\HkelompokbarangForm.resx">
       <DependentUpon>HkelompokbarangForm.cs</DependentUpon>
     </EmbeddedResource>
+      <EmbeddedResource Include="View\LokasikotaForm.resx">
+          <DependentUpon>LokasikotaForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\MasterGudangForm.resx">
       <DependentUpon>MasterGudangForm.cs</DependentUpon>
+    </EmbeddedResource>
+      <EmbeddedResource Include="View\LokasiprovinsiForm.resx">
+          <DependentUpon>LokasiprovinsiForm.cs</DependentUpon>
     </EmbeddedResource>
       <EmbeddedResource Include="View\ReportViewerForm.resx">
           <DependentUpon>ReportViewerForm.cs</DependentUpon>

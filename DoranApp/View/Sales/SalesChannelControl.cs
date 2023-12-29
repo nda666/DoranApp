@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -176,7 +175,7 @@ namespace DoranApp.View
             dataGridView1.EnableDoubleBuffered(true);
             _dataTable = _salesChannelData.GetDataTable();
             dataGridView1.DataSource = _dataTable;
-            dataGridView1.Sort(dataGridView1.Columns[2], ListSortDirection.Descending);
+            // dataGridView1.Sort(dataGridView1.Columns[2], ListSortDirection.Descending);
             dataGridView1.ClearSelection();
 
             ResetForm();
