@@ -207,6 +207,7 @@
       <Compile Include="Dtos\PaginationDto.cs"/>
     <Compile Include="Helper.cs" />
       <Compile Include="LocalModel\NotaOrderanDetail.cs"/>
+      <Compile Include="LocalModel\NotaPpnDetail.cs"/>
       <Compile Include="LocalModel\NotaTransaksiOLDetail.cs"/>
       <Compile Include="LocalModel\NotaTransaksiPpnDetail.cs"/>
     <Compile Include="LocalModel\NotaTransaksiDetail.cs" />
@@ -499,6 +500,7 @@
       <EmbeddedResource Include="Properties\licenses.licx"/>
       <EmbeddedResource Include="Report\NotaOrderanOl.rdlc"/>
       <EmbeddedResource Include="Report\NotaOrderan.rdlc"/>
+      <EmbeddedResource Include="Report\NotaPpn.rdlc"/>
       <EmbeddedResource Include="Report\NotaTransaksiOl.rdlc"/>
       <EmbeddedResource Include="Report\NotaTransaksiPpn.rdlc"/>
     <EmbeddedResource Include="Report\NotaTransaksi.rdlc" />

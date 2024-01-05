@@ -11,6 +11,12 @@ namespace DoranApp
 {
     public class Helper
     {
+        public static void ShowError(String message)
+        {
+            MessageBox.Show(message, "Error", MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+        }
+
         public static void ShowErrorMessage(Exception ex)
         {
             MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK,
@@ -61,6 +67,39 @@ namespace DoranApp
                 default:
                     return "Cash";
             }
+        }
+
+        public static int TipeTempoIndexToValue(int indexTempo)
+        {
+            // Cash
+            // 1 Minggu
+            // 2 Minggu
+            // 1 Bulan
+            // 2 Bulan
+            var subDay = 0;
+            switch (indexTempo)
+            {
+                case 0:
+                    subDay = 0;
+                    break;
+                case 1:
+                    subDay = 7;
+                    break;
+                case 2:
+                    subDay = 14;
+                    break;
+                case 3:
+                    subDay = 30;
+                    break;
+                case 4:
+                    subDay = 60;
+                    break;
+                default:
+                    subDay = 0;
+                    break;
+            }
+
+            return subDay;
         }
 
         public static int TipeTempoValueToIndex(int tipeTempo)

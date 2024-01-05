@@ -84,7 +84,7 @@ namespace DoranApp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("182.253.116.121")]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.0.99")]
         public string BASE_API_URL {
             get {
                 return ((string)(this["BASE_API_URL"]));

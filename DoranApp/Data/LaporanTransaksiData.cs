@@ -61,17 +61,28 @@ namespace DoranApp.Data
                 { "Lunas", x => Convert.ToSByte(x.lunas), typeof(Boolean) },
                 { "No Nota", x => x.kodenota },
                 { "Tipe", x => TipeTempo(Convert.ToInt32(x.tipetempo)) },
+                { "Jatuh Tempo", x => x.tgltempo, typeof(DateTime) },
                 { "Gudang", x => x.mastergudang?.nama ?? "" },
                 { "DPP", x => x.dpp },
                 { "Faktur PPN", x => x.ppn },
                 { "PPN 100%", x => x.ppnreal },
+                { "Diskon", x => x.diskon },
+                { "TglPPN", x => x.tglPpn, typeof(DateTime) },
                 { "Tanggal Input", x => x.insertTime, typeof(DateTime) },
                 { "Keterangan", x => x.keterangan },
                 { "Seri OL", x => x.noSeriOnline },
                 { "Barcode OL", x => x.barcodeonline },
+                { "K", x => x.jumlahkomisi },
+                { "KodeP", x => x.kodepelanggan },
+                { "Point Toko", x => x.poinToko },
                 { "Retur", x => Convert.ToSByte(x.retur), typeof(Boolean) },
+                { "Stok Nota", x => x.stoknota, typeof(Boolean) },
+                { "U", x => x.untung },
+                { "Untung Blm Pot OL", x => x.untungbelumpotOl },
                 { "Kodeh", x => x.kodeH },
+                { "Tgl Lapor PPN", x => x.tglLaporPpn },
                 { "Jurnal", x => Convert.ToSByte(x.akanDiJurnalkan), typeof(Boolean) },
+                { "NPWP", x => x.masterpelanggan?.npwp }
             };
 
             return columnSettingsList;

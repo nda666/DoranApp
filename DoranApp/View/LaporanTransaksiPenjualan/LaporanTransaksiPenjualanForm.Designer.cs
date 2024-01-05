@@ -114,13 +114,19 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.CBO_UntukSemua = new System.Windows.Forms.CheckBox();
+            this.CBO_SetSemuaTglPPN = new System.Windows.Forms.CheckBox();
+            this.button16 = new System.Windows.Forms.Button();
+            this.button15 = new System.Windows.Forms.Button();
+            this.label28 = new System.Windows.Forms.Label();
+            this.DATE_TglLapor = new System.Windows.Forms.DateTimePicker();
             this.label24 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.Date_TglPPN = new System.Windows.Forms.DateTimePicker();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.button14 = new System.Windows.Forms.Button();
             this.label21 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button13 = new System.Windows.Forms.Button();
+            this.BTN_HapusPPN = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
@@ -177,6 +183,17 @@
             this.labelTotalOmzet = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.Group_JatuhTempo = new System.Windows.Forms.GroupBox();
+            this.DATE_TglTempo = new System.Windows.Forms.DateTimePicker();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button17 = new System.Windows.Forms.Button();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.COMBO_NamaTempo2 = new System.Windows.Forms.ComboBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.COMBO_KodeTempo = new System.Windows.Forms.ComboBox();
+            this.CBO_YangSudahJatuhTempo = new System.Windows.Forms.CheckBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -226,6 +243,8 @@
             this.tabPage9.SuspendLayout();
             this.Group_Bos.SuspendLayout();
             this.tabControl2.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.Group_JatuhTempo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -1020,10 +1039,16 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.CBO_UntukSemua);
+            this.tabPage6.Controls.Add(this.CBO_SetSemuaTglPPN);
+            this.tabPage6.Controls.Add(this.button16);
+            this.tabPage6.Controls.Add(this.button15);
+            this.tabPage6.Controls.Add(this.label28);
+            this.tabPage6.Controls.Add(this.DATE_TglLapor);
             this.tabPage6.Controls.Add(this.label24);
-            this.tabPage6.Controls.Add(this.dateTimePicker1);
+            this.tabPage6.Controls.Add(this.Date_TglPPN);
             this.tabPage6.Controls.Add(this.groupBox5);
-            this.tabPage6.Controls.Add(this.button13);
+            this.tabPage6.Controls.Add(this.BTN_HapusPPN);
             this.tabPage6.Controls.Add(this.button12);
             this.tabPage6.Controls.Add(this.button10);
             this.tabPage6.Controls.Add(this.button9);
@@ -1043,6 +1068,63 @@
             this.tabPage6.Text = "PPN";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // CBO_UntukSemua
+            // 
+            this.CBO_UntukSemua.Location = new System.Drawing.Point(278, 251);
+            this.CBO_UntukSemua.Name = "CBO_UntukSemua";
+            this.CBO_UntukSemua.Size = new System.Drawing.Size(94, 24);
+            this.CBO_UntukSemua.TabIndex = 69;
+            this.CBO_UntukSemua.Text = "Untuk Semua";
+            this.CBO_UntukSemua.UseVisualStyleBackColor = true;
+            // 
+            // CBO_SetSemuaTglPPN
+            // 
+            this.CBO_SetSemuaTglPPN.Location = new System.Drawing.Point(302, 217);
+            this.CBO_SetSemuaTglPPN.Name = "CBO_SetSemuaTglPPN";
+            this.CBO_SetSemuaTglPPN.Size = new System.Drawing.Size(94, 24);
+            this.CBO_SetSemuaTglPPN.TabIndex = 68;
+            this.CBO_SetSemuaTglPPN.Text = "Untuk Semua";
+            this.CBO_SetSemuaTglPPN.UseVisualStyleBackColor = true;
+            // 
+            // button16
+            // 
+            this.button16.Location = new System.Drawing.Point(218, 247);
+            this.button16.Name = "button16";
+            this.button16.Size = new System.Drawing.Size(54, 30);
+            this.button16.TabIndex = 67;
+            this.button16.Text = "Lapor";
+            this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(218, 213);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(78, 30);
+            this.button15.TabIndex = 64;
+            this.button15.Text = "Set Tgl PPN";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // label28
+            // 
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(3, 250);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(99, 21);
+            this.label28.TabIndex = 66;
+            this.label28.Text = "Tanggal Arsip :";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // DATE_TglLapor
+            // 
+            this.DATE_TglLapor.CustomFormat = "dd/MM/yyyy";
+            this.DATE_TglLapor.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DATE_TglLapor.Location = new System.Drawing.Point(108, 251);
+            this.DATE_TglLapor.Name = "DATE_TglLapor";
+            this.DATE_TglLapor.Size = new System.Drawing.Size(97, 20);
+            this.DATE_TglLapor.TabIndex = 65;
+            // 
             // label24
             // 
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1050,17 +1132,17 @@
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(99, 21);
             this.label24.TabIndex = 64;
-            this.label24.Text = "Tgl Trans. [F1] :";
+            this.label24.Text = "Tgl PPN :";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // dateTimePicker1
+            // Date_TglPPN
             // 
-            this.dateTimePicker1.CustomFormat = "dd/MM/yyyy";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(109, 213);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(97, 20);
-            this.dateTimePicker1.TabIndex = 63;
+            this.Date_TglPPN.CustomFormat = "dd/MM/yyyy";
+            this.Date_TglPPN.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.Date_TglPPN.Location = new System.Drawing.Point(109, 213);
+            this.Date_TglPPN.Name = "Date_TglPPN";
+            this.Date_TglPPN.Size = new System.Drawing.Size(97, 20);
+            this.Date_TglPPN.TabIndex = 63;
             // 
             // groupBox5
             // 
@@ -1099,41 +1181,45 @@
             this.textBox3.Size = new System.Drawing.Size(141, 20);
             this.textBox3.TabIndex = 55;
             // 
-            // button13
+            // BTN_HapusPPN
             // 
-            this.button13.Location = new System.Drawing.Point(182, 84);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(90, 30);
-            this.button13.TabIndex = 61;
-            this.button13.Text = "Hapus PPN";
-            this.button13.UseVisualStyleBackColor = true;
+            this.BTN_HapusPPN.Location = new System.Drawing.Point(178, 90);
+            this.BTN_HapusPPN.Name = "BTN_HapusPPN";
+            this.BTN_HapusPPN.Size = new System.Drawing.Size(90, 30);
+            this.BTN_HapusPPN.TabIndex = 61;
+            this.BTN_HapusPPN.Text = "Hapus PPN";
+            this.BTN_HapusPPN.UseVisualStyleBackColor = true;
+            this.BTN_HapusPPN.Click += new System.EventHandler(this.BTN_HapusPPN_Click);
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(135, 48);
+            this.button12.Location = new System.Drawing.Point(135, 54);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(195, 30);
             this.button12.TabIndex = 60;
             this.button12.Text = "Cetak Daftar Transaksi PPN";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(6, 84);
+            this.button10.Location = new System.Drawing.Point(5, 90);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(170, 30);
             this.button10.TabIndex = 59;
             this.button10.Text = "Tambahkan PPN 11%";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(6, 48);
+            this.button9.Location = new System.Drawing.Point(6, 54);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(123, 30);
             this.button9.TabIndex = 4;
             this.button9.Text = "CETAK NOTA PPN";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // groupBox4
             // 
@@ -1650,12 +1736,135 @@
             // tabControl2
             // 
             this.tabControl2.Controls.Add(this.tabPage9);
+            this.tabControl2.Controls.Add(this.tabPage7);
             this.tabControl2.Controls.Add(this.tabPage6);
             this.tabControl2.Location = new System.Drawing.Point(3, 272);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
             this.tabControl2.Size = new System.Drawing.Size(404, 323);
             this.tabControl2.TabIndex = 0;
+            // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.Group_JatuhTempo);
+            this.tabPage7.Controls.Add(this.label32);
+            this.tabPage7.Controls.Add(this.COMBO_KodeTempo);
+            this.tabPage7.Controls.Add(this.CBO_YangSudahJatuhTempo);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(396, 297);
+            this.tabPage7.TabIndex = 5;
+            this.tabPage7.Text = "Jatuh Tempo";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // Group_JatuhTempo
+            // 
+            this.Group_JatuhTempo.Controls.Add(this.DATE_TglTempo);
+            this.Group_JatuhTempo.Controls.Add(this.button18);
+            this.Group_JatuhTempo.Controls.Add(this.button17);
+            this.Group_JatuhTempo.Controls.Add(this.label36);
+            this.Group_JatuhTempo.Controls.Add(this.label34);
+            this.Group_JatuhTempo.Controls.Add(this.COMBO_NamaTempo2);
+            this.Group_JatuhTempo.Location = new System.Drawing.Point(6, 191);
+            this.Group_JatuhTempo.Name = "Group_JatuhTempo";
+            this.Group_JatuhTempo.Size = new System.Drawing.Size(384, 100);
+            this.Group_JatuhTempo.TabIndex = 54;
+            this.Group_JatuhTempo.TabStop = false;
+            this.Group_JatuhTempo.Text = "Set Tempo";
+            // 
+            // DATE_TglTempo
+            // 
+            this.DATE_TglTempo.CustomFormat = "dd/MM/yyyy";
+            this.DATE_TglTempo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.DATE_TglTempo.Location = new System.Drawing.Point(108, 58);
+            this.DATE_TglTempo.Name = "DATE_TglTempo";
+            this.DATE_TglTempo.Size = new System.Drawing.Size(148, 20);
+            this.DATE_TglTempo.TabIndex = 60;
+            // 
+            // button18
+            // 
+            this.button18.Location = new System.Drawing.Point(291, 58);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(83, 30);
+            this.button18.TabIndex = 55;
+            this.button18.Text = "Set Isi Tempo";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
+            // button17
+            // 
+            this.button17.Location = new System.Drawing.Point(291, 22);
+            this.button17.Name = "button17";
+            this.button17.Size = new System.Drawing.Size(83, 30);
+            this.button17.TabIndex = 55;
+            this.button17.Text = "Set Tempo";
+            this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
+            // 
+            // label36
+            // 
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Location = new System.Drawing.Point(6, 57);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(96, 21);
+            this.label36.TabIndex = 58;
+            this.label36.Text = "Jatuh Tempo :";
+            this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label34
+            // 
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(6, 27);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(96, 21);
+            this.label34.TabIndex = 56;
+            this.label34.Text = "Tempo :";
+            this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // COMBO_NamaTempo2
+            // 
+            this.COMBO_NamaTempo2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.COMBO_NamaTempo2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.COMBO_NamaTempo2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.COMBO_NamaTempo2.FormattingEnabled = true;
+            this.COMBO_NamaTempo2.Items.AddRange(new object[] { "Cash", "1 Minggu", "2 Minggu", "1 Bulan", "2 Bulan" });
+            this.COMBO_NamaTempo2.Location = new System.Drawing.Point(108, 31);
+            this.COMBO_NamaTempo2.Name = "COMBO_NamaTempo2";
+            this.COMBO_NamaTempo2.Size = new System.Drawing.Size(148, 21);
+            this.COMBO_NamaTempo2.TabIndex = 55;
+            this.COMBO_NamaTempo2.SelectedIndexChanged += new System.EventHandler(this.COMBO_NamaTempo2_SelectedIndexChanged);
+            this.COMBO_NamaTempo2.Leave += new System.EventHandler(this.COMBO_NamaTempo2_Leave);
+            // 
+            // label32
+            // 
+            this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.Location = new System.Drawing.Point(12, 42);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(57, 21);
+            this.label32.TabIndex = 53;
+            this.label32.Text = "Tempo :";
+            this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // COMBO_KodeTempo
+            // 
+            this.COMBO_KodeTempo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.COMBO_KodeTempo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.COMBO_KodeTempo.FormattingEnabled = true;
+            this.COMBO_KodeTempo.Location = new System.Drawing.Point(75, 43);
+            this.COMBO_KodeTempo.Name = "COMBO_KodeTempo";
+            this.COMBO_KodeTempo.Size = new System.Drawing.Size(148, 21);
+            this.COMBO_KodeTempo.TabIndex = 52;
+            this.COMBO_KodeTempo.Text = "Semua";
+            // 
+            // CBO_YangSudahJatuhTempo
+            // 
+            this.CBO_YangSudahJatuhTempo.Location = new System.Drawing.Point(12, 15);
+            this.CBO_YangSudahJatuhTempo.Name = "CBO_YangSudahJatuhTempo";
+            this.CBO_YangSudahJatuhTempo.Size = new System.Drawing.Size(164, 24);
+            this.CBO_YangSudahJatuhTempo.TabIndex = 0;
+            this.CBO_YangSudahJatuhTempo.Text = "Yang Sudah Jatuh Tempo ";
+            this.CBO_YangSudahJatuhTempo.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -1996,6 +2205,8 @@
             this.Group_Bos.ResumeLayout(false);
             this.Group_Bos.PerformLayout();
             this.tabControl2.ResumeLayout(false);
+            this.tabPage7.ResumeLayout(false);
+            this.Group_JatuhTempo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -2006,8 +2217,35 @@
             this.ResumeLayout(false);
         }
 
+        private System.Windows.Forms.DateTimePicker DATE_TglTempo;
+
+        private System.Windows.Forms.Button button18;
+
+        private System.Windows.Forms.Button button17;
+
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.ComboBox COMBO_NamaTempo2;
+        private System.Windows.Forms.Label label36;
+
+        private System.Windows.Forms.GroupBox Group_JatuhTempo;
+
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.ComboBox COMBO_KodeTempo;
+
+        private System.Windows.Forms.TabPage tabPage7;
+
+        private System.Windows.Forms.CheckBox CBO_SetSemuaTglPPN;
+        private System.Windows.Forms.CheckBox CBO_UntukSemua;
+
+        private System.Windows.Forms.Button button16;
+
+        private System.Windows.Forms.Button button15;
+
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.DateTimePicker DATE_TglLapor;
+
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker Date_TglPPN;
 
         private System.Windows.Forms.Button button14;
 
@@ -2016,7 +2254,7 @@
 
         private System.Windows.Forms.GroupBox groupBox5;
 
-        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button BTN_HapusPPN;
 
         private System.Windows.Forms.Button button12;
 
@@ -2052,7 +2290,7 @@
 
         private System.Windows.Forms.CheckBox checkBox4;
 
-        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox CBO_YangSudahJatuhTempo;
 
         private System.Windows.Forms.CheckBox CBO_GantiHarga;
         private System.Windows.Forms.CheckBox CBO_TanpaLogfile;
